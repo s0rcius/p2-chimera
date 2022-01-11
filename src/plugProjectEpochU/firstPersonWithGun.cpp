@@ -7,7 +7,7 @@
 
 // extern uint* HdamaShootVT;
 // extern uint* efxArgDirVT;
-// extern struct HoudaiShotGunMgr* Game::Houdai::sHoudaiShotGunMgr;
+// extern struct HoudaiShotGunMgr* Game::Houdai::sNaviGunMgr;
 
 namespace Game {
 
@@ -34,9 +34,9 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 			if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
 				// OSReport("we are not in a cave\n"); //this is never reached
 
-				// this_00 = (_sHoudaiShotGunMgr*)JSystem__operator_new(0x20);
+				// this_00 = (_sNaviGunMgr*)JSystem__operator_new(0x20);
 				// if (this_00 != 0) {
-				// create_sHoudaiShotGunMgr(this_00); //move this to happen
+				// create_sNaviGunMgr(this_00); //move this to happen
 				// during navi init
 				/// }
 				// this->ShotgunMgr = this_00;
@@ -74,14 +74,14 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 	// HoudaiShotGunMgr* this;
 	input = (player->m_padinput->press);
 
-	// this = _sHoudaiShotGunMgr;
-	OSReport("gunmgr = %x\n", sHoudaiShotGunMgr);
+	// this = _sNaviGunMgr;
+	OSReport("gunmgr = %x\n", sNaviGunMgr);
 	OSReport("input = %x\n", input);
 	OSReport("player = %x\n", player);
-	if (((player != 0) && (input != 0)) && (sHoudaiShotGunMgr != 0)) {
+	if (((player != 0) && (input != 0)) && (sNaviGunMgr != nullptr)) {
 		OSReport("gun initialized\n");
 		aim                                           = camera.zoomCam;
-		sHoudaiShotGunMgr->gunPosMatrix               = (Matrixf*)&player->m_mainMatrix;
+		sNaviGunMgr->gunPosMatrix                     = (Matrixf*)&player->m_mainMatrix;
 		(player->m_mainMatrix).m_matrix.structView.ty = (player->m_mainMatrix).m_matrix.structView.ty + 15;
 		(player->m_mainMatrix).m_matrix.structView.xy = (player->m_mainMatrix).m_matrix.structView.xy - aim;
 		aim                                           = (player->m_mainMatrix).m_matrix.structView.xx;
@@ -90,8 +90,10 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 		if ((input & 0x20) != 0) {
 			OSReport("we are TRYING to fire the damn gun\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
-			emitShotGun__Q34Game6Houdai3ObjFv(sHoudaiShotGunMgr);
+			emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
 		}
+	} else if (sNaviGunMgr == nullptr) {
+		createShotGun();
 	}
 	return;
 }
@@ -108,6 +110,32 @@ bool gunmodeCstick(FakePiki& param_1)
 	}
 	// return uVar1;
 }
+
+HoudaiShotGunMgr::HoudaiShotGunMgr()
+{
+	HoudaiObject   = nullptr;
+	aimingActive   = 0;
+	lockon_on      = 0;
+	shotgun_on     = 0;
+	field_0x7      = 0;
+	gun_angletimer = 0.0f;
+	gun_angle      = 0.0f;
+	tamaMatrix     = nullptr;
+	gunPosMatrix   = nullptr;
+	TargetX        = 0.0f;
+	TargetY        = 0.0f;
+	TargetZ        = 0.0f;
+	Lockon_X       = 0.0f;
+	Lockon_Y       = 0.0f;
+	Lockon_Z       = 0.0f;
+	efx_sight      = nullptr;
+	gunNode1       = new HoudaiShotGunNode;
+	gunNode2       = new HoudaiShotGunNode;
+
+	// __ct__Q34Game6Houdai16HoudaiShotGunMgrFPQ34Game6Houdai3Obj(nullptr);
+};
+
+void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
 
 /*void naviEmitShotGun(HoudaiShotGunMgr* this)
 
@@ -213,7 +241,7 @@ prev_y_angle * prev_y_angle; if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 < fVar2))
     return;
 }*/
 
-/*void create_sHoudaiShotGunMgr(HoudaiShotGunMgr* this)
+/*void create_sNaviGunMgr(HoudaiShotGunMgr* this)
 //WIP Function
 {
     HoudaiShotGunNode* node;
@@ -278,7 +306,7 @@ pOVar2;
         CNode::add((CNode*)this->gunNode2, (CNode*)node3);
         iVar1 = iVar1 + 1;
     } while (iVar1 < 10);
-    _sHoudaiShotGunMgr = (HoudaiShotGunMgr*)0x0;
+    _sNaviGunMgr = (HoudaiShotGunMgr*)0x0;
     return;
 }*/
 } // namespace Game

@@ -5,6 +5,7 @@
 #include "Epoch/playCamera.h"
 #include "Game/Navi.h"
 #include "Vector3.h"
+#include "JSystem/JKR/JKRHeap.h"
 
 namespace Game {
 
@@ -32,6 +33,8 @@ struct HoudaiShotGunMgr { /* PlaceHolder Class Structure */
 	struct THdamaSight* efx_sight;
 	struct HoudaiShotGunNode* gunNode1;
 	struct HoudaiShotGunNode* gunNode2;
+
+	HoudaiShotGunMgr();
 };
 
 struct HoudaiShotGunNode { /* PlaceHolder Class Structure */
@@ -83,16 +86,18 @@ struct NaviShotGunNode { /* PlaceHolder Class Structure */
 // JAISe* playSystemSe(SysIF* this, SoundID soundid, ulong flag);
 // u32 isModCameraFinished(PlayCamera* this);
 extern "C" {
-void emitShotGun__Q34Game6Houdai3ObjFv(HoudaiShotGunMgr*);
+void emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(HoudaiShotGunMgr*);
+// void __ct__Q34Game6Houdai16HoudaiShotGunMgrFPQ34Game6Houdai3Obj(void*);
 }
 // void OSReport(char* uParm1, ...);
 // void panic_f(char* filename, int line, char* param_3, ...);
 // char* TSimpleMtx3::simpleMTX3Create(Arg* param_1);
 // uint JSystem__operator_new(u32 structsize);
 
-static HoudaiShotGunMgr* sHoudaiShotGunMgr;
+static HoudaiShotGunMgr* sNaviGunMgr;
 
 void pikminGunFire(PlayCamera& camera, Navi* player);
+void createShotGun();
 
 } // namespace Game
 #endif
