@@ -521,6 +521,7 @@ lbl_8023F918:
 /* 8023F918 0023C858  3B FF 00 01 */	addi r31, r31, 1
 /* 8023F91C 0023C85C  2C 1F 00 03 */	cmpwi r31, 3
 /* 8023F920 0023C860  41 80 FF DC */	blt lbl_8023F8FC
+/* 8023F928 0023C868  48 00 ?? ?? */	bl firstPersonGunCamera__4GameFRQ24Game10PlayCamera
 /* 8023F924 0023C864  7F C3 F3 78 */	mr r3, r30
 /* 8023F928 0023C868  48 00 11 ED */	bl isModCameraFinished__Q24Game10PlayCameraFv
 /* 8023F92C 0023C86C  80 01 00 14 */	lwz r0, 0x14(r1)

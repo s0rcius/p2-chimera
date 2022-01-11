@@ -46,7 +46,7 @@ include obj_files.mk
 
 O_FILES :=	$(GROUP_0_FILES) $(JSYSTEM) $(DOLPHIN)\
 			$(YAMASHITA) $(KANDO) $(NISHIMURA) $(OGAWA) $(HIKINO) $(MORIMURA) $(EBISAWA) $(KONO)\
-			$(BOOTUP) $(COMMON) $(GC) $(UTILITY)
+			$(EPOCH) $(BOOTUP) $(COMMON) $(GC) $(UTILITY)
 
 #-------------------------------------------------------------------------------
 # Tools

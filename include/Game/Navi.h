@@ -3,7 +3,7 @@
 
 #include "Game/FakePiki.h"
 #include "Game/PelletView.h"
-#include "Game/StateMachine.h"
+// #include "Game/StateMachine.h"
 
 #include "SysShape/Joint.h"
 
@@ -12,7 +12,8 @@
 #include "CollInfo.h"
 #include "Vector3.h"
 
-struct Controller;
+#include "Controller.h"
+
 
 namespace PSM {
 struct Navi;
@@ -324,11 +325,11 @@ struct Navi : public FakePiki, virtual public PelletView {
 	bool m_commandOn2;             // _30D
 	                               // PelletView: _310 - _320
 };
-
+/*
 struct NaviFSM : public StateMachine<Navi> {
 	virtual void start(struct Navi*, int, StateArg*);
 };
-
+*/
 struct NaviMgr {
 	void setupNavi(Navi*);
 
@@ -336,7 +337,7 @@ struct NaviMgr {
 	CollPartFactory* _CC; // _CC
 };
 
-NaviMgr* naviMgr;
+extern NaviMgr* naviMgr;
 } // namespace Game
 
 #endif

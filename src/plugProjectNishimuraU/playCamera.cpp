@@ -2098,7 +2098,7 @@ lbl_80240AEC:
  * Address:	80240B14
  * Size:	000174
  */
-void PlayCamera::isModCameraFinished(void)
+bool PlayCamera::isModCameraFinished(void)
 {
 	/*
 	lwz      r0, 0x19c(r3)
