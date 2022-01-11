@@ -91,7 +91,7 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 		if ((input & 0x20) != 0) {
 			OSReport("we are TRYING to fire the damn gun\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
-			emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
+			// emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
 		}
 	} else if (sNaviGunMgr == nullptr) {
 		createShotGun();
