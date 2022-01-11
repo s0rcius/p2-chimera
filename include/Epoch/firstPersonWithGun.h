@@ -94,8 +94,6 @@ void emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(HoudaiShotGunMgr*);
 // char* TSimpleMtx3::simpleMTX3Create(Arg* param_1);
 // uint JSystem__operator_new(u32 structsize);
 
-static HoudaiShotGunMgr* sNaviGunMgr;
-
 void pikminGunFire(PlayCamera& camera, Navi* player);
 void createShotGun();
 

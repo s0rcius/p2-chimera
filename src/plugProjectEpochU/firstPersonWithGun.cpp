@@ -10,6 +10,7 @@
 // extern struct HoudaiShotGunMgr* Game::Houdai::sNaviGunMgr;
 
 namespace Game {
+HoudaiShotGunMgr* sNaviGunMgr;
 
 void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 
