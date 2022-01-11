@@ -26,7 +26,9 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 		input = (player->m_padinput);
 		if (input != 0) {
 			float cstick_horizontal = (input->cstick_lr);
+			OSReport("cstick_horizontal = %f\n", cstick_horizontal);
 			float cstick_vertical   = (input->cstick_up);
+			OSReport("cstick_vertical = %f\n", cstick_vertical);
 			// panic_f("firstPersonWithGun.c", 0x2d, "P2Assert");
 
 			if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
@@ -41,20 +43,20 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 
 				if (input != 0) {
 					pikminGunFire(player_camera, player);
-					if (__fabs(cstick_horizontal) > 0.05) {
-						(player_camera.camAngle2) -= 0.02 * cstick_horizontal;
+					if (__fabs(cstick_horizontal) > 0.05f) {
+						(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
 					}
-					if (__fabs(cstick_vertical) > 0.05) {
-						(player_camera.zoomCam) -= 0.02 * cstick_vertical;
+					if (__fabs(cstick_vertical) > 0.05f) {
+						(player_camera.zoomCam) -= 0.02f * cstick_vertical;
 					}
-					if ((player_camera.zoomCam) > 0.5) {
-						(player_camera.zoomCam) = 0.5;
+					if ((player_camera.zoomCam) > 0.5f) {
+						(player_camera.zoomCam) = 0.5f;
 					}
-					if ((player_camera.zoomCam) < -0.5) {
-						(player_camera.zoomCam) = -0.5;
+					if ((player_camera.zoomCam) < -0.5f) {
+						(player_camera.zoomCam) = -0.5f;
 					}
 					if (player != 0) {
-						player->m_faceDir = player_camera.camAngle2 + 3.14;
+						player->m_faceDir = player_camera.camAngle2 + 3.14f;
 					}
 				}
 			}

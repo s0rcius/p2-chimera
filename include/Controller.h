@@ -4,7 +4,6 @@
 #include "JSystem/JUT/JUTGamePad.h"
 
 struct Controller : public JUTGamePad {
-	u32 filler_00;
 	u8 field_0x4;
 	u8 field_0x5;
 	u8 field_0x6;
