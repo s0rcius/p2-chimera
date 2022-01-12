@@ -4,9 +4,16 @@
 #include "Game/gameSystem.h"
 #include "SoundID.h"
 #include "PSSystem/SysIF.h"
+#include "efx/TSimple.h"
 
-// extern uint* HdamaShootVT;
-// extern uint* efxArgDirVT;
+#define m(_ptr, _offset, _type)                   *(_type*)((void*)_ptr + _offset)
+#define vt_base(_this, _offset, _type, _vtoffset) m(m(_this, _vtoffset, void*), _offset, _type*)
+
+extern "C" {
+extern HDamaShootVt __vt__Q23efx11THdamaShoot;
+extern HDamaShootVt __vt__Q23efx6ArgDir;
+bool create__Q23efx11TSimpleMtx3FPQ23efx3Arg(TSimpleMtx3&, u32*);
+}
 // extern struct HoudaiShotGunMgr* Game::Houdai::sNaviGunMgr;
 
 namespace Game {
@@ -92,6 +99,7 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 			OSReport("we are TRYING to fire the damn gun\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
 			// emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
+			naviEmitShotGun(sNaviGunMgr); // will crash the game
 		}
 	} else if (sNaviGunMgr == nullptr) {
 		createShotGun();
@@ -138,24 +146,21 @@ HoudaiShotGunMgr::HoudaiShotGunMgr()
 
 void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
 
-/*void naviEmitShotGun(HoudaiShotGunMgr* this)
+void naviEmitShotGun(HoudaiShotGunMgr* shotmgr)
 
 {
     float fVar1;
     float fVar2;
     Matrixf* gunMatrix;
-    astruct_4* this_00;
-    Parms* pPVar4;
-    Parms* pPVar5;
-    const double inaccuracyThreshold = (0.008);
+	astruct_4* this_00;
     double reciprocal_angle;
-    double zpos;
+    double tz;
     double ty;
-    double xpos;
+    double tx;
     double xz;
     double xy;
     double xx;
-    uint* local_d8;
+    u32* local_d8;
     float new_angle_x;
     float new_angle_y;
     float new_angle_z;
@@ -164,37 +169,20 @@ void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
     float prev_z_angle;
     TSimpleMtx3 TSimpleMatrix;
     //Matrixf* pMStack164;
-    uint random_value;
 
-    this_00 = this->gunNode2->astruct_4_pointer;
-    if (this_00 != (astruct_4*)0x0) {
-        gunMatrix = this->gunPosMatrix;
+    this_00 = shotmgr->gunNode2->astruct_4_pointer;
+    if (this_00 != nullptr) {
+        gunMatrix = shotmgr->gunPosMatrix;
         fVar1 = 0.0;
-        xy = (double)gunMatrix->xy;
-        xz = (double)gunMatrix->xz;
-        xx = (double)gunMatrix->xx;
-        xpos = (double)gunMatrix->xpos;
-        ty = (double)gunMatrix->ty;
-        zpos = (double)gunMatrix->zpos;
+		xy        = (double)gunMatrix->m_matrix.structView.xy;
+		xz        = (double)gunMatrix->m_matrix.structView.xz;
+		xx        = (double)gunMatrix->m_matrix.structView.xx;
+		tx        = (double)gunMatrix->m_matrix.structView.tx;
+		ty        = (double)gunMatrix->m_matrix.structView.ty;
+		tz        = (double)gunMatrix->m_matrix.structView.tz;
         fVar2 = (float)(xz * xz) + (float)(xx * xx +
 (double)(float)(xy * xy)); if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 <
-fVar2)) { fVar1 = (1.0 / SQRT(fVar2)) * fVar2;
-        }
-        if (0.0 < fVar1) {
-            reciprocal_angle = (double)(1.0 / fVar1);
-            xx = (double)(float)(xx * reciprocal_angle);
-            xy = (double)(float)(xy * reciprocal_angle);
-            xz = (double)(float)(xz * reciprocal_angle);
-        }
-        random_value = Dolphin::rand();
-        xx = RANDOM_VALUE_MAPPED_TO_INT_LESS_THAN_LIMIT(random_value,
-inaccuracyThreshold); random_value = Dolphin::rand(); xy =
-RANDOM_VALUE_MAPPED_TO_INT_LESS_THAN_LIMIT(random_value, inaccuracyThreshold);
-        random_value = Dolphin::rand();
-        xz = RANDOM_VALUE_MAPPED_TO_INT_LESS_THAN_LIMIT(random_value,
-inaccuracyThreshold); fVar1 = 0.0; fVar2 = (float)(xz * xz) +
-(float)(xx * xx + (double)(float)(xy * xy)); if ((0.0 < fVar2)
-&& (fVar1 = fVar2, 0.0 < fVar2)) { fVar1 = (1.0 / SQRT(fVar2)) * fVar2;
+fVar2)) { fVar1 = __frsqrte(fVar2);
         }
         if (0.0 < fVar1) {
             reciprocal_angle = (double)(1.0 / fVar1);
@@ -203,9 +191,9 @@ inaccuracyThreshold); fVar1 = 0.0; fVar2 = (float)(xz * xz) +
             xz = (double)(float)(xz * reciprocal_angle);
         }
         fVar1 = 0.0;
-        this_00->first_angle_x = (float)(xpos + (double)(float)(xx * 45.0));
+        this_00->first_angle_x = (float)(tx + (double)(float)(xx * 45.0));
         this_00->first_angle_y = (float)(ty + (double)(float)(xy * 45.0));
-        this_00->first_angle_z = (float)(zpos + (double)(float)(xz * 45.0));
+        this_00->first_angle_z = (float)(tz + (double)(float)(xz * 45.0));
         this_00->last_angle_x = (float)(xx * 600.0);
         this_00->last_angle_y = (float)(xy * 600.0);
         this_00->last_angle_z = (float)(xz * 600.0);
@@ -214,7 +202,7 @@ inaccuracyThreshold); fVar1 = 0.0; fVar2 = (float)(xz * xz) +
         prev_x_angle = this_00->last_angle_x;
         fVar2 = prev_z_angle * prev_z_angle + prev_x_angle * prev_x_angle +
 prev_y_angle * prev_y_angle; if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 < fVar2))
-{ fVar1 = (1.0 / SQRT(fVar2)) * fVar2;
+{ fVar1 = __frsqrte(fVar2);
         }
         if (0.0 < fVar1) {
             fVar1 = 1.0 / fVar1;
@@ -224,23 +212,24 @@ prev_y_angle * prev_y_angle; if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 < fVar2))
         }
         new_angle_x = this_00->first_angle_x;
         new_angle_y = this_00->first_angle_y;
-        new_angle_z = this_00->first_angle_z;;
+        new_angle_z = this_00->first_angle_z;
         this_00->id[4] = (int)&this_00->first_angle_x;
-        vt_base(this_00, 0x20, int, 0x8)(this_00->id, &efxArgDirVT);
-        CNode__del((CNode*)this_00);
-        CNode__add((CNode*)this->gunNode1, (CNode*)this_00);
+        // vt_base(this_00, 0x20, int, 0x8)(this_00->id, &__vt__Q23efx6ArgDir);
+        ((CNode&)this_00).del();
+		((CNode&)(shotmgr->gunNode1)).add((CNode*)this_00);
         //pMStack164 = this->gunPosMatrix;
-        TSimpleMatrix.id = Enemy_Houdai_THamaShoot_1;
-        TSimpleMatrix.id2 = Enemy_Houdai_THamaShoot_2;
-        TSimpleMatrix.id3 = Enemy_Houdai_THdamaShoot_3;
-        TSimpleMatrix.mgr = (int*)0x0;
-        TSimpleMatrix.unk = (int*)0x0;
-        TSimpleMatrix.mtx = (Matrixf*)0x0;
-        TSimpleMatrix.this = HdamaShootVT;
-        simpleMTX3Create(&TSimpleMatrix);
+		TSimpleMatrix.id   = 157;
+		TSimpleMatrix.id2  = 158;
+		TSimpleMatrix.id3  = 583;
+		TSimpleMatrix.mgr  = nullptr;
+		TSimpleMatrix.unk  = nullptr;
+		TSimpleMatrix.mtx  = nullptr;
+        TSimpleMatrix.vtptr = &__vt__Q23efx11THdamaShoot;
+		
+		create__Q23efx11TSimpleMtx3FPQ23efx3Arg(TSimpleMatrix, nullptr);
     }
     return;
-}*/
+}
 
 /*void create_sNaviGunMgr(HoudaiShotGunMgr* this)
 //WIP Function

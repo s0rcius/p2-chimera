@@ -1222,6 +1222,7 @@ emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv:
 /* 802C489C 002C17DC  80 63 00 38 */	lwz r3, 0x38(r3)
 /* 802C48A0 002C17E0  83 A3 00 10 */	lwz r29, 0x10(r3)
 /* 802C48A4 002C17E4  28 1D 00 00 */	cmplwi r29, 0
+# exit early if nullptr
 /* 802C48A8 002C17E8  41 82 03 0C */	beq lbl_802C4BB4
 /* 802C48AC 002C17EC  80 7F 00 14 */	lwz r3, 0x14(r31)
 /* 802C48B0 002C17F0  C0 02 E2 28 */	lfs f0, lbl_8051C588@sda21(r2)

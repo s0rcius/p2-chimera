@@ -96,6 +96,45 @@ void emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(HoudaiShotGunMgr*);
 
 void pikminGunFire(PlayCamera& camera, Navi* player);
 void createShotGun();
+void naviEmitShotGun(HoudaiShotGunMgr* shotmgr);
 
+
+struct astruct_4 {
+	u32 field_0x0;
+	struct astruct_4* inc;
+	struct CNode* field_0x8;
+	struct CNode* field_0xc;
+	u32 field_0x10;
+	char* field_0x14;
+	float info;
+	int* id;
+	float first_angle_x;
+	float first_angle_y;
+	float first_angle_z;
+	float last_angle_x;
+	float last_angle_y;
+	float last_angle_z;
+};
 } // namespace Game
+typedef struct TSimpleMtx3 TSimpleMtx3, *PTSimpleMtx3;
+
+struct HDamaShootVt {
+	u32 a;
+	u32 b;
+	u32 c;
+	u32 d;
+	u32 e;
+};
+
+struct TSimpleMtx3 { /* PlaceHolder Structure */
+	void* vtptr;
+	int id;
+	int id2;
+	int id3;
+	u8 field_0xa;
+	u8 field_0xb;
+	int* mgr;
+	int* unk;
+	struct Matrixf* mtx;
+};
 #endif
