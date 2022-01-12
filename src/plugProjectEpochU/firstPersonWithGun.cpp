@@ -28,7 +28,7 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 		if (input != 0) {
 			float cstick_horizontal = (input->cstick_lr);
 			OSReport("cstick_horizontal = %f\n", cstick_horizontal);
-			float cstick_vertical   = (input->cstick_up);
+			float cstick_vertical = (input->cstick_up);
 			OSReport("cstick_vertical = %f\n", cstick_vertical);
 			// panic_f("firstPersonWithGun.c", 0x2d, "P2Assert");
 
@@ -63,7 +63,7 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 			}
 		}
 	} /* else {
-		isModCameraFinished(player_camera);
+	    isModCameraFinished(player_camera);
 	}*/
 	return;
 }

@@ -14,7 +14,6 @@
 
 #include "Controller.h"
 
-
 namespace PSM {
 struct Navi;
 } // namespace PSM
@@ -327,7 +326,7 @@ struct Navi : public FakePiki, virtual public PelletView {
 };
 /*
 struct NaviFSM : public StateMachine<Navi> {
-	virtual void start(struct Navi*, int, StateArg*);
+    virtual void start(struct Navi*, int, StateArg*);
 };
 */
 struct NaviMgr {
