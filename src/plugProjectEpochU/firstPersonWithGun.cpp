@@ -57,7 +57,7 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 						(player_camera.zoomCam) = -0.5f;
 					}
 					if (player != 0) {
-						player->m_faceDir = player_camera.camAngle2 + 3.14f;
+						// player->m_faceDir = player_camera.camAngle2 + 3.14f;
 					}
 				}
 			}
