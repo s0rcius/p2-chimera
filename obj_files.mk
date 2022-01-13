@@ -5,6 +5,9 @@ GROUP_0_FILES:=\
 	$(BUILD_DIR)/asm/dtors.o\
 	$(BUILD_DIR)/asm/bss.o\
 
+MOD_FILES:=\
+	$(BUILD_DIR)/src/sysAxiotU/testground.o\
+
 JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/object/object-particle.o\
 	$(BUILD_DIR)/asm/JSystem/JPA/control.o\

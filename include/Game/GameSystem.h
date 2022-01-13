@@ -81,7 +81,6 @@ struct GameSystem : public NodeObjectMgr<GenericObjectMgr> {
 };
 
 extern GameSystem* gameSystem;
-
 } // namespace Game
 
 #endif

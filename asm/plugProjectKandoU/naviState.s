@@ -2558,6 +2558,8 @@ lbl_8017E960:
 /* 8017E980 0017B8C0  4B FC 51 85 */	bl control__Q24Game4NaviFv
 /* 8017E984 0017B8C4  7F C3 F3 78 */	mr r3, r30
 /* 8017E988 0017B8C8  4B FC 7D E5 */	bl findNextThrowPiki__Q24Game4NaviFv
+mr r3, r30
+bl Handle_NaviWalkState__3modFPQ24Game4Navi
 /* 8017E98C 0017B8CC  80 1E 02 78 */	lwz r0, 0x278(r30)
 /* 8017E990 0017B8D0  28 00 00 00 */	cmplwi r0, 0
 /* 8017E994 0017B8D4  40 82 00 4C */	bne lbl_8017E9E0

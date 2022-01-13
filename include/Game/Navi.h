@@ -336,7 +336,7 @@ struct NaviMgr {
 	CollPartFactory* _CC; // _CC
 };
 
-NaviMgr* naviMgr;
+extern NaviMgr* naviMgr;
 } // namespace Game
 
 #endif
