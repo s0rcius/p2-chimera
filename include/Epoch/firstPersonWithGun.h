@@ -56,7 +56,7 @@ void emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(HoudaiShotGunMgr*);
 }
 
 void pikminGunFire(PlayCamera& camera, Navi* player);
-void useNaviController(PlayCamera& camera, Navi* player);
+void useNaviController(Navi* player);
 void createShotGun();
 void naviParticleSpawn(Game::Navi* navi, int efx_id);
 

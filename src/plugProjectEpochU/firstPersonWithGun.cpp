@@ -10,7 +10,7 @@
 
 namespace Game {
 
-HoudaiShotGunMgr* sNaviGunMgr;
+// HoudaiShotGunMgr* sNaviGunMgr;
 static int sEfxId          = 339;
 static bool isCStickCamera = true;
 
@@ -28,7 +28,7 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 				float cstick_vertical = (input->cstick_up);
 				// OSReport("cstick_vertical = %f\n", cstick_vertical);
 				// cstick controls camera angle
-				useNaviController(player_camera, player);
+				useNaviController(player);
 				if ((isCStickCamera) && (gameSystem->m_isInCave == false)) { // checks boolean conditional
 					if (__fabs(cstick_horizontal) > 0.05f) {
 						(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
@@ -96,7 +96,7 @@ void naviParticleSpawn(Game::Navi* navi, int efx_id)
 	util::SpawnParticle_1(efx_id, particle_position);
 }
 
-void useNaviController(PlayCamera& camera, Navi* player)
+void useNaviController(Navi* player)
 {
 	if ((player != nullptr) /* && (input != 0)*/) {
 		u32 input = (player->m_padinput->press);
