@@ -85,7 +85,6 @@ struct PlayerParticle {
 
 		// Finally, spawn the particle
 		m_fxGenerator.create(&settings);
-		m_fxGenerator.forceKill();
 	}
 
 	// Our particle generator
