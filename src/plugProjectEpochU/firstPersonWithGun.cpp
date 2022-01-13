@@ -11,7 +11,7 @@
 namespace Game {
 
 HoudaiShotGunMgr* sNaviGunMgr;
-static int sEfxId = 339;
+static int sEfxId          = 339;
 static bool isCStickCamera = true;
 
 void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
@@ -58,34 +58,24 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 }
 void pikminGunFire(PlayCamera& camera, Navi* player)
 {
-	float aim;
-	u32 input = (player->m_padinput->press);
-
-	OSReport("gunmgr = %x\n", sNaviGunMgr);
-	OSReport("input = %x\n", input);
-	OSReport("player = %x\n", player);
-	if (((player != 0) && (input != 0)) && (sNaviGunMgr != nullptr)) {
-		OSReport("gun initialized\n");
-		aim                                           = camera.zoomCam;
-		sNaviGunMgr->gunPosMatrix                     = (Matrixf*)&player->m_mainMatrix;
-		(player->m_mainMatrix).m_matrix.structView.ty = (player->m_mainMatrix).m_matrix.structView.ty + 15;
-		(player->m_mainMatrix).m_matrix.structView.xy = (player->m_mainMatrix).m_matrix.structView.xy - aim;
-		aim                                           = (player->m_mainMatrix).m_matrix.structView.xx;
-		(player->m_mainMatrix).m_matrix.structView.xx = -(player->m_mainMatrix).m_matrix.structView.xz;
-		(player->m_mainMatrix).m_matrix.structView.xz = aim;
-		if ((input & 0x40) != 0) // press L (0x40)
-		{
-			OSReport("we are TRYING to fire the damn gun\n");
-			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
-			// naviParticleSpawn(player, sEfxId);
-			// sEfxId++;
-			// emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
-			// naviEmitShotGun(sNaviGunMgr); // will crash the game
-		}
-	} else if (sNaviGunMgr == nullptr) {
+	if (!sNaviGunMgr) {
 		createShotGun();
 	}
-	return;
+
+	u32 input = player->m_padinput->press;
+	if (input) {
+		sNaviGunMgr->gunPosMatrix = (Matrixf*)&player->m_mainMatrix;
+		player->m_mainMatrix.m_matrix.structView.ty += 15;
+
+		float aim                                   = player->m_mainMatrix.m_matrix.structView.xx;
+		player->m_mainMatrix.m_matrix.structView.xx = -player->m_mainMatrix.m_matrix.structView.xz;
+		player->m_mainMatrix.m_matrix.structView.xz = aim;
+
+		if (input & 0x40) // press L (0x40)
+		{
+			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
+		}
+	}
 }
 
 bool gunmodeCstick(FakePiki& param_1)
@@ -102,7 +92,7 @@ void naviParticleSpawn(Game::Navi* navi, int efx_id)
 {
 	Vector3f overhead_position = navi->getPosition();
 	overhead_position.x += (-100.0f * navi->m_padinput->cstick_lr);
-	overhead_position.y += 5.0f/* (100.0f * navi->m_padinput->cstickdeflection)*/;
+	overhead_position.y += 5.0f /* (100.0f * navi->m_padinput->cstickdeflection)*/;
 	overhead_position.z += (100.0f * navi->m_padinput->cstick_up);
 	util::SpawnParticle_1(efx_id, overhead_position);
 }
