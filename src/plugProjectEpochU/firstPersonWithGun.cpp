@@ -89,11 +89,11 @@ bool gunmodeCstick(FakePiki& param_1)
 
 void naviParticleSpawn(Game::Navi* navi, int efx_id)
 {
-	Vector3f overhead_position = navi->getPosition();
-	overhead_position.x += (-100.0f * navi->m_padinput->cstick_lr);
-	overhead_position.y += 5.0f /* (100.0f * navi->m_padinput->cstickdeflection)*/;
-	overhead_position.z += (100.0f * navi->m_padinput->cstick_up);
-	util::SpawnParticle_1(efx_id, overhead_position);
+	Vector3f particle_position = navi->getPosition();
+	particle_position.x += (-100.0f * navi->m_padinput->cstick_lr);
+	particle_position.y += 5.0f /* (100.0f * navi->m_padinput->cstickdeflection)*/;
+	particle_position.z += (100.0f * navi->m_padinput->cstick_up);
+	util::SpawnParticle_1(efx_id, particle_position);
 }
 
 void useNaviController(PlayCamera& camera, Navi* player)
