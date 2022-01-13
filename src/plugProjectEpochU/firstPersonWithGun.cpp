@@ -6,65 +6,47 @@
 #include "PSSystem/SysIF.h"
 #include "efx/TSimple.h"
 
-#define m(_ptr, _offset, _type)                   *(_type*)((void*)_ptr + _offset)
-#define vt_base(_this, _offset, _type, _vtoffset) m(m(_this, _vtoffset, void*), _offset, _type*)
-
-extern "C" {
-extern HDamaShootVt __vt__Q23efx11THdamaShoot;
-extern HDamaShootVt __vt__Q23efx6ArgDir;
-bool create__Q23efx11TSimpleMtx3FPQ23efx3Arg(TSimpleMtx3&, u32*);
-}
 // extern struct HoudaiShotGunMgr* Game::Houdai::sNaviGunMgr;
 
 namespace Game {
+
 HoudaiShotGunMgr* sNaviGunMgr;
+static int sEfxId = 339;
+static bool isCStickCamera = true;
 
 void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
-
 {
-	Controller* input;
-	Navi* player;
-	// HoudaiShotGunMgr* this_00;
-	// OSReport("bingus\n"); //this gets reported ok (challenge) and gets
-	// reported once (story)
-	player = (player_camera.target);
-	// OSReport("bongus\n"); //this gets reported ok (challenge) and gets
-	// reported once (story)
-	if (player != 0) {
-		input = (player->m_padinput);
-		if (input != 0) {
+	Navi* player = (player_camera.target);
+
+	if (player != nullptr) {
+		Controller* input = (player->m_padinput);
+		if (input != nullptr) {
 			float cstick_horizontal = (input->cstick_lr);
-			OSReport("cstick_horizontal = %f\n", cstick_horizontal);
+			// OSReport("cstick_horizontal = %f\n", cstick_horizontal);
 			float cstick_vertical = (input->cstick_up);
-			OSReport("cstick_vertical = %f\n", cstick_vertical);
-			// panic_f("firstPersonWithGun.c", 0x2d, "P2Assert");
+			// OSReport("cstick_vertical = %f\n", cstick_vertical);
 
 			if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
-				// OSReport("we are not in a cave\n"); //this is never reached
 
-				// this_00 = (_sNaviGunMgr*)JSystem__operator_new(0x20);
-				// if (this_00 != 0) {
-				// create_sNaviGunMgr(this_00); //move this to happen
-				// during navi init
-				/// }
-				// this->ShotgunMgr = this_00;
-
-				if (input != 0) {
-					pikminGunFire(player_camera, player);
-					if (__fabs(cstick_horizontal) > 0.05f) {
-						(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
-					}
-					if (__fabs(cstick_vertical) > 0.05f) {
-						(player_camera.zoomCam) -= 0.02f * cstick_vertical;
-					}
-					if ((player_camera.zoomCam) > 0.5f) {
-						(player_camera.zoomCam) = 0.5f;
-					}
-					if ((player_camera.zoomCam) < -0.5f) {
-						(player_camera.zoomCam) = -0.5f;
-					}
-					if (player != 0) {
-						// player->m_faceDir = player_camera.camAngle2 + 3.14f;
+				if (input != nullptr) { // cstick controls camera angle
+					useNaviController(player_camera, player);
+					if (isCStickCamera) { // checks boolean conditional
+						if (__fabs(cstick_horizontal) > 0.05f) {
+							(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
+						}
+						if (__fabs(cstick_vertical) > 0.05f) {
+							(player_camera.zoomCam) -= 0.02f * cstick_vertical;
+						}
+						// clamp camera to 45 degrees vertical variance
+						if ((player_camera.zoomCam) > 0.5f) {
+							(player_camera.zoomCam) = 0.5f;
+						}
+						if ((player_camera.zoomCam) < -0.5f) {
+							(player_camera.zoomCam) = -0.5f;
+						}
+						if (player != 0) {
+							// player->m_faceDir = player_camera.camAngle2 + 3.14f;
+						}
 					}
 				}
 			}
@@ -75,14 +57,10 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 	return;
 }
 void pikminGunFire(PlayCamera& camera, Navi* player)
-
 {
 	float aim;
-	u32 input;
-	// HoudaiShotGunMgr* this;
-	input = (player->m_padinput->press);
+	u32 input = (player->m_padinput->press);
 
-	// this = _sNaviGunMgr;
 	OSReport("gunmgr = %x\n", sNaviGunMgr);
 	OSReport("input = %x\n", input);
 	OSReport("player = %x\n", player);
@@ -95,11 +73,14 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 		aim                                           = (player->m_mainMatrix).m_matrix.structView.xx;
 		(player->m_mainMatrix).m_matrix.structView.xx = -(player->m_mainMatrix).m_matrix.structView.xz;
 		(player->m_mainMatrix).m_matrix.structView.xz = aim;
-		if ((input & 0x20) != 0) {
+		if ((input & 0x40) != 0) // press L (0x40)
+		{
 			OSReport("we are TRYING to fire the damn gun\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
+			// naviParticleSpawn(player, sEfxId);
+			// sEfxId++;
 			// emitShotGun__Q34Game6Houdai16HoudaiShotGunMgrFv(sNaviGunMgr);
-			naviEmitShotGun(sNaviGunMgr); // will crash the game
+			// naviEmitShotGun(sNaviGunMgr); // will crash the game
 		}
 	} else if (sNaviGunMgr == nullptr) {
 		createShotGun();
@@ -110,14 +91,46 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 bool gunmodeCstick(FakePiki& param_1)
 
 {
-	// uint uVar1;
 	if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
-		// uVar1 = 0;
 		return false;
 	} else {
 		return param_1.useMoveRotation();
 	}
-	// return uVar1;
+}
+
+void naviParticleSpawn(Game::Navi* navi, int efx_id)
+{
+	Vector3f overhead_position = navi->getPosition();
+	overhead_position.x += (-100.0f * navi->m_padinput->cstick_lr);
+	overhead_position.y += 5.0f/* (100.0f * navi->m_padinput->cstickdeflection)*/;
+	overhead_position.z += (100.0f * navi->m_padinput->cstick_up);
+	util::SpawnParticle_1(efx_id, overhead_position);
+}
+
+void useNaviController(PlayCamera& camera, Navi* player)
+{
+	if ((player != nullptr) /* && (input != 0)*/) {
+		u32 input = (player->m_padinput->press);
+		// OSReport("input = %x\n", input); // reports input as unsigned long
+		if (player->m_padinput->cstickdeflection > 0.1f) {
+			naviParticleSpawn(player, sEfxId);
+		}
+		if ((input & 0x10) != 0) // press Z (0x10) to disable C-Stick camera control
+		{
+			isCStickCamera = !isCStickCamera;
+		}
+		if ((input & 0x40) != 0) // press L (0x40) to increment spawned particle ID
+		{
+			OSReport("we are incrementing particle ID\n");
+			PSSystem::spSysIF->playSystemSe(PSSE_PK_RESULT_INCREMENT, 0);
+			sEfxId++;
+			if (sEfxId > 694) { // highest particle id is 694
+				sEfxId = 0;
+			}
+			OSReport("Particle spawned with ID %i\n", sEfxId);
+		}
+	}
+	return;
 }
 
 HoudaiShotGunMgr::HoudaiShotGunMgr()
@@ -146,157 +159,4 @@ HoudaiShotGunMgr::HoudaiShotGunMgr()
 
 void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
 
-void naviEmitShotGun(HoudaiShotGunMgr* shotmgr)
-
-{
-    float fVar1;
-    float fVar2;
-    Matrixf* gunMatrix;
-	astruct_4* this_00;
-    double reciprocal_angle;
-    double tz;
-    double ty;
-    double tx;
-    double xz;
-    double xy;
-    double xx;
-    u32* local_d8;
-    float new_angle_x;
-    float new_angle_y;
-    float new_angle_z;
-    float prev_x_angle;
-    float prev_y_angle;
-    float prev_z_angle;
-    TSimpleMtx3 TSimpleMatrix;
-    //Matrixf* pMStack164;
-
-    this_00 = shotmgr->gunNode2->astruct_4_pointer;
-    if (this_00 != nullptr) {
-        gunMatrix = shotmgr->gunPosMatrix;
-        fVar1 = 0.0;
-		xy        = (double)gunMatrix->m_matrix.structView.xy;
-		xz        = (double)gunMatrix->m_matrix.structView.xz;
-		xx        = (double)gunMatrix->m_matrix.structView.xx;
-		tx        = (double)gunMatrix->m_matrix.structView.tx;
-		ty        = (double)gunMatrix->m_matrix.structView.ty;
-		tz        = (double)gunMatrix->m_matrix.structView.tz;
-        fVar2 = (float)(xz * xz) + (float)(xx * xx +
-(double)(float)(xy * xy)); if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 <
-fVar2)) { fVar1 = __frsqrte(fVar2);
-        }
-        if (0.0 < fVar1) {
-            reciprocal_angle = (double)(1.0 / fVar1);
-            xx = (double)(float)(xx * reciprocal_angle);
-            xy = (double)(float)(xy * reciprocal_angle);
-            xz = (double)(float)(xz * reciprocal_angle);
-        }
-        fVar1 = 0.0;
-        this_00->first_angle_x = (float)(tx + (double)(float)(xx * 45.0));
-        this_00->first_angle_y = (float)(ty + (double)(float)(xy * 45.0));
-        this_00->first_angle_z = (float)(tz + (double)(float)(xz * 45.0));
-        this_00->last_angle_x = (float)(xx * 600.0);
-        this_00->last_angle_y = (float)(xy * 600.0);
-        this_00->last_angle_z = (float)(xz * 600.0);
-        prev_y_angle = this_00->last_angle_y;
-        prev_z_angle = this_00->last_angle_z;
-        prev_x_angle = this_00->last_angle_x;
-        fVar2 = prev_z_angle * prev_z_angle + prev_x_angle * prev_x_angle +
-prev_y_angle * prev_y_angle; if ((0.0 < fVar2) && (fVar1 = fVar2, 0.0 < fVar2))
-{ fVar1 = __frsqrte(fVar2);
-        }
-        if (0.0 < fVar1) {
-            fVar1 = 1.0 / fVar1;
-            prev_x_angle = prev_x_angle * fVar1;
-            prev_y_angle = prev_y_angle * fVar1;
-            prev_z_angle = prev_z_angle * fVar1;
-        }
-        new_angle_x = this_00->first_angle_x;
-        new_angle_y = this_00->first_angle_y;
-        new_angle_z = this_00->first_angle_z;
-        this_00->id[4] = (int)&this_00->first_angle_x;
-        // vt_base(this_00, 0x20, int, 0x8)(this_00->id, &__vt__Q23efx6ArgDir);
-        ((CNode&)this_00).del();
-		((CNode&)(shotmgr->gunNode1)).add((CNode*)this_00);
-        //pMStack164 = this->gunPosMatrix;
-		TSimpleMatrix.id   = 157;
-		TSimpleMatrix.id2  = 158;
-		TSimpleMatrix.id3  = 583;
-		TSimpleMatrix.mgr  = nullptr;
-		TSimpleMatrix.unk  = nullptr;
-		TSimpleMatrix.mtx  = nullptr;
-        TSimpleMatrix.vtptr = &__vt__Q23efx11THdamaShoot;
-		
-		create__Q23efx11TSimpleMtx3FPQ23efx3Arg(TSimpleMatrix, nullptr);
-    }
-    return;
-}
-
-/*void create_sNaviGunMgr(HoudaiShotGunMgr* this)
-//WIP Function
-{
-    HoudaiShotGunNode* node;
-    HoudaiShotGunNode* node2;
-    HoudaiShotGunNode* node3;
-    THdamaShell* efx1;
-    int iVar1;
-    Obj* pOVar2;
-
-    this->gun_angle = 0.0;
-    node = (HoudaiShotGunNode*)JSystem__operator_new(0x38);
-    if (node != (HoudaiShotGunNode*)0x0) {
-        pOVar2 = this->HoudaiObject;
-        CNode::CNode((CNode*)node);
-        node->this =
-&plugProjectNishimuraU::__vt__Q34Game6Houdai17HoudaiShotGunNode; node->owner =
-pOVar2;
-    }
-    this->gunNode1 = node;
-    node2 = (HoudaiShotGunNode*)JSystem__operator_new(0x38);
-    if (node2 != (HoudaiShotGunNode*)0x0) {
-        pOVar2 = this->HoudaiObject;
-        CNode::CNode((CNode*)node2);
-        node2->this =
-&plugProjectNishimuraU::__vt__Q34Game6Houdai17HoudaiShotGunNode; node2->owner =
-pOVar2;
-    }
-    this->gunNode2 = node2;
-    iVar1 = 0;
-    do {
-        node3 = (HoudaiShotGunNode*)JSystem__operator_new(0x38);
-        if (node3 != (HoudaiShotGunNode*)0x0) {
-            pOVar2 = this->HoudaiObject;
-            CNode::CNode((CNode*)node3);
-            node3->this =
-&plugProjectNishimuraU::__vt__Q34Game6Houdai17HoudaiShotGunNode; node3->owner =
-pOVar2;
-        }
-        efx1 = (THdamaShell*)JSystem__operator_new(0x14);
-        if (efx1 != (THdamaShell*)0x0) {
-            efx1->this = &plugProjectYamashitaU::__vt__Q23efx5TBase;
-            efx1->this2 = &JSystem::__vt__18JPAEmitterCallBack;
-            efx1->this = (uint*)&plugProjectEbisawaU::__vt__Q23efx5TSync;
-            efx1->this2 = &UINT_804e68e0;
-            efx1->field_0x8 = 0;
-            efx1->field_0xc = Enemy_DangoMushi_TDangoFly_2;
-            efx1->field_0xe = 0;
-            efx1->this = &plugProjectEbisawaU::__vt__Q23efx9TChasePos;
-            efx1->this2 = &UINT_804e6894;
-            efx1->field_0x10 = 0;
-            efx1->field_0xc = Enemy_Houdai_THdamaShell;
-            efx1->this = &plugProjectEbisawaU::__vt__Q23efx11THdamaShell;
-            efx1->this2 = &UINT_804e9f5c;
-        }
-        node3->efx_shell = efx1;
-        (node3->bounds).X = sysCommonU::zero_Vector3.X;
-        (node3->bounds).Y = sysCommonU::zero_Vector3.Y;
-        (node3->bounds).Z = sysCommonU::zero_Vector3.Z;
-        (node3->field_0x2c).X = sysCommonU::zero_Vector3.X;
-        (node3->field_0x2c).Y = sysCommonU::zero_Vector3.Y;
-        (node3->field_0x2c).Z = sysCommonU::zero_Vector3.Z;
-        CNode::add((CNode*)this->gunNode2, (CNode*)node3);
-        iVar1 = iVar1 + 1;
-    } while (iVar1 < 10);
-    _sNaviGunMgr = (HoudaiShotGunMgr*)0x0;
-    return;
-}*/
 } // namespace Game
