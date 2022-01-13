@@ -15,6 +15,7 @@ static int sEfxId          = 339;
 static bool isCStickCamera = true;
 
 void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
+// hooked at 0x8023F928 in playCamera.s
 {
 	if (gameSystem != nullptr) {
 		Navi* player = (player_camera.target);
@@ -50,30 +51,32 @@ void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 	}*/
 	return;
 }
+// UNUSED
+/*
 void pikminGunFire(PlayCamera& camera, Navi* player)
 {
-	if (!sNaviGunMgr) {
-		createShotGun();
-	}
+    if (!sNaviGunMgr) {
+        createShotGun();
+    }
 
-	u32 input = player->m_padinput->press;
-	if (input) {
-		sNaviGunMgr->gunPosMatrix = (Matrixf*)&player->m_mainMatrix;
-		player->m_mainMatrix.m_matrix.structView.ty += 15;
+    u32 input = player->m_padinput->press;
+    if (input) {
+        sNaviGunMgr->gunPosMatrix = (Matrixf*)&player->m_mainMatrix;
+        player->m_mainMatrix.m_matrix.structView.ty += 15;
 
-		float aim                                   = player->m_mainMatrix.m_matrix.structView.xx;
-		player->m_mainMatrix.m_matrix.structView.xx = -player->m_mainMatrix.m_matrix.structView.xz;
-		player->m_mainMatrix.m_matrix.structView.xz = aim;
+        float aim                                   = player->m_mainMatrix.m_matrix.structView.xx;
+        player->m_mainMatrix.m_matrix.structView.xx = -player->m_mainMatrix.m_matrix.structView.xz;
+        player->m_mainMatrix.m_matrix.structView.xz = aim;
 
-		if (input & 0x40) // press L (0x40)
-		{
-			PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
-		}
-	}
+        if (input & 0x40) // press L (0x40)
+        {
+            PSSystem::spSysIF->playSystemSe(PSSE_EN_HOUDAI_SHOT, 0);
+        }
+    }
 }
-
+*/
 bool gunmodeCstick(FakePiki& param_1)
-
+// hooked at 0x8013EB4C in fakePiki.s
 {
 	if (gameSystem == nullptr) {
 		return false;
@@ -118,31 +121,33 @@ void useNaviController(PlayCamera& camera, Navi* player)
 	}
 	return;
 }
-
+// UNUSED
+/*
 HoudaiShotGunMgr::HoudaiShotGunMgr()
 {
-	HoudaiObject   = nullptr;
-	aimingActive   = 0;
-	lockon_on      = 0;
-	shotgun_on     = 0;
-	field_0x7      = 0;
-	gun_angletimer = 0.0f;
-	gun_angle      = 0.0f;
-	tamaMatrix     = nullptr;
-	gunPosMatrix   = nullptr;
-	TargetX        = 0.0f;
-	TargetY        = 0.0f;
-	TargetZ        = 0.0f;
-	Lockon_X       = 0.0f;
-	Lockon_Y       = 0.0f;
-	Lockon_Z       = 0.0f;
-	efx_sight      = nullptr;
-	gunNode1       = new HoudaiShotGunNode;
-	gunNode2       = new HoudaiShotGunNode;
+    HoudaiObject   = nullptr;
+    aimingActive   = 0;
+    lockon_on      = 0;
+    shotgun_on     = 0;
+    field_0x7      = 0;
+    gun_angletimer = 0.0f;
+    gun_angle      = 0.0f;
+    tamaMatrix     = nullptr;
+    gunPosMatrix   = nullptr;
+    TargetX        = 0.0f;
+    TargetY        = 0.0f;
+    TargetZ        = 0.0f;
+    Lockon_X       = 0.0f;
+    Lockon_Y       = 0.0f;
+    Lockon_Z       = 0.0f;
+    efx_sight      = nullptr;
+    gunNode1       = new HoudaiShotGunNode;
+    gunNode2       = new HoudaiShotGunNode;
 
-	// __ct__Q34Game6Houdai16HoudaiShotGunMgrFPQ34Game6Houdai3Obj(nullptr);
+    // __ct__Q34Game6Houdai16HoudaiShotGunMgrFPQ34Game6Houdai3Obj(nullptr);
 };
-
-void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
+*/
+// UNUSED
+// void createShotGun() { sNaviGunMgr = new HoudaiShotGunMgr; };
 
 } // namespace Game

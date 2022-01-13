@@ -2527,6 +2527,7 @@ lbl_8013EB3C:
 # /* 8013EB44 0013BA84  81 8C 01 D4 */	lwz r12, 0x1d4(r12)
 # /* 8013EB48 0013BA88  7D 89 03 A6 */	mtctr r12
 # /* 8013EB4C 0013BA8C  4E 80 04 21 */	bctrl
+# gunmodeCstick hook
 /* 8013EB4C 0013BA8C  4E 80 04 21 */	bl gunmodeCstick__4GameFRQ24Game8FakePiki
 /* 8013EB50 0013BA90  54 60 06 3F */	clrlwi. r0, r3, 0x18
 /* 8013EB54 0013BA94  41 82 00 68 */	beq lbl_8013EBBC
