@@ -16,37 +16,31 @@ static bool isCStickCamera = true;
 
 void firstPersonGunCamera(PlayCamera& player_camera) // sets player_camera angle
 {
-	Navi* player = (player_camera.target);
+	if (gameSystem != nullptr) {
+		Navi* player = (player_camera.target);
 
-	if (player != nullptr) {
-		Controller* input = (player->m_padinput);
-		if (input != nullptr) {
-			float cstick_horizontal = (input->cstick_lr);
-			// OSReport("cstick_horizontal = %f\n", cstick_horizontal);
-			float cstick_vertical = (input->cstick_up);
-			// OSReport("cstick_vertical = %f\n", cstick_vertical);
-
-			if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
-
-				if (input != nullptr) { // cstick controls camera angle
-					useNaviController(player_camera, player);
-					if (isCStickCamera) { // checks boolean conditional
-						if (__fabs(cstick_horizontal) > 0.05f) {
-							(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
-						}
-						if (__fabs(cstick_vertical) > 0.05f) {
-							(player_camera.zoomCam) -= 0.02f * cstick_vertical;
-						}
-						// clamp camera to 45 degrees vertical variance
-						if ((player_camera.zoomCam) > 0.5f) {
-							(player_camera.zoomCam) = 0.5f;
-						}
-						if ((player_camera.zoomCam) < -0.5f) {
-							(player_camera.zoomCam) = -0.5f;
-						}
-						if (player != 0) {
-							// player->m_faceDir = player_camera.camAngle2 + 3.14f;
-						}
+		if (player != nullptr) {
+			Controller* input = (player->m_padinput);
+			if (input != nullptr) {
+				float cstick_horizontal = (input->cstick_lr);
+				// OSReport("cstick_horizontal = %f\n", cstick_horizontal);
+				float cstick_vertical = (input->cstick_up);
+				// OSReport("cstick_vertical = %f\n", cstick_vertical);
+				// cstick controls camera angle
+				useNaviController(player_camera, player);
+				if ((isCStickCamera) && (gameSystem->m_isInCave == false)) { // checks boolean conditional
+					if (__fabs(cstick_horizontal) > 0.05f) {
+						(player_camera.camAngle2) -= 0.02f * cstick_horizontal;
+					}
+					if (__fabs(cstick_vertical) > 0.05f) {
+						(player_camera.zoomCam) -= 0.02f * cstick_vertical;
+					}
+					// clamp camera to 45 degrees vertical variance
+					if ((player_camera.zoomCam) > 0.5f) {
+						(player_camera.zoomCam) = 0.5f;
+					}
+					if ((player_camera.zoomCam) < -0.5f) {
+						(player_camera.zoomCam) = -0.5f;
 					}
 				}
 			}
@@ -81,10 +75,12 @@ void pikminGunFire(PlayCamera& camera, Navi* player)
 bool gunmodeCstick(FakePiki& param_1)
 
 {
-	if ((gameSystem == nullptr) || (gameSystem->m_isInCave == false)) {
+	if (gameSystem == nullptr) {
 		return false;
-	} else {
+	} else if ((!isCStickCamera) || (gameSystem->m_isInCave == true)) {
 		return param_1.useMoveRotation();
+	} else {
+		return false;
 	}
 }
 
