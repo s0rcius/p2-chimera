@@ -1,7 +1,6 @@
 #ifndef _SYS_GRIDDIVIDER_H
 #define _SYS_GRIDDIVIDER_H
 
-#include "BoundBox.h"
 #include "Sys/TriDivider.h"
 #include "Vector3.h"
 namespace Game {
