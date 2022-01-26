@@ -12,6 +12,7 @@
 
 #include "Dolphin/mtx.h"
 
+#include "Controller.h"
 #include "CollInfo.h"
 #include "Vector3.h"
 
@@ -343,7 +344,7 @@ struct NaviMgr {
 	CollPartFactory* _CC;
 };
 
-NaviMgr* naviMgr;
+extern NaviMgr* naviMgr;
 } // namespace Game
 
 #endif
