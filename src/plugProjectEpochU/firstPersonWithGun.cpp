@@ -95,55 +95,60 @@ bool gunmodeCstick(FakePiki& param_1)
 void naviParticleSpawn(Game::Navi* navi, int efx_id)
 {
 	Vector3f particle_position = navi->getPosition();
-	particle_position.x += (-100.0f * navi->m_padinput->cstick_lr);
+	Vector3f cstick_pos        = navi->m_cStickTargetVector;
+	// OSReport("cstickpos.x = %f\n", cstick_pos.x);
+	// OSReport("cstickpos.y = %f\n", cstick_pos.y);
+	// OSReport("cstickpos.z = %f\n", cstick_pos.z);
+	particle_position.x += (100.0f * cstick_pos.x);
 	particle_position.y += 5.0f /* (100.0f * navi->m_padinput->cstickdeflection)*/;
-	particle_position.z += (100.0f * navi->m_padinput->cstick_up);
+	particle_position.z += (100.0f * cstick_pos.z);
 	util::SpawnParticle_1(efx_id, particle_position);
 }
 
 void naviBouncySphere(Game::Navi* navi)
 {
 	Vector3f sphere_pos = navi->getPosition();
-	
-	sphere_pos.x += (-100.0f * navi->m_padinput->cstick_lr);
+	Vector3f cstick_pos = navi->m_cStickTargetVector;
+
+	sphere_pos.x += (100.0f * cstick_pos.x);
 	// sphere_pos.y += 5.0f /* (100.0f * navi->m_padinput->cstickdeflection)*/;
-	sphere_pos.z += (100.0f * navi->m_padinput->cstick_up);
-	
-	// Create a sphere with a radius of 75 at olimar's position
-    Sys::Sphere detectionSphere(sphere_pos, 75);
-    Game::CellIteratorArg arg(detectionSphere);
-	
+	sphere_pos.z += (100.0f * cstick_pos.z);
+
+	// Create a sphere with a radius of 75 at offset from active Navi's position
+	Sys::Sphere detectionSphere(sphere_pos, 75);
+	Game::CellIteratorArg arg(detectionSphere);
+
 	// Create the iterator based on the sphere
-    Game::CellIterator iterator(arg);
-	
+	Game::CellIterator iterator(arg);
+
 	// Initialise properly
-    iterator.first();
-	
+	iterator.first();
+
 	// Loop until there are no objects left
-    while (!iterator.isDone()) {
-        // Grab the current object by calling *iterator
-        Game::CellObject* obj = *iterator;
+	while (!iterator.isDone()) {
+		// Grab the current object by calling *iterator
+		Game::CellObject* obj = *iterator;
 
-        // Push any Pikis away from Olimar - he has bad breath.
-        if (obj->getObjType() == OBJTYPE_Piki) {
-            Game::Piki* piki_obj = (Game::Piki*)obj;
-            Vector3f piki_pos    = piki_obj->getPosition();
+		// Repel any Pikis from the particle sphere.
+		if (obj->getObjType() == OBJTYPE_Piki) {
+			Game::Piki* piki_obj = (Game::Piki*)obj;
+			Vector3f piki_pos    = piki_obj->getPosition();
 
-            // Turn the position into a direction (velocity), pushes the Piki away from the player
-            piki_pos.x -= sphere_pos.x;
-            piki_pos.y = 10.0f;
-            piki_pos.z -= sphere_pos.z;
+			// Turn the position into a direction (velocity), pushes the Piki away from the sphere
+			piki_pos.x -= sphere_pos.x;
+			piki_pos.y = 10.0f;
+			piki_pos.z -= sphere_pos.z;
 
-            // Exaggerate the velocity
-            piki_pos.x *= 25;
-            piki_pos.z *= 25;
+			// Exaggerate the velocity
+			piki_pos.x *= 25;
+			piki_pos.z *= 25;
 
-            piki_obj->setVelocity(piki_pos);
-        }
+			piki_obj->setVelocity(piki_pos);
+		}
 
-        // Iterate to the next object
-        iterator.next();
-    }
+		// Iterate to the next object
+		iterator.next();
+	}
 }
 
 void useNaviController(Navi* player)
@@ -157,7 +162,7 @@ void useNaviController(Navi* player)
 		if ((player->m_padinput->cstickdeflection > 0.1f) && isBouncySphere) {
 			naviBouncySphere(player);
 		}
-		
+
 		// toggle flags and increment particle ID
 		if ((input & 0x10) != 0) // press Z (0x10) to toggle C-Stick camera control
 		{
