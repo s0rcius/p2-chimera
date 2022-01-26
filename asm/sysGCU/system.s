@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 	.4byte __sinit_system_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global gStrSystem_CPP
 gStrSystem_CPP:
 	.asciz "system.cpp"
@@ -85,7 +86,7 @@ lbl_804999E4:
 	.skip 0x1
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global localNtsc608x448IntDfProg
 localNtsc608x448IntDfProg:
 	.4byte 0x00000002
@@ -188,7 +189,7 @@ __vt__Q23PSM7Factory:
 	.4byte newSceneMgr__Q23PSM7FactoryFv
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 0x8
+.balign 8
 .global sUseABXCommand
 sUseABXCommand:
 	.byte 0x01
@@ -200,7 +201,7 @@ cMapFileName:
 	.4byte str_MapFileName
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global mRenderMode__6System
 mRenderMode__6System:
 	.skip 0x4
@@ -212,7 +213,7 @@ sVerifyArg__6System:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global gStrSystem_Abort
 gStrSystem_Abort:
 	.asciz "abort\n"

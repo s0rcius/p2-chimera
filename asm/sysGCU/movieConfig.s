@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 	.4byte __sinit_movieConfig_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8049A3B0
 lbl_8049A3B0:
 	.4byte 0x00000000
@@ -41,7 +42,7 @@ lbl_8049A3D8:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804EC368
 lbl_804EC368:
 	.4byte 0x00000000
@@ -68,7 +69,7 @@ __vt__Q24Game11MovieConfig:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80516210
 lbl_80516210:
 	.skip 0x4
@@ -80,7 +81,7 @@ movieList__4Game:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_805206F8
 lbl_805206F8:
 	.4byte 0x666F6C64

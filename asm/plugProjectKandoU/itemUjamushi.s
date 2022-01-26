@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_itemUjamushi_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_80481D40
 lbl_80481D40:
 	.skip 0xC
@@ -124,7 +125,7 @@ lbl_80481ECC:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804BEF60
 lbl_804BEF60:
 	.4byte 0x00000000
@@ -913,7 +914,7 @@ __vt__Q34Game12ItemUjamushi13BoidParameter:
 	.4byte getChildCount__5CNodeFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515BB8
 lbl_80515BB8:
 	.skip 0x4
@@ -925,7 +926,7 @@ mgr__Q24Game12ItemUjamushi:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_80519D90
 lbl_80519D90:
 	.4byte 0x3E8A3D71

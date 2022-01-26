@@ -281,8 +281,8 @@ asm void CRSplineTangent(float, Vector3f*)
  */
 void BoundBox::read(Stream& stream)
 {
-	m_min.read(stream);
 	m_max.read(stream);
+	m_min.read(stream);
 }
 
 /*
@@ -1276,16 +1276,12 @@ Quat::Quat(float _w, Vector3f vec)
 // * Address:	80412784
 // * Size:	000014
 // */
-// void Quat::set(float, float, float, float)
+// void Quat::set(float a, float b, float c, float d)
 //{
-//    /*
-//    .loc_0x0:
-//      stfs      f1, 0x0(r3)
-//      stfs      f2, 0x4(r3)
-//      stfs      f3, 0x8(r3)
-//      stfs      f4, 0xC(r3)
-//      blr
-//    */
+//    w = a;
+//    x = b;
+//    y = c;
+//    z = d;
 //}
 //
 ///*

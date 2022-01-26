@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_registItem_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_80480DB0
 lbl_80480DB0:
 	.4byte 0x00000000
@@ -44,7 +45,7 @@ lbl_80480DB0:
 	.4byte 0x41726700
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804BA360
 lbl_804BA360:
 	.4byte 0x00000000
@@ -53,7 +54,7 @@ lbl_804BA360:
 	.4byte 0x00000000
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515B08
 lbl_80515B08:
 	.skip 0x4
@@ -62,7 +63,7 @@ lbl_80515B0C:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_80519990
 lbl_80519990:
 	.4byte 0x2D576565

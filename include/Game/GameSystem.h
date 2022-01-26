@@ -13,8 +13,16 @@ namespace Game {
 struct BaseGameSection;
 struct TimeMgr;
 
-enum GameSystemMode { GSM_STORY_MODE = 0, GSM_VERSUS_MODE, GSM_ONE_PLAYER_CHALLENGE, GSM_TWO_PLAYER_CHALLENGE, GSM_PIKLOPEDIA };
-
+#pragma enumalwaysint on
+enum GameSystemMode {
+	GSM_FORCE_INT  = -0xFFFF,
+	GSM_STORY_MODE = 0,
+	GSM_VERSUS_MODE,
+	GSM_ONE_PLAYER_CHALLENGE,
+	GSM_TWO_PLAYER_CHALLENGE,
+	GSM_PIKLOPEDIA,
+};
+#pragma enumalwaysint reset
 struct GameSystem : public NodeObjectMgr<GenericObjectMgr> {
 	GameSystem(Game::BaseGameSection*);
 	// vtable 1
@@ -58,10 +66,15 @@ struct GameSystem : public NodeObjectMgr<GenericObjectMgr> {
 	void setPause(bool, char*, int);
 	void startPause(bool, int, char*);
 
+	/**
+	 * @fabricated
+	 */
+	inline bool isMultiplayerMode() { return (m_mode == GSM_VERSUS_MODE || m_mode == GSM_TWO_PLAYER_CHALLENGE); }
+
 	u8 _3C;                     // _3C /* bitfield */
 	TimeMgr* m_timeMgr;         // _40
 	GameSystemMode m_mode;      // _44
-	u8 m_isInCave;              // _48
+	u8 m_isInCaveMaybe;         // _48
 	u8 _49;                     // _49
 	bool m_isFrozen;            // _4A
 	bool m_isPaused;            // _4B

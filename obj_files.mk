@@ -250,7 +250,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/msghndlr.o\
 	$(BUILD_DIR)/asm/Dolphin/support.o\
 	$(BUILD_DIR)/src/Dolphin/mutex_TRK.o\
-	$(BUILD_DIR)/asm/Dolphin/notify.o\
+	$(BUILD_DIR)/src/Dolphin/notify.o\
 	$(BUILD_DIR)/asm/Dolphin/flush_cache.o\
 	$(BUILD_DIR)/src/Dolphin/mem_TRK.o\
 	$(BUILD_DIR)/asm/Dolphin/mem_TRK.o\
@@ -262,7 +262,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/main_TRK.o\
 	$(BUILD_DIR)/asm/Dolphin/dolphin_trk_glue.o\
 	$(BUILD_DIR)/src/Dolphin/targcont.o\
-	$(BUILD_DIR)/asm/Dolphin/target_options.o\
+	$(BUILD_DIR)/src/Dolphin/target_options.o\
 	$(BUILD_DIR)/asm/Dolphin/mslsupp.o\
 	$(BUILD_DIR)/src/Dolphin/UDP_Stubs.o\
 	$(BUILD_DIR)/asm/Dolphin/ddh/main.o\
@@ -270,7 +270,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/main.o\
 	$(BUILD_DIR)/src/Dolphin/MWTrace.o\
 	$(BUILD_DIR)/src/Dolphin/MWCriticalSection_gc.o\
-	$(BUILD_DIR)/asm/Dolphin/__va_arg.o\
+	$(BUILD_DIR)/src/Dolphin/__va_arg.o\
 	$(BUILD_DIR)/asm/Dolphin/global_destructor_chain.o\
 	$(BUILD_DIR)/src/Dolphin/CPlusLibPPC.o\
 	$(BUILD_DIR)/asm/Dolphin/NMWException.o\
@@ -358,7 +358,6 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/CARDWrite.o\
 	$(BUILD_DIR)/asm/Dolphin/CARDStat.o\
 	$(BUILD_DIR)/asm/Dolphin/CARDNet.o\
-	$(BUILD_DIR)/asm/Dolphin/db.o\
 	$(BUILD_DIR)/src/Dolphin/db.o\
 	$(BUILD_DIR)/asm/Dolphin/dsp.o\
 	$(BUILD_DIR)/src/Dolphin/dsp_debug.o\
@@ -370,7 +369,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/dvderror.o\
 	$(BUILD_DIR)/asm/Dolphin/dvdidutils.o\
 	$(BUILD_DIR)/src/Dolphin/dvdFatal.o\
-	$(BUILD_DIR)/asm/Dolphin/fstload.o\
+	$(BUILD_DIR)/src/Dolphin/fstload.o\
 	$(BUILD_DIR)/asm/Dolphin/EXIBios.o\
 	$(BUILD_DIR)/asm/Dolphin/EXIUart.o\
 	$(BUILD_DIR)/src/Dolphin/GDBase.o\
@@ -421,7 +420,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/Padclamp.o\
 	$(BUILD_DIR)/asm/Dolphin/Pad.o\
 	$(BUILD_DIR)/asm/Dolphin/SIBios.o\
-	$(BUILD_DIR)/asm/Dolphin/SISamplingRate.o\
+	$(BUILD_DIR)/src/Dolphin/SISamplingRate.o\
 	$(BUILD_DIR)/asm/Dolphin/ai.o\
 	$(BUILD_DIR)/asm/Dolphin/THPDec.o\
 	$(BUILD_DIR)/asm/Dolphin/THPAudio.o\
@@ -558,7 +557,7 @@ KANDO:=\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemCave.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemBigFountain.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemBridge.o\
-	$(BUILD_DIR)/asm/plugProjectKandoU/pikiContainer.o\
+	$(BUILD_DIR)/src/plugProjectKandoU/pikiContainer.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/gameGeneratorCache.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemTreasure.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemDownFloor.o\
@@ -585,7 +584,7 @@ KANDO:=\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_WorldMap.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_FileSelect.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/gamePlayDataMemCard.o\
-	$(BUILD_DIR)/asm/plugProjectKandoU/baseHIOparms.o\
+	$(BUILD_DIR)/src/plugProjectKandoU/baseHIOparms.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/radarInfo.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_Movie.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/navi_demoCheck.o\
@@ -1037,7 +1036,6 @@ EBISAWA:=\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleUnit.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiUtility.o\
 	$(BUILD_DIR)/src/plugProjectEbisawaU/ebiP2TitleCamera.o\
-	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleCamera.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleLight.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiScreenMemoryCard.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/efxTPkEffectMgr.o\

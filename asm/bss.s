@@ -1,7 +1,7 @@
 .include "macros.inc"
 .section .bss  # 0x804EFC20 - 0x8051467C
 .global aoData$1232
-aoData$1232:
+aoData$1232: # should be local to object-particle.cpp
 	.skip 0x90
 .global lbl_804EFCB0
 lbl_804EFCB0:
@@ -202,8 +202,9 @@ TRK_Use_BBA:
 _MetroTRK_Has_Framing:
 	.skip 0x4
 .global bUseSerialIO
-bUseSerialIO:
-	.skip 0x8
+bUseSerialIO: # should be local to target_options.c
+	.skip 1
+.balign 8
 .global gRecvBuf
 gRecvBuf:
 	.skip 0x800
@@ -285,8 +286,8 @@ WaitingQueue:
 .global bb2Buf
 bb2Buf:
 	.skip 0x40
-.global block$18
-block$18:
+.global block_18
+block_18:
 	.skip 0x30
 .global Ecb
 Ecb:

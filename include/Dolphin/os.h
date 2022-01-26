@@ -106,6 +106,7 @@ typedef struct OSMutexLink OSMutexLink;
 typedef struct OSCond OSCond;
 
 typedef void (*OSIdleFunction)(void* param);
+typedef void* (*OSThreadStartFunction)(void*);
 
 struct OSThreadQueue {
 	OSThread* head;
@@ -172,7 +173,7 @@ BOOL OSIsThreadTerminated(OSThread* thread);
 s32 OSDisableScheduler(void);
 s32 OSEnableScheduler(void);
 void OSYieldThread(void);
-BOOL OSCreateThread(OSThread* thread, void* (*func)(void*), void* param, void* stack, u32 stackSize, OSPriority priority, u16 attr);
+BOOL OSCreateThread(OSThread* thread, OSThreadStartFunction func, void* param, void* stack, u32 stackSize, OSPriority priority, u16 attr);
 void OSExitThread(void* val);
 void OSCancelThread(OSThread* thread);
 BOOL OSJoinThread(OSThread* thread, void** val);
@@ -197,6 +198,19 @@ void OSSignalCond(OSThreadQueue*);
 
 void __OSUnlockSramEx(int);
 u8* __OSLockSramEx(void);
+
+int OSDisableInterrupts(void);
+void OSRestoreInterrupts(int);
+
+BOOL OSGetSoundMode();
+void OSSetSoundMode(uint);
+
+// u32 GameCode : 0x80000000;
+// u32 FSTLocationInRam : 0x80000038;
+
+// Rounds to nearest multiple of 20 upwards and downwards
+#define OSRoundUp32B(x)   (((u32)(x) + 0x1F) & ~(0x1F))
+#define OSRoundDown32B(x) (((u32)(x)) & ~(0x1F))
 
 #ifdef __cplusplus
 };

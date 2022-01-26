@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_Houdai_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8048B0D8
 lbl_8048B0D8:
 	.asciz "rhand1jnt"
@@ -97,7 +98,7 @@ lbl_8048B1EC:
 	.skip 2
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804D0E98
 lbl_804D0E98:
 	.4byte 0x00000000
@@ -522,7 +523,7 @@ __vt__Q34Game6Houdai20HoudaiGroundCallBack:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515D98
 lbl_80515D98:
 	.skip 0x4
@@ -531,7 +532,7 @@ lbl_80515D9C:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051C4F8
 lbl_8051C4F8:
 	.4byte 0x00000000

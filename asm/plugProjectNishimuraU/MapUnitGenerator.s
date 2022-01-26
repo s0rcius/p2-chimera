@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_MapUnitGenerator_cpp
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804C1B08
 lbl_804C1B08:
 	.4byte 0x00000000
@@ -12,7 +13,7 @@ lbl_804C1B08:
 	.4byte 0x00000000
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515D10
 lbl_80515D10:
 	.skip 0x4
@@ -21,7 +22,7 @@ lbl_80515D14:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051A7D8
 lbl_8051A7D8:
 	.float 1.0

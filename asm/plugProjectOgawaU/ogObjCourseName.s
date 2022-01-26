@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_ogObjCourseName_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8048E700
 lbl_8048E700:
 	.4byte 0x6F674F62
@@ -32,11 +33,11 @@ lbl_8048E700:
 	.4byte 0x73637265
 	.4byte 0x656E4F62
 	.4byte 0x6A2E6800
+.balign 4
 	.asciz "P2Assert"
-	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global __vt__Q32og9newScreen13ObjCourseName
 __vt__Q32og9newScreen13ObjCourseName:
 	.4byte 0
@@ -76,7 +77,7 @@ msVal__Q32og9newScreen13ObjCourseName:
 	.skip 0x10
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051D8D0
 lbl_8051D8D0:
 	.4byte 0x00000000

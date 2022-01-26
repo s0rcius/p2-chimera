@@ -33,7 +33,7 @@ struct J3DModelData {
 	void simpleCalcMaterial(u16, Mtx*);
 	void syncJ3DSysFlags() const;
 
-	u32 _00;                          // _00
+	// VTBL _00
 	u8* m_bmd;                        // _04
 	u32 m_modelLoaderFlags;           // _08
 	u16 _0C;                          // _0C
@@ -62,7 +62,7 @@ struct J3DModel {
 	u32 _14;                         // _14
 	JGeometry::TVec3f m_modelScale;  // _18
 	Mtx _24;                         // _24
-	Mtx _54;                         // _54
+	J3DMtxCalc* _54;                 // _54
 	J3DMtxBuffer* m_mtxBuffer;       // _84
 	J3DVertexBuffer m_vertexBuffer;  // _88
 	J3DMatPacket* m_matPackets;      // _C0

@@ -521,7 +521,7 @@
     lbl_80518408:
         .asciz "orima"
 */
-
+static const u32 fillerbytes[3] = { 0, 0, 0 };
 namespace Game {
 
 /*
@@ -1355,6 +1355,7 @@ namespace Game {
  * Address:	801400B0
  * Size:	000290
  * Majority matches except for var offsets and end of func
+ * Believe it's fixed -EpochFlame
  */
 void Navi::onInit(Game::CreatureInitArg* arg)
 {
@@ -1416,15 +1417,17 @@ void Navi::onInit(Game::CreatureInitArg* arg)
 
 	_26A = 0;
 	_269 = 0;
-	// needs an extra fmr
-	float navi_scale  = 1.3f;
-	float louie_scale = 1.3f;
-	if (m_naviIndex.m_shortView == 1) {
-		navi_scale  = 1.3f;
-		louie_scale = 1.5f;
+	Vector3f navi_scale; // navi model scale
+	navi_scale.x = 1.3f;
+	navi_scale.y = 1.3f;
+	navi_scale.z = 1.3f;
+	if (m_naviIndex.m_shortView == 1) { // case for Louie/President scale
+		navi_scale.x = 1.5f;
+		navi_scale.y = 1.5f;
+		navi_scale.z = 1.5f;
 	}
 
-	m_scale = Vector3f(navi_scale, navi_scale, louie_scale);
+	m_scale = navi_scale;
 	uVar2   = m_naviIndex.m_shortView;
 	m_cursorMatAnim->start((Sys::MatBaseAnimation*)(naviMgr->naviIndexArray + (u32)uVar2 * 5 + 3));
 	m_arrowMatAnim->start((Sys::MatBaseAnimation*)(naviMgr->naviIndexArray + (u32)uVar2 * 5 + 0xd));
@@ -2347,101 +2350,48 @@ void Navi::setupNukuAdjustArg(Game::ItemPikihead::Item*, Game::NaviNukuAdjustSta
  * --INFO--
  * Address:	80140E2C
  * Size:	000050
+ * Matches
+ * https://decomp.me/scratch/6AZ0H
  */
-bool Navi::hasDope(int)
+bool Navi::hasDope(int sprayType)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	lwz      r5, gameSystem__4Game@sda21(r13)
-	lwz      r0, 0x44(r5)
-	cmpwi    r0, 1
-	bne      lbl_80140E64
-	slwi     r0, r4, 2
-	add      r3, r3, r0
-	lwz      r3, 0x25c(r3)
-	neg      r0, r3
-	andc     r0, r0, r3
-	srwi     r3, r0, 0x1f
-	b        lbl_80140E6C
-
-lbl_80140E64:
-	lwz      r3, playData__4Game@sda21(r13)
-	bl       hasDope__Q24Game8PlayDataFi
-
-lbl_80140E6C:
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	if (gameSystem->m_mode == GSM_VERSUS_MODE) {
+		return (m_sprayCounts[sprayType] > 0); // signed to generate andc
+	} else {
+		return playData->hasDope(sprayType);
+	}
 }
 
 /*
  * --INFO--
  * Address:	80140E7C
  * Size:	000044
+ * Matches
+ * https://decomp.me/scratch/1gQV1
  */
-int Navi::getDopeCount(int)
+int Navi::getDopeCount(int sprayType)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	lwz      r5, gameSystem__4Game@sda21(r13)
-	lwz      r0, 0x44(r5)
-	cmpwi    r0, 1
-	bne      lbl_80140EA8
-	slwi     r0, r4, 2
-	add      r3, r3, r0
-	lwz      r3, 0x25c(r3)
-	b        lbl_80140EB0
-
-lbl_80140EA8:
-	lwz      r3, playData__4Game@sda21(r13)
-	bl       getDopeCount__Q24Game8PlayDataFi
-
-lbl_80140EB0:
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	if (gameSystem->m_mode == GSM_VERSUS_MODE) {
+		return (m_sprayCounts[sprayType]);
+	} else {
+		return playData->getDopeCount(sprayType);
+	}
 }
 
 /*
  * --INFO--
  * Address:	80140EC0
  * Size:	00004C
+ * Matches
+ * https://decomp.me/scratch/Z907P
  */
-void Navi::useDope(int)
+void Navi::useDope(int sprayType)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	lwz      r5, gameSystem__4Game@sda21(r13)
-	lwz      r0, 0x44(r5)
-	cmpwi    r0, 1
-	bne      lbl_80140EF4
-	slwi     r0, r4, 2
-	add      r4, r3, r0
-	lwz      r3, 0x25c(r4)
-	addi     r0, r3, -1
-	stw      r0, 0x25c(r4)
-	b        lbl_80140EFC
-
-lbl_80140EF4:
-	lwz      r3, playData__4Game@sda21(r13)
-	bl       useDope__Q24Game8PlayDataFi
-
-lbl_80140EFC:
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	if (gameSystem->m_mode == GSM_VERSUS_MODE) {
+		(m_sprayCounts[sprayType]--);
+	} else {
+		playData->useDope(sprayType);
+	}
 }
 
 /*

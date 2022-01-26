@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 	.4byte __sinit_ebiP2TitleKogane_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_804974A0
 lbl_804974A0:
 	.4byte 0x00000000
@@ -109,7 +110,7 @@ lbl_804975A4:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804E9E10
 lbl_804E9E10:
 	.4byte 0x00000000
@@ -142,7 +143,7 @@ __vt__Q23ebi17E3DAnimFolderBase:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_805160F8
 lbl_805160F8:
 	.skip 0x4
@@ -151,7 +152,7 @@ lbl_805160FC:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051FD00
 lbl_8051FD00:
 	.4byte 0x00000000

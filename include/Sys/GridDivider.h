@@ -16,22 +16,17 @@ struct Sphere;
 
 struct GridDivider : public TriDivider {
 	GridDivider()
+	    : m_boundingBox()
 	{
-		m_boundingBox.m_min.x = 32768.0f;
-		m_boundingBox.m_min.y = 32768.0f;
-		m_boundingBox.m_min.z = 32768.0f;
-		m_boundingBox.m_max.x = -32768.0f;
-		m_boundingBox.m_max.y = -32768.0f;
-		m_boundingBox.m_max.z = -32768.0f;
-		m_triIndexLists       = nullptr;
-		_24                   = 0;
-		_20                   = 0;
+		m_triIndexLists = nullptr;
+		_24             = 0;
+		_20             = 0;
 	}
 	~GridDivider();
 
-	void create(struct BoundBox&, int, int, Sys::VertexTable*, Sys::TriangleTable*);
+	void create(BoundBox&, int, int, Sys::VertexTable*, Sys::TriangleTable*);
 	void createTriangles(Sys::CreateTriangleArg&);
-	void do_clone(struct Matrixf&, Sys::VertexTable*, Sys::TriangleTable*);
+	void do_clone(Matrixf&, Sys::VertexTable*, Sys::TriangleTable*);
 	// virtual TriIndexList* findTriLists(Sys::Sphere&);
 	// virtual void getBoundBox(BoundBox&);
 	// virtual void getCurrTri(Game::CurrTriInfo&);
