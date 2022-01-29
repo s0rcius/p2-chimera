@@ -178,15 +178,25 @@ void useNaviController(Navi* player)
 			isParticleSpawn = !isParticleSpawn;
 			PSSystem::spSysIF->playSystemSe(PSSE_EV_ROCKET_LAND, 0);
 		}
-		if ((input & 0x40) != 0) // press L (0x40) to increment spawned particle ID
+		if ((input & 0x20) != 0) // press R (0x20) to increment spawned particle ID
 		{
-			OSReport("we are incrementing particle ID\n");
+			// OSReport("we are incrementing particle ID\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_PK_RESULT_INCREMENT, 0);
 			sEfxId++;
-			if (sEfxId > 693) { // highest particle id is 693
-				sEfxId = 0;
+			if (sEfxId > 693) { // highest particle ID is 693
+				sEfxId = 0;     // set particle ID to zero if above highest ID
 			}
-			OSReport("Particle spawned with ID %i\n", sEfxId);
+			OSReport("Particle ID incremented; it is now %i\n", sEfxId);
+		}
+		if ((input & 0x40) != 0) // press L (0x40) to decrement spawned particle ID
+		{
+			// OSReport("we are decrementing particle ID\n");
+			PSSystem::spSysIF->playSystemSe(PSSE_PK_RESULT_DECREMENT, 0);
+			sEfxId--;
+			if (sEfxId < 0) { // lowest particle ID is 0
+				sEfxId = 693; // set particle ID to highest if below zero
+			}
+			OSReport("Particle ID decremented; it is now %i\n", sEfxId);
 		}
 	}
 	return;
