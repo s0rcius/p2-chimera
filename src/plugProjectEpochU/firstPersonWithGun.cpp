@@ -183,7 +183,7 @@ void useNaviController(Navi* player)
 			OSReport("we are incrementing particle ID\n");
 			PSSystem::spSysIF->playSystemSe(PSSE_PK_RESULT_INCREMENT, 0);
 			sEfxId++;
-			if (sEfxId > 694) { // highest particle id is 694
+			if (sEfxId > 693) { // highest particle id is 693
 				sEfxId = 0;
 			}
 			OSReport("Particle spawned with ID %i\n", sEfxId);
