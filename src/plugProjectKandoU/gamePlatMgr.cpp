@@ -220,7 +220,7 @@ void PlatInstance::setCollision(bool flag)
 	}
 }
 
-// #if NOPE
+#if NOPE
 
 /*
  * --INFO--
@@ -241,7 +241,7 @@ Vector3f PlatInstance::getPosition()
  * Address:	801C4C1C
  * Size:	000050
  */
-void PlatInstance::getBoundingSphere(Sys::Sphere& sphere) { sphere = _EC->getTriDivider()->m_obb._100; }
+void PlatInstance::getBoundingSphere(Sys::Sphere& sphere) { sphere = ((Sys::OBBTree*)_EC->getTriDivider())->m_obb._100; }
 
 /*
  * --INFO--
@@ -1386,7 +1386,7 @@ PlatInstance* PlatMgr::addInstance(PlatAddInstanceArg& arg)
 		sphere.m_position.x = instance->_B8->m_matrix.structView.tx;
 		sphere.m_position.y = instance->_B8->m_matrix.structView.ty;
 		sphere.m_position.z = instance->_B8->m_matrix.structView.tz;
-		Sys::OBBTree* div   = instance->_EC->getTriDivider();
+		Sys::OBBTree* div   = (Sys::OBBTree*)instance->_EC->getTriDivider();
 		sphere.m_position.x += div->m_obb._100.m_position.x;
 		sphere.m_position.y += div->m_obb._100.m_position.y;
 		sphere.m_position.z += div->m_obb._100.m_position.z;
@@ -3832,6 +3832,6 @@ bool PlatInstance::collisionUpdatable() { return 0x0; }
 // 	*/
 // }
 
-// #endif
+#endif
 
 } // namespace Game
