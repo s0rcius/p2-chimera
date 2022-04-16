@@ -16,8 +16,7 @@
 
 #include "CollInfo.h"
 #include "Vector3.h"
-
-struct Controller;
+#include "Controller.h"
 
 namespace PSM {
 struct Navi;

@@ -1089,6 +1089,9 @@ KONO:=\
 	$(BUILD_DIR)/asm/plugProjectKonoU/khWinLoseReason.o\
 	$(BUILD_DIR)/src/plugProjectKonoU/khMailSaveData.o\
 
+EPOCH:=\
+	$(BUILD_DIR)/src/plugProjectEpochU/naviWarp.o\
+
 BOOTUP:=\
 	$(BUILD_DIR)/src/sysBootupU/sysBootup.o\
 
