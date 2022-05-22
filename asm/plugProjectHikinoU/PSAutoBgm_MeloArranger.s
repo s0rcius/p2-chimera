@@ -1,22 +1,14 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
-.global lbl_80490010
+.balign 8
 lbl_80490010:
-	.4byte 0x50534175
-	.4byte 0x746F4267
-	.4byte 0x6D5F4D65
-	.4byte 0x6C6F4172
-	.4byte 0x72616E67
-	.4byte 0x65722E63
-	.4byte 0x70700000
-.global lbl_8049002C
+	.asciz "PSAutoBgm_MeloArranger.cpp"
+.balign 4
 lbl_8049002C:
 	.asciz "P2Assert"
-	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global __vt__Q29PSAutoBgm11MeloArrBase
 __vt__Q29PSAutoBgm11MeloArrBase:
 	.4byte 0

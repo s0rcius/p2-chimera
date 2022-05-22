@@ -29,13 +29,14 @@ void PSMTXTransApply(const Mtx, Mtx, float, float, float);
 void PSMTXScale(Mtx, float, float, float);
 void PSMTXScaleApply(const Mtx, Mtx, float, float, float);
 void PSMTXQuat(Mtx, const PSQuaternion*);
-void PSMTXMultVec(Mtx, Vec, Vec);
+void PSMTXMultVec(Mtx, Vec*, Vec*);
 void PSMTXMultVecSR(Mtx, Vec, Vec);
 /* TODO: Determine what these params are. */
 void PSMTXMultVecArraySR(Mtx, float*, float*, float*);
 void PSMTX44Copy(Mtx44, Mtx44);
 
 void C_MTXPerspective(float, float, float, float, Mtx);
+void C_MTXOrtho(Mtx44, float, float, float, float, float, float);
 
 #ifdef __cplusplus
 }

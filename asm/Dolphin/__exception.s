@@ -4,7 +4,7 @@
 .global gTRKInterruptVectorTable
 gTRKInterruptVectorTable:
 .asciz "Metrowerks Target Resident Kernel for PowerPC"
-.skip 0x2
+.balign 4
 /* 80003184 00000184  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 80003188 00000188  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 8000318C 0000018C  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
@@ -1994,4 +1994,5 @@ lbl_80004384:
 /* 8000507C 0000207C  7C 7A 03 A6 */	mtspr 0x1a, r3
 /* 80005080 00002080  38 60 1F 00 */	li r3, 0x1f00
 /* 80005084 00002084  4C 00 00 64 */	rfi 
+.global gTRKInterruptVectorTableEnd
 gTRKInterruptVectorTableEnd:

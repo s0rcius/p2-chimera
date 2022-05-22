@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global __vt__13J2DOrthoGraph
 __vt__13J2DOrthoGraph:
 	.4byte 0
@@ -15,11 +15,9 @@ __vt__13J2DOrthoGraph:
 	.4byte setLookat__13J2DOrthoGraphFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
-.global lbl_80516780
+.balign 8
 lbl_80516780:
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.float 0.0
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__13J2DOrthoGraphFv
@@ -50,7 +48,7 @@ __ct__13J2DOrthoGraphFv:
 /* 8003558C 000324CC  4E 80 00 20 */	blr 
 
 .global __dt__14J2DGrafContextFv
-__dt__14J2DGrafContextFv:
+__dt__14J2DGrafContextFv: # weak function
 /* 80035590 000324D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80035594 000324D4  7C 08 02 A6 */	mflr r0
 /* 80035598 000324D8  90 01 00 14 */	stw r0, 0x14(r1)

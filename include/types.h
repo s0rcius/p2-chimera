@@ -34,6 +34,13 @@ typedef volatile f64 vf64;
 
 typedef int BOOL;
 
+typedef unsigned int uintptr_t; // Manually added
+
+// Pointer to unknown, to be determined at a later date.
+typedef void* unkptr;
+
+typedef u32 unknown;
+
 #ifndef TRUE
 #define TRUE 1
 #endif // ifndef TRUE
@@ -50,15 +57,21 @@ typedef int BOOL;
 #define nullptr 0
 #endif // ifndef nullptr
 
+// Array size define
+#define ARRAY_SIZE(o) (sizeof((o)) / sizeof(*(o)))
+
+// Align X to the previous N bytes (N must be power of two)
+#define ALIGN_PREV(X, N) ((X) & ~((N)-1))
+// Align X to the next N bytes (N must be power of two)
+#define ALIGN_NEXT(X, N) ALIGN_PREV(((X) + (N)-1), N)
+// Align object to num bytes (num should be power of two)
+#define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
+
 // For functions that return 0 on a success and -1 on failure
 #ifndef EXIT_SUCCESS
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE -1
 #endif // ifndef EXIT_SUCCESS
-
-// Rounds to nearest multiple of 20 upwards and downwards
-#define RoundUp20B(x)   (((u32)(x) + 0x1F) & ~(0x1F))
-#define RoundDown20B(x) (((u32)(x)) & ~(0x1F))
 
 #define ASSERT_HANG(cond) \
 	if (!(cond)) {        \

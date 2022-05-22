@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 	.4byte __sinit_JSTObjectParticleActor_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8049BA78
 lbl_8049BA78:
 	.4byte 0x7475746F
@@ -22,7 +23,7 @@ lbl_8049BA90:
 	.4byte 0x0A000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804ED7D0
 lbl_804ED7D0:
 	.4byte 0x00000000
@@ -91,7 +92,7 @@ __vt__Q34Game5P2JST19ObjectParticleActor:
 	.4byte executeAfter__Q34Game5P2JST19ObjectParticleActorFP14JPABaseEmitter
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_805162F0
 lbl_805162F0:
 	.skip 0x4
@@ -100,7 +101,7 @@ lbl_805162F4:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_80520B98
 lbl_80520B98:
 	.4byte 0x666F7265

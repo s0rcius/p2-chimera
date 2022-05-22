@@ -30,21 +30,31 @@ struct ObjBase;
 struct ObjMgrBase;
 struct Mgr;
 
-struct SceneArg {
-	virtual SceneType getSceneType(); // _00
-	virtual int getClassSize();       // _04
+struct SceneArgBase {
+	virtual SceneType getSceneType() const; // _00
+	virtual int getClassSize() = 0;         // _04
 };
 
-struct StartSceneArg : public SceneArg {
-	virtual SceneType getSceneType(); // _00
-	virtual int getClassSize();       // _04
-
+struct StartSceneArg : public SceneArgBase {
 	float _04; // _04
 };
 
-struct SetSceneArg : public SceneArg {
-	virtual SceneType getSceneType(); // _00
-	virtual int getClassSize();       // _04
+struct SetSceneArg : public SceneArgBase {
+	/**
+	 * @fabricated
+	 * Unsure if p3 and p4 exist or are hardcoded.
+	 * Remove p3 and p4 if they appear to never be set to anything else by a ctor.
+	 */
+	inline SetSceneArg(SceneType sceneType, og::Screen::DispMemberBase* dispMember, u8 p3 = 0, bool p4 = true)
+	    : m_sceneType(sceneType)
+	    , m_dispMember(dispMember)
+	{
+		// _08 = p3;
+		// _09 = p4;
+	}
+
+	virtual SceneType getSceneType() const; // _00
+	virtual int getClassSize();             // _04
 
 	SceneType m_sceneType;                    // _04
 	u8 _08;                                   // _08
@@ -52,16 +62,15 @@ struct SetSceneArg : public SceneArg {
 	og::Screen::DispMemberBase* m_dispMember; // _0C
 };
 
-struct EndSceneArg : public SceneArg {
-	virtual SceneType getSceneType(); // _00
-	virtual int getClassSize();       // _04
+struct EndSceneArg : public SceneArgBase {
+	virtual int getClassSize(); // _04
 
 	u8 _04; // _04
 };
 
 struct SceneBase {
 #pragma enumalwaysint on
-	enum StateID { Unknown0 = 0, Unknown1, Unknown2, Unknown3, Unknown4, Invalid = 0xFFFFFFFF };
+	enum StateID { Unknown0 = 0, Unknown1, Unknown2, Unknown3, Unknown4 };
 #pragma enumalwaysint reset
 
 	SceneBase();
@@ -85,9 +94,9 @@ struct SceneBase {
 	virtual void doSetBackupScene(SetSceneArg&);            // _40
 	virtual int doGetFinishState();                         // _44
 
-	void confirmEndScene(EndSceneArg*);
-	void confirmSetScene(SetSceneArg&);
-	void confirmStartScene(StartSceneArg*);
+	bool confirmEndScene(EndSceneArg*);
+	bool confirmSetScene(SetSceneArg&);
+	bool confirmStartScene(StartSceneArg*);
 	void create();
 	void createObj(JKRArchive*);
 	void destroy();
@@ -98,10 +107,10 @@ struct SceneBase {
 	Controller* getGamePad() const;
 	void registObj(ObjBase*, JKRArchive*);
 	IObjBase* searchObj(char*);
-	void setBackupScene();
+	bool setBackupScene();
 	void setColorBG(u8, u8, u8, u8);
 	void setScene(SetSceneArg&);
-	void setDispMember(og::Screen::DispMemberBase*);
+	bool setDispMember(og::Screen::DispMemberBase*);
 	bool start(StartSceneArg*);
 	void startScene(StartSceneArg*);
 	void update();
@@ -117,7 +126,7 @@ struct SceneBase {
 	Controller* m_controller;                         // _104
 	Mgr* m_screenMgr;                                 // _108
 	Delegate1<SceneBase, Resource::MgrCommand*> _10C; // _10C
-	StateID m_stateID;                                // _120
+	int m_stateID;                                    // _120
 	float m_someTime;                                 // _124
 	Resource::MgrCommand m_command;                   // _128
 	ObjMgrBase* m_objMgr;                             // _218
@@ -125,6 +134,11 @@ struct SceneBase {
 };
 
 struct IObjBase : public CNode, JKRDisposer {
+	IObjBase()
+	    : CNode("No Name")
+	    , JKRDisposer()
+	{
+	}
 	// vtable 2
 	virtual ~IObjBase();                          // _00
 	virtual bool update()                    = 0; // _04
@@ -148,9 +162,9 @@ struct ObjBase : public IObjBase {
 	virtual void setOwner(SceneBase*);                // _14
 	virtual SceneBase* getOwner() const;              // _18
 	virtual void create(JKRArchive*);                 // _1C
-	virtual void confirmSetScene(SetSceneArg&);       // _20
-	virtual void confirmStartScene(StartSceneArg*);   // _24
-	virtual void confirmEndScene(EndSceneArg*);       // _28
+	virtual bool confirmSetScene(SetSceneArg&);       // _20
+	virtual bool confirmStartScene(StartSceneArg*);   // _24
+	virtual bool confirmEndScene(EndSceneArg*);       // _28
 	virtual bool doStart(const StartSceneArg*);       // _2C
 	virtual bool doEnd(const EndSceneArg*);           // _30
 	virtual void doCreate(JKRArchive*);               // _34
@@ -174,7 +188,7 @@ struct ObjBase : public IObjBase {
 
 struct MgrBase : public JKRDisposer {
 	virtual ~MgrBase();                          // _00
-	virtual void setScene(SetSceneArg&)     = 0; // _04
+	virtual bool setScene(SetSceneArg&)     = 0; // _04
 	virtual bool startScene(StartSceneArg*) = 0; // _08
 	virtual void endScene(EndSceneArg*)     = 0; // _0C
 };
@@ -182,7 +196,7 @@ struct Mgr : public MgrBase {
 	Mgr();
 
 	virtual ~Mgr();                             // _00
-	virtual void setScene(SetSceneArg&);        // _04
+	virtual bool setScene(SetSceneArg&);        // _04
 	virtual bool startScene(StartSceneArg*);    // _08
 	virtual void endScene(EndSceneArg*);        // _0C
 	virtual void reset();                       // _10
@@ -213,7 +227,7 @@ struct Mgr : public MgrBase {
 	JUtility::TColor _A0;       // _A0
 	int m_bgMode;               // _A4
 };
-struct ObjMgrBase : public CNode {
+struct ObjMgrBase {
 	ObjMgrBase();
 
 	bool confirmSetScene(SetSceneArg&);
@@ -226,6 +240,8 @@ struct ObjMgrBase : public CNode {
 	bool start(StartSceneArg*);
 	bool update();
 	bool end(EndSceneArg*);
+
+	CNode _00;
 };
 } // namespace Screen
 

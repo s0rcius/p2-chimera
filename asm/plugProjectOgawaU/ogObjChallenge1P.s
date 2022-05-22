@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_ogObjChallenge1P_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8048F428
 lbl_8048F428:
 	.4byte 0x00000000
@@ -48,7 +49,7 @@ lbl_8048F428:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804D9B08
 lbl_804D9B08:
 	.4byte 0x00000000
@@ -94,7 +95,7 @@ msVal__Q32og9newScreen14ObjChallenge1P:
 	.skip 0x6C
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515E90
 lbl_80515E90:
 	.skip 0x4
@@ -103,7 +104,7 @@ lbl_80515E94:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051DE28
 lbl_8051DE28:
 	.4byte 0x00000000

@@ -1,7 +1,7 @@
 .include "macros.inc"
 .section .bss  # 0x804EFC20 - 0x8051467C
 .global aoData$1232
-aoData$1232:
+aoData$1232: # should be local to object-particle.cpp
 	.skip 0x90
 .global lbl_804EFCB0
 lbl_804EFCB0:
@@ -202,8 +202,9 @@ TRK_Use_BBA:
 _MetroTRK_Has_Framing:
 	.skip 0x4
 .global bUseSerialIO
-bUseSerialIO:
-	.skip 0x8
+bUseSerialIO: # should be local to target_options.c
+	.skip 1
+.balign 8
 .global gRecvBuf
 gRecvBuf:
 	.skip 0x800
@@ -226,13 +227,13 @@ __atexit_funcs:
 protopool$192:
 	.skip 0x38
 .global stderr_buff
-stderr_buff:
+stderr_buff: # should be local to ansi_files.c
 	.skip 0x100
 .global stdout_buff
-stdout_buff:
+stdout_buff: # should be local to ansi_files.c
 	.skip 0x100
 .global stdin_buff
-stdin_buff:
+stdin_buff: # should be local to ansi_files.c
 	.skip 0x100
 .global regs
 regs:
@@ -285,8 +286,8 @@ WaitingQueue:
 .global bb2Buf
 bb2Buf:
 	.skip 0x40
-.global block$18
-block$18:
+.global block_18
+block_18:
 	.skip 0x30
 .global Ecb
 Ecb:
@@ -399,9 +400,10 @@ lbl_804F7C38:
 .global sRubyDataBuffer__5P2JME
 sRubyDataBuffer__5P2JME:
 	.skip 0x28
-.global str$673
-str$673:
-	.skip 0x110
+.global str_673
+str_673:
+	.skip 0x100
+.balign 32
 .global sCardWorkArea
 sCardWorkArea:
 	.skip 0xA000
@@ -422,7 +424,8 @@ FreeAudioBufferMessage:
 	.skip 0xC
 .global DecodedAudioBufferMessage
 DecodedAudioBufferMessage:
-	.skip 0x1C
+	.skip 0xC
+.balign 32
 .global WorkBuffer
 WorkBuffer:
 	.skip 0x40
@@ -434,7 +437,8 @@ UsedTextureSetQueue:
 	.skip 0x20
 .global UsedTextureSetMessage
 UsedTextureSetMessage:
-	.skip 0x20
+	.skip 0xC
+.balign 32
 .global SoundBuffer
 SoundBuffer:
 	.skip 0x1180

@@ -4,25 +4,17 @@
 #include "types.h"
 #include "CNode.h"
 #include "ObjectMgr.h"
+#include "Game/BaseGameSection.h"
+#include "Game/TimeMgr.h"
 
 struct Graphics;
 struct JUTTexture;
 struct LightMgr;
 struct Viewport;
 namespace Game {
-struct BaseGameSection;
-struct TimeMgr;
 
-#pragma enumalwaysint on
-enum GameSystemMode {
-	GSM_STORY_MODE = 0,
-	GSM_VERSUS_MODE,
-	GSM_ONE_PLAYER_CHALLENGE,
-	GSM_TWO_PLAYER_CHALLENGE,
-	GSM_PIKLOPEDIA,
-	GSM_FORCE_UINT = 0xFFFFFFFF
-};
-#pragma enumalwaysint reset
+enum GameSystemMode { GSM_STORY_MODE = 0, GSM_VERSUS_MODE, GSM_ONE_PLAYER_CHALLENGE, GSM_TWO_PLAYER_CHALLENGE, GSM_PIKLOPEDIA };
+
 struct GameSystem : public NodeObjectMgr<GenericObjectMgr> {
 	GameSystem(Game::BaseGameSection*);
 	// vtable 1
@@ -65,6 +57,11 @@ struct GameSystem : public NodeObjectMgr<GenericObjectMgr> {
 	void setMoviePause(bool, char*);
 	void setPause(bool, char*, int);
 	void startPause(bool, int, char*);
+
+	/**
+	 * @fabricated
+	 */
+	inline bool isMultiplayerMode() { return (m_mode == GSM_VERSUS_MODE || m_mode == GSM_TWO_PLAYER_CHALLENGE); }
 
 	u8 _3C;                     // _3C /* bitfield */
 	TimeMgr* m_timeMgr;         // _40

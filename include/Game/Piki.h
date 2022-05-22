@@ -2,6 +2,7 @@
 #define _GAME_PIKI_H
 
 #include "Game/FakePiki.h"
+#include "JAInter/Object.h"
 #include "JSystem/JUtility.h"
 #include "types.h"
 
@@ -58,9 +59,10 @@ typedef enum EPikiColor {
 } EPikiColor;
 
 typedef enum EPikiHappa {
-	Leaf       = 0,
-	Bud        = 1,
-	Flower     = 2,
+	Leaf   = 0,
+	Bud    = 1,
+	Flower = 2,
+	PikiGrowthStageCount,
 	Bud_Red    = 3,
 	Flower_Red = 4,
 } EPikiHappa;
@@ -72,7 +74,7 @@ struct PikiFSM {
 	virtual void transit(Game::Piki*, int, Game::StateArg*); // _0C
 };
 
-struct Piki : public FakePiki {
+struct Piki : public FakePiki, public SysShape::MotionListener {
 	struct InvokeAIFreeArg {
 	};
 
@@ -90,7 +92,7 @@ struct Piki : public FakePiki {
 	virtual void bounceCallback(Sys::Triangle*);                // _E0
 	virtual void collisionCallback(CollEvent&);                 // _E4
 	virtual void platCallback(PlatEvent&);                      // _E8
-	virtual void getJAIObject();                                // _EC
+	virtual JAInter::Object* getJAIObject();                    // _EC
 	virtual PSM::Creature* getPSCreature();                     // _F0
 	virtual void on_movie_begin(bool);                          // _108
 	virtual void on_movie_end(bool);                            // _10C
@@ -104,7 +106,7 @@ struct Piki : public FakePiki {
 	virtual void onStickStartSelf(Creature*);                   // _158
 	virtual void onStickEndSelf(Creature*);                     // _15C
 	virtual bool ignoreAtari(Creature*);                        // _188
-	virtual void stimulate(Interaction&);                       // _19C
+	virtual bool stimulate(Interaction&);                       // _19C
 	virtual char* getCreatureName();                            // _1A0
 	virtual s32 getCreatureID();                                // _1A4
 	// vtable 2 (MotionListener + FakePiki + self)
@@ -171,6 +173,7 @@ struct Piki : public FakePiki {
 	void updateColor();
 
 	// FakePiki: _000 - _24C
+	// MotionListener: _24C - _250 (presumably)
 	PSM::Piki* m_soundObj;          // _250
 	float m_targetLookAngle;        // _254
 	efx::TPkEffect* m_effectsObj;   // _258

@@ -1,44 +1,32 @@
 #include "Game/cellPyramid.h"
 
 /*
-    Generated from dpostproc
+.section .rodata  # 0x804732E0 - 0x8049E220
+.balign 8
+lbl_80483828:
+    .asciz "cellIterator.cpp"
+.balign 4
+lbl_8048383C:
+    .asciz "xy %f %f\n%f %f\n"
 
-    .section .rodata  # 0x804732E0 - 0x8049E220
-    .global lbl_80483828
-    lbl_80483828:
-        .4byte 0x63656C6C
-        .4byte 0x49746572
-        .4byte 0x61746F72
-        .4byte 0x2E637070
-        .4byte 0x00000000
-    .global lbl_8048383C
-    lbl_8048383C:
-        .4byte 0x78792025
-        .4byte 0x66202566
-        .4byte 0x0A256620
-        .4byte 0x25660A00
-        .4byte 0x00000000
-
-    .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-    .global lbl_8051A304
-    lbl_8051A304:
-        .float 1.0
-    .global lbl_8051A308
-    lbl_8051A308:
-        .4byte 0x78202566
-        .4byte 0x3E256600
-    .global lbl_8051A310
-    lbl_8051A310:
-        .4byte 0x79202566
-        .4byte 0x3E256600
-    .global lbl_8051A318
-    lbl_8051A318:
-        .4byte 0x43300000
-        .4byte 0x00000000
+.section .sdata2, "a"     # 0x80516360 - 0x80520E40
+.balign 8
+lbl_8051A300:
+    .float 0.0
+lbl_8051A304:
+    .float 1.0
+lbl_8051A308:
+    .asciz "x %f>%f"
+.balign 4
+lbl_8051A310:
+    .asciz "y %f>%f"
+.balign 8
+lbl_8051A318:
+    .4byte 0x43300000
+    .4byte 0x00000000
 */
 
 namespace Game {
-#pragma auto_inline on
 /*
  * --INFO--
  * Address:	8022E36C
@@ -55,7 +43,7 @@ CellIteratorArg::CellIteratorArg()
 	m_sphere.m_position.z = 0.0f;
 	m_sphere.m_radius     = 0.0f;
 
-	m_cellMgr = Game::cellMgr;
+	m_cellMgr = cellMgr;
 
 	_1D = 0;
 	_1C = 0;
@@ -162,44 +150,25 @@ lbl_8022E4E4:
 	*/
 }
 
-// /*
-//  * --INFO--
-//  * Address:	8022E500
-//  * Size:	000034
-//  */
-// void CellIterator::next(void)
-// {
-// 	/*
-// 	stwu     r1, -0x10(r1)
-// 	mflr     r0
-// 	stw      r0, 0x14(r1)
-// 	stw      r31, 0xc(r1)
-// 	mr       r31, r3
-// 	bl       step__Q24Game12CellIteratorFv
-// 	mr       r3, r31
-// 	bl       find__Q24Game12CellIteratorFv
-// 	lwz      r0, 0x14(r1)
-// 	lwz      r31, 0xc(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x10
-// 	blr
-// 	*/
-// }
+/*
+ * --INFO--
+ * Address:	8022E500
+ * Size:	000034
+ * Matches
+ */
+bool CellIterator::next()
+{
+	step();
+	return find();
+}
 
-// /*
-//  * --INFO--
-//  * Address:	8022E534
-//  * Size:	000010
-//  */
-// void CellIterator::isDone(void)
-// {
-// 	/*
-// 	lwz      r0, 0(r3)
-// 	cntlzw   r0, r0
-// 	srwi     r3, r0, 5
-// 	blr
-// 	*/
-// }
+/*
+ * --INFO--
+ * Address:	8022E534
+ * Size:	000010
+ * Matches
+ */
+bool CellIterator::isDone(void) { return _00 == 0; }
 
 // /*
 //  * --INFO--
@@ -656,11 +625,10 @@ lbl_8022E4E4:
 // 	*/
 // }
 
-// /*
-//  * --INFO--
-//  * Address:	8022EA90
-//  * Size:	000004
-//  */
-// void CellIterator::dump(void) { }
-#pragma auto_inline reset
+/*
+ * --INFO--
+ * Address:	8022EA90
+ * Size:	000004
+ */
+void CellIterator::dump(void) { }
 } // namespace Game

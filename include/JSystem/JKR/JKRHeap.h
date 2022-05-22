@@ -4,7 +4,7 @@
 #include "types.h"
 #include "Dolphin/os.h"
 #include "JSystem/JKR/JKRDisposer.h"
-#include "JSystem/JSU/JSUList.h"
+#include "JSystem/JSupport/JSUList.h"
 
 typedef void JKRHeapErrorHandler(void*, u32, int);
 
@@ -118,7 +118,15 @@ struct JKRHeap : public JKRDisposer {
 	static u8* mUserRamStart;
 	static u8* mUserRamEnd;
 	static u32 mMemorySize;
+
+	inline void* JKRAllocFromHeap(u32 size, int alignment) { return JKRHeap::alloc(size, alignment, this); }
 };
+
+inline void* JKRAllocFromSysHeap(u32 size, int alignment)
+{
+	JKRHeap* systemHeap = JKRHeap::sSystemHeap;
+	return systemHeap->alloc(size, alignment);
+}
 
 struct JKRExpHeap : public JKRHeap {
 	struct CMemBlock {
@@ -231,6 +239,7 @@ struct JKRSolidHeap : public JKRHeap {
 
 void JKRDefaultMemoryErrorRoutine(void*, u32, int);
 
+// void* operator new(size_t size, void* mem) { return mem; }
 void* operator new(size_t, JKRHeap*, int);
 void* operator new[](size_t, JKRHeap*, int);
 

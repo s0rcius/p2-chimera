@@ -156,23 +156,19 @@ float pikmin2_atan2f(float x, float y) { return JMath::atanTable_.atan2_(x, y); 
  * --INFO--
  * Address:	80411804
  * Size:	000018
+ * The asm seems necessary to match, but why would they do this?
+ * Perhaps they didn't want to call the intrinsic.
  */
-float pikmin2_sqrtf(float x)
+float pikmin2_sqrtf(register float x)
 {
-	if (!(x > lbl_80520270)) { // if x <= 0
-		return x;
+	if (x > lbl_80520270) {
+		register float reg_f0;
+		asm {
+            frsqrte reg_f0, x
+		}
+		return reg_f0 * x;
 	}
-
-	register float reg1 = x;
-	register float reg2 = lbl_80520270;
-	register float result;
-
-	asm {
-      frsqrte reg2, reg1
-      fmuls result, reg2, reg1
-	}
-
-	return result;
+	return x;
 }
 
 /*
@@ -281,8 +277,8 @@ asm void CRSplineTangent(float, Vector3f*)
  */
 void BoundBox::read(Stream& stream)
 {
-	m_min.read(stream);
 	m_max.read(stream);
+	m_min.read(stream);
 }
 
 /*
@@ -1276,16 +1272,12 @@ Quat::Quat(float _w, Vector3f vec)
 // * Address:	80412784
 // * Size:	000014
 // */
-// void Quat::set(float, float, float, float)
+// void Quat::set(float a, float b, float c, float d)
 //{
-//    /*
-//    .loc_0x0:
-//      stfs      f1, 0x0(r3)
-//      stfs      f2, 0x4(r3)
-//      stfs      f3, 0x8(r3)
-//      stfs      f4, 0xC(r3)
-//      blr
-//    */
+//    w = a;
+//    x = b;
+//    y = c;
+//    z = d;
 //}
 //
 ///*

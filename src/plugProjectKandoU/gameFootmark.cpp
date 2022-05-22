@@ -28,12 +28,12 @@ struct Footmark {
 	Footmark();
 };
 struct Footmarks {
-	Footmark* m_marks; // _00
-	u32 _04;           // _04
-	u32 _08;           // _08
-	int m_count;       // _0C
-	u32 _10;           // _10
-	Vector3f _14;      // _14
+	Footmark* m_marks;   // _00
+	int _04;             // _04
+	int _08;             // _08
+	int m_count;         // _0C
+	int _10;             // _10
+	Vector3f m_position; // m_position
 
 	Footmarks();
 	void alloc(int);
@@ -95,9 +95,9 @@ void Footmarks::alloc(int amt)
  */
 void Footmarks::add(Footmark& mark)
 {
-	_14.x = mark.position.x;
-	_14.y = mark.position.y;
-	_14.z = mark.position.z;
+	m_position.x = mark.position.x;
+	m_position.y = mark.position.y;
+	m_position.z = mark.position.z;
 	Footmark* v2;
 	float v3;
 	float v4;
@@ -118,12 +118,8 @@ void Footmarks::add(Footmark& mark)
 		if (v8 < m_count)
 			_08 = v8 + 1;
 		_10 = Game::gameSystem->m_frameTimer;
-		namespace Game {
-
-		}
 	}
-
-} // namespace Game
+}
 #ifdef UNFINISHED
 void Footmarks::add(Game::Footmark&)
 {

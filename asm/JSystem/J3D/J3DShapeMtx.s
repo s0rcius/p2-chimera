@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_J3DShapeMtx_cpp
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804A2C98
 lbl_804A2C98:
 	.4byte 0x00000000
@@ -223,7 +224,7 @@ sMtxLoadCache__11J3DShapeMtx:
 	.skip 0x14
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global sCurrentPipeline__11J3DShapeMtx
 sCurrentPipeline__11J3DShapeMtx:
 	.skip 0x4
@@ -250,7 +251,7 @@ sTexMtxObj__17J3DDifferedTexMtx:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_80516AE8
 lbl_80516AE8:
 	.4byte 0x00000000
@@ -286,15 +287,15 @@ loadMtxIndx_PNGP__11J3DShapeMtxCFiUs:
 /* 80086150 00083090  38 00 00 28 */	li r0, 0x28
 /* 80086154 00083094  54 63 04 3E */	clrlwi r3, r3, 0x10
 /* 80086158 00083098  60 66 B0 00 */	ori r6, r3, 0xb000
-/* 8008615C 0008309C  B0 A7 80 00 */	sth r5, -0x8000(r7)
+/* 8008615C 0008309C  B0 A7 80 00 */	sth r5, 0xCC008000@l(r7)
 /* 80086160 000830A0  1C 64 00 09 */	mulli r3, r4, 9
-/* 80086164 000830A4  B0 C7 80 00 */	sth r6, -0x8000(r7)
-/* 80086168 000830A8  98 07 80 00 */	stb r0, -0x8000(r7)
+/* 80086164 000830A4  B0 C7 80 00 */	sth r6, 0xCC008000@l(r7)
+/* 80086168 000830A8  98 07 80 00 */	stb r0, 0xCC008000@l(r7)
 /* 8008616C 000830AC  38 03 04 00 */	addi r0, r3, 0x400
 /* 80086170 000830B0  54 00 04 3E */	clrlwi r0, r0, 0x10
-/* 80086174 000830B4  B0 A7 80 00 */	sth r5, -0x8000(r7)
+/* 80086174 000830B4  B0 A7 80 00 */	sth r5, 0xCC008000@l(r7)
 /* 80086178 000830B8  60 00 80 00 */	ori r0, r0, 0x8000
-/* 8008617C 000830BC  B0 07 80 00 */	sth r0, -0x8000(r7)
+/* 8008617C 000830BC  B0 07 80 00 */	sth r0, 0xCC008000@l(r7)
 /* 80086180 000830C0  4E 80 00 20 */	blr 
 
 .global loadMtxIndx_PCPU__11J3DShapeMtxCFiUs

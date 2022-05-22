@@ -15,18 +15,18 @@ JSYSTEM:=\
 	$(BUILD_DIR)/src/JSystem/data.o\
 	$(BUILD_DIR)/asm/JSystem/processor.o\
 	$(BUILD_DIR)/asm/JSystem/control.o\
-	$(BUILD_DIR)/src/JSystem/stb/stb-data-parse.o\
+	$(BUILD_DIR)/src/JSystem/JStudio/stb/data/stb-data-parse.o\
 	$(BUILD_DIR)/asm/JSystem/functionvalue.o\
-	$(BUILD_DIR)/asm/JSystem/fvb/fvb.o\
-	$(BUILD_DIR)/src/JSystem/fvb/fvb-data.o\
-	$(BUILD_DIR)/src/JSystem/fvb/fvb-data-parse.o\
-	$(BUILD_DIR)/asm/JSystem/jstudio/jstudio-control.o\
-	$(BUILD_DIR)/src/JSystem/jstudio/jstudio-data.o\
-	$(BUILD_DIR)/asm/JSystem/jstudio/jstudio-object.o\
+	$(BUILD_DIR)/asm/JSystem/JStudio/fvb/fvb.o\
+	$(BUILD_DIR)/src/JSystem/JStudio/fvb/data/fvb-data.o\
+	$(BUILD_DIR)/src/JSystem/JStudio/fvb/data/fvb-data-parse.o\
+	$(BUILD_DIR)/asm/JSystem/JStudio/jstudio-control.o\
+	$(BUILD_DIR)/src/JSystem/JStudio/data/jstudio-data.o\
+	$(BUILD_DIR)/asm/JSystem/JStudio/jstudio-object.o\
 	$(BUILD_DIR)/asm/JSystem/object/object-id.o\
-	$(BUILD_DIR)/asm/JSystem/stb/stb.o\
-	$(BUILD_DIR)/src/JSystem/stb/stb-data.o\
-	$(BUILD_DIR)/asm/JSystem/jstudio/jstudio-math.o\
+	$(BUILD_DIR)/asm/JSystem/JStudio/stb/stb.o\
+	$(BUILD_DIR)/src/JSystem/JStudio/stb/data/stb-data.o\
+	$(BUILD_DIR)/asm/JSystem/JStudio/jstudio-math.o\
 	$(BUILD_DIR)/asm/JSystem/object/object-light.o\
 	$(BUILD_DIR)/asm/JSystem/object/object.o\
 	$(BUILD_DIR)/asm/JSystem/object/object-actor.o\
@@ -47,7 +47,7 @@ JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRAramBlock.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRAramHeap.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRAramPiece.o\
-	$(BUILD_DIR)/asm/JSystem/JKR/JKRAramStream.o\
+	$(BUILD_DIR)/src/JSystem/JKR/JKRAramStream.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRArchivePri.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRArchivePub.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRCompArchive.o\
@@ -66,11 +66,11 @@ JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRMemArchive.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRSolidHeap.o\
 	$(BUILD_DIR)/asm/JSystem/JKR/JKRThread.o\
-	$(BUILD_DIR)/asm/JSystem/JSU/JSUOutputStream.o\
-	$(BUILD_DIR)/asm/JSystem/JSU/JSUInputStream.o\
-	$(BUILD_DIR)/src/JSystem/JSU/JSUList.o\
-	$(BUILD_DIR)/asm/JSystem/JSU/JSUMemoryStream.o\
-	$(BUILD_DIR)/asm/JSystem/JSU/JSUFileStream.o\
+	$(BUILD_DIR)/src/JSystem/JSupport/JSUOutputStream.o\
+	$(BUILD_DIR)/src/JSystem/JSupport/JSUInputStream.o\
+	$(BUILD_DIR)/src/JSystem/JSupport/JSUList.o\
+	$(BUILD_DIR)/src/JSystem/JSupport/JSUMemoryStream.o\
+	$(BUILD_DIR)/src/JSystem/JSupport/JSUFileStream.o\
 	$(BUILD_DIR)/asm/JSystem/binary.o\
 	$(BUILD_DIR)/asm/JSystem/linklist.o\
 	$(BUILD_DIR)/asm/JSystem/std/std-list.o\
@@ -82,15 +82,15 @@ JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTDirectPrint.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTException.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTFader.o\
-	$(BUILD_DIR)/asm/JSystem/JUT/JUTFont.o\
+	$(BUILD_DIR)/src/JSystem/JUT/JUTFont.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTGamePad.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTGraphFifo.o\
 	$(BUILD_DIR)/src/JSystem/JUT/JUTNameTab.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTPalette.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTProcBar.o\
-	$(BUILD_DIR)/asm/JSystem/JUT/JUTResFont.o\
+	$(BUILD_DIR)/src/JSystem/JUT/JUTResFont.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTResource.o\
-	$(BUILD_DIR)/asm/JSystem/JUT/JUTRomFont.o\
+	$(BUILD_DIR)/src/JSystem/JUT/JUTRomFont.o\
 	$(BUILD_DIR)/src/JSystem/JUT/JUTFontData_Ascfont_fix12.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTTexture.o\
 	$(BUILD_DIR)/asm/JSystem/JUT/JUTVideo.o\
@@ -169,10 +169,10 @@ JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/JPA/JPAResourceLoader.o\
 	$(BUILD_DIR)/asm/JSystem/JPA/JPAResourceManager.o\
 	$(BUILD_DIR)/src/JSystem/JPA/JPATexture.o\
-	$(BUILD_DIR)/asm/JSystem/JSG/JSGSystem.o\
-	$(BUILD_DIR)/asm/JSystem/JSG/JSGCamera.o\
-	$(BUILD_DIR)/asm/JSystem/JSG/JSGObject.o\
-	$(BUILD_DIR)/asm/JSystem/JSG/JSGActor.o\
+	$(BUILD_DIR)/src/JSystem/JSG/JSGSystem.o\
+	$(BUILD_DIR)/src/JSystem/JSG/JSGCamera.o\
+	$(BUILD_DIR)/src/JSystem/JSG/JSGObject.o\
+	$(BUILD_DIR)/src/JSystem/JSG/JSGActor.o\
 	$(BUILD_DIR)/asm/JSystem/JAS/JASWSParser.o\
 	$(BUILD_DIR)/asm/JSystem/JAS/JASBankMgr.o\
 	$(BUILD_DIR)/asm/JSystem/JAS/JASBasicBank.o\
@@ -221,6 +221,7 @@ JSYSTEM:=\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIAnimation.o\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIBankWave.o\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIBasic.o\
+	$(BUILD_DIR)/src/JSystem/JAI/JAIConst.o\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIConst.o\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIDummyObject.o\
 	$(BUILD_DIR)/asm/JSystem/JAI/JAIFx.o\
@@ -253,7 +254,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/msghndlr.o\
 	$(BUILD_DIR)/asm/Dolphin/support.o\
 	$(BUILD_DIR)/src/Dolphin/mutex_TRK.o\
-	$(BUILD_DIR)/asm/Dolphin/notify.o\
+	$(BUILD_DIR)/src/Dolphin/notify.o\
 	$(BUILD_DIR)/asm/Dolphin/flush_cache.o\
 	$(BUILD_DIR)/src/Dolphin/mem_TRK.o\
 	$(BUILD_DIR)/asm/Dolphin/mem_TRK.o\
@@ -265,7 +266,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/main_TRK.o\
 	$(BUILD_DIR)/asm/Dolphin/dolphin_trk_glue.o\
 	$(BUILD_DIR)/src/Dolphin/targcont.o\
-	$(BUILD_DIR)/asm/Dolphin/target_options.o\
+	$(BUILD_DIR)/src/Dolphin/target_options.o\
 	$(BUILD_DIR)/asm/Dolphin/mslsupp.o\
 	$(BUILD_DIR)/src/Dolphin/UDP_Stubs.o\
 	$(BUILD_DIR)/asm/Dolphin/ddh/main.o\
@@ -273,7 +274,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/main.o\
 	$(BUILD_DIR)/src/Dolphin/MWTrace.o\
 	$(BUILD_DIR)/src/Dolphin/MWCriticalSection_gc.o\
-	$(BUILD_DIR)/asm/Dolphin/__va_arg.o\
+	$(BUILD_DIR)/src/Dolphin/__va_arg.o\
 	$(BUILD_DIR)/asm/Dolphin/global_destructor_chain.o\
 	$(BUILD_DIR)/src/Dolphin/CPlusLibPPC.o\
 	$(BUILD_DIR)/asm/Dolphin/NMWException.o\
@@ -284,7 +285,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/GCN_mem_alloc.o\
 	$(BUILD_DIR)/asm/Dolphin/abort_exit.o\
 	$(BUILD_DIR)/asm/Dolphin/alloc.o\
-	$(BUILD_DIR)/asm/Dolphin/ansi_files.o\
+	$(BUILD_DIR)/src/Dolphin/ansi_files.o\
 	$(BUILD_DIR)/asm/Dolphin/ansi_fp.o\
 	$(BUILD_DIR)/src/Dolphin/arith.o\
 	$(BUILD_DIR)/src/Dolphin/buffer_io.o\
@@ -294,7 +295,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/errno.o\
 	$(BUILD_DIR)/asm/Dolphin/file_io.o\
 	$(BUILD_DIR)/asm/Dolphin/FILE_POS.o\
-	$(BUILD_DIR)/asm/Dolphin/locale.o\
+	$(BUILD_DIR)/src/Dolphin/locale.o\
 	$(BUILD_DIR)/asm/Dolphin/mbstring.o\
 	$(BUILD_DIR)/src/Dolphin/mem.o\
 	$(BUILD_DIR)/asm/Dolphin/mem_funcs.o\
@@ -307,19 +308,19 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/strtold.o\
 	$(BUILD_DIR)/asm/Dolphin/strtoul.o\
 	$(BUILD_DIR)/src/Dolphin/wchar_io.o\
-	$(BUILD_DIR)/asm/Dolphin/uart_console_io_gcn.o\
-	$(BUILD_DIR)/asm/Dolphin/e_asin.o\
+	$(BUILD_DIR)/src/Dolphin/uart_console_io_gcn.o\
+	$(BUILD_DIR)/src/Dolphin/e_asin.o\
 	$(BUILD_DIR)/src/Dolphin/e_atan2.o\
 	$(BUILD_DIR)/src/Dolphin/e_exp.o\
 	$(BUILD_DIR)/src/Dolphin/e_fmod.o\
-	$(BUILD_DIR)/asm/Dolphin/e_log.o\
-	$(BUILD_DIR)/asm/Dolphin/e_log10.o\
+	$(BUILD_DIR)/src/Dolphin/e_log.o\
+	$(BUILD_DIR)/src/Dolphin/e_log10.o\
 	$(BUILD_DIR)/src/Dolphin/e_pow.o\
-	$(BUILD_DIR)/asm/Dolphin/e_rem_pio2.o\
+	$(BUILD_DIR)/src/Dolphin/e_rem_pio2.o\
 	$(BUILD_DIR)/src/Dolphin/k_cos.o\
 	$(BUILD_DIR)/src/Dolphin/k_rem_pio2.o\
 	$(BUILD_DIR)/src/Dolphin/k_sin.o\
-	$(BUILD_DIR)/asm/Dolphin/k_tan.o\
+	$(BUILD_DIR)/src/Dolphin/k_tan.o\
 	$(BUILD_DIR)/src/Dolphin/s_atan.o\
 	$(BUILD_DIR)/src/Dolphin/s_ceil.o\
 	$(BUILD_DIR)/src/Dolphin/s_copysign.o\
@@ -336,7 +337,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/src/Dolphin/w_fmod.o\
 	$(BUILD_DIR)/src/Dolphin/w_log10.o\
 	$(BUILD_DIR)/src/Dolphin/w_pow.o\
-	$(BUILD_DIR)/asm/Dolphin/e_sqrt.o\
+	$(BUILD_DIR)/src/Dolphin/e_sqrt.o\
 	$(BUILD_DIR)/src/Dolphin/math_ppc.o\
 	$(BUILD_DIR)/src/Dolphin/w_sqrt.o\
 	$(BUILD_DIR)/asm/Dolphin/extras.o\
@@ -361,7 +362,6 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/CARDWrite.o\
 	$(BUILD_DIR)/asm/Dolphin/CARDStat.o\
 	$(BUILD_DIR)/asm/Dolphin/CARDNet.o\
-	$(BUILD_DIR)/asm/Dolphin/db.o\
 	$(BUILD_DIR)/src/Dolphin/db.o\
 	$(BUILD_DIR)/asm/Dolphin/dsp.o\
 	$(BUILD_DIR)/src/Dolphin/dsp_debug.o\
@@ -371,9 +371,9 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/dvd.o\
 	$(BUILD_DIR)/asm/Dolphin/dvdqueue.o\
 	$(BUILD_DIR)/src/Dolphin/dvderror.o\
-	$(BUILD_DIR)/asm/Dolphin/dvdidutils.o\
+	$(BUILD_DIR)/src/Dolphin/dvdidutils.o\
 	$(BUILD_DIR)/src/Dolphin/dvdFatal.o\
-	$(BUILD_DIR)/asm/Dolphin/fstload.o\
+	$(BUILD_DIR)/src/Dolphin/fstload.o\
 	$(BUILD_DIR)/asm/Dolphin/EXIBios.o\
 	$(BUILD_DIR)/asm/Dolphin/EXIUart.o\
 	$(BUILD_DIR)/src/Dolphin/GDBase.o\
@@ -401,7 +401,7 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/OSAlarm.o\
 	$(BUILD_DIR)/asm/Dolphin/OSAlloc.o\
 	$(BUILD_DIR)/src/Dolphin/OSArena.o\
-	$(BUILD_DIR)/asm/Dolphin/OSAudioSystem.o\
+	$(BUILD_DIR)/src/Dolphin/OSAudioSystem.o\
 	$(BUILD_DIR)/asm/Dolphin/OSCache.o\
 	$(BUILD_DIR)/asm/Dolphin/OSContext.o\
 	$(BUILD_DIR)/asm/Dolphin/OSError.o\
@@ -420,11 +420,11 @@ DOLPHIN:=\
 	$(BUILD_DIR)/asm/Dolphin/OSTime.o\
 	$(BUILD_DIR)/asm/Dolphin/__mem.o\
 	$(BUILD_DIR)/src/Dolphin/__start.o\
-	$(BUILD_DIR)/asm/Dolphin/__ppc_eabi_init.o\
+	$(BUILD_DIR)/src/Dolphin/__ppc_eabi_init.o\
 	$(BUILD_DIR)/asm/Dolphin/Padclamp.o\
 	$(BUILD_DIR)/asm/Dolphin/Pad.o\
 	$(BUILD_DIR)/asm/Dolphin/SIBios.o\
-	$(BUILD_DIR)/asm/Dolphin/SISamplingRate.o\
+	$(BUILD_DIR)/src/Dolphin/SISamplingRate.o\
 	$(BUILD_DIR)/asm/Dolphin/ai.o\
 	$(BUILD_DIR)/asm/Dolphin/THPDec.o\
 	$(BUILD_DIR)/asm/Dolphin/THPAudio.o\
@@ -561,7 +561,7 @@ KANDO:=\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemCave.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemBigFountain.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemBridge.o\
-	$(BUILD_DIR)/asm/plugProjectKandoU/pikiContainer.o\
+	$(BUILD_DIR)/src/plugProjectKandoU/pikiContainer.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/gameGeneratorCache.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemTreasure.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/itemDownFloor.o\
@@ -588,7 +588,7 @@ KANDO:=\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_WorldMap.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_FileSelect.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/gamePlayDataMemCard.o\
-	$(BUILD_DIR)/asm/plugProjectKandoU/baseHIOparms.o\
+	$(BUILD_DIR)/src/plugProjectKandoU/baseHIOparms.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/radarInfo.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/singleGS_Movie.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/navi_demoCheck.o\
@@ -615,7 +615,7 @@ KANDO:=\
 	$(BUILD_DIR)/src/plugProjectKandoU/gameHighscore.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/gamePlayCommonData.o\
 	$(BUILD_DIR)/src/plugProjectKandoU/pelletCarry.o\
-	$(BUILD_DIR)/asm/plugProjectKandoU/gameChallenge2D.o\
+	$(BUILD_DIR)/src/plugProjectKandoU/gameChallenge2D.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/vsTekiMgr.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/vsCardMgr.o\
 	$(BUILD_DIR)/asm/plugProjectKandoU/aiRescue.o\
@@ -639,16 +639,16 @@ NISHIMURA:=\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/EnemyUnit.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandMapMgr.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandMapDraw.o\
-	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandMapChecker.o\
+	$(BUILD_DIR)/src/plugProjectNishimuraU/RandMapChecker.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandMapUnit.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandEnemyUnit.o\
-	$(BUILD_DIR)/asm/plugProjectNishimuraU/DoorNode.o\
+	$(BUILD_DIR)/src/plugProjectNishimuraU/DoorNode.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/MapUnitGenerator.o\
-	$(BUILD_DIR)/asm/plugProjectNishimuraU/MapCreator.o\
+	$(BUILD_DIR)/src/plugProjectNishimuraU/MapCreator.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandMapScore.o\
-	$(BUILD_DIR)/asm/plugProjectNishimuraU/ItemUnit.o\
+	$(BUILD_DIR)/src/plugProjectNishimuraU/ItemUnit.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandItemUnit.o\
-	$(BUILD_DIR)/asm/plugProjectNishimuraU/GateUnit.o\
+	$(BUILD_DIR)/src/plugProjectNishimuraU/GateUnit.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/RandGateUnit.o\
 	$(BUILD_DIR)/src/plugProjectNishimuraU/ObjectLayout.o\
 	$(BUILD_DIR)/asm/plugProjectNishimuraU/CameraMgr.o\
@@ -871,7 +871,7 @@ OGAWA:=\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogDopingScreen.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogPikminCounter.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogAnime.o\
-	$(BUILD_DIR)/asm/plugProjectOgawaU/ogCounter.o\
+	$(BUILD_DIR)/src/plugProjectOgawaU/ogCounter.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogLifeGauge.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSunMeter.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogCatchPiki.o\
@@ -901,7 +901,7 @@ OGAWA:=\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjSMenuPause.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjSMenuBase.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjCourseName.o\
-	$(BUILD_DIR)/asm/plugProjectOgawaU/ogUtil.o\
+	$(BUILD_DIR)/src/plugProjectOgawaU/ogUtil.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSceneCourseName.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjKantei.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSceneKantei.o\
@@ -911,6 +911,7 @@ OGAWA:=\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSceneFloor.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjCave.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSceneCave.o\
+	$(BUILD_DIR)/src/plugProjectOgawaU/ogObjAnaDemo.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjAnaDemo.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogSceneAnaDemo.o\
 	$(BUILD_DIR)/asm/plugProjectOgawaU/ogObjChallenge2P.o\
@@ -1040,12 +1041,11 @@ EBISAWA:=\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleUnit.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiUtility.o\
 	$(BUILD_DIR)/src/plugProjectEbisawaU/ebiP2TitleCamera.o\
-	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleCamera.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiP2TitleLight.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiScreenMemoryCard.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/efxTPkEffectMgr.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/efxEnemyGeneral.o\
-	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebi3DGraph.o\
+	$(BUILD_DIR)/src/plugProjectEbisawaU/ebi3DGraph.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiGeometry.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebi2DGraph.o\
 	$(BUILD_DIR)/asm/plugProjectEbisawaU/ebiScreenOption.o\
@@ -1141,7 +1141,7 @@ GC:=\
 	$(BUILD_DIR)/asm/sysGCU/JSTFindCreature.o\
 	$(BUILD_DIR)/asm/sysGCU/movieConfig.o\
 	$(BUILD_DIR)/asm/sysGCU/gameConfig.o\
-	$(BUILD_DIR)/asm/sysGCU/fogMgr.o\
+	$(BUILD_DIR)/src/sysGCU/fogMgr.o\
 	$(BUILD_DIR)/asm/sysGCU/aramMgr.o\
 	$(BUILD_DIR)/asm/sysGCU/resourceMgr.o\
 	$(BUILD_DIR)/asm/sysGCU/resourceMgr2D.o\
@@ -1154,9 +1154,9 @@ GC:=\
 	$(BUILD_DIR)/asm/sysGCU/messageMgr.o\
 	$(BUILD_DIR)/asm/sysGCU/messageObj.o\
 	$(BUILD_DIR)/asm/sysGCU/messageRendering.o\
-	$(BUILD_DIR)/asm/sysGCU/message.o\
+	$(BUILD_DIR)/src/sysGCU/message.o\
 	$(BUILD_DIR)/asm/sysGCU/modelEffect.o\
-	$(BUILD_DIR)/asm/sysGCU/messageReference.o\
+	$(BUILD_DIR)/src/sysGCU/messageReference.o\
 	$(BUILD_DIR)/src/sysGCU/simpleMessage.o\
 	$(BUILD_DIR)/asm/sysGCU/sysShapeAnimation.o\
 	$(BUILD_DIR)/asm/sysGCU/sysShapeModel.o\
@@ -1171,7 +1171,6 @@ GC:=\
 	$(BUILD_DIR)/asm/sysGCU/demoSection.o\
 	$(BUILD_DIR)/asm/sysGCU/THPAudioDecode.o\
 	$(BUILD_DIR)/src/sysGCU/THPDraw.o\
-	$(BUILD_DIR)/asm/sysGCU/THPDraw.o\
 	$(BUILD_DIR)/asm/sysGCU/THPPlayer.o\
 	$(BUILD_DIR)/asm/sysGCU/THPRead.o\
 	$(BUILD_DIR)/asm/sysGCU/THPVideoDecode.o\

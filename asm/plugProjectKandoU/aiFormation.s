@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_aiFormation_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_8047F168
 lbl_8047F168:
 	.4byte 0x00000000
@@ -57,7 +58,7 @@ lbl_8047F1E0:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804B4CF0
 lbl_804B4CF0:
 	.4byte 0x00000000
@@ -96,13 +97,13 @@ __vt__Q24Game18SlotChangeListener:
 	.4byte 0
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 0x8
+.balign 8
 .global newVer
 newVer:
 	.4byte 0x01000000
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_805159E8
 lbl_805159E8:
 	.skip 0x4
@@ -111,7 +112,7 @@ lbl_805159EC:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_80518FE8
 lbl_80518FE8:
 	.4byte 0x00000000

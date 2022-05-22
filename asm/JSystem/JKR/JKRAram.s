@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_JKRAram_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_80473480
 lbl_80473480:
 	.4byte 0x4A4B5241
@@ -46,7 +47,7 @@ lbl_8047348C:
 	.4byte 0x2E0A0000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global sMessageBuffer__7JKRAram
 sMessageBuffer__7JKRAram:
 	.4byte 0x00000000
@@ -76,13 +77,13 @@ sAramCommandList__7JKRAram:
 	.skip 0xC
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 0x8
+.balign 8
 .global sSZSBufferSize__7JKRAram
 sSZSBufferSize__7JKRAram:
 	.4byte 0x00000400
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global sAramObject__7JKRAram
 sAramObject__7JKRAram:
 	.skip 0x4
@@ -133,7 +134,7 @@ tsArea:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_805164D0
 lbl_805164D0:
 	.4byte 0x25730000
@@ -1158,8 +1159,6 @@ nextSrcData__FPUc:
 /* 800187F4 00015734  90 01 00 24 */	stw r0, 0x24(r1)
 /* 800187F8 00015738  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800187FC 0001573C  93 C1 00 18 */	stw r30, 0x18(r1)
-.global lbl_80018800
-lbl_80018800:
 /* 80018800 00015740  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 80018804 00015744  93 81 00 10 */	stw r28, 0x10(r1)
 /* 80018808 00015748  80 0D 87 28 */	lwz r0, szpEnd@sda21(r13)

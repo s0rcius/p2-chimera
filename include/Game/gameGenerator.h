@@ -1,6 +1,7 @@
 #ifndef _GAME_GAMEGENERATOR_H
 #define _GAME_GAMEGENERATOR_H
 
+#include "IDelegate.h"
 #include "Matrixf.h"
 #include "Graphics.h"
 #include "Parameters.h"
@@ -108,10 +109,19 @@ struct GeneratorMgr : public CNode {
 	float _68;                 // _68
 	u8 _6C;                    // _6C
 	u8 _6D;                    // _6D
+
+	static Delegate1<struct BaseGameSection, Vector3f&>* cursorCallback;
 };
 
-struct GenArg {
-	virtual char* getName(); // _00
+struct CreatureInitArg {
+	virtual const char* getName() = 0; // _00
+
+	// _00 VTBL
+	Vector3f m_position; // _04
+};
+
+struct GenArg : public CreatureInitArg {
+	virtual const char* getName(); // _00
 
 	// _00 VTBL
 };
@@ -144,12 +154,17 @@ struct GenBase : public Parameters {
 };
 
 struct GenObject : public GenBase {
+	GenObject(u32 tag, char* description, char* t)
+	    : GenBase(tag, description, t)
+	{
+	}
+
 	virtual void render(Graphics&, Generator*);            // _18
 	virtual u32 getLatestVersion();                        // _1C
 	virtual J3DModelData* getShape();                      // _20
 	virtual void updateUseList(Generator*, int);           // _24
 	virtual Creature* generate(Generator*);                // _28
-	virtual void birth(GenArg*);                           // _2C
+	virtual Creature* birth(GenArg*);                      // _2C
 	virtual void generatorMakeMatrix(Matrixf&, Vector3f&); // _30
 	virtual void getDebugInfo(char*);                      // _34
 };
@@ -180,11 +195,18 @@ struct GenObjectFactoryFactory {
 		m_limit     = 12;
 		m_count     = 0;
 	}
+
 	u32 m_count;                   // _00
 	u32 m_limit;                   // _04
 	GenObjectFactory* m_factories; // _08
 	u8 _0C[4];                     // _0C
 };
+
+extern GeneratorMgr* generatorMgr;
+extern GeneratorMgr* onceGeneratorMgr;
+extern GeneratorMgr* limitGeneratorMgr;
+extern GeneratorMgr* plantsGeneratorMgr;
+extern GeneratorMgr* dayGeneratorMgr;
 } // namespace Game
 
 extern u32 GeneratorCurrentVersion;

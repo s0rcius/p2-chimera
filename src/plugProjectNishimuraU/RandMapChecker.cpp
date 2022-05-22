@@ -1,532 +1,223 @@
 #include "types.h"
-
-/*
-    Generated from dpostproc
-*/
+#include "Game/Cave/RandMapUnit.h"
+#include "Game/Cave/Node.h"
 
 namespace Game {
+namespace Cave {
 
 /*
  * --INFO--
  * Address:	80245664
  * Size:	000008
+ * Matches!
  */
-Cave::RandMapChecker::RandMapChecker(Game::Cave::MapNode*)
-{
-	/*
-	stw      r4, 0(r3)
-	blr
-	*/
-}
+RandMapChecker::RandMapChecker(MapNode* mapnode) { m_mapNode = mapnode; }
 
 /*
  * --INFO--
  * Address:	8024566C
  * Size:	00007C
+ * Matches!
  */
-void Cave::RandMapChecker::isPutOnMap(Game::Cave::MapNode*)
+bool RandMapChecker::isPutOnMap(MapNode* mapnode)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	stw      r31, 0xc(r1)
-	mr       r31, r4
-	stw      r30, 8(r1)
-	mr       r30, r3
-	bl       isPartsOnParts__Q34Game4Cave14RandMapCheckerFPQ34Game4Cave7MapNode
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_8024569C
-	li       r3, 0
-	b        lbl_802456D0
-
-lbl_8024569C:
-	mr       r3, r30
-	mr       r4, r31
-	bl       isDoorOnParts__Q34Game4Cave14RandMapCheckerFPQ34Game4Cave7MapNode
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_802456B8
-	li       r3, 0
-	b        lbl_802456D0
-
-lbl_802456B8:
-	mr       r3, r30
-	mr       r4, r31
-	bl       isPartsOnDoor__Q34Game4Cave14RandMapCheckerFPQ34Game4Cave7MapNode
-	clrlwi   r0, r3, 0x18
-	cntlzw   r0, r0
-	srwi     r3, r0, 5
-
-lbl_802456D0:
-	lwz      r0, 0x14(r1)
-	lwz      r31, 0xc(r1)
-	lwz      r30, 8(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	if (isPartsOnParts(mapnode))
+		return false;
+	if (isDoorOnParts(mapnode))
+		return false;
+	if (isPartsOnDoor(mapnode))
+		return false;
+	return true;
 }
 
 /*
  * --INFO--
  * Address:	802456E8
  * Size:	0000F0
+ * Description: Appears to check if map parts would overlap
+ * Matches!
  */
-void Cave::RandMapChecker::isPartsOnParts(Game::Cave::MapNode*)
+bool RandMapChecker::isPartsOnParts(MapNode* mapnode)
 {
-	/*
-	stwu     r1, -0x40(r1)
-	mflr     r0
-	stw      r0, 0x44(r1)
-	stmw     r23, 0x1c(r1)
-	mr       r24, r4
-	mr       r23, r3
-	mr       r3, r24
-	bl       getNodeOffsetX__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	mr       r3, r24
-	mr       r31, r0
-	bl       getNodeOffsetY__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	lwz      r3, 0x18(r24)
-	mr       r30, r0
-	bl       getUnitSizeX__Q34Game4Cave8UnitInfoFv
-	add      r29, r31, r3
-	lwz      r3, 0x18(r24)
-	bl       getUnitSizeY__Q34Game4Cave8UnitInfoFv
-	lwz      r4, 0(r23)
-	add      r28, r30, r3
-	lwz      r24, 0x10(r4)
-	b        lbl_802457B8
+	int outerX1, outerY1, outerX2, outerY2;
+	int innerX1, innerY1, innerX2, innerY2;
 
-lbl_80245744:
-	mr       r3, r24
-	bl       getNodeOffsetX__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	mr       r3, r24
-	mr       r27, r0
-	bl       getNodeOffsetY__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	lwz      r3, 0x18(r24)
-	mr       r26, r0
-	bl       getUnitSizeX__Q34Game4Cave8UnitInfoFv
-	add      r25, r27, r3
-	lwz      r3, 0x18(r24)
-	bl       getUnitSizeY__Q34Game4Cave8UnitInfoFv
-	add      r0, r26, r3
-	mr       r3, r23
-	stw      r0, 8(r1)
-	mr       r4, r31
-	mr       r5, r30
-	mr       r6, r29
-	mr       r7, r28
-	mr       r8, r27
-	mr       r9, r26
-	mr       r10, r25
-	bl       isInnerBox__Q34Game4Cave14RandMapCheckerFiiiiiiii
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_802457B4
-	li       r3, 1
-	b        lbl_802457C4
+	outerX1 = mapnode->getNodeOffsetX();
+	outerY1 = mapnode->getNodeOffsetY();
+	outerX2 = outerX1 + mapnode->m_unitInfo->getUnitSizeX();
+	outerY2 = outerY1 + mapnode->m_unitInfo->getUnitSizeY();
 
-lbl_802457B4:
-	lwz      r24, 4(r24)
+	for (CNode* node = m_mapNode->m_child; node != nullptr; node = node->m_next) {
+		MapNode* nextMapNode = (MapNode*)node;
+		innerX1              = nextMapNode->getNodeOffsetX();
+		innerY1              = nextMapNode->getNodeOffsetY();
+		innerX2              = innerX1 + nextMapNode->m_unitInfo->getUnitSizeX();
+		innerY2              = innerY1 + nextMapNode->m_unitInfo->getUnitSizeY();
 
-lbl_802457B8:
-	cmplwi   r24, 0
-	bne      lbl_80245744
-	li       r3, 0
+		if (isInnerBox(outerX1, outerY1, outerX2, outerY2, innerX1, innerY1, innerX2, innerY2))
+			return true;
+	}
 
-lbl_802457C4:
-	lmw      r23, 0x1c(r1)
-	lwz      r0, 0x44(r1)
-	mtlr     r0
-	addi     r1, r1, 0x40
-	blr
-	*/
-}
+	return false;
+};
 
 /*
  * --INFO--
  * Address:	802457D8
  * Size:	000220
+ * Matches!
  */
-void Cave::RandMapChecker::isDoorOnParts(Game::Cave::MapNode*)
+bool RandMapChecker::isDoorOnParts(MapNode* mapnode)
 {
-	/*
-	stwu     r1, -0x50(r1)
-	mflr     r0
-	stw      r0, 0x54(r1)
-	stmw     r23, 0x2c(r1)
-	mr       r29, r4
-	mr       r28, r3
-	mr       r3, r29
-	bl       getNumDoors__Q34Game4Cave7MapNodeFv
-	mr       r31, r3
-	mr       r3, r29
-	bl       getNodeOffsetX__Q34Game4Cave7MapNodeFv
-	stw      r3, 0x1c(r1)
-	mr       r3, r29
-	bl       getNodeOffsetY__Q34Game4Cave7MapNodeFv
-	stw      r3, 0x18(r1)
-	li       r30, 0
-	b        lbl_802459D8
+	int outerX1, outerY1, outerX2, outerY2;
+	int innerX1, innerY1, innerX2, innerY2;
 
-lbl_8024581C:
-	mr       r3, r29
-	mr       r4, r30
-	addi     r5, r1, 0x1c
-	addi     r6, r1, 0x18
-	li       r25, 0
-	bl       getDoorOffset__Q34Game4Cave7MapNodeFiRiRi
-	lwz      r3, 0(r28)
-	lwz      r24, 0x10(r3)
-	b        lbl_802458E4
+	int doorCount1 = mapnode->getNumDoors();
+	outerX1        = mapnode->getNodeOffsetX();
+	outerY1        = mapnode->getNodeOffsetY();
 
-lbl_80245840:
-	mr       r3, r24
-	bl       getNumDoors__Q34Game4Cave7MapNodeFv
-	mr       r26, r3
-	li       r23, 0
-	b        lbl_802458D8
+	for (int doorIndex = 0; doorCount1 > doorIndex; doorIndex++) {
+		bool b_flag = false;
+		mapnode->getDoorOffset(doorIndex, outerX1, outerY1);
 
-lbl_80245854:
-	clrlwi.  r0, r25, 0x18
-	bne      lbl_802458D4
-	mr       r3, r24
-	mr       r4, r23
-	bl       isDoorClose__Q34Game4Cave7MapNodeFi
-	clrlwi.  r0, r3, 0x18
-	bne      lbl_802458D4
-	mr       r3, r24
-	mr       r4, r23
-	bl       getDoorNode__Q34Game4Cave7MapNodeFi
-	mr       r27, r3
-	mr       r3, r29
-	mr       r4, r30
-	bl       getDoorNode__Q34Game4Cave7MapNodeFi
-	mr       r4, r27
-	bl       isDoorAdjust__Q34Game4Cave8DoorNodeFPQ34Game4Cave8DoorNode
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_802458D4
-	mr       r3, r24
-	mr       r4, r23
-	addi     r5, r1, 0x14
-	addi     r6, r1, 0x10
-	bl       getDoorOffset__Q34Game4Cave7MapNodeFiRiRi
-	lwz      r3, 0x1c(r1)
-	lwz      r0, 0x14(r1)
-	cmpw     r3, r0
-	bne      lbl_802458D4
-	lwz      r3, 0x18(r1)
-	lwz      r0, 0x10(r1)
-	cmpw     r3, r0
-	bne      lbl_802458D4
-	li       r25, 1
+		for (CNode* node = m_mapNode->m_child; node != nullptr; node = node->m_next) {
+			MapNode* mapNode = (MapNode*)node;
 
-lbl_802458D4:
-	addi     r23, r23, 1
+			int doorCount2 = mapNode->getNumDoors();
+			for (int doorIndex2 = 0; doorIndex2 < doorCount2; doorIndex2++) {
+				if ((!b_flag) && (!(mapNode->isDoorClose(doorIndex2)))) {
+					if (mapnode->getDoorNode(doorIndex)->isDoorAdjust(mapNode->getDoorNode(doorIndex2))) {
+						mapNode->getDoorOffset(doorIndex2, outerX2, outerY2);
+						if (outerX1 == outerX2 && outerY1 == outerY2)
+							b_flag = true;
+					}
+				}
+			}
+		}
 
-lbl_802458D8:
-	cmpw     r23, r26
-	blt      lbl_80245854
-	lwz      r24, 4(r24)
+		if (!b_flag) {
+			switch (mapnode->getDoorDirect(doorIndex)) {
+			case CD_UP:
+				outerY1--;
+				break;
+			case CD_LEFT:
+				outerX1--;
+			case CD_RIGHT:
+			case CD_DOWN:
+				break;
+			}
 
-lbl_802458E4:
-	cmplwi   r24, 0
-	bne      lbl_80245840
-	clrlwi.  r0, r25, 0x18
-	bne      lbl_802459D4
-	mr       r3, r29
-	mr       r4, r30
-	bl       getDoorDirect__Q34Game4Cave7MapNodeFi
-	cmpwi    r3, 3
-	beq      lbl_80245928
-	bge      lbl_80245934
-	cmpwi    r3, 0
-	beq      lbl_80245918
-	b        lbl_80245934
+			outerX2 = outerX1 + 1;
+			outerY2 = outerY1 + 1;
 
-lbl_80245918:
-	lwz      r3, 0x18(r1)
-	addi     r0, r3, -1
-	stw      r0, 0x18(r1)
-	b        lbl_80245934
+			for (CNode* node = m_mapNode->m_child; node != nullptr; node = node->m_next) {
+				MapNode* mapNode = (MapNode*)node;
 
-lbl_80245928:
-	lwz      r3, 0x1c(r1)
-	addi     r0, r3, -1
-	stw      r0, 0x1c(r1)
+				innerX1 = mapNode->getNodeOffsetX();
+				innerY1 = mapNode->getNodeOffsetY();
+				innerX2 = innerX1 + mapNode->m_unitInfo->getUnitSizeX();
+				innerY2 = innerY1 + mapNode->m_unitInfo->getUnitSizeY();
 
-lbl_80245934:
-	lwz      r4, 0x1c(r1)
-	lwz      r3, 0x18(r1)
-	addi     r4, r4, 1
-	addi     r0, r3, 1
-	stw      r4, 0x14(r1)
-	stw      r0, 0x10(r1)
-	lwz      r3, 0(r28)
-	lwz      r23, 0x10(r3)
-	b        lbl_802459CC
+				if (isInnerBox(outerX1, outerY1, outerX2, outerY2, innerX1, innerY1, innerX2, innerY2))
+					return true;
+			}
+		}
+	};
 
-lbl_80245958:
-	mr       r3, r23
-	bl       getNodeOffsetX__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	mr       r3, r23
-	mr       r26, r0
-	bl       getNodeOffsetY__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	lwz      r3, 0x18(r23)
-	mr       r27, r0
-	bl       getUnitSizeX__Q34Game4Cave8UnitInfoFv
-	add      r25, r26, r3
-	lwz      r3, 0x18(r23)
-	bl       getUnitSizeY__Q34Game4Cave8UnitInfoFv
-	add      r0, r27, r3
-	mr       r3, r28
-	stw      r0, 8(r1)
-	mr       r8, r26
-	mr       r9, r27
-	mr       r10, r25
-	lwz      r4, 0x1c(r1)
-	lwz      r5, 0x18(r1)
-	lwz      r6, 0x14(r1)
-	lwz      r7, 0x10(r1)
-	bl       isInnerBox__Q34Game4Cave14RandMapCheckerFiiiiiiii
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_802459C8
-	li       r3, 1
-	b        lbl_802459E4
-
-lbl_802459C8:
-	lwz      r23, 4(r23)
-
-lbl_802459CC:
-	cmplwi   r23, 0
-	bne      lbl_80245958
-
-lbl_802459D4:
-	addi     r30, r30, 1
-
-lbl_802459D8:
-	cmpw     r30, r31
-	blt      lbl_8024581C
-	li       r3, 0
-
-lbl_802459E4:
-	lmw      r23, 0x2c(r1)
-	lwz      r0, 0x54(r1)
-	mtlr     r0
-	addi     r1, r1, 0x50
-	blr
-	*/
+	return false;
 }
 
 /*
  * --INFO--
  * Address:	802459F8
  * Size:	0001E8
+ * Matches!
  */
-void Cave::RandMapChecker::isPartsOnDoor(Game::Cave::MapNode*)
+bool RandMapChecker::isPartsOnDoor(MapNode* mapnode)
 {
-	/*
-	stwu     r1, -0x60(r1)
-	mflr     r0
-	stw      r0, 0x64(r1)
-	stmw     r19, 0x2c(r1)
-	mr       r21, r4
-	mr       r20, r3
-	mr       r3, r21
-	bl       getNodeOffsetX__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	mr       r3, r21
-	mr       r29, r0
-	bl       getNodeOffsetY__Q34Game4Cave7MapNodeFv
-	mr       r0, r3
-	lwz      r3, 0x18(r21)
-	mr       r28, r0
-	bl       getUnitSizeX__Q34Game4Cave8UnitInfoFv
-	add      r27, r29, r3
-	lwz      r3, 0x18(r21)
-	bl       getUnitSizeY__Q34Game4Cave8UnitInfoFv
-	lwz      r4, 0(r20)
-	add      r26, r28, r3
-	lwz      r25, 0x10(r4)
-	b        lbl_80245BC0
+	int outerX1, outerY1, innerX1, innerY1;
+	int outerX2, outerY2, innerX2, innerY2;
 
-lbl_80245A54:
-	mr       r3, r25
-	bl       getNumDoors__Q34Game4Cave7MapNodeFv
-	mr       r30, r3
-	li       r24, 0
-	b        lbl_80245BB4
+	outerX1 = mapnode->getNodeOffsetX();
+	outerY1 = mapnode->getNodeOffsetY();
+	outerX2 = outerX1 + mapnode->m_unitInfo->getUnitSizeX();
+	outerY2 = outerY1 + mapnode->m_unitInfo->getUnitSizeY();
 
-lbl_80245A68:
-	mr       r3, r25
-	mr       r4, r24
-	bl       isDoorClose__Q34Game4Cave7MapNodeFi
-	clrlwi.  r0, r3, 0x18
-	bne      lbl_80245BB0
-	mr       r3, r21
-	li       r23, 0
-	bl       getNumDoors__Q34Game4Cave7MapNodeFv
-	mr       r31, r3
-	mr       r3, r25
-	mr       r4, r24
-	addi     r5, r1, 0x1c
-	addi     r6, r1, 0x18
-	bl       getDoorOffset__Q34Game4Cave7MapNodeFiRiRi
-	li       r22, 0
-	b        lbl_80245B18
+	for (CNode* node = m_mapNode->m_child; node != nullptr; node = node->m_next) {
+		MapNode* child = (MapNode*)node;
 
-lbl_80245AA8:
-	clrlwi.  r0, r23, 0x18
-	bne      lbl_80245B14
-	mr       r3, r21
-	mr       r4, r22
-	bl       getDoorNode__Q34Game4Cave7MapNodeFi
-	mr       r19, r3
-	mr       r3, r25
-	mr       r4, r24
-	bl       getDoorNode__Q34Game4Cave7MapNodeFi
-	mr       r4, r19
-	bl       isDoorAdjust__Q34Game4Cave8DoorNodeFPQ34Game4Cave8DoorNode
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_80245B14
-	mr       r3, r21
-	mr       r4, r22
-	addi     r5, r1, 0x14
-	addi     r6, r1, 0x10
-	bl       getDoorOffset__Q34Game4Cave7MapNodeFiRiRi
-	lwz      r3, 0x1c(r1)
-	lwz      r0, 0x14(r1)
-	cmpw     r3, r0
-	bne      lbl_80245B14
-	lwz      r3, 0x18(r1)
-	lwz      r0, 0x10(r1)
-	cmpw     r3, r0
-	bne      lbl_80245B14
-	li       r23, 1
+		int doorCount1 = child->getNumDoors();
+		for (int adjustInfoIndex = 0; adjustInfoIndex < doorCount1; adjustInfoIndex++) {
 
-lbl_80245B14:
-	addi     r22, r22, 1
+			bool b_flag;
+			if (!child->isDoorClose(adjustInfoIndex)) {
+				b_flag         = false;
+				int doorCount2 = mapnode->getNumDoors();
+				child->getDoorOffset(adjustInfoIndex, innerX1, innerY1);
+				for (int adjustInfoIndex2 = 0; adjustInfoIndex2 < doorCount2; adjustInfoIndex2++) {
+					if (!b_flag) {
+						if (child->getDoorNode(adjustInfoIndex)->isDoorAdjust(mapnode->getDoorNode(adjustInfoIndex2))) {
+							mapnode->getDoorOffset(adjustInfoIndex2, innerX2, innerY2);
+							if (innerX1 == innerX2 && innerY1 == innerY2)
+								b_flag = true;
+						}
+					}
+				}
 
-lbl_80245B18:
-	cmpw     r22, r31
-	blt      lbl_80245AA8
-	clrlwi.  r0, r23, 0x18
-	bne      lbl_80245BB0
-	mr       r3, r25
-	mr       r4, r24
-	bl       getDoorDirect__Q34Game4Cave7MapNodeFi
-	cmpwi    r3, 3
-	beq      lbl_80245B5C
-	bge      lbl_80245B68
-	cmpwi    r3, 0
-	beq      lbl_80245B4C
-	b        lbl_80245B68
+				if (!b_flag) {
+					switch (child->getDoorDirect(adjustInfoIndex)) {
+					case CD_UP:
+						innerY1--;
+						break;
+					case CD_LEFT:
+						innerX1--;
+					case CD_RIGHT:
+					case CD_DOWN:
+						break;
+					}
 
-lbl_80245B4C:
-	lwz      r3, 0x18(r1)
-	addi     r0, r3, -1
-	stw      r0, 0x18(r1)
-	b        lbl_80245B68
+					innerX2 = innerX1 + 1;
+					innerY2 = innerY1 + 1;
 
-lbl_80245B5C:
-	lwz      r3, 0x1c(r1)
-	addi     r0, r3, -1
-	stw      r0, 0x1c(r1)
+					if (isInnerBox(outerX1, outerY1, outerX2, outerY2, innerX1, innerY1, innerX2, innerY2))
+						return true;
+				}
+			}
+		}
+	};
 
-lbl_80245B68:
-	lwz      r8, 0x1c(r1)
-	mr       r3, r20
-	lwz      r9, 0x18(r1)
-	mr       r4, r29
-	addi     r6, r8, 1
-	mr       r5, r28
-	addi     r0, r9, 1
-	stw      r6, 0x14(r1)
-	mr       r6, r27
-	mr       r7, r26
-	stw      r0, 0x10(r1)
-	stw      r0, 8(r1)
-	lwz      r10, 0x14(r1)
-	bl       isInnerBox__Q34Game4Cave14RandMapCheckerFiiiiiiii
-	clrlwi.  r0, r3, 0x18
-	beq      lbl_80245BB0
-	li       r3, 1
-	b        lbl_80245BCC
-
-lbl_80245BB0:
-	addi     r24, r24, 1
-
-lbl_80245BB4:
-	cmpw     r24, r30
-	blt      lbl_80245A68
-	lwz      r25, 4(r25)
-
-lbl_80245BC0:
-	cmplwi   r25, 0
-	bne      lbl_80245A54
-	li       r3, 0
-
-lbl_80245BCC:
-	lmw      r19, 0x2c(r1)
-	lwz      r0, 0x64(r1)
-	mtlr     r0
-	addi     r1, r1, 0x60
-	blr
-	*/
+	return false;
 }
 
 /*
  * --INFO--
  * Address:	80245BE0
  * Size:	00007C
+ * Matches!
  */
-void Cave::RandMapChecker::isInnerBox(int, int, int, int, int, int, int, int)
+bool RandMapChecker::isInnerBox(int outerX1, int outerY1, int outerX2, int outerY2, int innerX1, int innerY1, int innerX2, int innerY2)
 {
-	/*
-	cmpw     r4, r8
-	lwz      r0, 8(r1)
-	bge      lbl_80245C24
-	cmpw     r5, r9
-	bge      lbl_80245C0C
-	cmpw     r6, r8
-	ble      lbl_80245C54
-	cmpw     r7, r9
-	ble      lbl_80245C54
-	li       r3, 1
-	blr
+	if (outerX1 < innerX1) {
+		if (outerY1 < innerY1) {
+			if (outerX2 > innerX1 && outerY2 > innerY1)
+				return true;
+		} else {
+			if (outerY1 < innerY2 && outerX2 > innerX1)
+				return true;
+		}
+	} else {
+		if (outerX1 < innerX2) {
+			if (outerY1 < innerY1) {
+				if (outerY2 > innerY1)
+					return true;
+			} else {
+				if (outerY1 < innerY2)
+					return true;
+			}
+		}
+	}
 
-lbl_80245C0C:
-	cmpw     r5, r0
-	bge      lbl_80245C54
-	cmpw     r6, r8
-	ble      lbl_80245C54
-	li       r3, 1
-	blr
-
-lbl_80245C24:
-	cmpw     r4, r10
-	bge      lbl_80245C54
-	cmpw     r5, r9
-	bge      lbl_80245C44
-	cmpw     r7, r9
-	ble      lbl_80245C54
-	li       r3, 1
-	blr
-
-lbl_80245C44:
-	cmpw     r5, r0
-	bge      lbl_80245C54
-	li       r3, 1
-	blr
-
-lbl_80245C54:
-	li       r3, 0
-	blr
-	*/
+	return false;
 }
+} // namespace Cave
 } // namespace Game

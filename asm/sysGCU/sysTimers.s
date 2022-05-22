@@ -1,23 +1,16 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
-.global lbl_80499E10
+.balign 8
 lbl_80499E10:
-	.4byte 0x73797354
-	.4byte 0x696D6572
-	.4byte 0x73000000
-.global lbl_80499E1C
+	.asciz "sysTimers"
+.balign 4
 lbl_80499E1C:
-	.4byte 0x73797354
-	.4byte 0x696D6572
-	.4byte 0x732E6370
-	.4byte 0x70000000
-.global lbl_80499E2C
+	.asciz "sysTimers.cpp"
+.balign 4
 lbl_80499E2C:
 	.asciz "P2Assert"
-	.skip 3
-.global lbl_80499E38
-lbl_80499E38:
+.balign 4
+lbl_80499E38: # Shift-JIS
 	.4byte 0x974C82E8
 	.4byte 0x82A682C8
 	.4byte 0x82A2815B
@@ -32,7 +25,7 @@ lbl_80499E38:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global __vt__8TimerInf
 __vt__8TimerInf:
 	.4byte 0
@@ -44,24 +37,20 @@ __vt__9SysTimers:
 	.4byte 0
 	.4byte __dt__9SysTimersFv
 	.4byte getChildCount__5CNodeFv
-	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global drawFlag__9SysTimers
 drawFlag__9SysTimers:
-	.skip 0x8
+	.skip 1
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
-.global lbl_80520588
+.balign 8
 lbl_80520588:
-	.4byte 0x6E6F6E61
-	.4byte 0x6D650000
-.global lbl_80520590
+	.asciz "noname"
+.balign 4
 lbl_80520590:
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.float 0.0
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__9SysTimersFv

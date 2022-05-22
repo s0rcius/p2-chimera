@@ -1,19 +1,17 @@
 .include "macros.inc"
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global sDebugPrint__10JUTDbPrint
 sDebugPrint__10JUTDbPrint:
-	.skip 0x8
+	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
-.global lbl_805165A0
+.balign 8
 lbl_805165A0:
 	.float -1.0
-.global lbl_805165A4
 lbl_805165A4:
 	.float 1.0
-.global lbl_805165A8
+.balign 8
 lbl_805165A8:
 	.4byte 0x43300000
 	.4byte 0x80000000

@@ -31,9 +31,6 @@ import math
 #                                             #
 ###############################################
 
-DOL_PATH = "baserom.dol"
-MAP_PATH = "build/pikmin2.usa/pikmin2UP.MAP"
-
 MEM1_HI = 0x81200000
 MEM1_LO = 0x80004000
 
@@ -58,9 +55,9 @@ REGEX_TO_USE = MW_GC_SYMBOL_REGEX
 
 TEXT_SECTIONS = ["init", "text"]
 DATA_SECTIONS = [
-"rodata", "data", "bss", "sdata", "sbss", "sdata2", "sbss2", "file",
+"rodata", "data", "bss", "sdata", "sbss", "sdata2", "sbss2",
 "ctors", "_ctors", "dtors", "ctors$99", "_ctors$99", "ctors$00", "dtors$99",
-"extab_", "extabindex_"
+"extab_", "extabindex_", "_extab", "_exidx"
 ]
 
 # DOL info
@@ -70,6 +67,12 @@ DATA_SECTION_COUNT = 11
 SECTION_TEXT = 0
 SECTION_DATA = 1
 
+# Progress flavor
+codeFrac = 10000        # total code "item" amount
+dataFrac = 201          # total data "item" amount
+codeItem = "Pokos"      # code flavor item
+dataItem = "treasures"  # data flavor item
+
 ###############################################
 #                                             #
 #                Entrypoint                   #
@@ -78,7 +81,7 @@ SECTION_DATA = 1
 
 if __name__ == "__main__":
     # Sum up DOL section sizes
-    dol_handle = open(DOL_PATH, "rb")
+    dol_handle = open(sys.argv[1], "rb")
 
     # Seek to virtual addresses
     dol_handle.seek(0x48)
@@ -120,7 +123,7 @@ if __name__ == "__main__":
         dol_code_size += i
 
     # Open map file
-    mapfile = open(MAP_PATH, "r")
+    mapfile = open(sys.argv[2], "r")
     symbols = mapfile.readlines()
 
     decomp_code_size = 0
@@ -131,7 +134,10 @@ if __name__ == "__main__":
     first_section = 0
     while (symbols[first_section].startswith(".") == False and "section layout" not in symbols[first_section]): first_section += 1
     assert(first_section < len(symbols)), "Map file contains no sections!!!"
-
+    
+    cur_object = None
+    cur_size = 0
+    j = 0
     for i in range(first_section, len(symbols)):
         # New section
         if (symbols[i].startswith(".") == True or "section layout" in symbols[i]):
@@ -141,32 +147,50 @@ if __name__ == "__main__":
             section_type = SECTION_DATA if (sectionName in DATA_SECTIONS) else SECTION_TEXT
         # Parse symbols until we hit the next section declaration
         else:
-            if ("entry of" in symbols[i]) or ("UNUSED" in symbols[i]): continue
+            if "UNUSED" in symbols[i]: continue
+            if "entry of" in symbols[i]:
+                if j == i - 1:
+                    if section_type == SECTION_TEXT:
+                        decomp_code_size -= cur_size
+                    else:
+                        decomp_data_size -= cur_size
+                    cur_size = 0
+                    #print(f"Line* {j}: {symbols[j]}")
+                #print(f"Line {i}: {symbols[i]}")
+                continue
             assert(section_type != None), f"Symbol found outside of a section!!!\n{symbols[i]}"
             match_obj = re.search(REGEX_TO_USE, symbols[i])
             # Should be a symbol in ASM (so we discard it)
-            if (match_obj == None): continue
+            if (match_obj == None):
+                #print(f"Line {i}: {symbols[i]}")
+                continue
+            # Has the object file changed?
+            last_object = cur_object
+            cur_object = match_obj.group("Object").strip()
+            if last_object != cur_object: continue
             # Is the symbol a file-wide section?
             symb = match_obj.group("Symbol")
             if (symb.startswith("*fill*")) or (symb.startswith(".") and symb[1:] in TEXT_SECTIONS or symb[1:] in DATA_SECTIONS): continue
             # For sections that don't start with "."
             if (symb in DATA_SECTIONS): continue
             # If not, we accumulate the file size
+            cur_size = int(match_obj.group("Size"), 16)
+            j = i
             if (section_type == SECTION_TEXT):
-                decomp_code_size += int(match_obj.group("Size"), 16)
+                decomp_code_size += cur_size
             else:
-                decomp_data_size += int(match_obj.group("Size"), 16)
+                decomp_data_size += cur_size
 
     # Calculate percentages
-    codeCompletionPcnt = (decomp_code_size / dol_code_size)
-    dataCompletionPcnt = (decomp_data_size / dol_data_size)
-    bytesPerPoko = dol_code_size / 10000
-    bytesPerPart = dol_data_size / 201
+    codeCompletionPcnt = (decomp_code_size / dol_code_size) # code completion percent
+    dataCompletionPcnt = (decomp_data_size / dol_data_size) # data completion percent
+    bytesPerCodeItem = dol_code_size / codeFrac # bytes per code item
+    bytesPerDataItem = dol_data_size / dataFrac # bytes per data item
     
-    pokoCount = math.floor(decomp_code_size / bytesPerPoko)
-    partCount = math.floor(decomp_code_size / bytesPerPart)
+    codeCount = math.floor(decomp_code_size / bytesPerCodeItem)
+    dataCount = math.floor(decomp_data_size / bytesPerDataItem)
 
     print("Progress:")
     print(f"\tCode sections: {decomp_code_size} / {dol_code_size}\tbytes in src ({codeCompletionPcnt:%})")
     print(f"\tData sections: {decomp_data_size} / {dol_data_size}\tbytes in src ({dataCompletionPcnt:%})")
-    print("\nYou have {} out of 10000 Pokos and collected {} out of 201 treasures.".format(pokoCount, partCount))
+    print("\nYou have {} out of {} {} and collected {} out of {} {}.".format(codeCount, codeFrac, codeItem, dataCount, dataFrac, dataItem))

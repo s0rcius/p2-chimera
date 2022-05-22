@@ -96,7 +96,6 @@ template <typename T> struct StateMachine {
 		void registerState(FSMState<T>*);         \
 	}
 
-// The linker complains about multiple linkage - this shouldn't be defined in the header
 // template <> void Game::FSMState<void>::transit(void* obj, int id, StateArg* arg) { m_stateMachine->transit(obj, id, arg); }
 
 #endif

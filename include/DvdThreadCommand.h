@@ -1,7 +1,7 @@
 #ifndef _DVDTHREADCOMMAND_H
 #define _DVDTHREADCOMMAND_H
 
-#include "JSystem/JSU/JSUList.h"
+#include "JSystem/JSupport/JSUList.h"
 #include "types.h"
 
 struct JKRArchive;
@@ -9,6 +9,8 @@ struct JKRHeap;
 
 struct DvdThreadCommand {
 	DvdThreadCommand();
+
+	~DvdThreadCommand();
 
 	u32 _00;                      // _00
 	u32 m_loadType;               // _04

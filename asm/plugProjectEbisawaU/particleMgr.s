@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 	.4byte __sinit_particleMgr_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_80495BC8
 lbl_80495BC8:
 	.4byte 0x00000000
@@ -51,7 +52,7 @@ lbl_80495C4C:
 	.4byte 0x79000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804E7688
 lbl_804E7688:
 	.4byte 0x00000000
@@ -174,7 +175,7 @@ __vt__19ModelEffectDataRoot:
 	.4byte "__ml__23Iterator<11ModelEffect>Fv"
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 0x8
+.balign 8
 .global mClipRadiusS__11ParticleMgr
 mClipRadiusS__11ParticleMgr:
 	.float 10.0
@@ -186,7 +187,7 @@ mClipRadiusL__11ParticleMgr:
 	.float 100.0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80516090
 lbl_80516090:
 	.skip 0x4
@@ -201,7 +202,7 @@ disableCulling__11ParticleMgr:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051F6F0
 lbl_8051F6F0:
 	.float 0.5

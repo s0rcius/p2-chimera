@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_SnakeCrowState_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_804883D8
 lbl_804883D8:
 	.asciz "disappear"
@@ -14,7 +15,7 @@ lbl_804883E4:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global lbl_804CB2A8
 lbl_804CB2A8:
 	.4byte 0x00000000
@@ -151,7 +152,7 @@ __vt__Q34Game9SnakeCrow3FSM:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global lbl_80515D58
 lbl_80515D58:
 	.skip 0x4
@@ -160,7 +161,7 @@ lbl_80515D5C:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
+.balign 8
 .global lbl_8051B9F8
 lbl_8051B9F8:
 	.4byte 0x64656164

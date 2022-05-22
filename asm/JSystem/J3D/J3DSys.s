@@ -1,9 +1,10 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
+lbl_constructor:
 .4byte __sinit_J3DSys_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
+.balign 8
 .global lbl_80478700
 lbl_80478700:
 	.4byte 0x00008000
@@ -56,7 +57,7 @@ lbl_80478804:
 	.4byte lbl_80478804
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global NullTexData
 NullTexData:
 	.4byte 0x00000000
@@ -102,9 +103,12 @@ mParentS__6J3DSys:
 .global sTexCoordScaleTable__6J3DSys
 sTexCoordScaleTable__6J3DSys:
 	.skip 0x40
+.global sGDLObj__17J3DDisplayListObj # technically goes with J3DPacket.cpp
+sGDLObj__17J3DDisplayListObj:
+	.skip 0x10
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 0x8
+.balign 8
 .global ColorBlack
 ColorBlack:
 	.4byte 0
@@ -113,23 +117,19 @@ ColorWhite:
 	.4byte 0xffffffff
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global j3dDefaultViewNo
 j3dDefaultViewNo:
-	.skip 0x8
+	.skip 4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 0x8
-.global lbl_80516988
+.balign 8
 lbl_80516988:
-	.4byte 0x00000000
-.global lbl_8051698C
+	.float 0.0
 lbl_8051698C:
 	.float 1.0
-.global lbl_80516990
 lbl_80516990:
 	.float 0.1
-	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__6J3DSysFv
@@ -211,9 +211,9 @@ loadPosMtxIndx__6J3DSysCFiUs:
 /* 8005DBC8 0005AB08  3C 60 CC 01 */	lis r3, 0xCC008000@ha
 /* 8005DBCC 0005AB0C  98 83 80 00 */	stb r4, 0xCC008000@l(r3)
 /* 8005DBD0 0005AB10  54 00 04 3E */	clrlwi r0, r0, 0x10
-/* 8005DBD4 0005AB14  B0 A3 80 00 */	sth r5, -0x8000(r3)
+/* 8005DBD4 0005AB14  B0 A3 80 00 */	sth r5, 0xCC008000@l(r3)
 /* 8005DBD8 0005AB18  60 00 B0 00 */	ori r0, r0, 0xb000
-/* 8005DBDC 0005AB1C  B0 03 80 00 */	sth r0, -0x8000(r3)
+/* 8005DBDC 0005AB1C  B0 03 80 00 */	sth r0, 0xCC008000@l(r3)
 /* 8005DBE0 0005AB20  4E 80 00 20 */	blr 
 
 .global loadNrmMtxIndx__6J3DSysCFiUs
@@ -224,9 +224,9 @@ loadNrmMtxIndx__6J3DSysCFiUs:
 /* 8005DBF0 0005AB30  98 04 80 00 */	stb r0, 0xCC008000@l(r4)
 /* 8005DBF4 0005AB34  38 03 04 00 */	addi r0, r3, 0x400
 /* 8005DBF8 0005AB38  54 00 04 3E */	clrlwi r0, r0, 0x10
-/* 8005DBFC 0005AB3C  B0 A4 80 00 */	sth r5, -0x8000(r4)
+/* 8005DBFC 0005AB3C  B0 A4 80 00 */	sth r5, 0xCC008000@l(r4)
 /* 8005DC00 0005AB40  60 00 80 00 */	ori r0, r0, 0x8000
-/* 8005DC04 0005AB44  B0 04 80 00 */	sth r0, -0x8000(r4)
+/* 8005DC04 0005AB44  B0 04 80 00 */	sth r0, 0xCC008000@l(r4)
 /* 8005DC08 0005AB48  4E 80 00 20 */	blr 
 
 .global drawInit__6J3DSysFv

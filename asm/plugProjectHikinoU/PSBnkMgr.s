@@ -1,23 +1,17 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 0x8
-.global lbl_8048FEF0
+.balign 8
 lbl_8048FEF0:
-	.4byte 0x5053426E
-	.4byte 0x6B4D6772
-	.4byte 0x2E637070
-	.4byte 0x00000000
-.global lbl_8048FF00
+	.asciz "PSBnkMgr.cpp"
+.balign 4
 lbl_8048FF00:
 	.asciz "P2Assert"
-	.skip 3
-	.4byte 0x2F417564
-	.4byte 0x696F5265
-	.4byte 0x732F4261
-	.4byte 0x6E6B7300
+.balign 4
+lbl_8048FF0C:
+	.asciz "/AudioRes/Banks"
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 0x8
+.balign 8
 .global __vt__Q38PSSystem9WaveScene8WaveArea
 __vt__Q38PSSystem9WaveScene8WaveArea:
 	.4byte 0
@@ -30,10 +24,10 @@ __vt__Q28PSSystem7BankMgr:
 	.4byte __dt__Q28PSSystem7BankMgrFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 0x8
+.balign 8
 .global sBankMgr__Q28PSSystem7BankMgr
 sBankMgr__Q28PSSystem7BankMgr:
-	.skip 0x8
+	.skip 0x4
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global createInstance__Q28PSSystem7BankMgrFv
