@@ -6,12 +6,7 @@
 struct BaseParm;
 struct Stream;
 
-// @fabricatedName
-struct IParameters {
-	// void* m_endAddress; // _00
-};
-
-struct Parameters : virtual IParameters {
+struct Parameters {
 	Parameters(BaseParm* head, char* name)
 	    : m_parmsHead(head)
 	    , m_name(name)

@@ -2,7 +2,6 @@
 #define _GAME_ENEMYMGRBASE_H
 
 #include "Container.h"
-#include "enemyInfo.h"
 #include "Game/EnemyPelletInfo.h"
 #include "Game/EnemyStone.h"
 #include "Game/PelletMgr.h"
@@ -39,10 +38,10 @@ struct EnemyBirthArg {
 
 struct IEnemyMgrBase : public GenericObjectMgr, public GenericContainer {
 	// vtable 2 (GenericContainer + self)
-	virtual ~IEnemyMgrBase(); // 18
+	virtual ~IEnemyMgrBase() { } // 18
 };
 struct EnemyMgrBase : public IEnemyMgrBase {
-	EnemyMgrBase(int, u8);
+	EnemyMgrBase(int objLimit, u8 modelType);
 
 	// vtable 1 (GenericObjectMgr)
 	virtual void doAnimation();           // _00
@@ -52,11 +51,11 @@ struct EnemyMgrBase : public IEnemyMgrBase {
 	virtual void doSimulation(float);     // _10
 	virtual void doDirectDraw(Graphics&); // _14
 	// vtable 2 (GenericContainer + IEnemyMgrBase + self)
-	virtual ~EnemyMgrBase();                          // _18
+	virtual ~EnemyMgrBase() { }                       // _18
 	virtual void* getObject(void*);                   // _1C
-	virtual int getNext(void*);                       // _20
-	virtual int getStart();                           // _24
-	virtual int getEnd();                             // _28
+	virtual void* getNext(void*);                     // _20
+	virtual void* getStart();                         // _24
+	virtual void* getEnd();                           // _28
 	virtual void alloc();                             // _2C
 	virtual EnemyBase* birth(EnemyBirthArg&);         // _30
 	virtual J3DModelData* getJ3DModelData() const;    // _34
@@ -77,8 +76,8 @@ struct EnemyMgrBase : public IEnemyMgrBase {
 	{
 		return false;
 	}
-	virtual void createObj(int)   = 0;                  // _60
-	virtual EnemyBase* getEnemy() = 0;                  // _64
+	virtual void createObj(int)      = 0;               // _60
+	virtual EnemyBase* getEnemy(int) = 0;               // _64
 	virtual void doAlloc();                             // _68
 	virtual EnemyTypeID::EEnemyTypeID getEnemyTypeID(); // _6C
 	virtual SysShape::Model* createModel();             // _70

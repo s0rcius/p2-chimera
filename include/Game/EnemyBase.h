@@ -170,9 +170,9 @@ struct EnemyBase : public Creature, public SysShape::MotionListener, virtual pub
 	virtual char* getCreatureName();                            // _1A0
 	virtual s32 getCreatureID();                                // _1A4
 	// vtable 2 (MotionListener+self)
-	virtual ~EnemyBase();                                           // _1AC
+	virtual ~EnemyBase() { }                                        // _1AC
 	virtual void birth(Vector3f&, float);                           // _1B0
-	virtual void SetInitialSetting(EnemyInitialParamBase*) = 0;     // _1B4
+	virtual void setInitialSetting(EnemyInitialParamBase*) = 0;     // _1B4
 	virtual void update();                                          // _1B8
 	virtual void doUpdate() = 0;                                    // _1BC
 	virtual void doUpdateCommon();                                  // _1C0
@@ -196,7 +196,7 @@ struct EnemyBase : public Creature, public SysShape::MotionListener, virtual pub
 	virtual void viewStartPreCarryMotion();                         // _208
 	virtual void viewStartCarryMotion();                            // _20C
 	virtual void viewOnPelletKilled();                              // _210
-	virtual void getOffsetForMapCollision();                        // _214
+	virtual Vector3f getOffsetForMapCollision();                    // _214
 	virtual void setParameters();                                   // _218
 	virtual void initMouthSlots();                                  // _21C
 	virtual void initWalkSmokeEffect();                             // _220
