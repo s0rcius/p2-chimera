@@ -1,4 +1,4 @@
-#include "node.h"
+#include "Node.h"
 #include "CNode.h"
 #include "JSystem/JUT/JUTException.h"
 #include "Dolphin/os.h"
@@ -90,7 +90,7 @@ void Node::draw(Graphics& gfx)
 CNode::CNode()
 {
 	reset("CNode");
-	setName("CNode");
+	m_name = "CNode";
 }
 
 /*

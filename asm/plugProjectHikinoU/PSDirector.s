@@ -1,28 +1,41 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80490180
 lbl_80490180:
-	.asciz "PSDirector.cpp"
-.balign 4
+	.4byte 0x50534469
+	.4byte 0x72656374
+	.4byte 0x6F722E63
+	.4byte 0x70700000
+.global lbl_80490190
 lbl_80490190:
 	.asciz "P2Assert"
-.balign 4
+	.skip 3
+.global lbl_8049019C
 lbl_8049019C:
-	.asciz "\nNot Called From Main Thread\n"
-.balign 4
-lbl_804901BC: # Shift-JIS
+	.4byte 0x0A4E6F74
+	.4byte 0x2043616C
+	.4byte 0x6C656420
+	.4byte 0x46726F6D
+	.4byte 0x204D6169
+	.4byte 0x6E205468
+	.4byte 0x72656164
+	.4byte 0x0A000000
 	.4byte 0x83668342
 	.4byte 0x838C834E
 	.4byte 0x835E815B
 	.4byte 0x837D836C
 	.4byte 0x815B8357
 	.4byte 0x83830000
-.balign 4
+.global lbl_804901D4
 lbl_804901D4:
-	.asciz "PSDirector.h"
+	.4byte 0x50534469
+	.4byte 0x72656374
+	.4byte 0x6F722E68
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q28PSSystem17DirectorCopyActor
 __vt__Q28PSSystem17DirectorCopyActor:
 	.4byte 0
@@ -91,15 +104,17 @@ __vt__Q28PSSystem12DirectorBase:
 	.4byte onDirectOff__Q28PSSystem12DirectorBaseFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sToolMode__Q28PSSystem12DirectorBase
 sToolMode__Q28PSSystem12DirectorBase:
-	.skip 0x1
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E1F0
 lbl_8051E1F0:
-	.asciz "PSSeq.h"
+	.4byte 0x50535365
+	.4byte 0x712E6800
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q28PSSystem12DirectorBaseFiPCc

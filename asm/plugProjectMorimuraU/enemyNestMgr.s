@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_enemyNestMgr_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80491DD8
 lbl_80491DD8:
 	.4byte 0x656E656D
@@ -240,7 +239,7 @@ lbl_80491DE8:
 	.4byte 0x74000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game4Nest3Mgr
 __vt__Q34Game4Nest3Mgr:
 	.4byte 0
@@ -301,7 +300,7 @@ __vt__Q34Game4Nest3Mgr:
 	.4byte initGenerator__Q24Game12EnemyMgrBaseFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global mMatColor__Q24Game4Nest
 mMatColor__Q24Game4Nest:
 	.skip 0x8

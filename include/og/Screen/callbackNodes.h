@@ -15,7 +15,6 @@ struct TColor;
 
 namespace P2JME {
 struct SimpleMessage;
-struct TRenderingProcessor;
 } // namespace P2JME
 
 namespace og {
@@ -26,9 +25,7 @@ struct AnimScreen;
 struct CounterKeta;
 struct DataNavi;
 
-/**
- * @size{0x44}
- */
+// Size: 0x44
 struct CallBack_CatchPiki : public P2DScreen::CallBackNode {
 	CallBack_CatchPiki();
 
@@ -47,7 +44,7 @@ struct CallBack_CatchPiki : public P2DScreen::CallBackNode {
 };
 
 struct CallBack_CounterRV : public P2DScreen::CallBackNode {
-	enum EnumCenteringMode { ECM_Unknown0 = 0, ECM_Unknown1 = 1, ECM_UNKNOWN_2 = 2 };
+	enum EnumCenteringMode { ECM_UNKNOWN_2 = 2, _ECM_FORCE_UINT = 0xFFFFFFFF };
 
 	CallBack_CounterRV(char**, u16, u16, JKRArchive*);
 
@@ -122,7 +119,7 @@ struct CallBack_CounterRV : public P2DScreen::CallBackNode {
 };
 
 struct CallBack_CounterDay : public CallBack_CounterRV {
-	CallBack_CounterDay(char**, unsigned short, JKRArchive*);
+	CallBack_CounterDay(char**, u16, JKRArchive*);
 
 	virtual ~CallBack_CounterDay(); // _00
 	virtual void update();          // _08
@@ -132,7 +129,7 @@ struct CallBack_CounterDay : public CallBack_CounterRV {
 	virtual void hide();     // _1C
 	virtual void setValue(); // _24
 
-	J2DPicture* _A8; // _A8
+	J2DPane* _A8; // _A8
 };
 
 // Size: 0xCC
@@ -208,8 +205,7 @@ struct CallBack_Furiko : public P2DScreen::CallBackNode {
 };
 
 struct CallBack_LifeGauge : public P2DScreen::CallBackNode {
-	// what goes here?
-	enum LifeGaugeType {};
+	enum LifeGaugeType { _LGT_FORCE_UINT = 0xFFFFFFFF };
 
 	CallBack_LifeGauge();
 
@@ -257,15 +253,10 @@ struct CallBack_LifeGauge : public P2DScreen::CallBackNode {
 
 // Size: 0x48
 struct CallBack_Message : public P2DScreen::CallBackNode {
-	CallBack_Message();
-
 	virtual ~CallBack_Message();                   // _00
 	virtual void update();                         // _08
 	virtual void draw(Graphics&, J2DGrafContext&); // _0C
 	virtual void _14();                            // _14
-
-	// Unused/inlined:
-	void drawInfo(J2DGrafContext&);
 
 	P2JME::SimpleMessage* m_message; // _1C
 	u64 m_messageIDAsULL;            // _20
@@ -277,19 +268,6 @@ struct CallBack_Message : public P2DScreen::CallBackNode {
 	float _40;                       // _40
 	float _44;                       // _44
 };
-
-/**
- * @unused
- */
-struct CallBack_MessageAndShadow : public CallBack_Message {
-	CallBack_MessageAndShadow(float, float, J2DPane*);
-
-	virtual ~CallBack_MessageAndShadow();          // _00
-	virtual void draw(Graphics&, J2DGrafContext&); // _0C
-};
-
-// Unused/inlined:
-void MessageSetInfoShadow(J2DPane*, P2JME::TRenderingProcessor*, J2DPane*);
 
 struct CallBack_Screen : public P2DScreen::CallBackNode {
 	virtual ~CallBack_Screen();                    // _00
@@ -310,11 +288,10 @@ struct CallBack_Screen : public P2DScreen::CallBackNode {
 
 // Size: 0x38
 struct CallBack_Picture : public CallBack_Screen {
-	CallBack_Picture(P2DScreen::Mgr*, unsigned long long); // Unused/inlined
-	virtual ~CallBack_Picture();                           // _00
-	virtual void update();                                 // _08
-	virtual void draw(Graphics&, J2DGrafContext&);         // _0C
-	virtual void _14();                                    // _14
+	virtual ~CallBack_Picture();                   // _00
+	virtual void update();                         // _08
+	virtual void draw(Graphics&, J2DGrafContext&); // _0C
+	virtual void _14();                            // _14
 
 	AnimGroup* m_animGroup; // _34
 };
@@ -382,21 +359,6 @@ struct AnimText_Screen : public CallBack_Screen {
 	JUtility::TColor _B0;      // _B0
 	u8 _B4[4];                 // _B4
 };
-
-struct CounterKeta {
-	void setSuji(ResTIMG**, unsigned long);
-	void calcScale();
-
-	J2DPicture* m_picture; // _00
-	u32 m_textureIndex;    // _04
-	ScaleMgr* m_scaleMgr;  // _08
-	float _0C;             // _0C
-	float _10;             // _10
-};
-
-extern const char* SujiTex32[11];
-extern const char* SujiTexMap[11];
-
 } // namespace Screen
 } // namespace og
 

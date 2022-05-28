@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_JKRDvdFile_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80473608
 lbl_80473608:
 	.4byte 0x4A4B5244
@@ -21,7 +20,7 @@ lbl_80473618:
 	.4byte 0x650A0000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__10JKRDvdFile
 __vt__10JKRDvdFile:
 	.4byte 0

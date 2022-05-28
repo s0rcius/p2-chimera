@@ -16,8 +16,6 @@
 #include "Sys/Sphere.h"
 #include "types.h"
 #include "Vector3.h"
-#include "Game/Cave/Info.h"
-#include "Game/Cave/ObjectLayout.h"
 
 struct Graphics;
 struct J3DModelData;
@@ -106,8 +104,6 @@ struct MapUnit {
 struct PartsView : public CNode {
 	PartsView();
 	PartsView(MapUnit*, u8*);
-
-	virtual ~PartsView();                 // _00
 	virtual void constructor();           // _08
 	virtual void doAnimation();           // _0C
 	virtual void doEntry();               // _10
@@ -200,38 +196,24 @@ struct MapRoom : public CellObject {
 	Sys::Sphere _190;                       // _190
 };
 
-struct RoomMapMgr : public MapMgr {
-	SysShape::Model* m_modelOrCaveVRBoxOrBothMaybe; // _24
-	Cave::CaveInfo* m_caveInfo;                     // _28
-	Cave::FloorInfo* m_floorInfo;                   // _2C
-	int m_0x30;                                     // _30
-	MapCollision* m_mapCollision;                   // _34
-	u32 m_0x38;                                     // _38
-	void* m_0x3C;                                   // _3C
-	// triangle
-	u8 tri[0xA0 - 0x40];                  // _40
-	int m_count;                          // _A0
-	void* m_A4;                           // _A4
-	MapUnitMgr* m_mapUnitMgr;             // _A8
-	u8 mono[0xDC - 0xAC];                 // _AC
-	BoundBox m_boundbox;                  // _DC
-	uint m_mapUnitInterfaceCount;         // _F4
-	MapUnitInterface* m_mapUnitInterface; // _F8
-	Vector3f m_startPositions[2];         // _FC
-	void* m_blackmanObjPtr;               // _114 actually Game::BlackMan::Obj*
-	u32* m_118;                           // _118
-	u32 m_11C;                            // _11C
+struct ObjectLayoutNode : public CNode {
+	virtual int getObjectId();
+	virtual u8 getObjectType();
+	virtual int getBirthCount();
+	virtual double getDirection();
+	virtual int getBirthDoorIndex();
+	virtual void getBirthPosition(float&, float&);
+	virtual u32 getExtraCode();
+	virtual bool isFixedBattery();
+};
 
+struct RoomMapMgr : public MapMgr {
 	float getMinY(Vector3f&);
 	// void getStartPosition__Q24Game10RoomMapMgrFR10Vector3f i(void)
 	void getStartPosition(Vector3f&, int);
 	void nishimuraCreateRandomMap(MapUnitInterface*, int, Cave::FloorInfo*, bool, Cave::EditMapUnit*);
 	void nishimuraPlaceRooms();
 	void nishimuraSetTexture();
-	void useUnit(char*);
-	void allocRooms(int);
-	void makeRoom(char*, float, float, int, int, Game::RoomLink*, Game::ObjectLayoutInfo*);
-	JUTTexture* getTexture(char*);
 };
 
 struct CaveVRBox {

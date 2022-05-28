@@ -1,34 +1,27 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
-lbl_80490038: # Shift-JIS
+.balign 0x8
+.global lbl_80490038
+lbl_80490038:
 	.4byte 0x8373834C
 	.4byte 0x53458AD4
 	.4byte 0x88F882AB
 	.4byte 0x90DD92E8
 	.4byte 0x00000000
-.balign 4
-lbl_8049004C: # Shift-JIS
 	.4byte 0x8373834C
 	.4byte 0x95A8895E
 	.4byte 0x82D189B9
 	.4byte 0x00000000
-.balign 4
-lbl_8049005C: # Shift-JIS
 	.4byte 0x8373834C
 	.4byte 0x8E648E96
 	.4byte 0x924082AB
 	.4byte 0x89B90000
-.balign 4
-lbl_8049006C: # Shift-JIS
 	.4byte 0x8373834C
 	.4byte 0x93DB82DD
 	.4byte 0x8D9E82DC
 	.4byte 0x82EA82E0
 	.4byte 0x82AA82AB
 	.4byte 0x90BA0000
-.balign 4
-lbl_80490084: # Shift-JIS
 	.4byte 0x83608383
 	.4byte 0x838C8393
 	.4byte 0x83578382
@@ -37,30 +30,27 @@ lbl_80490084: # Shift-JIS
 	.4byte 0x83628376
 	.4byte 0x89E696CA
 	.4byte 0x97700000
-.balign 4
-lbl_804900A4: # Shift-JIS
 	.4byte 0x8373834C
 	.4byte 0x92859085
 	.4byte 0x89B99770
 	.4byte 0x00000000
-.balign 4
-lbl_804900B4: # Shift-JIS
 	.4byte 0x8373834C
 	.4byte 0x8370836A
 	.4byte 0x8362834E
 	.4byte 0x83898393
 	.4byte 0x97700000
-.balign 4
+.global lbl_804900C8
 lbl_804900C8:
-	.asciz "PSSe.cpp"
-.balign 4
+	.4byte 0x50535365
+	.4byte 0x2E637070
+	.4byte 0x00000000
+.global lbl_804900D4
 lbl_804900D4:
 	.asciz "P2Assert"
-.balign 4
-lbl_804900E0:
-	.asciz "PSCommon.h"
-.balign 4
-lbl_804900EC: # Shift-JIS
+	.skip 3
+	.4byte 0x5053436F
+	.4byte 0x6D6D6F6E
+	.4byte 0x2E680000
 	.4byte 0x838A8393
 	.4byte 0x834E82AA
 	.4byte 0x82A082E8
@@ -68,7 +58,7 @@ lbl_804900EC: # Shift-JIS
 	.4byte 0x82F10000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q26PSGame25Builder_EvnSe_Perspective
 __vt__Q26PSGame25Builder_EvnSe_Perspective:
 	.4byte 0
@@ -117,50 +107,57 @@ __vt__Q26PSGame5SeMgr:
 	.4byte "__dt__Q28PSSystem30SingletonBase<Q26PSGame5SeMgr>Fv"
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global cRatio__Q26PSGame5Rappa
 cRatio__Q26PSGame5Rappa:
 	.float 15.0
 .global cBaseWaitTime__Q26PSGame5Rappa
 cBaseWaitTime__Q26PSGame5Rappa:
-	.2byte 0x0003
-.balign 4
+	.4byte 0x00030000
 .global sRappa__Q26PSGame5Rappa
 sRappa__Q26PSGame5Rappa:
-	.4byte 0x00000000 # two Rappa null pointers.
-	.4byte 0x00000000 # why isn't this sbss?
+	.4byte 0x00000000
+	.4byte 0x00000000
 .global cNotUsingMasterIdRatio__Q26PSGame6RandId
 cNotUsingMasterIdRatio__Q26PSGame6RandId:
 	.float -1.0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
-lbl_8051E188: # Shift-JIS
+.balign 0x8
+.global lbl_8051E188
+lbl_8051E188:
 	.4byte 0x934794C4
 	.4byte 0x97700000
-.balign 4
+.global lbl_8051E190
 lbl_8051E190:
 	.float 1.0
+.global lbl_8051E194
 lbl_8051E194:
 	.float 0.5
+.global lbl_8051E198
 lbl_8051E198:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051E19C
 lbl_8051E19C:
 	.float 0.1
+.global lbl_8051E1A0
 lbl_8051E1A0:
-	.float -1.0
-.balign 8
+	.4byte 0xBF800000
+	.4byte 0x00000000
+.global lbl_8051E1A8
 lbl_8051E1A8:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_8051E1B0
 lbl_8051E1B0:
 	.4byte 0x43300000
 	.4byte 0x00000000
+.global lbl_8051E1B8
 lbl_8051E1B8:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051E1BC
 lbl_8051E1BC:
-	.float 1000.0
+	.4byte 0x447A0000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q26PSGame5SeMgrFv

@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_enemyAction_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8047AE88
 lbl_8047AE88:
 	.asciz "teki-srch"
@@ -15,7 +14,7 @@ lbl_8047AE94:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804ABC48
 lbl_804ABC48:
 	.4byte 0x00000000
@@ -68,7 +67,7 @@ __vt__Q34Game9EnemyFunc21ConditionPikminNearby:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_80515878
 lbl_80515878:
 	.skip 0x4
@@ -77,7 +76,7 @@ lbl_8051587C:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80517A78
 lbl_80517A78:
 	.4byte 0x40490FDB

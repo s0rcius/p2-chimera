@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_JSTObjectActor_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8049A158
 lbl_8049A158:
 	.4byte 0x00000000
@@ -60,7 +59,7 @@ lbl_8049A204:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804EC018
 lbl_804EC018:
 	.4byte 0x00000000
@@ -131,7 +130,7 @@ __vt__Q34Game5P2JST10ObjectBase:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_805161D8
 lbl_805161D8:
 	.skip 0x4
@@ -140,7 +139,7 @@ lbl_805161DC:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80520678
 lbl_80520678:
 	.float 1.0

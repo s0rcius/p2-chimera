@@ -97,7 +97,6 @@ struct PlayCommonData {
 namespace CommonSaveData {
 // Size: 0x48
 struct Mgr : public PlayCommonData {
-	enum SoundMode { SM_Mono = 0, SM_Stereo = 1, SM_SurroundSound = 2 };
 	Mgr();
 
 	void setup();

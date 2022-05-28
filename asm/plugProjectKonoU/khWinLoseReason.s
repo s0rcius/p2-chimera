@@ -1,54 +1,38 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_khWinLoseReason_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_804994F0
 lbl_804994F0:
 	.asciz "khWinLoseReason.cpp"
-.balign 4
-lbl_80499504:
 	.asciz "otakara_get.blo"
-.balign 4
-lbl_80499514:
 	.asciz "otakara_get.bck"
-.balign 4
-lbl_80499524:
 	.asciz "otakara_get.bpk"
-.balign 4
-lbl_80499534:
 	.asciz "disp member err"
-.balign 4
-lbl_80499544:
 	.asciz "OrimaDown"
-.balign 4
+	.skip 2
+.global lbl_80499550
 lbl_80499550:
 	.asciz "P2Assert"
-.balign 4
-lbl_8049955C:
+	.skip 3
 	.asciz "PikminDown"
-.balign 4
-lbl_80499568:
+	.skip 1
 	.asciz "LujiDown"
-.balign 4
-lbl_80499574:
+	.skip 3
 	.asciz "PSGame.h"
-.balign 4
-lbl_80499580:
+	.skip 3
 	.asciz "PSScene.h"
-.balign 4
-lbl_8049958C:
+	.skip 2
 	.asciz "get sound scene at\ninvalid timming\n"
-.balign 4
+.global lbl_804995B0
 lbl_804995B0:
 	.asciz "win_lose_reason.szs"
-.balign 4
-lbl_804995C4:
 	.asciz "screenObj.h"
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q32kh6Screen18SceneWinLoseReason
 __vt__Q32kh6Screen18SceneWinLoseReason:
 	.4byte 0
@@ -110,15 +94,19 @@ msVal__Q32kh6Screen16ObjWinLoseReason:
 	.skip 0x1C
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80520240
 lbl_80520240:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80520244
 lbl_80520244:
 	.float 1.0
+.global lbl_80520248
 lbl_80520248:
-	.float -120.0
+	.4byte 0xC2F00000
+.global lbl_8052024C
 lbl_8052024C:
-	.float 120.0
+	.4byte 0x42F00000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global doCreate__Q32kh6Screen16ObjWinLoseReasonFP10JKRArchive

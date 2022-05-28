@@ -1,14 +1,17 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80487C40
 lbl_80487C40:
 	.asciz "moveside"
-.balign 4
+	.skip 3
+.global lbl_80487C4C
 lbl_80487C4C:
 	.asciz "movecentre"
+	.skip 1
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game5Armor9StateFail
 __vt__Q34Game5Armor9StateFail:
 	.4byte 0
@@ -187,53 +190,69 @@ __vt__Q34Game5Armor3FSM:
 	.4byte setCurrState__Q24Game17EnemyStateMachineFPQ24Game9EnemyBasePQ24Game13EnemyFSMState
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051B728
 lbl_8051B728:
-	.asciz "dead"
-.balign 4
+	.4byte 0x64656164
+	.4byte 0x00000000
+.global lbl_8051B730
 lbl_8051B730:
-	.asciz "stay"
-.balign 4
+	.4byte 0x73746179
+	.4byte 0x00000000
+.global lbl_8051B738
 lbl_8051B738:
-	.asciz "appear"
-.balign 4
+	.4byte 0x61707065
+	.4byte 0x61720000
+.global lbl_8051B740
 lbl_8051B740:
-	.asciz "dive"
-.balign 4
+	.4byte 0x64697665
+	.4byte 0x00000000
+.global lbl_8051B748
 lbl_8051B748:
-	.asciz "move"
-.balign 4
+	.4byte 0x6D6F7665
+	.4byte 0x00000000
+.global lbl_8051B750
 lbl_8051B750:
-	.asciz "movetop"
-.balign 4
+	.4byte 0x6D6F7665
+	.4byte 0x746F7000
+.global lbl_8051B758
 lbl_8051B758:
-	.asciz "gohome"
-.balign 4
+	.4byte 0x676F686F
+	.4byte 0x6D650000
+.global lbl_8051B760
 lbl_8051B760:
-	.asciz "attack1"
-.balign 4
+	.4byte 0x61747461
+	.4byte 0x636B3100
+.global lbl_8051B768
 lbl_8051B768:
-	.asciz "attack2"
-.balign 4
+	.4byte 0x61747461
+	.4byte 0x636B3200
+.global lbl_8051B770
 lbl_8051B770:
-	.asciz "eat"
-.balign 4
+	.4byte 0x65617400
+.global lbl_8051B774
 lbl_8051B774:
-	.asciz "flick"
-.balign 4
+	.4byte 0x666C6963
+	.4byte 0x6B000000
+.global lbl_8051B77C
 lbl_8051B77C:
-	.asciz "fail"
-.balign 4
+	.4byte 0x6661696C
+	.4byte 0x00000000
+.global lbl_8051B784
 lbl_8051B784:
-	.float 0.0
-lbl_8051B788: # pi
-	.float 3.1415927
+	.4byte 0x00000000
+.global lbl_8051B788
+lbl_8051B788:
+	.4byte 0x40490FDB
+.global lbl_8051B78C
 lbl_8051B78C:
-	.float 0.0055555557
+	.4byte 0x3BB60B61
+.global lbl_8051B790
 lbl_8051B790:
-	.float 17.0
+	.4byte 0x41880000
+.global lbl_8051B794
 lbl_8051B794:
-	.float 27.0
+	.4byte 0x41D80000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global init__Q34Game5Armor3FSMFPQ24Game9EnemyBase

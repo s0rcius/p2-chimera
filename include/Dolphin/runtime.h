@@ -1,7 +1,5 @@
-#ifndef _DOLPHIN_RUNTIME_H
-#define _DOLPHIN_RUNTIME_H
-
-#include "types.h"
+#ifndef _DOLPHIN_CTYPE_H
+#define _DOLPHIN_CTYPE_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,8 +7,6 @@ extern "C" {
 
 unsigned long __cvt_fp2unsigned(double);
 // TODO: The rest
-
-void* __copy(char*, char*, size_t);
 
 #ifdef __cplusplus
 };

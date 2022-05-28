@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global maxStdHeaps__Q29JFWSystem11CSetUpParam
 maxStdHeaps__Q29JFWSystem11CSetUpParam:
 	.4byte 2
@@ -36,7 +36,7 @@ exConsoleBufferSize__Q29JFWSystem11CSetUpParam:
 	.4byte 0x000024FC
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global rootHeap__9JFWSystem
 rootHeap__9JFWSystem:
 	.skip 0x4
@@ -60,15 +60,17 @@ systemConsole__9JFWSystem:
 	.skip 0x4
 .global sInitCalled__9JFWSystem
 sInitCalled__9JFWSystem:
-	.skip 0x1
+	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516B00
 lbl_80516B00:
 	.float 0.5
+.global lbl_80516B04
 lbl_80516B04:
-	.float 0.85
-.balign 8
+	.4byte 0x3F59999A
+.global lbl_80516B08
 lbl_80516B08:
 	.4byte 0x43300000
 	.4byte 0x80000000

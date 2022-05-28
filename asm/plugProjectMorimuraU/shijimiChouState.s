@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game11ShijimiChou9StateRest
 __vt__Q34Game11ShijimiChou9StateRest:
 	.4byte 0
@@ -91,57 +91,71 @@ __vt__Q34Game11ShijimiChou3FSM:
 	.4byte setCurrState__Q24Game17EnemyStateMachineFPQ24Game9EnemyBasePQ24Game13EnemyFSMState
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051EE10
 lbl_8051EE10:
-	.asciz "wait"
-.balign 4
+	.4byte 0x77616974
+	.4byte 0x00000000
+.global lbl_8051EE18
 lbl_8051EE18:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051EE1C
 lbl_8051EE1C:
-	.float 32768.0
-.balign 8
+	.4byte 0x47000000
+.global lbl_8051EE20
 lbl_8051EE20:
 	.4byte 0x43300000
 	.4byte 0x80000000
+.global lbl_8051EE28
 lbl_8051EE28:
-	.float 180.0
+	.4byte 0x43340000
+.global lbl_8051EE2C
 lbl_8051EE2C:
-	.float 150.0
-.balign 4
+	.4byte 0x43160000
+.global lbl_8051EE30
 lbl_8051EE30:
-	.asciz "fly"
-.balign 4
+	.4byte 0x666C7900
+.global lbl_8051EE34
 lbl_8051EE34:
-	.float 60.0
-.balign 4
+	.4byte 0x42700000
+.global lbl_8051EE38
 lbl_8051EE38:
-	.asciz "fall"
-.balign 4
+	.4byte 0x66616C6C
+	.4byte 0x00000000
+.global lbl_8051EE40
 lbl_8051EE40:
-	.float -20.0
-.balign 4
+	.4byte 0xC1A00000
+.global lbl_8051EE44
 lbl_8051EE44:
-	.asciz "dead"
-.balign 4
+	.4byte 0x64656164
+	.4byte 0x00000000
+.global lbl_8051EE4C
 lbl_8051EE4C:
 	.float 1.0
-.balign 4
+.global lbl_8051EE50
 lbl_8051EE50:
-	.asciz "leave"
-.balign 4
+	.4byte 0x6C656176
+	.4byte 0x65000000
+.global lbl_8051EE58
 lbl_8051EE58:
-	.asciz "rest"
-.balign 4
+	.4byte 0x72657374
+	.4byte 0x00000000
+.global lbl_8051EE60
 lbl_8051EE60:
-	.float 30.0
+	.4byte 0x41F00000
+.global lbl_8051EE64
 lbl_8051EE64:
-	.float 100.0
+	.4byte 0x42C80000
+.global lbl_8051EE68
 lbl_8051EE68:
-	.float 50.0
+	.4byte 0x42480000
+.global lbl_8051EE6C
 lbl_8051EE6C:
-	.float 600.0
+	.4byte 0x44160000
+.global lbl_8051EE70
 lbl_8051EE70:
-	.float 400.0
+	.4byte 0x43C80000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global init__Q34Game11ShijimiChou3FSMFPQ24Game9EnemyBase

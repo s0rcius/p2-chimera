@@ -13,8 +13,6 @@ struct Mgr;
 
 namespace Game {
 struct THPPlayer : public JKRDisposer, public CNode {
-	THPPlayer();
-
 	int _30;                          // _30
 	long _34;                         // _34
 	void* m_videoInfo;                // _38

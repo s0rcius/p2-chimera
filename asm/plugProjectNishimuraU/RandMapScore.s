@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_804840F8
 lbl_804840F8:
 	.4byte 0x00000004
@@ -21,7 +21,7 @@ lbl_80484118:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game4Cave10FixObjNode
 __vt__Q34Game4Cave10FixObjNode:
 	.4byte 0
@@ -38,7 +38,7 @@ __vt__Q34Game4Cave10FixObjNode:
 	.4byte isFixedBattery__Q24Game16ObjectLayoutNodeFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_8051A7F8
 lbl_8051A7F8:
 	.4byte 0x47000000
@@ -82,12 +82,19 @@ lbl_8051A830:
 lbl_8051A834:
 	.4byte 0x43160000
 
-.section .sbss2, "", @nobits # 0x80520E40 - 0x80520ED8
-.balign 8
+.section .sbss2, "", @nobits # 0x80520e40 - 0x80520ED8
+.global lbl_80520EA8
 lbl_80520EA8:
-	.skip 0x8
+	.skip 0x4
+.global lbl_80520EAC
+lbl_80520EAC:
+	.skip 0x4
+.global lbl_80520EB0
 lbl_80520EB0:
-	.skip 0x8
+	.skip 0x4
+.global lbl_80520EB4
+lbl_80520EB4:
+	.skip 0x4
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game4Cave12RandMapScoreFPQ34Game4Cave16MapUnitGenerator
@@ -775,9 +782,9 @@ lbl_8024D1A4:
 lbl_8024D1A8:
 /* 8024D1A8 0024A0E8  80 A2 2B 48 */	lwz r5, lbl_80520EA8@sda21(r2)
 /* 8024D1AC 0024A0EC  28 1E 00 00 */	cmplwi r30, 0
-/* 8024D1B0 0024A0F0  80 82 2B 4C */	lwz r4, (lbl_80520EA8+4)@sda21(r2)
+/* 8024D1B0 0024A0F0  80 82 2B 4C */	lwz r4, lbl_80520EAC@sda21(r2)
 /* 8024D1B4 0024A0F4  80 62 2B 50 */	lwz r3, lbl_80520EB0@sda21(r2)
-/* 8024D1B8 0024A0F8  80 02 2B 54 */	lwz r0, (lbl_80520EB0+4)@sda21(r2)
+/* 8024D1B8 0024A0F8  80 02 2B 54 */	lwz r0, lbl_80520EB4@sda21(r2)
 /* 8024D1BC 0024A0FC  90 A1 00 10 */	stw r5, 0x10(r1)
 /* 8024D1C0 0024A100  90 81 00 14 */	stw r4, 0x14(r1)
 /* 8024D1C4 0024A104  90 61 00 08 */	stw r3, 8(r1)

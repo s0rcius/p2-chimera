@@ -3,31 +3,23 @@
 
 #include "Dolphin/os.h"
 #include "JSystem/JKR/JKRDisposer.h"
-#include "JSystem/JSupport/JSUList.h"
+#include "JSystem/JSU/JSUList.h"
 #include "types.h"
 
-struct JKRThreadSwitch {
-	void loopProc();
-};
-
 struct JKRThread : public JKRDisposer {
-	JKRThread(unsigned long stackSize, int msgCount, int threadPriority);
-	JKRThread(JKRHeap*, unsigned long stackSize, int msgCount, int threadPriority);
-	JKRThread(OSThread*, int);
+	JKRThread(u32 stackSize, int msgCount, int threadPriority);
 
 	virtual ~JKRThread(); // _00
 	virtual void run();   // _04
 
-	void setCommon_mesgQueue(JKRHeap*, int);
-	void setCommon_heapSpecified(JKRHeap*, unsigned long, int);
-	void* start(void*);
-
 	JSUPtrLink m_link;         // _18
 	JKRHeap* m_heap;           // _28
 	OSThread* m_thread;        // _2C
-	OSMessageQueue m_msgQueue; // _30
-	OSMessage* m_msgBuffer;    // _50
-	int m_msgCount;            // _54
+	OSMessageQueue m_msgQueue; // _28
+	u8 _48[4];                 // _48
+	u8 _4C[4];                 // _4C
+	u8 _50[4];                 // _50
+	int _54;                   // _54
 	void* m_stack;             // _58
 	u32 m_stackSize;           // _5C
 	u8 _60;                    // _60
@@ -36,26 +28,6 @@ struct JKRThread : public JKRDisposer {
 	u32 _6C;                   // _6C
 	u32 _70;                   // _70
 	u32 _74;                   // _74
-	u32 _78;                   // _78
-
-	static JSUList<JKRThread> sThreadList;
-};
-
-/**
- * @size{0x98}
- */
-struct JKRTask : public JKRThread {
-	typedef void RequestCallback(void*);
-	virtual ~JKRTask(); // _00
-	virtual void run(); // _04
-
-	static JKRTask* create(int, int, unsigned long, JKRHeap*);
-
-	void request(RequestCallback*, void*, void*);
-
-	JSUPtrLink _7C;      // _7C
-	u8 _8C[8];           // _8C
-	OSMessageQueue* _94; // _94
 };
 
 #endif

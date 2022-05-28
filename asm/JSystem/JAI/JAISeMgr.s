@@ -1,12 +1,12 @@
 .include "macros.inc"
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global seStartCallback__Q27JAInter5SeMgr
 seStartCallback__Q27JAInter5SeMgr:
 	.4byte startSeSequence__Q27JAInter5SeMgrFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global seTrackUpdate__Q27JAInter5SeMgr
 seTrackUpdate__Q27JAInter5SeMgr:
 	.skip 0x4
@@ -24,8 +24,7 @@ seHandle__Q27JAInter5SeMgr:
 	.skip 0x4
 .global seScene__Q27JAInter5SeMgr
 seScene__Q27JAInter5SeMgr:
-	.skip 0x1
-.balign 4
+	.skip 0x4
 .global seqMuteFlagFromSe__Q27JAInter5SeMgr
 seqMuteFlagFromSe__Q27JAInter5SeMgr:
 	.skip 0x4
@@ -34,47 +33,59 @@ seCategoryVolume__Q27JAInter5SeMgr:
 	.skip 0x4
 .global seEntryCancel__Q27JAInter5SeMgr
 seEntryCancel__Q27JAInter5SeMgr:
-	.skip 0x4
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516F48
 lbl_80516F48:
 	.float 1.0
+.global lbl_80516F4C
 lbl_80516F4C:
 	.float 0.0
+.global lbl_80516F50
 lbl_80516F50:
 	.float 0.5
+.global lbl_80516F54
 lbl_80516F54:
 	.float 1000.0
+.global lbl_80516F58
 lbl_80516F58:
-	.float 2.14748365E9
-.balign 8
+	.4byte 0x4F000000
+	.4byte 0x00000000
+.global lbl_80516F60
 lbl_80516F60:
 	.double 0.5
-.balign 8
+.global lbl_80516F68
 lbl_80516F68:
 	.double 3.0
-.balign 8
+.global lbl_80516F70
 lbl_80516F70:
 	.double 0.0
+.global lbl_80516F78
 lbl_80516F78:
 	.float 6.0
+.global lbl_80516F7C
 lbl_80516F7C:
-	.float 1.0E10
-.balign 8
+	.4byte 0x501502F9
+.global lbl_80516F80
 lbl_80516F80:
 	.4byte 0x43300000
 	.4byte 0x80000000
+.global lbl_80516F88
 lbl_80516F88:
-	.float 255.0
+	.4byte 0x437F0000
+.global lbl_80516F8C
 lbl_80516F8C:
-	.float 127.0
-.balign 8
+	.4byte 0x42FE0000
+.global lbl_80516F90
 lbl_80516F90:
 	.4byte 0x43300000
 	.4byte 0x00000000
+.global lbl_80516F98
 lbl_80516F98:
 	.float -1.0
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global init__Q27JAInter5SeMgrFv

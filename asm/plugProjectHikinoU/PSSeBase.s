@@ -1,14 +1,19 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80490100
 lbl_80490100:
-	.asciz "PSSeBase.cpp"
-.balign 4
+	.4byte 0x50535365
+	.4byte 0x42617365
+	.4byte 0x2E637070
+	.4byte 0x00000000
+.global lbl_80490110
 lbl_80490110:
 	.asciz "P2Assert"
+	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q38PSSystem9ClusterSe7Factory
 __vt__Q38PSSystem9ClusterSe7Factory:
 	.4byte 0
@@ -35,16 +40,20 @@ __vt__Q28PSSystem9EnvSeBase:
 	.4byte setPanAndDolby__Q28PSSystem9EnvSeBaseFP8JAISound
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E1C0
 lbl_8051E1C0:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051E1C4
 lbl_8051E1C4:
 	.float 0.3
+.global lbl_8051E1C8
 lbl_8051E1C8:
-	.float 0.4
+	.4byte 0x3ECCCCCD
+.global lbl_8051E1CC
 lbl_8051E1CC:
 	.float 1.0
-.balign 8
+.global lbl_8051E1D0
 lbl_8051E1D0:
 	.4byte 0x43300000
 	.4byte 0x00000000

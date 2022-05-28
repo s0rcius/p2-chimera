@@ -1,17 +1,21 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80498CB0
 lbl_80498CB0:
 	.asciz "khUtil.cpp"
-.balign 4
+	.skip 1
+.global lbl_80498CBC
 lbl_80498CBC:
 	.asciz "P2Assert"
-.balign 4
+	.skip 3
+.global lbl_80498CC8
 lbl_80498CC8:
 	.asciz "khUtil.h"
+	.skip 7
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q32kh6Screen14khUtilColorAnm
 __vt__Q32kh6Screen14khUtilColorAnm:
 	.4byte 0
@@ -36,16 +40,18 @@ __vt__Q32kh6Screen14khUtilFadePane:
 	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80520180
 lbl_80520180:
 	.float 0.25
+.global lbl_80520184
 lbl_80520184:
 	.float 1.0
-.balign 8
+.global lbl_80520188
 lbl_80520188:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_80520190
 lbl_80520190:
 	.4byte 0x43300000
 	.4byte 0x00000000

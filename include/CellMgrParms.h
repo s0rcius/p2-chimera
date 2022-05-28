@@ -65,11 +65,7 @@ private:
 public:
 	virtual ~CellMgrParms();
 
-	/**
-	 * @reifiedAddress{801577D4}
-	 * @reifiedFile{plugProjectKandoU/cellPyramid.cpp}
-	 */
-	inline static CellMgrParms* getInstance() { return mInstance; }
+	static CellMgrParms* getInstance();
 	void globalInstance();
 
 	// 00-0C: Parameters

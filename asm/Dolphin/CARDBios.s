@@ -1,9 +1,11 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
+.global lbl_804A7710
 lbl_804A7710:
 	.asciz "<< Dolphin SDK - CARD\trelease build: Apr 17 2003 12:34:19 (0x2301) >>"
-.balign 4
+	.skip 2
+.global ResetFunctionInfo
 ResetFunctionInfo:
 	.4byte OnReset
 	.4byte 0x0000007F
@@ -17,16 +19,16 @@ ResetFunctionInfo:
 	.4byte 0x00000000
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global __CARDVersion
 __CARDVersion:
 	.4byte lbl_804A7710
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global __CARDEncode
 __CARDEncode:
-	.skip 2
+	.skip 0x2
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __CARDDefaultApiCallback
@@ -447,6 +449,7 @@ lbl_800D4C04:
 /* 800D4C14 000D1B54  7C 08 03 A6 */	mtlr r0
 /* 800D4C18 000D1B58  4E 80 00 20 */	blr 
 
+.global TimeoutHandler
 TimeoutHandler:
 /* 800D4C1C 000D1B5C  7C 08 02 A6 */	mflr r0
 /* 800D4C20 000D1B60  3C 80 80 4F */	lis r4, __CARDBlock@ha
@@ -492,6 +495,7 @@ lbl_800D4CA8:
 /* 800D4CB8 000D1BF8  7C 08 03 A6 */	mtlr r0
 /* 800D4CBC 000D1BFC  4E 80 00 20 */	blr 
 
+.global Retry
 Retry:
 /* 800D4CC0 000D1C00  7C 08 02 A6 */	mflr r0
 /* 800D4CC4 000D1C04  38 A0 00 04 */	li r5, 4
@@ -645,6 +649,7 @@ lbl_800D4ED4:
 /* 800D4EE4 000D1E24  7C 08 03 A6 */	mtlr r0
 /* 800D4EE8 000D1E28  4E 80 00 20 */	blr 
 
+.global UnlockedCallback
 UnlockedCallback:
 /* 800D4EEC 000D1E2C  7C 08 02 A6 */	mflr r0
 /* 800D4EF0 000D1E30  2C 04 00 00 */	cmpwi r4, 0
@@ -721,6 +726,7 @@ lbl_800D4FE4:
 /* 800D4FF4 000D1F34  7C 08 03 A6 */	mtlr r0
 /* 800D4FF8 000D1F38  4E 80 00 20 */	blr 
 
+.global __CARDStart
 __CARDStart:
 /* 800D4FFC 000D1F3C  7C 08 02 A6 */	mflr r0
 /* 800D5000 000D1F40  90 01 00 04 */	stw r0, 4(r1)
@@ -1373,6 +1379,7 @@ lbl_800D5898:
 /* 800D58C8 000D2808  7C 08 03 A6 */	mtlr r0
 /* 800D58CC 000D280C  4E 80 00 20 */	blr 
 
+.global OnReset
 OnReset:
 /* 800D58D0 000D2810  7C 08 02 A6 */	mflr r0
 /* 800D58D4 000D2814  2C 03 00 00 */	cmpwi r3, 0

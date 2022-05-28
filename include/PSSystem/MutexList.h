@@ -2,7 +2,7 @@
 #define _PSSYSTEM_MUTEXLIST_H
 
 #include "Dolphin/os.h"
-#include "JSystem/JSupport/JSUList.h"
+#include "JSystem/JSU/JSUList.h"
 
 namespace PSSystem {
 template <typename T> struct MutexList : JSUList<T> {

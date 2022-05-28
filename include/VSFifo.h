@@ -2,7 +2,6 @@
 #define _VSFIFO_H
 
 #include "types.h"
-#include "Dolphin/os.h"
 #include "Dolphin/gx.h"
 
 struct VSFifo {

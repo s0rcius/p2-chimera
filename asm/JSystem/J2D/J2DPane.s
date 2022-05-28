@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_J2DPane_cpp
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804A0678
 lbl_804A0678:
 	.4byte lbl_80039544
@@ -57,13 +56,12 @@ __vt__7J2DPane:
 	.4byte 0
 
 .section .bss  # 0x804EFC20 - 0x8051467C
-bss_entry:
 .global static_mBounds__7J2DPane
 static_mBounds__7J2DPane:
 	.skip 0x10
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_805167C0
 lbl_805167C0:
 	.4byte 0x00000000

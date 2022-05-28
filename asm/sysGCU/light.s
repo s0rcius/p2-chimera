@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_light_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80499EF8
 lbl_80499EF8:
 	.4byte 0x83418393
@@ -15,7 +14,7 @@ lbl_80499EF8:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804EBE88
 lbl_804EBE88:
 	.4byte 0x00000000
@@ -44,7 +43,7 @@ __vt__8LightObj:
 	.4byte drawPos__8LightObjFR8GraphicsR6Camera
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_805161B8
 lbl_805161B8:
 	.skip 0x4
@@ -53,7 +52,7 @@ lbl_805161BC:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_805205A8
 lbl_805205A8:
 	.4byte 0x00000000

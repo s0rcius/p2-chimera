@@ -9,7 +9,7 @@ struct TColor;
 } // namespace JUtility
 
 namespace efx2d {
-struct TForever : public TBase, public JPAEmitterCallBack {
+struct TForever : public TBase, public JPAEmitterCallback {
 	TForever();
 
 	// vtable 1 (TBase)

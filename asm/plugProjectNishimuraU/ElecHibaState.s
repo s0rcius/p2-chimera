@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game8ElecHiba11StateAttack
 __vt__Q34Game8ElecHiba11StateAttack:
 	.4byte 0
@@ -69,21 +69,27 @@ __vt__Q34Game8ElecHiba3FSM:
 	.4byte setCurrState__Q24Game17EnemyStateMachineFPQ24Game9EnemyBasePQ24Game13EnemyFSMState
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051B098
 lbl_8051B098:
-	.asciz "dead"
-.balign 4
+	.4byte 0x64656164
+	.4byte 0x00000000
+.global lbl_8051B0A0
 lbl_8051B0A0:
-	.asciz "wait"
-.balign 4
+	.4byte 0x77616974
+	.4byte 0x00000000
+.global lbl_8051B0A8
 lbl_8051B0A8:
-	.asciz "sign"
-.balign 4
+	.4byte 0x7369676E
+	.4byte 0x00000000
+.global lbl_8051B0B0
 lbl_8051B0B0:
-	.asciz "attack"
-.balign 4
+	.4byte 0x61747461
+	.4byte 0x636B0000
+.global lbl_8051B0B8
 lbl_8051B0B8:
-	.float 0.0
+	.4byte 0x00000000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global init__Q34Game8ElecHiba3FSMFPQ24Game9EnemyBase

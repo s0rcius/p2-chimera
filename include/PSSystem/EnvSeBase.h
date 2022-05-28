@@ -2,7 +2,7 @@
 #define _PSSYSTEM_ENVSEBASE_H
 
 #include "Dolphin/os.h"
-#include "JSystem/JSupport/JSUList.h"
+#include "JSystem/JSU/JSUList.h"
 #include "SoundID.h"
 
 struct JAISound;

@@ -1,35 +1,54 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80480460
 lbl_80480460:
-	.asciz "actBreakWall"
-.balign 4
+	.4byte 0x61637442
+	.4byte 0x7265616B
+	.4byte 0x57616C6C
+	.4byte 0x00000000
+.global lbl_80480470
 lbl_80480470:
-	.asciz "BreakGate"
-.balign 4
-lbl_8048047C:
-	.asciz "ActBreakGateArg"
-.balign 4
-lbl_8048048C:
-	.asciz "aiBreakGate.cpp"
-.balign 4
-lbl_8048049C:
+	.4byte 0x42726561
+	.4byte 0x6B476174
+	.4byte 0x65000000
+	.4byte 0x41637442
+	.4byte 0x7265616B
+	.4byte 0x47617465
+	.4byte 0x41726700
+	.4byte 0x61694272
+	.4byte 0x65616B47
+	.4byte 0x6174652E
+	.4byte 0x63707000
 	.asciz "P2Assert"
-.balign 4
-lbl_804804A8:
-	.asciz "ActionArg"
-.balign 4
-lbl_804804B4:
-	.asciz "StickAttackActionArg"
-.balign 4
-lbl_804804CC:
-	.asciz "GotoPosActionArg"
-.balign 4
+	.skip 3
+	.4byte 0x41637469
+	.4byte 0x6F6E4172
+	.4byte 0x67000000
+	.4byte 0x53746963
+	.4byte 0x6B417474
+	.4byte 0x61636B41
+	.4byte 0x6374696F
+	.4byte 0x6E417267
+	.4byte 0x00000000
+	.4byte 0x476F746F
+	.4byte 0x506F7341
+	.4byte 0x6374696F
+	.4byte 0x6E417267
+	.4byte 0x00000000
+.global lbl_804804E0
 lbl_804804E0:
-	.asciz "FollowVectorFieldActionArg"
+	.4byte 0x466F6C6C
+	.4byte 0x6F775665
+	.4byte 0x63746F72
+	.4byte 0x4669656C
+	.4byte 0x64416374
+	.4byte 0x696F6E41
+	.4byte 0x72670000
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q26PikiAI26FollowVectorFieldActionArg
 __vt__Q26PikiAI26FollowVectorFieldActionArg:
 	.4byte 0
@@ -58,9 +77,11 @@ __vt__Q26PikiAI12ActBreakGate:
 	.4byte "@52@4@onKeyEvent__Q26PikiAI12ActBreakGateFRCQ28SysShape8KeyEvent"
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80519630
 lbl_80519630:
 	.float 0.7
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q26PikiAI12ActBreakGateFPQ24Game4Piki

@@ -342,12 +342,20 @@ lbl_803CA744:
 	*/
 }
 
+} // namespace ebi
+
 /*
- * @generated{J2DPane::show()}
  * --INFO--
  * Address:	803CA760
  * Size:	00000C
  */
+void J2DPane::show()
+{
+	// Generated from stb r0, 0xB0(r3)
+	m_isVisible = true;
+}
+
+namespace ebi {
 
 /*
  * --INFO--
@@ -491,12 +499,20 @@ lbl_803CA8F4:
 	*/
 }
 
+} // namespace ebi
+
 /*
- * @generated{J2DPane::hide()}
  * --INFO--
  * Address:	803CA910
  * Size:	00000C
  */
+void J2DPane::hide()
+{
+	// Generated from stb r0, 0xB0(r3)
+	m_isVisible = false;
+}
+
+namespace ebi {
 
 /*
  * --INFO--

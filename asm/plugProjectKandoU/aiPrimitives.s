@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_aiPrimitives_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8047F070
 lbl_8047F070:
 	.4byte 0x00000000
@@ -74,7 +73,7 @@ lbl_8047F0B8:
 	.4byte 0x41726700
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804B4AA8
 lbl_804B4AA8:
 	.4byte 0x00000000
@@ -247,7 +246,7 @@ __vt__Q26PikiAI10ActGotoPos:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_805159E0
 lbl_805159E0:
 	.skip 0x4
@@ -256,7 +255,7 @@ lbl_805159E4:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80518F60
 lbl_80518F60:
 	.4byte 0x00000000

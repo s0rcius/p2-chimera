@@ -1,12 +1,12 @@
 .include "macros.inc"
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global SendCount
 SendCount:
-	.byte 0x80
+	.4byte 0x80000000
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global MTRCallback
 MTRCallback:
 	.skip 0x4
@@ -24,7 +24,7 @@ pEXIInputFlag:
 	.skip 0x4
 .global EXIInputFlag
 EXIInputFlag:
-	.skip 0x1
+	.skip 0x4
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 

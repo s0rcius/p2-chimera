@@ -1,22 +1,26 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8047BFC0
 lbl_8047BFC0:
 	.asciz "/enemy/data/BlueChappy/moyou_565.3.bti"
-.balign 4
+	.skip 1
+.global lbl_8047BFE8
 lbl_8047BFE8:
 	.asciz "/enemy/data/BlueChappy/swallow_565.3.bti"
-.balign 4
-lbl_8047C014: # Shift-JIS
+	.skip 3
+.global lbl_8047C014
+lbl_8047C014:
 	.4byte 0x90C28360
 	.4byte 0x83838362
 	.4byte 0x8373815B
 	.4byte 0x837D836C
 	.4byte 0x815B8357
 	.4byte 0x83830000
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game10BlueChappy3Mgr
 __vt__Q34Game10BlueChappy3Mgr:
 	.4byte 0
@@ -79,9 +83,11 @@ __vt__Q34Game10BlueChappy3Mgr:
 	.4byte getChangeTexture1__Q34Game10BlueChappy3MgrFv
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
+.global "cChappyChangeTexName0__Q34Game10BlueChappy27@unnamed@BlueChappyMgr_cpp@"
 "cChappyChangeTexName0__Q34Game10BlueChappy27@unnamed@BlueChappyMgr_cpp@":
 	.4byte lbl_8047BFC0
+.global "cChappyChangeTexName1__Q34Game10BlueChappy27@unnamed@BlueChappyMgr_cpp@"
 "cChappyChangeTexName1__Q34Game10BlueChappy27@unnamed@BlueChappyMgr_cpp@":
 	.4byte lbl_8047BFE8
 

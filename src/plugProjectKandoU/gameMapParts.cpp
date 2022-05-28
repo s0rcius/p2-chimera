@@ -673,7 +673,7 @@ namespace Game {
  */
 Door* MapUnitInterface::getDoor(int idx)
 {
-	return (Door*)m_door.getChildAt(idx);
+	return m_door.getChildAt(idx);
 	/*
 	.loc_0x0:
 	  stwu      r1, -0x10(r1)
@@ -1334,10 +1334,12 @@ void MapUnitMgr::makeUnit(Game::MapUnit* unit, char* path) { char path[512]; } /
 
 sprintf(path, "%s/arc.szs", path);
 JKRArchive* archive = JKRArchive::mount(path, 1, nullptr, 1);
-P2ASSERTLINE(651, archive);
+#line 651
+P2ASSERT(archive);
 
 void* viewModelData = archive.getResource("view.bmd");
-P2ASSERT(657, viewModelData);
+#line 657
+P2ASSERT(viewModelData);
 
 // unit->_0C = J3DModelData*
 unit->_0C = J3DModelLoaderDataBase::load(viewModelData,

@@ -1,17 +1,24 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80490158
 lbl_80490158:
-	.asciz "PSBgmTask.h"
-.balign 4
+	.4byte 0x50534267
+	.4byte 0x6D546173
+	.4byte 0x6B2E6800
+.global lbl_80490164
 lbl_80490164:
 	.asciz "P2Assert"
-.balign 4
+	.skip 3
+.global lbl_80490170
 lbl_80490170:
-	.asciz "PSBgmTrack.cpp"
+	.4byte 0x50534267
+	.4byte 0x6D547261
+	.4byte 0x636B2E63
+	.4byte 0x70700000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q28PSSystem13SeqTrackChild
 __vt__Q28PSSystem13SeqTrackChild:
 	.4byte 0
@@ -45,18 +52,23 @@ __vt__Q28PSSystem12SeqTrackBase:
 	.4byte update__Q28PSSystem12SeqTrackBaseFv
 	.4byte init__Q28PSSystem12SeqTrackBaseFP8JASTrack
 	.4byte 0
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E1D8
 lbl_8051E1D8:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051E1DC
 lbl_8051E1DC:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051E1E0
 lbl_8051E1E0:
 	.float 1.0
+.global lbl_8051E1E4
 lbl_8051E1E4:
 	.float 0.5
-.balign 8
+.global lbl_8051E1E8
 lbl_8051E1E8:
 	.4byte 0x43300000
 	.4byte 0x00000000

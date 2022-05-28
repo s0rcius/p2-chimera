@@ -1,22 +1,27 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_panModoki_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80490EF8
 lbl_80490EF8:
-	.asciz "panModoki.cpp"
-.balign 4
+	.4byte 0x70616E4D
+	.4byte 0x6F646F6B
+	.4byte 0x692E6370
+	.4byte 0x70000000
+.global lbl_80490F08
 lbl_80490F08:
 	.asciz "P2Assert"
+	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
-govNAN___Q24Game5P2JST:
-	.float 0.0
-	.float 0.0
-	.float 0.0
+.balign 0x8
+.global lbl_804DCAB8
+lbl_804DCAB8:
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 .global __vt__Q34Game11OoPanModoki3Obj
 __vt__Q34Game11OoPanModoki3Obj:
 	.4byte 0
@@ -453,106 +458,149 @@ __vt__Q24Game18InteractSuckFinish:
 	.4byte actPellet__Q24Game11InteractionFPQ24Game6Pellet
 	.4byte actOnyon__Q24Game11InteractionFPQ24Game5Onyon
 	.4byte actItem__Q24Game11InteractionFPQ24Game8BaseItem
+	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
-gu32NAN___Q24Game5P2JST:
+.balign 0x8
+.global lbl_80515F30
+lbl_80515F30:
 	.skip 0x4
-gfNAN___Q24Game5P2JST:
+.global lbl_80515F34
+lbl_80515F34:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E490
 lbl_8051E490:
-	.float 0.0
-.balign 4
+	.4byte 0x00000000
+.global lbl_8051E494
 lbl_8051E494:
-	.asciz "body"
-.balign 4
+	.4byte 0x626F6479
+	.4byte 0x00000000
+.global lbl_8051E49C
 lbl_8051E49C:
-	.asciz "kamu"
-.balign 4
+	.4byte 0x6B616D75
+	.4byte 0x00000000
+.global lbl_8051E4A4
 lbl_8051E4A4:
-	.float 20.0
+	.4byte 0x41A00000
+.global lbl_8051E4A8
 lbl_8051E4A8:
-	.float 15.0
+	.4byte 0x41700000
+.global lbl_8051E4AC
 lbl_8051E4AC:
-	.float 5.0
+	.4byte 0x40A00000
+.global lbl_8051E4B0
 lbl_8051E4B0:
-	.float 0.6
+	.4byte 0x3F19999A
+.global lbl_8051E4B4
 lbl_8051E4B4:
 	.float 1.0
+.global lbl_8051E4B8
 lbl_8051E4B8:
 	.float 0.1
+.global lbl_8051E4BC
 lbl_8051E4BC:
-	.float 0.2
-lbl_8051E4C0: # half-pi
-	.float 1.5707964
-lbl_8051E4C4: # pi
-	.float 3.1415927
+	.4byte 0x3E4CCCCD
+.global lbl_8051E4C0
+lbl_8051E4C0:
+	.4byte 0x3FC90FDB
+.global lbl_8051E4C4
+lbl_8051E4C4:
+	.4byte 0x40490FDB
+.global lbl_8051E4C8
 lbl_8051E4C8:
-	.float 325.9493
+	.4byte 0x43A2F983
+.global lbl_8051E4CC
 lbl_8051E4CC:
-	.float -325.9493
+	.4byte 0xC3A2F983
+.global lbl_8051E4D0
 lbl_8051E4D0:
 	.float 0.5
+.global lbl_8051E4D4
 lbl_8051E4D4:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051E4D8
 lbl_8051E4D8:
-	.float 50.0
+	.4byte 0x42480000
+.global lbl_8051E4DC
 lbl_8051E4DC:
-	.float 30.0
+	.4byte 0x41F00000
+.global lbl_8051E4E0
 lbl_8051E4E0:
-	.float -1000.0
-.balign 4
+	.4byte 0xC47A0000
+.global lbl_8051E4E4
 lbl_8051E4E4:
-	.asciz "asiL"
-.balign 4
+	.4byte 0x6173694C
+	.4byte 0x00000000
+.global lbl_8051E4EC
 lbl_8051E4EC:
-	.asciz "asiR"
-.balign 4
+	.4byte 0x61736952
+	.4byte 0x00000000
+.global lbl_8051E4F4
 lbl_8051E4F4:
-	.float 100.0
+	.4byte 0x42C80000
+.global lbl_8051E4F8
 lbl_8051E4F8:
-	.float 32768.0
-.balign 8
+	.4byte 0x47000000
+	.4byte 0x00000000
+.global lbl_8051E500
 lbl_8051E500:
 	.4byte 0x43300000
 	.4byte 0x80000000
+.global lbl_8051E508
 lbl_8051E508:
-	.float 60.0
+	.4byte 0x42700000
+.global lbl_8051E50C
 lbl_8051E50C:
-	.float 75.0
+	.4byte 0x42960000
+.global lbl_8051E510
 lbl_8051E510:
-	.float -1.0
+	.4byte 0xBF800000
+.global lbl_8051E514
 lbl_8051E514:
-	.float 150.0
+	.4byte 0x43160000
+.global lbl_8051E518
 lbl_8051E518:
-	.float 10.0
+	.4byte 0x41200000
+.global lbl_8051E51C
 lbl_8051E51C:
-	.float -0.1
+	.4byte 0xBDCCCCCD
+.global lbl_8051E520
 lbl_8051E520:
-	.float 0.9
+	.4byte 0x3F666666
+.global lbl_8051E524
 lbl_8051E524:
-	.float 0.0055555557
-.balign 4
+	.4byte 0x3BB60B61
+.global lbl_8051E528
 lbl_8051E528:
-	.asciz "orima"
-.balign 4
-lbl_8051E530: # tau
-	.float 6.2831855
+	.4byte 0x6F72696D
+	.4byte 0x61000000
+.global lbl_8051E530
+lbl_8051E530:
+	.4byte 0x40C90FDB
+.global lbl_8051E534
 lbl_8051E534:
-	.float 10000.0
+	.4byte 0x461C4000
+.global lbl_8051E538
 lbl_8051E538:
 	.float 0.15
+.global lbl_8051E53C
 lbl_8051E53C:
-	.float 0.99
+	.4byte 0x3F7D70A4
+.global lbl_8051E540
 lbl_8051E540:
-	.float 40.0
+	.4byte 0x42200000
+.global lbl_8051E544
 lbl_8051E544:
-	.float 12.0
+	.4byte 0x41400000
+.global lbl_8051E548
 lbl_8051E548:
-	.float 1.6
+	.4byte 0x3FCCCCCD
+.global lbl_8051E54C
+lbl_8051E54C:
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global actEnemy__Q24Game18InteractSuckFinishFPQ24Game9EnemyBase
@@ -5575,14 +5623,15 @@ getEnemyTypeID__Q34Game11OoPanModoki3ObjFv:
 /* 80353D1C 00350C5C  38 60 00 28 */	li r3, 0x28
 /* 80353D20 00350C60  4E 80 00 20 */	blr 
 
-__sinit_panModoki_cpp: # static initializer
+.global __sinit_panModoki_cpp
+__sinit_panModoki_cpp:
 /* 80353D24 00350C64  3C 80 80 51 */	lis r4, __float_nan@ha
 /* 80353D28 00350C68  38 00 FF FF */	li r0, -1
 /* 80353D2C 00350C6C  C0 04 48 B0 */	lfs f0, __float_nan@l(r4)
-/* 80353D30 00350C70  3C 60 80 4E */	lis r3, govNAN___Q24Game5P2JST@ha
-/* 80353D34 00350C74  90 0D 98 B0 */	stw r0, gu32NAN___Q24Game5P2JST@sda21(r13)
-/* 80353D38 00350C78  D4 03 CA B8 */	stfsu f0, govNAN___Q24Game5P2JST@l(r3)
-/* 80353D3C 00350C7C  D0 0D 98 B4 */	stfs f0, gfNAN___Q24Game5P2JST@sda21(r13)
+/* 80353D30 00350C70  3C 60 80 4E */	lis r3, lbl_804DCAB8@ha
+/* 80353D34 00350C74  90 0D 98 B0 */	stw r0, lbl_80515F30@sda21(r13)
+/* 80353D38 00350C78  D4 03 CA B8 */	stfsu f0, lbl_804DCAB8@l(r3)
+/* 80353D3C 00350C7C  D0 0D 98 B4 */	stfs f0, lbl_80515F34@sda21(r13)
 /* 80353D40 00350C80  D0 03 00 04 */	stfs f0, 4(r3)
 /* 80353D44 00350C84  D0 03 00 08 */	stfs f0, 8(r3)
 /* 80353D48 00350C88  4E 80 00 20 */	blr 

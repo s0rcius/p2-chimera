@@ -1,14 +1,15 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
-"gapfnExtrapolateParameter___Q27JStudio27@unnamed@functionvalue_cpp@": # local object
+.balign 0x8
+.global "gapfnExtrapolateParameter___Q27JStudio27@unnamed@functionvalue_cpp@"
+"gapfnExtrapolateParameter___Q27JStudio27@unnamed@functionvalue_cpp@":
 	.4byte extrapolateParameter_raw__Q27JStudio13functionvalueFdd
 	.4byte extrapolateParameter_repeat__Q27JStudio13functionvalueFdd
 	.4byte extrapolateParameter_turn__Q27JStudio13functionvalueFdd
 	.4byte extrapolateParameter_clamp__Q27JStudio13functionvalueFdd
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q27JStudio22TFunctionValue_hermite
 __vt__Q27JStudio22TFunctionValue_hermite:
 	.4byte 0
@@ -81,58 +82,61 @@ __vt__Q27JStudio14TFunctionValue:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
+.global lbl_80514D88
 lbl_80514D88:
-	.skip 0x1
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_805163A0
 lbl_805163A0:
-	.double 0.0
-.balign 8
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_805163A8
 lbl_805163A8:
 	.4byte 0x3FF00000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163B0
 lbl_805163B0:
 	.4byte 0x40080000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163B8
 lbl_805163B8:
 	.4byte 0xC0000000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163C0
 lbl_805163C0:
 	.4byte 0x3FC55555
 	.4byte 0x55555555
-.balign 8
+.global lbl_805163C8
 lbl_805163C8:
 	.4byte 0x3FE00000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163D0
 lbl_805163D0:
 	.4byte 0x3FE55555
 	.4byte 0x55555555
-.balign 8
+.global lbl_805163D8
 lbl_805163D8:
 	.4byte 0x40000000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163E0
 lbl_805163E0:
 	.4byte 0xBFF00000
 	.4byte 0x00000000
-.balign 8
+.global lbl_805163E8
 lbl_805163E8:
 	.4byte 0x43300000
 	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global extrapolateParameter_raw__Q27JStudio13functionvalueFdd
-extrapolateParameter_raw__Q27JStudio13functionvalueFdd: # weak function
+extrapolateParameter_raw__Q27JStudio13functionvalueFdd:
 /* 80008A80 000059C0  4E 80 00 20 */	blr 
 
 .global extrapolateParameter_repeat__Q27JStudio13functionvalueFdd
-extrapolateParameter_repeat__Q27JStudio13functionvalueFdd: # weak function
+extrapolateParameter_repeat__Q27JStudio13functionvalueFdd:
 /* 80008A84 000059C4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008A88 000059C8  7C 08 02 A6 */	mflr r0
 /* 80008A8C 000059CC  90 01 00 14 */	stw r0, 0x14(r1)

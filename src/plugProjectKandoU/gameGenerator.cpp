@@ -6,7 +6,6 @@
 #include "Game/GameSystem.h"
 #include "Game/TimeMgr.h"
 #include "JSystem/JUT/JUTException.h"
-#include "nans.h"
 #include "Parameters.h"
 #include "types.h"
 
@@ -214,7 +213,7 @@
         .4byte 0x67720000
 */
 
-u32 GeneratorCurrentVersion = 'v0.3';
+i32 GeneratorCurrentVersion = 'v0.3';
 
 /*
  * --INFO--
@@ -339,16 +338,18 @@ void GenBase::doRead(Stream&) { }
  */
 u32 GenObject::getLatestVersion()
 {
-	int count = GenObjectFactory::factory->m_count;
-	for (int i = 0; count > 0; i++, count--) {
+	u32 count = GenObjectFactory::factory->m_count;
+	if (count <= 0) {
+		return m_typeID;
+	}
+	int i = 0;
+	do {
 		if (m_typeID == GenObjectFactory::factory->m_factories[i].m_typeID) {
 			return GenObjectFactory::factory->m_factories[i].m_version;
 		}
-	}
+		i++;
+	} while (--count != 0);
 	return m_typeID;
-	// i++;
-	// } while (--count != 0);
-	// return m_typeID;
 	/*
 	lwz      r7, factory__Q24Game16GenObjectFactory@sda21(r13)
 	li       r4, 0
@@ -416,10 +417,10 @@ Generator::Generator()
 	_60             = 0;
 	m_creature      = nullptr;
 	_7C             = 0;
-	m_child         = nullptr;
-	m_parent        = nullptr;
-	m_prev          = nullptr;
-	m_next          = nullptr;
+	_10             = nullptr;
+	_0C             = nullptr;
+	_08             = nullptr;
+	_04             = nullptr;
 	_AC             = 1;
 	m_dayLimitMaybe = -1;
 	_74             = 0;
@@ -877,15 +878,15 @@ void Generator::render(Graphics&)
 void Generator::read(Stream& input)
 {
 	m_version.read(input);
-	if (m_version.getID() >= 'v0.0') {
+	if (m_version.m_id.raw >= 'v0.0') {
 		_5C = input.readShort();
 	} else {
 		_5C = input.readInt();
 	}
-	if (m_version.getID() >= 'v0.3') {
+	if (m_version.m_id.raw >= 'v0.3') {
 		_70 = input.readShort();
 	} else {
-		if (m_version.getID() >= 'v0.1') {
+		if (m_version.m_id.raw >= 'v0.1') {
 			_70 = input.readInt();
 		} else {
 			_70 = 0;
@@ -897,7 +898,7 @@ void Generator::read(Stream& input)
 			_20[i] = input.readByte();
 		} while (++i < 0x20);
 	} else {
-		if (m_version.getID() >= 'v0.2') {
+		if (m_version.m_id.raw >= 'v0.2') {
 			if (input.readByte() != '\0') {
 				int i = 0;
 				do {
@@ -938,31 +939,23 @@ void Generator::read(Stream& input)
 	_18 = nullptr;
 	ID32 temp;
 	temp.read(input);
-	// int i                 = 0;
-	s32 count             = GenObjectFactory::factory->m_count;
+	int i                 = 0;
+	u32 count             = GenObjectFactory::factory->m_count;
 	GenObject* makeResult = nullptr;
-	// if (0 < count) {
-	// 	do {
-	// 		if (temp.getID() == GenObjectFactory::factory->m_factories[i].m_typeID) {
-	// 			makeResult = GenObjectFactory::factory->m_factories[i].m_makeFunction();
-	// 			break;
-	// 		}
-	// 	} while (--count != 0);
-	// }
 	if (0 < count) {
-		for (int i = 0; i < count; i++) {
-			if (temp.getID() == GenObjectFactory::factory->m_factories[i].m_typeID) {
+		do {
+			if (temp.m_id.raw == GenObjectFactory::factory->m_factories[i].m_typeID) {
 				makeResult = GenObjectFactory::factory->m_factories[i].m_makeFunction();
 				break;
 			}
-		}
+		} while (--count != 0);
 	}
 	_18 = makeResult;
 	if (_18 != nullptr) {
 		if (Generator::ramMode == 0) {
 			ID32 temp2;
 			temp2.read(input);
-			_18->m_rawID = temp2.getID();
+			_18->m_rawID = temp2.m_id.raw;
 		} else {
 			_18->m_rawID = _18->getLatestVersion();
 		}
@@ -972,7 +965,7 @@ void Generator::read(Stream& input)
 		} else {
 			((Parameters*)_18)->read(input);
 		}
-		_1C = temp.getID();
+		_1C = temp.m_id.raw;
 	} else {
 		temp.print();
 	}
@@ -2582,7 +2575,7 @@ void GenObject::render(Graphics&, Game::Generator*) { }
  * Address:	801AC388
  * Size:	000008
  */
-J3DModelData* GenBase::getShape() { return nullptr; }
+u32 GenBase::getShape(void) { return 0x0; }
 
 /*
  * --INFO--

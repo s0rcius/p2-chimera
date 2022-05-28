@@ -19,7 +19,6 @@
  */
 
 #include "fdlibm.h"
-#include "Dolphin/math.h"
 
 /*
  * Table of constants for 2/pi, 396 Hex digits (476 decimal) of 2/pi
@@ -131,8 +130,9 @@ int __ieee754_rem_pio2(x, y) double x, y[];
 			i    = j - (((__HI(y[0])) >> 20) & 0x7ff);
 			if (i > 16) { /* 2nd iteration needed, good to 118 */
 				t    = r;
-				r    = t - fn * pio2_2;
-				w    = fn * pio2_2t - ((t - r) - fn * pio2_2);
+				w    = fn * pio2_2;
+				r    = t - w;
+				w    = fn * pio2_2t - ((t - r) - w);
 				y[0] = r - w;
 				i    = j - (((__HI(y[0])) >> 20) & 0x7ff);
 				if (i > 49) { /* 3rd iteration need, 151 bits acc */

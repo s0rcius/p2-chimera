@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_sysShape_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80499C58
 lbl_80499C58:
 	.skip 0xC
@@ -35,7 +34,7 @@ lbl_80499D10:
 	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804EBDC8
 lbl_804EBDC8:
 	.4byte 0x00000000
@@ -66,7 +65,7 @@ __vt__Q28SysShape8Animator:
 	.4byte animate__Q28SysShape8AnimatorFf
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_805161A0
 lbl_805161A0:
 	.skip 0x4
@@ -78,7 +77,7 @@ verbose__Q28SysShape8Animator:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80520528
 lbl_80520528:
 	.4byte 0x00000000

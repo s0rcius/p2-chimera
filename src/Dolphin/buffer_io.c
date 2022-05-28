@@ -1,7 +1,4 @@
 #include "Dolphin/bufferstruct.h"
-#include "types.h"
-
-// dear god this file needs cleanup, especially the struct
 
 /*
  * --INFO--

@@ -1,6 +1,3 @@
-#include "Game/MapMgr.h"
-#include "Game/AABBWaterBox.h"
-#include "MapCollision.h"
 #include "types.h"
 
 /*
@@ -579,12 +576,14 @@ lbl_80162654:
 	*/
 }
 
+} // namespace Game
+
 /*
  * --INFO--
  * Address:	8016267C
  * Size:	00007C
  */
-void MapMgr::getStartPosition(Vector3f&, int)
+void getStartPosition__Q24Game6MapMgrFR10Vector3f i(void)
 {
 	/*
 	stwu     r1, -0x10(r1)
@@ -625,12 +624,14 @@ lbl_801626E4:
 	*/
 }
 
+namespace Game {
+
 /*
  * --INFO--
  * Address:	801626F8
  * Size:	00002C
  */
-void MapMgr::getMapRotation()
+void MapMgr::getMapRotation(void)
 {
 	/*
 	lwz      r3, 0xc(r3)
@@ -669,12 +670,14 @@ lbl_80162738:
 	*/
 }
 
+} // namespace Game
+
 /*
  * --INFO--
  * Address:	80162740
  * Size:	000704
  */
-void MapMgr::getBestAngle(Vector3f&, float, float)
+void getBestAngle__Q24Game6MapMgrFR10Vector3f ff(void)
 {
 	/*
 	stwu     r1, -0x180(r1)
@@ -1149,6 +1152,8 @@ lbl_80162DC0:
 	blr
 	*/
 }
+
+namespace Game {
 
 /*
  * --INFO--
@@ -1955,31 +1960,30 @@ lbl_801638CC:
 namespace Sys {
 
 /*
- * @generated{__ct__Q23Sys15MatLoopAnimatorFv}
  * --INFO--
  * Address:	801638EC
  * Size:	00003C
  */
-// MatLoopAnimator::MatLoopAnimator(void)
-// {
-// 	/*
-// stwu     r1, -0x10(r1)
-// mflr     r0
-// stw      r0, 0x14(r1)
-// stw      r31, 0xc(r1)
-// mr       r31, r3
-// bl       __ct__Q23Sys15MatBaseAnimatorFv
-// lis      r4, __vt__Q23Sys15MatLoopAnimator@ha
-// mr       r3, r31
-// addi     r0, r4, __vt__Q23Sys15MatLoopAnimator@l
-// stw      r0, 0(r31)
-// lwz      r31, 0xc(r1)
-// lwz      r0, 0x14(r1)
-// mtlr     r0
-// addi     r1, r1, 0x10
-// blr
-// 	*/
-// }
+MatLoopAnimator::MatLoopAnimator(void)
+{
+	/*
+stwu     r1, -0x10(r1)
+mflr     r0
+stw      r0, 0x14(r1)
+stw      r31, 0xc(r1)
+mr       r31, r3
+bl       __ct__Q23Sys15MatBaseAnimatorFv
+lis      r4, __vt__Q23Sys15MatLoopAnimator@ha
+mr       r3, r31
+addi     r0, r4, __vt__Q23Sys15MatLoopAnimator@l
+stw      r0, 0(r31)
+lwz      r31, 0xc(r1)
+lwz      r0, 0x14(r1)
+mtlr     r0
+addi     r1, r1, 0x10
+blr
+	*/
+}
 
 } // namespace Sys
 
@@ -2112,7 +2116,7 @@ void MapMgr::do_update(void) { }
  * Address:	80163A4C
  * Size:	000018
  */
-void MapMgr::clearPerfMonitor()
+void MapMgr::clearPerfMonitor(void)
 {
 	/*
 	li       r0, 0
@@ -2254,8 +2258,7 @@ void TriDivider::createTriangles(Sys::CreateTriangleArg&) { }
  * Address:	80163B70
  * Size:	00008C
  */
-// void getMinY__Q24Game11ShapeMapMgrFR10Vector3f(void)
-float ShapeMapMgr::getMinY(Vector3f&)
+void getMinY__Q24Game11ShapeMapMgrFR10Vector3f(void)
 {
 	/*
 	stwu     r1, -0x40(r1)
@@ -2734,7 +2737,7 @@ void ShapeMapMgr::getBoundBox(BoundBox&)
  * Address:	801640F0
  * Size:	000008
  */
-bool MapMgr::frozenable(void) { return false; }
+u32 MapMgr::frozenable(void) { return 0x0; }
 
 /*
  * --INFO--

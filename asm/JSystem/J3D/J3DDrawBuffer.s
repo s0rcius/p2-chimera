@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_J3DDrawBuffer_cpp
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804A1930
 lbl_804A1930:
 	.4byte 0x00000000
@@ -61,13 +60,13 @@ drawFuncTable__13J3DDrawBuffer:
 	.4byte 0x00000000
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global entryNum__13J3DDrawBuffer
 entryNum__13J3DDrawBuffer:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80516A00
 lbl_80516A00:
 	.float 1.0

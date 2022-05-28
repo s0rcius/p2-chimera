@@ -4,13 +4,7 @@
 #include "Vector3.h"
 
 struct Plane {
-	Plane()
-	    : a(0.0f)
-	    , b(1.0f)
-	    , c(0.0f)
-	    , d(0.0f)
-	{
-	}
+	Plane();
 
 	void read(Stream&);
 	void write(Stream&);

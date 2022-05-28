@@ -25,30 +25,15 @@ struct CNode {
 	void concat(CNode*);
 	void del();
 
-	/**
-	 * @reifiedAddress{8013917C}
-	 * @reifiedFile{plugProjectKandoU/collinfo.cpp}
-	 */
-	void setName(char* name) { m_name = name; }
+	void setName(char*);
 
-	/**
-	 * @fabricated
-	 */
-	inline void clearRelations()
+	inline void reset(char* name)
 	{
 		m_child  = nullptr;
 		m_parent = nullptr;
 		m_prev   = nullptr;
 		m_next   = nullptr;
-	}
-
-	/**
-	 * @fabricated
-	 */
-	inline void reset(char* name)
-	{
-		clearRelations();
-		setName(name);
+		m_name   = name;
 	}
 
 	// _00 vtbl

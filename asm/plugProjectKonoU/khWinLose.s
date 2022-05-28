@@ -1,32 +1,34 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_khWinLose_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80499358
 lbl_80499358:
 	.asciz "khWinLose.cpp"
-.balign 4
+	.skip 2
+.global lbl_80499368
 lbl_80499368:
 	.asciz "lose.blo"
-.balign 4
+	.skip 3
+.global lbl_80499374
 lbl_80499374:
 	.asciz "lose.bck"
-.balign 4
+	.skip 3
+.global lbl_80499380
 lbl_80499380:
 	.asciz "lose.bpk"
-.balign 4
+	.skip 3
+.global lbl_8049938C
 lbl_8049938C:
 	.asciz "time_up.blo"
-.balign 4
+.global lbl_80499398
 lbl_80499398:
 	.asciz "time_up.bck"
-.balign 4
+.global lbl_804993A4
 lbl_804993A4:
 	.asciz "time_up.bpk"
-.balign 4
-lbl_804993B0:
 	.4byte lbl_8052020C
 	.4byte lbl_80520214
 	.4byte lbl_8052021C
@@ -36,44 +38,54 @@ lbl_804993B0:
 	.4byte lbl_8049938C
 	.4byte lbl_80499398
 	.4byte lbl_804993A4
-.balign 4
+.global lbl_804993D4
 lbl_804993D4:
 	.asciz "win_wait.blo"
-.balign 4
+	.skip 3
+.global lbl_804993E4
 lbl_804993E4:
 	.asciz "win_wait.bck"
-.balign 4
+	.skip 3
+.global lbl_804993F4
 lbl_804993F4:
 	.asciz "win_wait.bpk"
-.balign 4
+	.skip 3
+.global lbl_80499404
 lbl_80499404:
 	.asciz "lose_wait.blo"
-.balign 4
+	.skip 2
+.global lbl_80499414
 lbl_80499414:
 	.asciz "lose_wait.bck"
-.balign 4
+	.skip 2
+.global lbl_80499424
 lbl_80499424:
 	.asciz "lose_wait.bpk"
-.balign 4
+	.skip 2
+.global lbl_80499434
 lbl_80499434:
 	.asciz "time_up_wait.blo"
-.balign 4
+	.skip 3
+.global lbl_80499448
 lbl_80499448:
 	.asciz "time_up_wait.bck"
-.balign 4
+	.skip 3
+.global lbl_8049945C
 lbl_8049945C:
 	.asciz "time_up_wait.bpk"
-.balign 4
+	.skip 3
+.global lbl_80499470
 lbl_80499470:
 	.asciz "draw.blo"
-.balign 4
+	.skip 3
+.global lbl_8049947C
 lbl_8049947C:
 	.asciz "draw.bck"
-.balign 4
+	.skip 3
+.global lbl_80499488
 lbl_80499488:
 	.asciz "draw.bpk"
-.balign 4
-lbl_80499494:
+	.skip 3
 	.4byte lbl_804993D4
 	.4byte lbl_804993E4
 	.4byte lbl_804993F4
@@ -86,18 +98,15 @@ lbl_80499494:
 	.4byte lbl_80499470
 	.4byte lbl_8049947C
 	.4byte lbl_80499488
-.balign 4
+.global lbl_804994C4
 lbl_804994C4:
 	.asciz "disp member err"
-.balign 4
-lbl_804994D4:
 	.asciz "screenObj.h"
-.balign 4
-lbl_804994E0:
 	.asciz "P2Assert"
+	.skip 7
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q32kh6Screen10ObjWinLose
 __vt__Q32kh6Screen10ObjWinLose:
 	.4byte 0
@@ -137,35 +146,44 @@ msVal__Q32kh6Screen10ObjWinLose:
 	.skip 0x1C
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80520208
 lbl_80520208:
 	.float 0.0
-.balign 4
+.global lbl_8052020C
 lbl_8052020C:
 	.asciz "win.blo"
-.balign 4
+.global lbl_80520214
 lbl_80520214:
 	.asciz "win.bck"
-.balign 4
+.global lbl_8052021C
 lbl_8052021C:
 	.asciz "win.bpk"
-.balign 4
+.global lbl_80520224
 lbl_80520224:
 	.float 1.0
-.balign 8
+.global lbl_80520228
 lbl_80520228:
 	.4byte 0x43300000
 	.4byte 0x80000000
+.global lbl_80520230
 lbl_80520230:
-	.float -120.0
+	.4byte 0xC2F00000
+.global lbl_80520234
 lbl_80520234:
-	.float 120.0
+	.4byte 0x42F00000
+.global lbl_80520238
 lbl_80520238:
-	.float 60.0
+	.4byte 0x42700000
+	.4byte 0x00000000
 
-.section .sbss2, "", @nobits # 0x80520E40 - 0x80520ED8
+.section .sbss2, "", @nobits # 0x80520e40 - 0x80520ED8
+.global lbl_80520ED0
 lbl_80520ED0:
-	.skip 0x8
+	.skip 0x4
+.global lbl_80520ED4
+lbl_80520ED4:
+	.skip 0x4
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q32kh6Screen10ObjWinLoseFv
@@ -228,7 +246,7 @@ doCreate__Q32kh6Screen10ObjWinLoseFP10JKRArchive:
 /* 8040FDB8 0040CCF8  7C 9A 23 78 */	mr r26, r4
 /* 8040FDBC 0040CCFC  7C 79 1B 78 */	mr r25, r3
 /* 8040FDC0 0040CD00  80 A2 2B 70 */	lwz r5, lbl_80520ED0@sda21(r2)
-/* 8040FDC4 0040CD04  80 02 2B 74 */	lwz r0, (lbl_80520ED0+4)@sda21(r2)
+/* 8040FDC4 0040CD04  80 02 2B 74 */	lwz r0, lbl_80520ED4@sda21(r2)
 /* 8040FDC8 0040CD08  82 1E 00 58 */	lwz r16, 0x58(r30)
 /* 8040FDCC 0040CD0C  82 3E 00 5C */	lwz r17, 0x5c(r30)
 /* 8040FDD0 0040CD10  82 5E 00 60 */	lwz r18, 0x60(r30)

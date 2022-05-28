@@ -803,11 +803,10 @@ __sinit_khFinalFloor_cpp:
 /* 80402848 003FF788  4B FF FF 04 */	b __dt__Q32kh6Screen13ObjFinalFloorFv
 
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_khFinalFloor_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 lbl_80498758:
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -850,7 +849,7 @@ lbl_80498824:
 	.asciz "screenObj.h"
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 govNAN___Q24Game5P2JST:
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -917,14 +916,14 @@ msVal__Q32kh6Screen13ObjFinalFloor:
 	.skip 0xC
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 gu32NAN___Q24Game5P2JST:
 	.skip 0x4
 gfNAN___Q24Game5P2JST:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 lbl_80520088:
 	.float 0.0
 lbl_8052008C:

@@ -1,12 +1,16 @@
 .include "macros.inc"
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80519418
 lbl_80519418:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051941C
 lbl_8051941C:
-	.float 20.0
+	.4byte 0x41A00000
+.global lbl_80519420
 lbl_80519420:
-	.float 1280000.0
+	.4byte 0x499C4000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q24Game8FootmarkFv

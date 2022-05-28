@@ -229,8 +229,6 @@
         .4byte 0x00000000
 */
 
-#include "Game/Entities/Kogane.h"
-
 namespace Game {
 
 /*

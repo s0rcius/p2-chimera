@@ -1,76 +1,129 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048B640
 lbl_8048B640:
 	.asciz "246-BigFootShadow"
-.balign 4
-lbl_8048B654:
+	.skip 2
 	.asciz "rhand1jnt"
-.balign 4
-lbl_8048B660:
+	.skip 2
 	.asciz "rhand2jnt"
-.balign 4
-lbl_8048B66C:
+	.skip 2
 	.asciz "rhand3jnt"
-.balign 4
-lbl_8048B678:
+	.skip 2
 	.asciz "lhand1jnt"
-.balign 4
-lbl_8048B684:
+	.skip 2
 	.asciz "lhand2jnt"
-.balign 4
-lbl_8048B690:
+	.skip 2
 	.asciz "lhand3jnt"
-.balign 4
-lbl_8048B69C:
+	.skip 2
 	.asciz "rfoot1jnt"
-.balign 4
-lbl_8048B6A8:
+	.skip 2
 	.asciz "rfoot2jnt"
-.balign 4
-lbl_8048B6B4:
+	.skip 2
 	.asciz "rfoot3jnt"
-.balign 4
-lbl_8048B6C0:
+	.skip 2
 	.asciz "lfoot1jnt"
-.balign 4
-lbl_8048B6CC:
+	.skip 2
 	.asciz "lfoot2jnt"
-.balign 4
-lbl_8048B6D8:
+	.skip 2
 	.asciz "lfoot3jnt"
+	.skip 6
+.global lbl_8048B6E8
+lbl_8048B6E8:
+	.asciz "rhand1jnt"
+	.skip 2
+.global lbl_8048B6F4
+lbl_8048B6F4:
+	.asciz "rhand2jnt"
+	.skip 2
+.global lbl_8048B700
+lbl_8048B700:
+	.asciz "rhand3jnt"
+	.skip 2
+.global lbl_8048B70C
+lbl_8048B70C:
+	.asciz "lhand1jnt"
+	.skip 2
+.global lbl_8048B718
+lbl_8048B718:
+	.asciz "lhand2jnt"
+	.skip 2
+.global lbl_8048B724
+lbl_8048B724:
+	.asciz "lhand3jnt"
+	.skip 2
+.global lbl_8048B730
+lbl_8048B730:
+	.asciz "rfoot1jnt"
+	.skip 2
+.global lbl_8048B73C
+lbl_8048B73C:
+	.asciz "rfoot2jnt"
+	.skip 2
+.global lbl_8048B748
+lbl_8048B748:
+	.asciz "rfoot3jnt"
+	.skip 2
+.global lbl_8048B754
+lbl_8048B754:
+	.asciz "lfoot1jnt"
+	.skip 2
+.global lbl_8048B760
+lbl_8048B760:
+	.asciz "lfoot2jnt"
+	.skip 2
+.global lbl_8048B76C
+lbl_8048B76C:
+	.asciz "lfoot3jnt"
+	.skip 2
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051C6E8
 lbl_8051C6E8:
-	.asciz "kosi"
-.balign 4
+	.4byte 0x6B6F7369
+	.4byte 0x00000000
+.global lbl_8051C6F0
 lbl_8051C6F0:
 	.float 0.5
+.global lbl_8051C6F4
 lbl_8051C6F4:
-	.float 3.0
+	.4byte 0x40400000
+.global lbl_8051C6F8
 lbl_8051C6F8:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051C6FC
 lbl_8051C6FC:
 	.float 1.0
+.global lbl_8051C700
 lbl_8051C700:
-	.float -75.0
+	.4byte 0xC2960000
+.global lbl_8051C704
 lbl_8051C704:
-	.float 2.5
+	.4byte 0x40200000
+.global lbl_8051C708
 lbl_8051C708:
-	.float 40.0
+	.4byte 0x42200000
+.global lbl_8051C70C
 lbl_8051C70C:
-	.float 60.0
+	.4byte 0x42700000
+.global lbl_8051C710
 lbl_8051C710:
-	.float -65.0
+	.4byte 0xC2820000
+.global lbl_8051C714
 lbl_8051C714:
-	.float 72.5
+	.4byte 0x42910000
+.global lbl_8051C718
 lbl_8051C718:
-	.float -10.0
+	.4byte 0xC1200000
+.global lbl_8051C71C
 lbl_8051C71C:
-	.float -5.0
+	.4byte 0xC0A00000
+.global lbl_8051C720
 lbl_8051C720:
-	.float -8.0
+	.4byte 0xC1000000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game7BigFoot16BigFootShadowMgrFPQ34Game7BigFoot3Obj

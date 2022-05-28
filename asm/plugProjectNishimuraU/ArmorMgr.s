@@ -1,21 +1,20 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_804870F8
 lbl_804870F8:
 	.asciz "246-ArmorMgr"
-.balign 4
-lbl_80487108: # Shift-JIS
+	.skip 3
+.global lbl_80487108
+lbl_80487108:
 	.4byte 0x8388838D
 	.4byte 0x83438380
 	.4byte 0x8356837D
 	.4byte 0x836C815B
 	.4byte 0x83578383
 	.4byte 0x00000000
-.balign 4
-lbl_80487120:
 	.asciz "EnemyParmsBase"
-.balign 4
-lbl_80487130: # Shift-JIS
+	.skip 1
 	.4byte 0x94928373
 	.4byte 0x834E837E
 	.4byte 0x83930000
@@ -203,7 +202,7 @@ lbl_80487130: # Shift-JIS
 	.4byte 0x82630000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game5Armor5Parms
 __vt__Q34Game5Armor5Parms:
 	.4byte 0
@@ -267,19 +266,26 @@ __vt__Q34Game5Armor3Mgr:
 	.4byte doLoadBmd__Q24Game12EnemyMgrBaseFPv
 	.4byte doLoadBdl__Q24Game12EnemyMgrBaseFPv
 	.4byte initGenerator__Q24Game12EnemyMgrBaseFv
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051B528
 lbl_8051B528:
-	.float 300.0
+	.4byte 0x43960000
+.global lbl_8051B52C
 lbl_8051B52C:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051B530
 lbl_8051B530:
-	.float 10000.0
+	.4byte 0x461C4000
+.global lbl_8051B534
 lbl_8051B534:
-	.float 10.0
+	.4byte 0x41200000
+.global lbl_8051B538
 lbl_8051B538:
-	.float 100.0
+	.4byte 0x42C80000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game5Armor3MgrFiUc

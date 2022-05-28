@@ -1,9 +1,6 @@
-#include "JSystem/J3D/J3DModel.h"
-#include "JSystem/JUT/JUTException.h"
 #include "SysShape/AnimInfo.h"
 #include "SysShape/AnimMgr.h"
 #include "types.h"
-#include "nans.h"
 
 /*
     Generated from dpostproc
@@ -73,11 +70,8 @@ namespace SysShape {
  * Address:	8043DCDC
  * Size:	000080
  */
-void AnimInfo::attach(J3DModelData* modelData, void* animData)
+void AnimInfo::attach(J3DModelData*, void*)
 {
-	// JUT_ASSERTLINE(64, animData != nullptr, "animData null!\n");
-	// m_anm = J3DAnmLoaderDataBase::load(animData);
-	// m_calc = J3DNewMtxCalcAnm(modelData->m_jointTree._08 & 0xf, m_anm);
 	/*
 	stwu     r1, -0x20(r1)
 	mflr     r0

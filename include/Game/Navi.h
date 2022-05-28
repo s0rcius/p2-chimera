@@ -1,15 +1,10 @@
 #ifndef _GAME_NAVI_H
 #define _GAME_NAVI_H
 
-#include "Color4.h"
-#include "efx/TChaseMtx.h"
 #include "Game/FakePiki.h"
 #include "Game/PelletView.h"
 #include "Game/StateMachine.h"
-#include "Game/GameSystem.h"
-#include "Game/PlayData.h"
 
-#include "JAInter/Object.h"
 #include "SysShape/Joint.h"
 
 #include "Dolphin/mtx.h"
@@ -37,6 +32,15 @@ struct KeyEvent;
 } // namespace SysShape
 
 namespace efx {
+struct Context {
+	Context();
+	~Context();
+};
+
+struct TOneEmitter {
+	~TOneEmitter();
+};
+
 struct TFueactCircle {
 	~TFueactCircle();
 };
@@ -51,6 +55,13 @@ struct TFueactBiri1 {
 
 struct TFueactBiri2 {
 	~TFueactBiri2();
+};
+
+struct TChaseMtxT {
+	~TChaseMtxT();
+};
+
+struct TChaseMtx2 {
 };
 
 struct TNaviEffect {
@@ -122,24 +133,19 @@ struct NaviState {
 struct NaviWhistle {
 	NaviWhistle(Navi*);
 
-	void init();
-	void updatePosition();
-	void start();
-	void stop();
-	void timeout();
-	void setFaceDir(float);
-	void updateWhistle();
-	void update(Vector3f&, bool);
-
-	Vector3f _00; // _00
+	f32 _00;      // _00
+	f32 _04;      // _04
+	f32 _08;      // _08
 	Vector3f _0C; // _0C
-	Vector3f _18; // _18
+	u8 _18[0xC];  // _18
 	f32 _24;      // _24
 	u16 _28;      // _28
 	f32 _2C;      // _2C
 	u32 _30;      // _30
-	Navi* m_navi; // _34
-	Color4 _38;   // _38
+	u32* _34;     // _34
+	u8 _38;       // _38
+	u8 _39;       // _39
+	u16 _3A;      // _3A
 };
 
 struct Navi : public FakePiki, virtual public PelletView {
@@ -162,7 +168,7 @@ struct Navi : public FakePiki, virtual public PelletView {
 	virtual void bounceCallback(Sys::Triangle*);               // _E0
 	virtual void collisionCallback(CollEvent&);                // _E4
 	virtual void platCallback(PlatEvent&);                     // _E8
-	virtual JAInter::Object* getJAIObject();                   // _EC
+	virtual void getJAIObject();                               // _EC
 	virtual PSM::Creature* getPSCreature();                    // _F0
 	virtual void on_movie_begin(bool);                         // _108
 	virtual void on_movie_end(bool);                           // _10C
@@ -177,7 +183,7 @@ struct Navi : public FakePiki, virtual public PelletView {
 	virtual void onStickStart(Creature*);                      // _150
 	virtual void onStickEnd(Creature*);                        // _154
 	virtual bool ignoreAtari(Creature*);                       // _188
-	virtual bool stimulate(Interaction&);                      // _19C
+	virtual void stimulate(Interaction&);                      // _19C
 	virtual char* getCreatureName();                           // _1A0
 	virtual s32 getCreatureID();                               // _1A4
 
@@ -253,7 +259,7 @@ struct Navi : public FakePiki, virtual public PelletView {
 	CPlate* m_cPlateMgr;       // _254
 	u8 _258;                   // _258
 	u8 m_stick;                // _259
-	s32 m_sprayCounts[2];      // _25C proven signed by Navi::hasDope
+	u32 m_sprayCounts[2];      // _25C
 	u8 _264[4];                // _264
 	bool m_isAlive;            // _268
 	u8 _269;                   // _269
@@ -324,14 +330,10 @@ struct NaviFSM : public StateMachine<Navi> {
 };
 
 struct NaviMgr {
-	virtual Navi* birth();
-
 	void setupNavi(Navi*);
 
-	u8 _00[0x54];
-	int naviIndexArray[2]; // _54
-	u8 _5C[0x70];
-	CollPartFactory* _CC;
+	u8 _00[0xCC];
+	CollPartFactory* _CC; // _CC
 };
 
 extern NaviMgr* naviMgr;

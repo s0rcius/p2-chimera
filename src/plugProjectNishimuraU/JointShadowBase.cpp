@@ -1,4 +1,3 @@
-#include "Vector3.h"
 #include "types.h"
 
 /*
@@ -24,9 +23,8 @@
  * Address:	802F2040
  * Size:	000278
  */
-void Game::TubeShadowTransNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&, Vector3f&)
+void makeShadowSRT__Q24Game19TubeShadowTransNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 {
-	// void makeShadowSRT__Q24Game19TubeShadowTransNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 	/*
 	.loc_0x0:
 	  stwu      r1, -0x80(r1)
@@ -201,9 +199,8 @@ void Game::TubeShadowTransNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&,
  * Address:	802F22B8
  * Size:	000278
  */
-void Game::TubeShadowSetNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&, Vector3f&)
+void makeShadowSRT__Q24Game17TubeShadowSetNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 {
-	// void makeShadowSRT__Q24Game17TubeShadowSetNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 	/*
 	.loc_0x0:
 	  stwu      r1, -0x80(r1)
@@ -378,9 +375,8 @@ void Game::TubeShadowSetNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&, V
  * Address:	802F2530
  * Size:	0001AC
  */
-void Game::TubeShadowPosNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&, Vector3f&)
+void makeShadowSRT__Q24Game17TubeShadowPosNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 {
-	// void makeShadowSRT__Q24Game17TubeShadowPosNodeFRQ24Game15JointShadowParmR10Vector3<float> R10Vector3f(void)
 	/*
 	.loc_0x0:
 	  stwu      r1, -0x70(r1)
@@ -504,9 +500,8 @@ void Game::TubeShadowPosNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&, V
  * Address:	802F26DC
  * Size:	000100
  */
-void Game::SphereShadowNode::makeShadowSRT(Game::JointShadowParm&, Vector3f&)
+void makeShadowSRT__Q24Game16SphereShadowNodeFRQ24Game15JointShadowParmR10Vector3<float>(void)
 {
-	// void makeShadowSRT__Q24Game16SphereShadowNodeFRQ24Game15JointShadowParmR10Vector3<float>(void)
 	/*
 	.loc_0x0:
 	  lfs       f1, -0x11EC(r2)

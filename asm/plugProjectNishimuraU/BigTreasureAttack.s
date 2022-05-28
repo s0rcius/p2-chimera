@@ -1,20 +1,24 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048D1F0
 lbl_8048D1F0:
 	.asciz "otakara_elec_eff"
-.balign 4
+	.skip 3
+.global lbl_8048D204
 lbl_8048D204:
 	.asciz "otakara_fire_eff"
-.balign 4
+	.skip 3
+.global lbl_8048D218
 lbl_8048D218:
 	.asciz "otakara_gas_eff"
-.balign 4
+.global lbl_8048D228
 lbl_8048D228:
 	.asciz "otakara_water_eff"
+	.skip 2
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q23efx12TOootaWbShot
 __vt__Q23efx12TOootaWbShot:
 	.4byte 0
@@ -228,105 +232,152 @@ __vt__Q34Game11BigTreasure16AttackShadowNode:
 	.4byte 0
 	.4byte __dt__Q34Game11BigTreasure16AttackShadowNodeFv
 	.4byte getChildCount__5CNodeFv
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051D200
 lbl_8051D200:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051D204
 lbl_8051D204:
-	.float 15.0
+	.4byte 0x41700000
+.global lbl_8051D208
 lbl_8051D208:
-	.float 2.5
+	.4byte 0x40200000
+.global lbl_8051D20C
 lbl_8051D20C:
-	.float -25.0
+	.4byte 0xC1C80000
+.global lbl_8051D210
 lbl_8051D210:
 	.float 1.0
+.global lbl_8051D214
 lbl_8051D214:
-	.float 3.0
+	.4byte 0x40400000
+.global lbl_8051D218
 lbl_8051D218:
-	.float 200.0
+	.4byte 0x43480000
+.global lbl_8051D21C
 lbl_8051D21C:
-	.float 40.0
+	.4byte 0x42200000
+.global lbl_8051D220
 lbl_8051D220:
-	.float 25.0
+	.4byte 0x41C80000
+.global lbl_8051D224
 lbl_8051D224:
-	.float 32768.0
+	.4byte 0x47000000
+.global lbl_8051D228
 lbl_8051D228:
-	.float 0.33
+	.4byte 0x3EA8F5C3
+.global lbl_8051D22C
 lbl_8051D22C:
-	.float -1000.0
-.balign 8
+	.4byte 0xC47A0000
+.global lbl_8051D230
 lbl_8051D230:
 	.4byte 0x43300000
 	.4byte 0x80000000
+.global lbl_8051D238
 lbl_8051D238:
-	.float 325.9493
+	.4byte 0x43A2F983
+.global lbl_8051D23C
 lbl_8051D23C:
-	.float -325.9493
+	.4byte 0xC3A2F983
+.global lbl_8051D240
 lbl_8051D240:
-	.float -15.0
+	.4byte 0xC1700000
+.global lbl_8051D244
 lbl_8051D244:
-	.float 0.27
+	.4byte 0x3E8A3D71
+.global lbl_8051D248
 lbl_8051D248:
-	.float 10.0
+	.4byte 0x41200000
+.global lbl_8051D24C
 lbl_8051D24C:
 	.float 0.5
+.global lbl_8051D250
 lbl_8051D250:
-	.float 480.0
+	.4byte 0x43F00000
+.global lbl_8051D254
 lbl_8051D254:
-	.float 30.0
+	.4byte 0x41F00000
+.global lbl_8051D258
 lbl_8051D258:
-	.float 0.67
+	.4byte 0x3F2B851F
+.global lbl_8051D25C
 lbl_8051D25C:
-	.float 20.0
+	.4byte 0x41A00000
+.global lbl_8051D260
 lbl_8051D260:
-	.float 300.0
+	.4byte 0x43960000
+.global lbl_8051D264
 lbl_8051D264:
-	.float 0.6
+	.4byte 0x3F19999A
+.global lbl_8051D268
 lbl_8051D268:
-	.float 150.0
+	.4byte 0x43160000
+.global lbl_8051D26C
 lbl_8051D26C:
-	.float 0.75
+	.4byte 0x3F400000
+.global lbl_8051D270
 lbl_8051D270:
-	.float 0.65
+	.4byte 0x3F266666
+.global lbl_8051D274
 lbl_8051D274:
-	.float 100.0
+	.4byte 0x42C80000
+.global lbl_8051D278
 lbl_8051D278:
-	.float 220.0
+	.4byte 0x435C0000
+.global lbl_8051D27C
 lbl_8051D27C:
-	.float 170.0
+	.4byte 0x432A0000
+.global lbl_8051D280
 lbl_8051D280:
-	.float 2.7
+	.4byte 0x402CCCCD
+.global lbl_8051D284
 lbl_8051D284:
 	.float 0.1
+.global lbl_8051D288
 lbl_8051D288:
-	.float 0.02
+	.4byte 0x3CA3D70A
+.global lbl_8051D28C
 lbl_8051D28C:
 	.float 0.25
+.global lbl_8051D290
 lbl_8051D290:
-	.float 50.0
+	.4byte 0x42480000
+.global lbl_8051D294
 lbl_8051D294:
-	.float 0.55
-lbl_8051D298: # tau
-	.float 6.2831855
-lbl_8051D29C: #four individual bytes, loaded as one word?
+	.4byte 0x3F0CCCCD
+.global lbl_8051D298
+lbl_8051D298:
+	.4byte 0x40C90FDB
+.global lbl_8051D29C
+lbl_8051D29C:
 	.4byte 0x01010101
+.global lbl_8051D2A0
 lbl_8051D2A0:
-	.float 500.0
+	.4byte 0x43FA0000
+.global lbl_8051D2A4
 lbl_8051D2A4:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051D2A8
 lbl_8051D2A8:
-	.float 350.0
+	.4byte 0x43AF0000
+.global lbl_8051D2AC
 lbl_8051D2AC:
-	.float 180.0
+	.4byte 0x43340000
+.global lbl_8051D2B0
 lbl_8051D2B0:
-	.float 1280.0
+	.4byte 0x44A00000
+.global lbl_8051D2B4
 lbl_8051D2B4:
-	.float 0.2
+	.4byte 0x3E4CCCCD
+.global lbl_8051D2B8
 lbl_8051D2B8:
-	.float 12.5
+	.4byte 0x41480000
+.global lbl_8051D2BC
 lbl_8051D2BC:
-	.float 7.5
+	.4byte 0x40F00000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global makeShadowSRT__Q34Game11BigTreasure16AttackShadowNodeFv

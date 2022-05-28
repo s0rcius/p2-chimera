@@ -1,27 +1,27 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_khWorldMap_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80497C70
 lbl_80497C70:
 	.asciz "khWorldMap.cpp"
-.balign 4
+	.skip 1
+.global cOpenMinFrm__Q22kh6Screen
 cOpenMinFrm__Q22kh6Screen:
 	.float 0.0
 	.float 300.0
 	.float 600.0
 	.float 900.0
+.global cOpenMaxFrm__Q22kh6Screen
 cOpenMaxFrm__Q22kh6Screen:
 	.float 300.0
 	.float 600.0
 	.float 900.0
 	.float 1100.0
-.balign 4
-lbl_80497CA0:
 	.asciz "P2Assert"
-.balign 4
+	.skip 3
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -54,52 +54,57 @@ lbl_80497CA0:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.balign 4
+.global lbl_80497D2C
 lbl_80497D2C:
 	.asciz "worldmap_icon.blo"
-.balign 4
+	.skip 2
+.global lbl_80497D40
 lbl_80497D40:
 	.asciz "worldmap_icon.bck"
-.balign 4
+	.skip 2
+.global lbl_80497D54
 lbl_80497D54:
 	.asciz "worldmap_icon.btp"
-.balign 4
+	.skip 2
+.global lbl_80497D68
 lbl_80497D68:
 	.asciz "worldmap_gicon.blo"
-.balign 4
+	.skip 1
+.global lbl_80497D7C
 lbl_80497D7C:
 	.asciz "worldmap_gicon.bck"
-.balign 4
+	.skip 1
+.global lbl_80497D90
 lbl_80497D90:
 	.asciz "worldmap_gicon.btp"
-.balign 4
-lbl_80497DA4:
+	.skip 1
 	.4byte lbl_80497D2C
 	.4byte lbl_80497D40
 	.4byte lbl_80497D54
 	.4byte lbl_80497D68
 	.4byte lbl_80497D7C
 	.4byte lbl_80497D90
-.balign 4
+.global lbl_80497DBC
 lbl_80497DBC:
 	.asciz "world_map_info.blo"
-.balign 4
+	.skip 1
+.global lbl_80497DD0
 lbl_80497DD0:
 	.asciz "world_map_info.btk"
-.balign 4
+	.skip 1
+.global lbl_80497DE4
 lbl_80497DE4:
 	.asciz "world_map_info_02.btk"
-.balign 4
+	.skip 2
+.global lbl_80497DFC
 lbl_80497DFC:
 	.asciz "world_map_info_03.btk"
-.balign 4
-lbl_80497E14:
+	.skip 2
 	.4byte lbl_80497DBC
 	.4byte lbl_80497DD0
 	.4byte lbl_80497DE4
 	.4byte lbl_80497DFC
-.balign 8
-lbl_80497E28:
+	.skip 4
 	.4byte 0x50494354
 	.4byte 0x5F303435
 	.4byte 0x0050675F
@@ -230,10 +235,12 @@ lbl_80497E28:
 	.4byte 0x65775F6C
 	.4byte 0x00545F6E
 	.4byte 0x65775F72
+.global lbl_80498030
 lbl_80498030:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+.global lbl_8049803C
 lbl_8049803C:
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -422,6 +429,7 @@ lbl_8049803C:
 	.4byte 0x635F3031
 	.4byte 0x0050335F
 	.4byte 0x635F3032
+.global lbl_80498328
 lbl_80498328:
 	.4byte 0x00004E77
 	.4byte 0x61697430
@@ -431,14 +439,18 @@ lbl_80498328:
 	.4byte 0x61697432
 	.4byte 0x00004E77
 	.4byte 0x61697433
+.global lbl_80498348
 lbl_80498348:
-	.asciz "ArgDirScale"
-.balign 4
-lbl_80498354:
-	.asciz "ArgScale"
+	.4byte 0x41726744
+	.4byte 0x69725363
+	.4byte 0x616C6500
+	.4byte 0x41726753
+	.4byte 0x63616C65
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
+.global lbl_804EA3A0
 lbl_804EA3A0:
 	.4byte lbl_803F3D80
 	.4byte lbl_803F4084
@@ -571,6 +583,7 @@ __vt__Q42kh6Screen14khUtilFadePane10khPaneNode:
 	.4byte 0
 	.4byte 0
 	.4byte __dt__Q42kh6Screen14khUtilFadePane10khPaneNodeFv
+	.4byte 0
 
 .section .bss  # 0x804EFC20 - 0x8051467C
 .global msVal__Q32kh6Screen8WorldMap
@@ -578,99 +591,139 @@ msVal__Q32kh6Screen8WorldMap:
 	.skip 0x7C
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051FEF0
 lbl_8051FEF0:
 	.float 1.0
+.global lbl_8051FEF4
 lbl_8051FEF4:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051FEF8
 lbl_8051FEF8:
-	.float -1.0
-.balign 4
+	.4byte 0xBF800000
+.global lbl_8051FEFC
 lbl_8051FEFC:
-	.asciz "failed"
-.balign 4
+	.4byte 0x6661696C
+	.4byte 0x65640000
+.global lbl_8051FF04
 lbl_8051FF04:
 	.float 0.1
+.global lbl_8051FF08
 lbl_8051FF08:
 	.float 0.7
+.global lbl_8051FF0C
 lbl_8051FF0C:
 	.float 0.3
+.global lbl_8051FF10
 lbl_8051FF10:
-	.float 1000.0
+	.4byte 0x447A0000
+.global lbl_8051FF14
 lbl_8051FF14:
 	.float 0.5
+.global lbl_8051FF18
 lbl_8051FF18:
-	.float 1.5
+	.4byte 0x3FC00000
+.global lbl_8051FF1C
 lbl_8051FF1C:
-	.float -0.1
+	.4byte 0xBDCCCCCD
+.global lbl_8051FF20
 lbl_8051FF20:
-	.float 32.0
+	.4byte 0x42000000
+.global lbl_8051FF24
 lbl_8051FF24:
-	.float 3.0
-lbl_8051FF28: #tau
-	.float 6.2831855
+	.4byte 0x40400000
+.global lbl_8051FF28
+lbl_8051FF28:
+	.4byte 0x40C90FDB
+.global lbl_8051FF2C
 lbl_8051FF2C:
-	.float 0.95
+	.4byte 0x3F733333
+.global lbl_8051FF30
 lbl_8051FF30:
-	.float 0.01
+	.4byte 0x3C23D70A
+.global lbl_8051FF34
 lbl_8051FF34:
-	.float 57.295776
+	.4byte 0x42652EE0
+.global lbl_8051FF38
 lbl_8051FF38:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051FF3C
 lbl_8051FF3C:
-	.float 255.0
-.balign 8
+	.4byte 0x437F0000
+.global lbl_8051FF40
 lbl_8051FF40:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_8051FF48
 lbl_8051FF48:
 	.4byte 0x43300000
 	.4byte 0x00000000
+.global lbl_8051FF50
 lbl_8051FF50:
-	.float 0.99
-lbl_8051FF54: #pi
-	.float 3.1415927
+	.4byte 0x3F7D70A4
+.global lbl_8051FF54
+lbl_8051FF54:
+	.4byte 0x40490FDB
+.global lbl_8051FF58
 lbl_8051FF58:
-	.float 0.02
+	.4byte 0x3CA3D70A
+.global lbl_8051FF5C
 lbl_8051FF5C:
-	.float -0.05
+	.4byte 0xBD4CCCCD
+.global lbl_8051FF60
 lbl_8051FF60:
 	.float 0.05
+.global lbl_8051FF64
 lbl_8051FF64:
-	.float 0.2
+	.4byte 0x3E4CCCCD
+.global lbl_8051FF68
 lbl_8051FF68:
-	.float 12.5
+	.4byte 0x41480000
+.global lbl_8051FF6C
 lbl_8051FF6C:
-	.float 11.5
+	.4byte 0x41380000
+.global lbl_8051FF70
 lbl_8051FF70:
 	.float 0.25
+.global lbl_8051FF74
 lbl_8051FF74:
-	.float 20.0
+	.4byte 0x41A00000
+.global lbl_8051FF78
 lbl_8051FF78:
-	.float 50.0
+	.4byte 0x42480000
+.global lbl_8051FF7C
 lbl_8051FF7C:
-	.float 4500.0
+	.4byte 0x458CA000
+.global lbl_8051FF80
 lbl_8051FF80:
-	.float 0.001
+	.4byte 0x3A83126F
+.global lbl_8051FF84
 lbl_8051FF84:
-	.float 0.92
+	.4byte 0x3F6B851F
+.global lbl_8051FF88
 lbl_8051FF88:
-	.float 800.0
+	.4byte 0x44480000
+.global lbl_8051FF8C
 lbl_8051FF8C:
-	.float 0.97
+	.4byte 0x3F7851EC
+.global lbl_8051FF90
 lbl_8051FF90:
-	.float 6000.0
+	.4byte 0x45BB8000
+.global lbl_8051FF94
 lbl_8051FF94:
-	.float 0.8
+	.4byte 0x3F4CCCCD
+.global lbl_8051FF98
 lbl_8051FF98:
-	.float 0.9
+	.4byte 0x3F666666
+.global lbl_8051FF9C
 lbl_8051FF9C:
-	.float 1.2
+	.4byte 0x3F99999A
+.global lbl_8051FFA0
 lbl_8051FFA0:
-	.float -0.01
+	.4byte 0xBC23D70A
+.global lbl_8051FFA4
 lbl_8051FFA4:
-	.float 0.88
+	.4byte 0x3F6147AE
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __dt__Q32kh6Screen14khUtilFadePaneFv

@@ -1,6 +1,5 @@
 #include "types.h"
 #include "Game/Cave/ObjectLayout.h"
-#include "Game/Cave/Node.h"
 
 namespace Game {
 namespace Cave {

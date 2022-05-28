@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_ogObjChallengeBase_cpp
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804DA058
 lbl_804DA058:
 	.4byte 0x00000000
@@ -50,7 +49,7 @@ msBaseVal__Q32og9newScreen16ObjChallengeBase:
 	.skip 0x1C
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_80515EB0
 lbl_80515EB0:
 	.skip 0x4
@@ -59,7 +58,7 @@ lbl_80515EB4:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_8051DF40
 lbl_8051DF40:
 	.4byte 0x00000000

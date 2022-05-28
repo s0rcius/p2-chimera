@@ -662,7 +662,7 @@ lbl_8019F560:
  * Size:	000014
  * Returns whether the creature is stuck to anything
  */
-bool Creature::isStickTo(void)
+void Creature::isStickTo(void)
 {
 	/*
 	lwz      r3, 0xf4(r3)
@@ -678,7 +678,7 @@ bool Creature::isStickTo(void)
  * Address:	8019F588
  * Size:	000060
  */
-bool Creature::isStickToMouth(void)
+void Creature::isStickToMouth(void)
 {
 	/*
 	stwu     r1, -0x10(r1)
@@ -715,7 +715,7 @@ lbl_8019F5D0:
  * Address:	........
  * Size:	000028
  */
-bool Creature::isStickLeader(void)
+void Creature::isStickLeader(void)
 {
 	// UNUSED FUNCTION
 }

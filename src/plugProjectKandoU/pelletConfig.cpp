@@ -114,7 +114,8 @@ PelletConfig* PelletConfigList::getPelletConfig(char* str)
 PelletConfig* PelletConfigList::getPelletConfig(int index)
 {
 	bool isValid = 0 <= index && index < m_configCnt;
-	P2ASSERTLINE(125, isValid);
+#line 125
+	P2ASSERT(isValid);
 
 	return &m_configs[index];
 }

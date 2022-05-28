@@ -1,13 +1,16 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048FE60
 lbl_8048FE60:
-	.asciz "PSAutoBgm.cpp"
-.balign 4
+	.4byte 0x50534175
+	.4byte 0x746F4267
+	.4byte 0x6D2E6370
+	.4byte 0x70000000
+.global lbl_8048FE70
 lbl_8048FE70:
 	.asciz "P2Assert"
-.balign 4
-lbl_8048FE7C: # Shift-JIS
+	.skip 3
 	.4byte 0x8386836A
 	.4byte 0x835D8393
 	.4byte 0x837D8358
@@ -30,15 +33,18 @@ lbl_8048FE7C: # Shift-JIS
 	.4byte 0x82A082E8
 	.4byte 0x82DC82B7
 	.4byte 0x00000000
-.balign 4
+.global lbl_8048FED4
 lbl_8048FED4:
-	.asciz "PSAutoBgm.h"
-.balign 4
-lbl_8048FEE0:
-	.asciz "not find(%s)"
+	.4byte 0x50534175
+	.4byte 0x746F4267
+	.4byte 0x6D2E6800
+	.4byte 0x6E6F7420
+	.4byte 0x66696E64
+	.4byte 0x28257329
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q29PSAutoBgm7AutoBgm
 __vt__Q29PSAutoBgm7AutoBgm:
 	.4byte 0
@@ -247,7 +253,7 @@ __vt__Q29PSAutoBgm9Conductor:
 	.4byte "load__Q210JADUtility7Prm<Uc>FR20JSUMemoryInputStream"
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sHeap__Q29PSAutoBgm12ConductorMgr
 sHeap__Q29PSAutoBgm12ConductorMgr:
 	.skip 0x4
@@ -256,17 +262,20 @@ sInstance__Q29PSAutoBgm15ConductorArcMgr:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E160
 lbl_8051E160:
-	.asciz "\0"
-.balign 4
+	.4byte 0x00000000
+.global lbl_8051E164
 lbl_8051E164:
-	.float 127.0
+	.4byte 0x42FE0000
+.global lbl_8051E168
 lbl_8051E168:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051E16C
 lbl_8051E16C:
 	.float 1.0
-.balign 8
+.global lbl_8051E170
 lbl_8051E170:
 	.4byte 0x43300000
 	.4byte 0x00000000

@@ -1,10 +1,14 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048F2E8
 lbl_8048F2E8:
-	.asciz "ogObjSave.cpp"
-.balign 4
-lbl_8048F2F8: #Shift-JIS
+	.4byte 0x6F674F62
+	.4byte 0x6A536176
+	.4byte 0x652E6370
+	.4byte 0x70000000
+.global lbl_8048F2F8
+lbl_8048F2F8:
 	.4byte 0x45525221
 	.4byte 0x20696E20
 	.4byte 0x4F626A53
@@ -15,7 +19,7 @@ lbl_8048F2F8: #Shift-JIS
 	.4byte 0x0A000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q32og9newScreen7ObjSave
 __vt__Q32og9newScreen7ObjSave:
 	.4byte 0
@@ -50,9 +54,11 @@ __vt__Q32og9newScreen7ObjSave:
 	.4byte doConfirmEndScene__Q26Screen7ObjBaseFRPQ26Screen11EndSceneArg
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051DD68
 lbl_8051DD68:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051DD6C
 lbl_8051DD6C:
 	.float 0.1
 

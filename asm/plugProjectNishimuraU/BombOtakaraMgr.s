@@ -1,10 +1,12 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048D3D8
 lbl_8048D3D8:
 	.asciz "/enemy/data/BombOtakara/otakara_bomb_s3tc.bti"
-.balign 4
-lbl_8048D408: # Shift-JIS
+	.skip 2
+.global lbl_8048D408
+lbl_8048D408:
 	.4byte 0x836F834E
 	.4byte 0x835F8393
 	.4byte 0x8349835E
@@ -13,15 +15,17 @@ lbl_8048D408: # Shift-JIS
 	.4byte 0x837D836C
 	.4byte 0x815B8357
 	.4byte 0x83830000
-.balign 4
+.global lbl_8048D428
 lbl_8048D428:
 	.asciz "BombOtakaraMgr.cpp"
-.balign 4
+	.skip 1
+.global lbl_8048D43C
 lbl_8048D43C:
 	.asciz "P2Assert"
+	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game11BombOtakara3Mgr
 __vt__Q34Game11BombOtakara3Mgr:
 	.4byte 0
@@ -81,10 +85,12 @@ __vt__Q34Game11BombOtakara3Mgr:
 	.4byte doLoadBdl__Q24Game12EnemyMgrBaseFPv
 	.4byte initGenerator__Q24Game12EnemyMgrBaseFv
 	.4byte getChangeTexture__Q34Game11BombOtakara3MgrFv
+	.4byte 0
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
-"cOtakaraChangeTexName__Q34Game11BombOtakara28@unnamed@BombOtakaraMgr_cpp@": # local object
+.balign 0x8
+.global "cOtakaraChangeTexName__Q34Game11BombOtakara28@unnamed@BombOtakaraMgr_cpp@"
+"cOtakaraChangeTexName__Q34Game11BombOtakara28@unnamed@BombOtakaraMgr_cpp@":
 	.4byte lbl_8048D3D8
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00

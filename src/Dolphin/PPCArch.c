@@ -1,5 +1,4 @@
 #include "types.h"
-#include "Dolphin/PPCArch.h"
 // clang-format off
 
 union FpscrUnion
@@ -410,14 +409,10 @@ asm void PPCMthid2 ( register u32 newhid2 )
  * --INFO--
  * Address:	........
  * Size:	00000C
- * UNUSED
  */
-asm u32 PPCMfwpar(void)
+void PPCMfwpar(void)
 {
-	nofralloc
-	sync
-	mfspr r3, 921
-	blr
+	// UNUSED FUNCTION
 }
 
 /*
@@ -506,13 +501,10 @@ void PPCDisableSpeculation (void)
  * --INFO--
  * Address:	........
  * Size:	000008
- * UNUSED
  */
-asm void PPCSetFpIEEEMode(void)
+void PPCSetFpIEEEMode(void)
 {
-    nofralloc
-    mtfsb0      29
-    blr
+	// UNUSED FUNCTION
 }
 
 /*

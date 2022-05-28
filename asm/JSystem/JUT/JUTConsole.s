@@ -1,49 +1,61 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__10JUTConsole
 __vt__10JUTConsole:
 	.4byte 0
 	.4byte 0
 	.4byte __dt__10JUTConsoleFv
+	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sManager__17JUTConsoleManager
 sManager__17JUTConsoleManager:
 	.skip 0x4
-sReportConsole: # local object
+.global sReportConsole
+sReportConsole:
 	.skip 0x4
-sWarningConsole: # local object
-	.skip 0x4
+.global sWarningConsole
+sWarningConsole:
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516568
 lbl_80516568:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051656C
 lbl_8051656C:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80516570
 lbl_80516570:
-	.float 640.0
+	.4byte 0x44200000
+.global lbl_80516574
 lbl_80516574:
-	.float 480.0
+	.4byte 0x43F00000
+.global lbl_80516578
 lbl_80516578:
 	.float -1.0
+.global lbl_8051657C
 lbl_8051657C:
 	.float 1.0
+.global lbl_80516580
 lbl_80516580:
-	.float 4.0
-.balign 8
+	.4byte 0x40800000
+	.4byte 0x00000000
+.global lbl_80516588
 lbl_80516588:
 	.4byte 0x43300000
 	.4byte 0x00000000
-.balign 8
+.global lbl_80516590
 lbl_80516590:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 4
+.global lbl_80516598
 lbl_80516598:
-	.asciz "%s"
+	.4byte 0x25730000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global create__10JUTConsoleFUiUiP7JKRHeap

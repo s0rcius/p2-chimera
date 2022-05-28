@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__19JPAParticleCallBack
 __vt__19JPAParticleCallBack:
 	.4byte 0
@@ -8,26 +8,37 @@ __vt__19JPAParticleCallBack:
 	.4byte 0
 	.4byte execute__19JPAParticleCallBackFP14JPABaseEmitterP15JPABaseParticle
 	.4byte draw__19JPAParticleCallBackFP14JPABaseEmitterP15JPABaseParticle
+	.4byte 0
+	.4byte 0
+	.4byte 0
+	.4byte 0
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516C30
 lbl_80516C30:
 	.float 1.0
+.global lbl_80516C34
 lbl_80516C34:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80516C38
 lbl_80516C38:
-	.float 32.0
+	.4byte 0x42000000
+.global lbl_80516C3C
 lbl_80516C3C:
 	.float 0.5
+.global lbl_80516C40
 lbl_80516C40:
-	.float 3.0
+	.4byte 0x40400000
+.global lbl_80516C44
 lbl_80516C44:
-	.float 32768.0
-.balign 8
+	.4byte 0x47000000
+.global lbl_80516C48
 lbl_80516C48:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_80516C50
 lbl_80516C50:
 	.4byte 0x43300000
 	.4byte 0x00000000

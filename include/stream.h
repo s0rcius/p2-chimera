@@ -36,11 +36,7 @@ struct Stream {
 	void writeFixedString(char*);
 
 	u8 readByte();
-	/**
-	 * @reifiedAddress{80139184}
-	 * @reifiedFile{plugProjectKandoU/collinfo.cpp}
-	 */
-	u16 readU16() { return readShort(); }
+	u16 readU16();
 	float readFloat();
 
 	int readInt();

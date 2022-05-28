@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_singleGS_Ending_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_804839B0
 lbl_804839B0:
 	.4byte 0x00000000
@@ -28,7 +27,7 @@ lbl_804839D8:
 	.4byte 0x68000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804C1370
 lbl_804C1370:
 	.4byte 0x00000000
@@ -89,7 +88,7 @@ __vt__Q34Game10SingleGame11EndingState:
 	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_80515CA0
 lbl_80515CA0:
 	.skip 0x4

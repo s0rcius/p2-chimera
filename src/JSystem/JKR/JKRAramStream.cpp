@@ -1,21 +1,28 @@
 #include "JSystem/JKR/Aram.h"
-#include "JSystem/JSupport/JSUStream.h"
-#include "Dolphin/os.h"
 #include "types.h"
 
 /*
     Generated from dpostproc
 
     .section .rodata  # 0x804732E0 - 0x8049E220
-    .balign 8
+    .global lbl_80473598
     lbl_80473598:
-        .asciz "JKRAramStream.cpp"
-    .balign 4
+        .4byte 0x4A4B5241
+        .4byte 0x72616D53
+        .4byte 0x74726561
+        .4byte 0x6D2E6370
+        .4byte 0x70000000
+    .global lbl_804735AC
     lbl_804735AC:
-        .asciz ":::Cannot alloc memory\n"
+        .4byte 0x3A3A3A43
+        .4byte 0x616E6E6F
+        .4byte 0x7420616C
+        .4byte 0x6C6F6320
+        .4byte 0x6D656D6F
+        .4byte 0x72790A00
+        .4byte 0x00000000
 
     .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-    .balign 8
     .global sMessageBuffer__13JKRAramStream
     sMessageBuffer__13JKRAramStream:
         .4byte 0x00000000
@@ -40,7 +47,6 @@
         .4byte run__13JKRAramStreamFv
 
     .section .sbss # 0x80514D80 - 0x80516360
-    .balign 8
     .global sAramStreamObject__13JKRAramStream
     sAramStreamObject__13JKRAramStream:
         .skip 0x4
@@ -55,31 +61,53 @@
         .skip 0x4
 
     .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-    .balign 8
+    .global lbl_805164E0
     lbl_805164E0:
-        .asciz "%s"
+        .4byte 0x25730000
+        .4byte 0x00000000
 */
-void* JKRAramStream::sMessageBuffer[4]      = { 0 }; // OSMessage
-OSMessageQueue JKRAramStream::sMessageQueue = { 0 };
-
-JKRAramStream* JKRAramStream::sAramStreamObject = nullptr;
-u8* JKRAramStream::transBuffer                  = nullptr;
-u32 JKRAramStream::transSize                    = nullptr;
-JKRHeap* JKRAramStream::transHeap               = nullptr;
 
 /*
  * --INFO--
  * Address:	80019F20
  * Size:	000070
  */
-
-JKRAramStream* JKRAramStream::create(s32 param)
+void JKRAramStream::create(long)
 {
-	if (JKRAramStream::sAramStreamObject == nullptr) {
-		JKRAramStream::sAramStreamObject = new (JKRHeap::sSystemHeap, 0) JKRAramStream(param);
-		setTransBuffer(nullptr, 0, nullptr);
-	}
-	return JKRAramStream::sAramStreamObject;
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	stw      r31, 0xc(r1)
+	mr       r31, r3
+	lwz      r0, sAramStreamObject__13JKRAramStream@sda21(r13)
+	cmplwi   r0, 0
+	bne      lbl_80019F78
+	lwz      r4, sSystemHeap__7JKRHeap@sda21(r13)
+	li       r3, 0x7c
+	li       r5, 0
+	bl       __nw__FUlP7JKRHeapi
+	or.      r0, r3, r3
+	beq      lbl_80019F64
+	mr       r4, r31
+	bl       __ct__13JKRAramStreamFl
+	mr       r0, r3
+
+lbl_80019F64:
+	stw      r0, sAramStreamObject__13JKRAramStream@sda21(r13)
+	li       r3, 0
+	li       r4, 0
+	li       r5, 0
+	bl       setTransBuffer__13JKRAramStreamFPUcUlP7JKRHeap
+
+lbl_80019F78:
+	lwz      r0, 0x14(r1)
+	lwz      r3, sAramStreamObject__13JKRAramStream@sda21(r13)
+	lwz      r31, 0xc(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
 }
 
 /*
@@ -87,10 +115,30 @@ JKRAramStream* JKRAramStream::create(s32 param)
  * Address:	80019F90
  * Size:	000050
  */
-JKRAramStream::JKRAramStream(s32 priority)
-    : JKRThread(0x4000, 0x10, priority)
+JKRAramStream::JKRAramStream(long)
 {
-	OSResumeThread(m_thread);
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	mr       r6, r4
+	li       r4, 0x4000
+	stw      r0, 0x14(r1)
+	li       r5, 0x10
+	stw      r31, 0xc(r1)
+	mr       r31, r3
+	bl       __ct__9JKRThreadFUlii
+	lis      r3, __vt__13JKRAramStream@ha
+	addi     r0, r3, __vt__13JKRAramStream@l
+	stw      r0, 0(r31)
+	lwz      r3, 0x2c(r31)
+	bl       OSResumeThread
+	lwz      r0, 0x14(r1)
+	mr       r3, r31
+	lwz      r31, 0xc(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
 }
 
 /*
@@ -98,30 +146,81 @@ JKRAramStream::JKRAramStream(s32 priority)
  * Address:	80019FE0
  * Size:	000060
  */
-JKRAramStream::~JKRAramStream() {};
+JKRAramStream::~JKRAramStream()
+{
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	stw      r31, 0xc(r1)
+	mr       r31, r4
+	stw      r30, 8(r1)
+	or.      r30, r3, r3
+	beq      lbl_8001A024
+	lis      r5, __vt__13JKRAramStream@ha
+	li       r4, 0
+	addi     r0, r5, __vt__13JKRAramStream@l
+	stw      r0, 0(r30)
+	bl       __dt__9JKRThreadFv
+	extsh.   r0, r31
+	ble      lbl_8001A024
+	mr       r3, r30
+	bl       __dl__FPv
+
+lbl_8001A024:
+	lwz      r0, 0x14(r1)
+	mr       r3, r30
+	lwz      r31, 0xc(r1)
+	lwz      r30, 8(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
+}
 
 /*
  * --INFO--
  * Address:	8001A040
  * Size:	000070
  */
-void JKRAramStream::run(void)
+void JKRAramStream::run()
 {
-	OSMessage result;
-	OSInitMessageQueue(&JKRAramStream::sMessageQueue, (void**)JKRAramStream::sMessageBuffer,
-	                   ARRAY_SIZE(sMessageBuffer)); // jank cast to void** to satisfy prototype
-	while (true) {
-		OSReceiveMessage(&JKRAramStream::sMessageQueue, &result, OS_MESSAGE_BLOCKING);
-		JKRAramStreamCommand* command = static_cast<JKRAramStreamCommand*>(result.message);
-		switch (command->type) {
-		case ECT_READ:
-			readFromAram();
-			break;
-		case ECT_WRITE:
-			writeToAram(command);
-			break;
-		}
-	}
+	/*
+	stwu     r1, -0x20(r1)
+	mflr     r0
+	lis      r3, sMessageQueue__13JKRAramStream@ha
+	lis      r4, sMessageBuffer__13JKRAramStream@ha
+	stw      r0, 0x24(r1)
+	addi     r3, r3, sMessageQueue__13JKRAramStream@l
+	li       r5, 4
+	addi     r4, r4, sMessageBuffer__13JKRAramStream@l
+	stw      r31, 0x1c(r1)
+	bl       OSInitMessageQueue
+	lis      r3, sMessageQueue__13JKRAramStream@ha
+	addi     r31, r3, sMessageQueue__13JKRAramStream@l
+
+lbl_8001A070:
+	mr       r3, r31
+	addi     r4, r1, 8
+	li       r5, 1
+	bl       OSReceiveMessage
+	lwz      r3, 8(r1)
+	lwz      r0, 0(r3)
+	cmpwi    r0, 2
+	beq      lbl_8001A0A8
+	bge      lbl_8001A070
+	cmpwi    r0, 1
+	bge      lbl_8001A0A0
+	b        lbl_8001A070
+
+lbl_8001A0A0:
+	bl       readFromAram__13JKRAramStreamFv
+	b        lbl_8001A070
+
+lbl_8001A0A8:
+	bl       writeToAram__13JKRAramStreamFP20JKRAramStreamCommand
+	b        lbl_8001A070
+	*/
 }
 
 /*
@@ -129,150 +228,270 @@ void JKRAramStream::run(void)
  * Address:	8001A0B0
  * Size:	000008
  */
-u32 JKRAramStream::readFromAram() { return 1; } // probably a define evaluating to 1
+u32 JKRAramStream::readFromAram() { return 0x1; }
 
 /*
  * --INFO--
  * Address:	8001A0B8
  * Size:	0001EC
  */
-s32 JKRAramStream::writeToAram(JKRAramStreamCommand* command)
+void JKRAramStream::writeToAram(JKRAramStreamCommand*)
 {
-	u32 dstSize       = command->mSize;
-	u32 offset        = command->mOffset;
-	u32 writtenLength = 0;
-	u32 destination   = command->mAddress;
-	u8* buffer        = command->mTransferBuffer;
-	u32 bufferSize    = command->mTransferBufferSize;
-	JKRHeap* heap     = command->mHeap;
-	if (buffer) {
-		bufferSize = (bufferSize) ? bufferSize : 0x8000;
+	/*
+	stwu     r1, -0x30(r1)
+	mflr     r0
+	stw      r0, 0x34(r1)
+	stmw     r24, 0x10(r1)
+	mr       r24, r3
+	li       r28, 0
+	lwz      r26, 0x1c(r3)
+	lwz      r30, 8(r3)
+	cmplwi   r26, 0
+	lwz      r29, 0x14(r3)
+	lwz      r27, 4(r3)
+	lwz      r0, 0x20(r3)
+	lwz      r25, 0x24(r3)
+	beq      lbl_8001A114
+	cmplwi   r0, 0
+	lis      r3, 0x00008000@ha
+	addi     r31, r3, 0x00008000@l
+	beq      lbl_8001A104
+	mr       r31, r0
 
-		command->mTransferBufferSize      = bufferSize;
-		command->mAllocatedTransferBuffer = false;
-	} else {
-		bufferSize = (bufferSize) ? bufferSize : 0x8000;
+lbl_8001A104:
+	stw      r31, 0x20(r24)
+	li       r0, 0
+	stb      r0, 0x28(r24)
+	b        lbl_8001A170
 
-		if (heap) {
-			buffer                   = (u8*)heap->JKRHeap::JKRAllocFromHeap(bufferSize, -0x20);
-			command->mTransferBuffer = buffer;
-		} else {
-			buffer                   = (u8*)JKRAllocFromSysHeap(bufferSize, -0x20);
-			command->mTransferBuffer = buffer;
-		}
+lbl_8001A114:
+	cmplwi   r0, 0
+	lis      r3, 0x00008000@ha
+	addi     r31, r3, 0x00008000@l
+	beq      lbl_8001A128
+	mr       r31, r0
 
-		command->mTransferBufferSize      = bufferSize;
-		command->mAllocatedTransferBuffer = true;
-	}
+lbl_8001A128:
+	cmplwi   r25, 0
+	beq      lbl_8001A14C
+	mr       r3, r31
+	mr       r5, r25
+	li       r4, -32
+	bl       alloc__7JKRHeapFUliP7JKRHeap
+	mr       r26, r3
+	stw      r26, 0x1c(r24)
+	b        lbl_8001A164
 
-	if (!buffer) {
-		if (!heap) {
-			JKRHeap::sCurrentHeap->dump();
-		} else {
-			heap->dump();
-		}
+lbl_8001A14C:
+	lwz      r3, sSystemHeap__7JKRHeap@sda21(r13)
+	mr       r4, r31
+	li       r5, -32
+	bl       alloc__7JKRHeapFUli
+	mr       r26, r3
+	stw      r26, 0x1c(r24)
 
-		JUT_PANICLINE(172, "%s", ":::Cannot alloc memory\n");
-	}
+lbl_8001A164:
+	stw      r31, 0x20(r24)
+	li       r0, 1
+	stb      r0, 0x28(r24)
 
-	if (buffer) {
-		command->mStream->seek(offset, SEEK_SET);
-		while (dstSize != 0) {
-			u32 length = (dstSize > bufferSize) ? bufferSize : dstSize;
+lbl_8001A170:
+	cmplwi   r26, 0
+	bne      lbl_8001A1CC
+	cmplwi   r25, 0
+	bne      lbl_8001A198
+	lwz      r3, sCurrentHeap__7JKRHeap@sda21(r13)
+	lwz      r12, 0(r3)
+	lwz      r12, 0x1c(r12)
+	mtctr    r12
+	bctrl
+	b        lbl_8001A1AC
 
-			s32 readLength = command->mStream->read(buffer, length);
-			if (readLength == 0) {
-				writtenLength = 0;
-				break;
-			}
+lbl_8001A198:
+	mr       r3, r25
+	lwz      r12, 0(r25)
+	lwz      r12, 0x1c(r12)
+	mtctr    r12
+	bctrl
 
-			JKRAramPiece::orderSync(0, (u32)buffer, destination, length, nullptr);
-			dstSize -= length;
-			writtenLength += length;
-			destination += length;
+lbl_8001A1AC:
+	lis      r3, lbl_80473598@ha
+	lis      r5, lbl_804735AC@ha
+	addi     r6, r5, lbl_804735AC@l
+	li       r4, 0xac
+	addi     r3, r3, lbl_80473598@l
+	addi     r5, r2, lbl_805164E0@sda21
+	crclr    6
+	bl       panic_f__12JUTExceptionFPCciPCce
 
-			if (command->mReturnSize) {
-				*command->mReturnSize += length;
-			}
-		}
+lbl_8001A1CC:
+	cmplwi   r26, 0
+	beq      lbl_8001A27C
+	lwz      r3, 0x10(r24)
+	mr       r4, r29
+	li       r5, 0
+	bl       seek__20JSURandomInputStreamFl17JSUStreamSeekFrom
+	b        lbl_8001A254
 
-		if (command->mAllocatedTransferBuffer) {
-			JKRHeap::free(buffer, (JKRHeap*)nullptr);
-			command->mAllocatedTransferBuffer = false;
-		}
-	}
+lbl_8001A1E8:
+	cmplw    r30, r31
+	mr       r25, r30
+	ble      lbl_8001A1F8
+	mr       r25, r31
 
-	OSSendMessage(&command->mMessageQueue, (void*)writtenLength, OS_MESSAGE_NON_BLOCKING);
-	return writtenLength;
-};
+lbl_8001A1F8:
+	lwz      r3, 0x10(r24)
+	mr       r4, r26
+	mr       r5, r25
+	bl       read__14JSUInputStreamFPvl
+	cmpwi    r3, 0
+	bne      lbl_8001A218
+	li       r28, 0
+	b        lbl_8001A25C
 
-/*
- * --INFO--
- * Address:	........
- * Size:	0000A0
- * Unused function, made-up contents. Do not take this seriously!
- * While the function exists in the map, this is almost certainly incorrect.
- * Should exist to generate JSURandomInputStream::getAvailable() const afterwards.
- */
+lbl_8001A218:
+	mr       r4, r26
+	mr       r5, r27
+	mr       r6, r25
+	li       r3, 0
+	li       r7, 0
+	bl       orderSync__12JKRAramPieceFiUlUlUlP12JKRAramBlock
+	lwz      r3, 0x18(r24)
+	subf     r30, r25, r30
+	add      r28, r28, r25
+	add      r27, r27, r25
+	cmplwi   r3, 0
+	beq      lbl_8001A254
+	lwz      r0, 0(r3)
+	add      r0, r0, r25
+	stw      r0, 0(r3)
 
-JKRAramStreamCommand* JKRAramStream::write_StreamToAram_Async(JSUFileInputStream* stream, JKRAramBlock* addr, u32 size, u32 offset,
-                                                              u32* returnSize)
-{
-	JKRAramStreamCommand* command = new (JKRHeap::sSystemHeap, -4) JKRAramStreamCommand();
-	command->type                 = ECT_WRITE;
-	command->mAddress             = (u32)addr;
-	command->mSize                = size;
-	command->mStream              = stream;
-	command->field_0x2c           = stream->getAvailable();
-	command->mOffset              = offset;
-	command->mTransferBuffer      = transBuffer;
-	command->mHeap                = transHeap;
-	command->mTransferBufferSize  = transSize;
-	command->mReturnSize          = returnSize;
-	if (returnSize) {
-		*returnSize = 0;
-	}
+lbl_8001A254:
+	cmplwi   r30, 0
+	bne      lbl_8001A1E8
 
-	OSInitMessageQueue(&command->mMessageQueue, &command->mMessage, 1);
-	OSSendMessage(&sMessageQueue, command, OS_MESSAGE_BLOCKING);
-	return command;
+lbl_8001A25C:
+	lbz      r0, 0x28(r24)
+	cmplwi   r0, 0
+	beq      lbl_8001A27C
+	mr       r3, r26
+	li       r4, 0
+	bl       free__7JKRHeapFPvP7JKRHeap
+	li       r0, 0
+	stb      r0, 0x28(r24)
+
+lbl_8001A27C:
+	mr       r4, r28
+	addi     r3, r24, 0x30
+	li       r5, 0
+	bl       OSSendMessage
+	mr       r3, r28
+	lmw      r24, 0x10(r1)
+	lwz      r0, 0x34(r1)
+	mtlr     r0
+	addi     r1, r1, 0x30
+	blr
+	*/
 }
 
 /*
  * --INFO--
  * Address:	8001A2A4
  * Size:	00005C
- * int JSURandomInputStream::getAvailable() const
- * Weak function, should live in JSUStream.h
  */
-
-// int JSURandomInputStream::getAvailable() const { return getLength() - getPosition(); };
+void JSURandomInputStream::getAvailable() const
+{
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	stw      r31, 0xc(r1)
+	stw      r30, 8(r1)
+	mr       r30, r3
+	lwz      r12, 0(r3)
+	lwz      r12, 0x18(r12)
+	mtctr    r12
+	bctrl
+	mr       r31, r3
+	mr       r3, r30
+	lwz      r12, 0(r30)
+	lwz      r12, 0x1c(r12)
+	mtctr    r12
+	bctrl
+	lwz      r0, 0x14(r1)
+	subf     r3, r3, r31
+	lwz      r31, 0xc(r1)
+	lwz      r30, 8(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
+}
 
 /*
  * --INFO--
  * Address:	8001A300
  * Size:	0000C8
  */
-JKRAramStreamCommand* JKRAramStream::write_StreamToAram_Async(JSUFileInputStream* stream, u32 addr, u32 size, u32 offset, u32* returnSize)
+void JKRAramStream::write_StreamToAram_Async(JSUFileInputStream*, unsigned long, unsigned long, unsigned long, unsigned long*)
 {
-	JKRAramStreamCommand* command = new (JKRHeap::sSystemHeap, -4) JKRAramStreamCommand();
-	command->type                 = ECT_WRITE;
-	command->mAddress             = addr;
-	command->mSize                = size;
-	command->mStream              = stream;
-	command->field_0x2c           = 0;
-	command->mOffset              = offset;
-	command->mTransferBuffer      = transBuffer;
-	command->mHeap                = transHeap;
-	command->mTransferBufferSize  = transSize;
-	command->mReturnSize          = returnSize;
-	if (returnSize) {
-		*returnSize = 0;
-	}
+	/*
+	.loc_0x0:
+	  stwu      r1, -0x20(r1)
+	  mflr      r0
+	  stw       r0, 0x24(r1)
+	  stmw      r26, 0x8(r1)
+	  mr        r27, r4
+	  mr        r26, r3
+	  mr        r28, r5
+	  mr        r29, r6
+	  mr        r30, r7
+	  li        r3, 0x5C
+	  li        r5, -0x4
+	  lwz       r4, -0x77D8(r13)
+	  bl        0x9C10
+	  mr.       r31, r3
+	  beq-      .loc_0x44
+	  bl        0x174
+	  mr        r31, r3
 
-	OSInitMessageQueue(&command->mMessageQueue, &command->mMessage, 1);
-	OSSendMessage(&sMessageQueue, command, OS_MESSAGE_BLOCKING);
-	return command;
+	.loc_0x44:
+	  li        r0, 0x2
+	  li        r3, 0
+	  stw       r0, 0x0(r31)
+	  cmplwi    r30, 0
+	  stw       r27, 0x4(r31)
+	  stw       r28, 0x8(r31)
+	  stw       r26, 0x10(r31)
+	  stw       r3, 0x2C(r31)
+	  stw       r29, 0x14(r31)
+	  lwz       r0, -0x789C(r13)
+	  stw       r0, 0x1C(r31)
+	  lwz       r0, -0x7894(r13)
+	  stw       r0, 0x24(r31)
+	  lwz       r0, -0x7898(r13)
+	  stw       r0, 0x20(r31)
+	  stw       r30, 0x18(r31)
+	  beq-      .loc_0x8C
+	  stw       r3, 0x0(r30)
+
+	.loc_0x8C:
+	  addi      r3, r31, 0x30
+	  addi      r4, r31, 0x50
+	  li        r5, 0x1
+	  bl        0xD5124
+	  lis       r3, 0x804A
+	  mr        r4, r31
+	  subi      r3, r3, 0x3B8
+	  li        r5, 0x1
+	  bl        0xD5170
+	  mr        r3, r31
+	  lmw       r26, 0x8(r1)
+	  lwz       r0, 0x24(r1)
+	  mtlr      r0
+	  addi      r1, r1, 0x20
+	  blr
+	*/
 }
 
 /*
@@ -280,29 +499,57 @@ JKRAramStreamCommand* JKRAramStream::write_StreamToAram_Async(JSUFileInputStream
  * Address:	8001A3C8
  * Size:	000094
  */
-JKRAramStreamCommand* JKRAramStream::sync(JKRAramStreamCommand* command, BOOL isNonBlocking)
+void JKRAramStream::sync(JKRAramStreamCommand*, int)
 {
-	OSMessage msg;
-	if (isNonBlocking == FALSE) {
-		OSReceiveMessage(&command->mMessageQueue, &msg.message, OS_MESSAGE_BLOCKING);
-		if (msg.message == nullptr) {
-			command = nullptr;
-			return command;
-		} else {
-			return command;
-		}
-	} else {
-		BOOL receiveResult = OSReceiveMessage(&command->mMessageQueue, &msg.message, OS_MESSAGE_NON_BLOCKING);
-		if (receiveResult == FALSE) {
-			command = nullptr;
-			return command;
-		} else if (msg.message == nullptr) {
-			command = nullptr;
-			return command;
-		} else {
-			return command;
-		}
-	}
+	/*
+	stwu     r1, -0x20(r1)
+	mflr     r0
+	cmpwi    r4, 0
+	stw      r0, 0x24(r1)
+	stw      r31, 0x1c(r1)
+	mr       r31, r3
+	bne      lbl_8001A410
+	addi     r3, r31, 0x30
+	addi     r4, r1, 8
+	li       r5, 1
+	bl       OSReceiveMessage
+	lwz      r0, 8(r1)
+	cmplwi   r0, 0
+	bne      lbl_8001A408
+	li       r3, 0
+	b        lbl_8001A448
+
+lbl_8001A408:
+	mr       r3, r31
+	b        lbl_8001A448
+
+lbl_8001A410:
+	addi     r3, r31, 0x30
+	addi     r4, r1, 8
+	li       r5, 0
+	bl       OSReceiveMessage
+	cmpwi    r3, 0
+	bne      lbl_8001A430
+	li       r3, 0
+	b        lbl_8001A448
+
+lbl_8001A430:
+	lwz      r0, 8(r1)
+	cmplwi   r0, 0
+	bne      lbl_8001A444
+	li       r3, 0
+	b        lbl_8001A448
+
+lbl_8001A444:
+	mr       r3, r31
+
+lbl_8001A448:
+	lwz      r0, 0x24(r1)
+	lwz      r31, 0x1c(r1)
+	mtlr     r0
+	addi     r1, r1, 0x20
+	blr
+	*/
 }
 
 /*
@@ -310,23 +557,35 @@ JKRAramStreamCommand* JKRAramStream::sync(JKRAramStreamCommand* command, BOOL is
  * Address:	8001A45C
  * Size:	000054
  */
-void JKRAramStream::setTransBuffer(u8* buffer, u32 bufferSize, JKRHeap* heap)
+void JKRAramStream::setTransBuffer(unsigned char*, unsigned long, JKRHeap*)
 {
-	transBuffer = nullptr;
-	transSize   = 0x8000;
-	transHeap   = nullptr;
+	/*
+	lis      r6, 0x00008000@ha
+	li       r7, 0
+	addi     r0, r6, 0x00008000@l
+	cmplwi   r3, 0
+	stw      r7, transBuffer__13JKRAramStream@sda21(r13)
+	stw      r0, transSize__13JKRAramStream@sda21(r13)
+	stw      r7, transHeap__13JKRAramStream@sda21(r13)
+	beq      lbl_8001A488
+	addi     r0, r3, 0x1f
+	rlwinm   r0, r0, 0, 0, 0x1a
+	stw      r0, transBuffer__13JKRAramStream@sda21(r13)
 
-	if (buffer) {
-		transBuffer = (u8*)ALIGN_NEXT((u32)buffer, 0x20);
-	}
+lbl_8001A488:
+	cmplwi   r4, 0
+	beq      lbl_8001A498
+	rlwinm   r0, r4, 0, 0, 0x1a
+	stw      r0, transSize__13JKRAramStream@sda21(r13)
 
-	if (bufferSize) {
-		transSize = ALIGN_PREV(bufferSize, 0x20);
-	}
-
-	if (heap && !buffer) {
-		transHeap = heap;
-	}
+lbl_8001A498:
+	cmplwi   r5, 0
+	beqlr
+	cmplwi   r3, 0
+	bnelr
+	stw      r5, transHeap__13JKRAramStream@sda21(r13)
+	blr
+	*/
 }
 
 /*
@@ -337,5 +596,5 @@ void JKRAramStream::setTransBuffer(u8* buffer, u32 bufferSize, JKRHeap* heap)
 JKRAramStreamCommand::JKRAramStreamCommand()
 {
 	// Generated from stb r0, 0x28(r3)
-	mAllocatedTransferBuffer = false;
+	_28 = 0;
 }

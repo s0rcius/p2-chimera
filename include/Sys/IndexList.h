@@ -6,11 +6,7 @@
 
 namespace Sys {
 struct IndexList : public ArrayContainer<int> {
-	/**
-	 * @reifiedAddress{801397AC}
-	 * @reifiedFile{plugProjectKandoU/collinfo.cpp}
-	 */
-	virtual ~IndexList() { } // _00
+	virtual ~IndexList();
 
 	void readObject(Stream&, int&);
 	void writeObject(Stream&, int&);

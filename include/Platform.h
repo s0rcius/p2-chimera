@@ -13,15 +13,10 @@ struct Platform : CNode {
 	Platform();
 	virtual ~Platform();
 
-	Sys::TriDivider* getTriDivider();
+	Sys::OBBTree* getTriDivider();
 	void setMapCodeAll(MapCode::Code&);
-	Platform* clone(Matrixf&);
+	void clone(Matrixf&);
 	void load(JKRFileLoader*, char*);
-
-	// Unused/inlined:
-	void setTriDivider(Sys::TriDivider*);
-	void read(Stream&);
-	void load(char*);
 
 	Sys::OBBTree* m_triDivider; // _18
 };

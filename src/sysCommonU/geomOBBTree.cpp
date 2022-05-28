@@ -65,7 +65,7 @@ namespace Sys {
  * Address:	8041CEBC
  * Size:	000170
  */
-void* OBBTree::clone(Matrixf&)
+void OBBTree::clone(Matrixf&)
 {
 	/*
 	stwu     r1, -0x30(r1)
@@ -206,7 +206,7 @@ namespace Sys {
  * Address:	........
  * Size:	000008
  */
-bool OBB::intersect(Sys::Sphere&)
+void OBB::intersect(Sys::Sphere&)
 {
 	// UNUSED FUNCTION
 }
@@ -216,7 +216,7 @@ bool OBB::intersect(Sys::Sphere&)
  * Address:	........
  * Size:	0002AC
  */
-bool OBB::intersect(Sys::VertexTable&, Sys::Triangle&)
+void OBB::intersect(Sys::VertexTable&, Sys::Triangle&)
 {
 	// UNUSED FUNCTION
 }

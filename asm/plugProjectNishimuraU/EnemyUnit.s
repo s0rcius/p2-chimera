@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game4Cave9EnemyNode
 __vt__Q34Game4Cave9EnemyNode:
 	.4byte 0
@@ -31,18 +31,24 @@ __vt__Q24Game16ObjectLayoutNode:
 	.4byte isFixedBattery__Q24Game16ObjectLayoutNodeFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051A708
 lbl_8051A708:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051A70C
 lbl_8051A70C:
-	.float 32768.0
-lbl_8051A710: # Tau
-	.float 6.2831855
+	.4byte 0x47000000
+.global lbl_8051A710
+lbl_8051A710:
+	.4byte 0x40C90FDB
+.global lbl_8051A714
 lbl_8051A714:
-	.float -325.9493
+	.4byte 0xC3A2F983
+.global lbl_8051A718
 lbl_8051A718:
-	.float 325.9493
-.balign 8
+	.4byte 0x43A2F983
+	.4byte 0x00000000
+.global lbl_8051A720
 lbl_8051A720:
 	.4byte 0x43300000
 	.4byte 0x80000000

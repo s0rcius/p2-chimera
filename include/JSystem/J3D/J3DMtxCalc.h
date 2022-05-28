@@ -1,11 +1,9 @@
 #ifndef _JSYSTEM_J3D_J3DMTXCALC_H
 #define _JSYSTEM_J3D_J3DMTXCALC_H
 
-#include "types.h"
-#include "JSystem/J3D/J3DAnmTransform.h"
-#include "Dolphin/vec.h"
-
+struct J3DAnmTransform;
 struct J3DMtxBuffer;
+struct Vec;
 
 struct J3DMtxCalc {
 	virtual ~J3DMtxCalc();                                         // _00

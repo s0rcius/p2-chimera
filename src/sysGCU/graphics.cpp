@@ -1,7 +1,6 @@
 #include "types.h"
 #include "Graphics.h"
 #include "Viewport.h"
-#include "nans.h"
 
 /*
     Generated from dpostproc

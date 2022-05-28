@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__9JAIStream
 __vt__9JAIStream:
 	.4byte 0
@@ -231,57 +231,77 @@ __vt__8JAISound:
 	.4byte onRelease__8JAISoundFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
+.global _port$2234
 _port$2234:
 	.skip 0x2
+.global _port$2291
 _port$2291:
 	.skip 0x2
+.global init$2292
 init$2292:
-	.skip 0x1
+	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516FE0
 lbl_80516FE0:
 	.float 1.0
+.global lbl_80516FE4
 lbl_80516FE4:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80516FE8
 lbl_80516FE8:
 	.float 0.5
-.balign 8
+	.4byte 0x00000000
+.global lbl_80516FF0
 lbl_80516FF0:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_80516FF8
 lbl_80516FF8:
-	.double 0.5
-.balign 8
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_80517000
 lbl_80517000:
-	.double 3.0
-.balign 8
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_80517008
 lbl_80517008:
-	.double 0.0
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global lbl_80517010
 lbl_80517010:
 	.float 0.1
+.global lbl_80517014
 lbl_80517014:
-	.float 2.0
-.balign 8
+	.4byte 0x40000000
+.global lbl_80517018
 lbl_80517018:
 	.4byte 0x43300000
 	.4byte 0x00000000
+.global lbl_80517020
 lbl_80517020:
-	.float 127.0
+	.4byte 0x42FE0000
+.global lbl_80517024
 lbl_80517024:
-	.float 4.2949673E9
+	.4byte 0x4F800000
+.global lbl_80517028
 lbl_80517028:
-	.float 1000.0
+	.4byte 0x447A0000
+.global lbl_8051702C
 lbl_8051702C:
-	.float 16.0
+	.4byte 0x41800000
+.global lbl_80517030
 lbl_80517030:
-	.float 192.0
+	.4byte 0x43400000
+.global lbl_80517034
 lbl_80517034:
 	.float -1.0
+.global lbl_80517038
 lbl_80517038:
-	.float 10.0
+	.4byte 0x41200000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__11JAISequenceFv

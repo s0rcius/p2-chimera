@@ -1,24 +1,24 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__12JUTGraphFifo
 __vt__12JUTGraphFifo:
 	.4byte 0
 	.4byte 0
 	.4byte __dt__12JUTGraphFifoFv
+	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sInitiated__12JUTGraphFifo
 sInitiated__12JUTGraphFifo:
-	.skip 0x1
-.balign 4
+	.skip 0x4
 .global sCurrentFifo__12JUTGraphFifo
 sCurrentFifo__12JUTGraphFifo:
 	.skip 0x4
 .global mGpStatus__12JUTGraphFifo
 mGpStatus__12JUTGraphFifo:
-	.skip 0x5
+	.skip 0x8
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__12JUTGraphFifoFUl

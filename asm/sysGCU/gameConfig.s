@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_gameConfig_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8049A428
 lbl_8049A428:
 	.4byte 0x67616D65
@@ -131,7 +130,7 @@ lbl_8049A428:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game10GameConfig5Parms
 __vt__Q34Game10GameConfig5Parms:
 	.4byte 0
@@ -145,7 +144,7 @@ gGameConfig__4Game:
 	.skip 0x27C
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80520710
 lbl_80520710:
 	.4byte 0x00000000
@@ -677,6 +676,7 @@ lbl_80432880:
 /* 80432890 0042F7D0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80432894 0042F7D4  4E 80 00 20 */	blr 
 
+.global __sinit_gameConfig_cpp
 __sinit_gameConfig_cpp:
 /* 80432898 0042F7D8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8043289C 0042F7DC  7C 08 02 A6 */	mflr r0

@@ -7,7 +7,6 @@
 #include "JSystem/J3D/J3DShape.h"
 #include "JSystem/J3D/J3DMaterial.h"
 #include "JSystem/J3D/J3DJointTree.h"
-#include "JSystem/J3D/J3DTypes.h"
 #include "JSystem/J3D/J3DVertexBuffer.h"
 #include "JSystem/JGeometry.h"
 
@@ -34,7 +33,7 @@ struct J3DModelData {
 	void simpleCalcMaterial(u16, Mtx*);
 	void syncJ3DSysFlags() const;
 
-	// VTBL _00
+	u32 _00;                          // _00
 	u8* m_bmd;                        // _04
 	u32 m_modelLoaderFlags;           // _08
 	u16 _0C;                          // _0C
@@ -46,19 +45,7 @@ struct J3DModelData {
 	J3DVertexData m_vertexData;       // _88
 };
 
-/**
- * @size{0xDC}
- */
 struct J3DModel {
-	/**
-	 * @fabricated
-	 */
-	J3DModel(J3DModelData* data, unsigned long p2, unsigned long modelType)
-	{
-		m_vertexBuffer.init();
-		initialize();
-		entryModelData(data, p2, modelType);
-	}
 	virtual void update();         // _00
 	virtual void entry();          // _04
 	virtual void calc();           // _08
@@ -66,22 +53,6 @@ struct J3DModel {
 	virtual void calcDiffTexMtx(); // _10
 	virtual void viewCalc();       // _14
 	virtual ~J3DModel();           // _18
-
-	void initialize();
-	void entryModelData(J3DModelData*, unsigned long, unsigned long);
-	J3DShapePacket* createShapePacket(J3DModelData*);
-	J3DMatPacket* createMatPacket(J3DModelData*, unsigned long);
-	void newDifferedDisplayList(unsigned long);
-	void newDifferedTexMtx(J3DTexDiffFlag);
-	void lock();
-	void makeDL();
-	void diff();
-	void setVtxColorCalc(J3DVtxColorCalc*, J3DDeformAttachFlag);
-	void calcWeightEnvelopeMtx();
-	void calcNrmMtx();
-	void calcBumpMtx();
-	void calcBBoardMtx();
-	void prepareShapePackets();
 
 	// _00 VTBL
 	J3DModelData* m_modelData;       // _04
@@ -91,7 +62,7 @@ struct J3DModel {
 	u32 _14;                         // _14
 	JGeometry::TVec3f m_modelScale;  // _18
 	Mtx _24;                         // _24
-	J3DMtxCalc* _54;                 // _54
+	Mtx _54;                         // _54
 	J3DMtxBuffer* m_mtxBuffer;       // _84
 	J3DVertexBuffer m_vertexBuffer;  // _88
 	J3DMatPacket* m_matPackets;      // _C0

@@ -1,32 +1,46 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_804820A8
 lbl_804820A8:
-	.asciz "actBridge"
-.balign 4
-lbl_804820B4:
-	.asciz "ActBridgeArg"
-.balign 4
-lbl_804820C4:
-	.asciz "aiBridge.cpp"
-.balign 4
-lbl_804820D4:
+	.4byte 0x61637442
+	.4byte 0x72696467
+	.4byte 0x65000000
+	.4byte 0x41637442
+	.4byte 0x72696467
+	.4byte 0x65417267
+	.4byte 0x00000000
+	.4byte 0x61694272
+	.4byte 0x69646765
+	.4byte 0x2E637070
+	.4byte 0x00000000
 	.asciz "P2Assert"
-.balign 4
-lbl_804820E0:
-	.asciz "ActionArg"
-.balign 4
-lbl_804820EC:
-	.asciz "StickAttackActionArg"
-.balign 4
-lbl_80482104:
-	.asciz "GotoPosActionArg"
-.balign 4
-lbl_80482118:
-	.asciz "FollowVectorFieldActionArg"
+	.skip 3
+	.4byte 0x41637469
+	.4byte 0x6F6E4172
+	.4byte 0x67000000
+	.4byte 0x53746963
+	.4byte 0x6B417474
+	.4byte 0x61636B41
+	.4byte 0x6374696F
+	.4byte 0x6E417267
+	.4byte 0x00000000
+	.4byte 0x476F746F
+	.4byte 0x506F7341
+	.4byte 0x6374696F
+	.4byte 0x6E417267
+	.4byte 0x00000000
+	.4byte 0x466F6C6C
+	.4byte 0x6F775665
+	.4byte 0x63746F72
+	.4byte 0x4669656C
+	.4byte 0x64416374
+	.4byte 0x696F6E41
+	.4byte 0x72670000
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q26PikiAI9ActBridge
 __vt__Q26PikiAI9ActBridge:
 	.4byte 0
@@ -48,14 +62,18 @@ __vt__Q26PikiAI9ActBridge:
 	.4byte 0
 	.4byte 0
 	.4byte "@52@4@onKeyEvent__Q26PikiAI9ActBridgeFRCQ28SysShape8KeyEvent"
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80519F58
 lbl_80519F58:
-	.asciz "Bridge"
-.balign 4
+	.4byte 0x42726964
+	.4byte 0x67650000
+.global lbl_80519F60
 lbl_80519F60:
 	.float 0.5
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q26PikiAI9ActBridgeFPQ24Game4Piki
@@ -548,6 +566,7 @@ bounceCallback__Q26PikiAI9ActBridgeFPQ24Game4PikiPQ23Sys8Triangle:
 onKeyEvent__Q26PikiAI9ActBridgeFRCQ28SysShape8KeyEvent:
 /* 80212944 0020F884  4E 80 00 20 */	blr 
 
+.global "@52@4@onKeyEvent__Q26PikiAI9ActBridgeFRCQ28SysShape8KeyEvent"
 "@52@4@onKeyEvent__Q26PikiAI9ActBridgeFRCQ28SysShape8KeyEvent":
 /* 80212948 0020F888  39 60 00 04 */	li r11, 4
 /* 8021294C 0020F88C  7D 63 58 2E */	lwzx r11, r3, r11

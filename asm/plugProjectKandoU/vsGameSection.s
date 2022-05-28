@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_vsGameSection_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8047FF98
 lbl_8047FF98:
 	.4byte 0x00000000
@@ -148,7 +147,7 @@ lbl_804800EC:
 	.4byte 0x67000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804B60E8
 lbl_804B60E8:
 	.4byte 0x00000000
@@ -329,7 +328,7 @@ __vt__Q34Game6VsGame3FSM:
 	.4byte transit__Q34Game6VsGame3FSMFPQ24Game13VsGameSectioniPQ24Game8StateArg
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_80515A88
 lbl_80515A88:
 	.skip 0x4
@@ -347,7 +346,7 @@ mDrawCount__Q24Game13VsGameSection:
 	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_805194A8
 lbl_805194A8:
 	.4byte 0x00000000
@@ -495,7 +494,7 @@ lbl_80519580:
 	.float 0.25
 	.4byte 0x00000000
 
-.section .sbss2, "", @nobits # 0x80520E40 - 0x80520ED8
+.section .sbss2, "", @nobits # 0x80520e40 - 0x80520ED8
 .global lbl_80520E68
 lbl_80520E68:
 	.skip 0x4

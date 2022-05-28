@@ -17,15 +17,10 @@ struct WPEdgeSearchArg {
 };
 
 enum WayPointFlags {
-	WPF_Unset    = 0x00,
-	WPF_Closed   = 0x01,
-	WPF_Water    = 0x02,
-	WPF_Bridge   = 0x04,
-	WPF_Unknown4 = 0x08,
-	WPF_Unknown5 = 0x10,
-	WPF_Unknown6 = 0x20,
-	WPF_Unknown7 = 0x40,
-	WPF_Unknown8 = 0x80
+	WPF_Unset  = 0,
+	WPF_Closed = 1,
+	WPF_Water  = 2,
+	WPF_Bridge = 4
 	// There is an additional value for "visited", and probably values for vs
 	// color
 };
@@ -138,9 +133,9 @@ struct EditorRouteMgr : public RouteMgr {
 	EditorRouteMgr();
 
 	virtual ~EditorRouteMgr();            // _00
-	virtual void* getNext(void*);         // _0C
-	virtual void* getStart();             // _10
-	virtual void* getEnd();               // _14
+	virtual int getNext(void*);           // _0C
+	virtual int getStart();               // _10
+	virtual int getEnd();                 // _14
 	virtual WayPoint* get(void*);         // _18
 	virtual WayPoint* getWayPoint(short); // _24
 	virtual void read(Stream&);           // _28
@@ -155,9 +150,9 @@ struct GameRouteMgr : public RouteMgr {
 	GameRouteMgr();
 
 	virtual ~GameRouteMgr();              // _00
-	virtual void* getNext(void*);         // _0C
-	virtual void* getStart();             // _10
-	virtual void* getEnd();               // _14
+	virtual int getNext(void*);           // _0C
+	virtual int getStart();               // _10
+	virtual int getEnd();                 // _14
 	virtual WayPoint* get(void*);         // _18
 	virtual WayPoint* getWayPoint(short); // _24
 	virtual void read(Stream&);           // _28

@@ -1,11 +1,12 @@
 .include "macros.inc"
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
-ResetFunctionQueue: # local object
+.balign 0x8
+.global ResetFunctionQueue
+ResetFunctionQueue:
 	.skip 0x8
-.balign 4
-bootThisDol: # local object
-	.skip 0x4
+.global bootThisDol
+bootThisDol:
+	.skip 0x8
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global OSRegisterResetFunction
@@ -51,7 +52,8 @@ lbl_800F0320:
 /* 800F0320 000ED260  90 64 00 08 */	stw r3, 8(r4)
 /* 800F0324 000ED264  4E 80 00 20 */	blr 
 
-Reset: # local function
+.global Reset
+Reset:
 /* 800F0328 000ED268  48 00 00 20 */	b lbl_800F0348
 lbl_800F032C:
 /* 800F032C 000ED26C  7D 10 FA A6 */	mfspr r8, 0x3f0

@@ -1,41 +1,49 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80499660
 lbl_80499660:
 	.asciz "stream.cpp"
-.balign 4
+	.skip 0x1
+.global lbl_8049966C
 lbl_8049966C:
 	.asciz "Reached EOF\n"
-.balign 4
+	.skip 0x3
+.global readByteTokErr
 readByteTokErr:
 	.asciz "readByte:Token Error\n"
-.balign 4
+	.skip 0x2
+.global readShortTokErr
 readShortTokErr:
 	.asciz "readShort:Token Error\n"
-.balign 4
+	.skip 0x1
+.global readIntTokErr
 readIntTokErr:
 	.asciz "readInt:Token Error\n"
-.balign 4
+	.skip 0x3
+.global readFloatTokErr
 readFloatTokErr:
 	.asciz "readFloat:Token Error\n"
-.balign 4
-lbl_804996DC:
+	.skip 0x1
+.global "assert@3391"
+"assert@3391":
 	.asciz "P2Assert"
-.balign 4
-lbl_804996E8:
+	.skip 0x3
 	.asciz "can not use readFixedString in text mode\n"
-.balign 4
-lbl_80499714:
+	.skip 0x2
 	.asciz "can not use writeFixedString in text mode\n"
-.balign 4
+	.skip 0x1
+.global lbl_80499740
 lbl_80499740:
 	.asciz "RamStream::read out of bounds (pos=%d,bound=%d)\n"
-.balign 4
+	.skip 0x3
+.global lbl_80499774
 lbl_80499774:
 	.asciz "RamStream::write out of bounds (pos=%d,bound=%d)\n"
+	.skip 0x2
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__9RamStream
 __vt__9RamStream:
 	.4byte 0
@@ -54,34 +62,37 @@ __vt__6Stream:
 	.4byte getPending__6StreamFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_805202E0
 lbl_805202E0:
-	.asciz "# %s\r\n"
-.balign 4
+	.4byte 0x23202573
+	.4byte 0x0D0A0000
+.global lbl_805202E8
 lbl_805202E8:
-	.asciz "{\r\n"
-.balign 4
+	.4byte 0x7B0D0A00
+.global lbl_805202EC
 lbl_805202EC:
-	.asciz "}\r\n"
-.balign 4
+	.4byte 0x7D0D0A00
+.global lbl_805202F0
 lbl_805202F0:
-	.asciz "%d"
-.balign 4
+	.4byte 0x25640000
+.global lbl_805202F4
 lbl_805202F4:
-	.asciz "%f"
-.balign 4
+	.4byte 0x25660000
+.global lbl_805202F8
 lbl_805202F8:
-	.asciz " "
-.balign 4
+	.4byte 0x20000000
+.global lbl_805202FC
 lbl_805202FC:
-	.asciz "%d "
-.balign 4
+	.4byte 0x25642000
+.global lbl_80520300
 lbl_80520300:
-	.asciz "%f "
+	.4byte 0x25662000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global eof__6StreamFv
-eof__6StreamFv: # weak function
+eof__6StreamFv:
 /* 80413DEC 00410D2C  38 60 00 00 */	li r3, 0
 /* 80413DF0 00410D30  4E 80 00 20 */	blr 
 
@@ -2182,6 +2193,6 @@ lbl_80415A94:
 /* 80415A98 004129D8  4E 80 00 20 */	blr 
 
 .global getPending__6StreamFv
-getPending__6StreamFv: # weak function
+getPending__6StreamFv:
 /* 80415A9C 004129DC  38 60 00 00 */	li r3, 0
 /* 80415AA0 004129E0  4E 80 00 20 */	blr 

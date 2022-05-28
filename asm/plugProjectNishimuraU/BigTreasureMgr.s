@@ -1,34 +1,31 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8048C1F0
 lbl_8048C1F0:
 	.asciz "246-BigTreasureMgr"
-.balign 4
-lbl_8048C204:
+	.skip 1
 	.asciz "/enemy/data/BigTreasure/oootakara_model.btk"
-.balign 4
-lbl_8048C230:
 	.asciz "/enemy/data/BigTreasure/oootakara_model.brk"
-.balign 4
+.global lbl_8048C25C
 lbl_8048C25C:
 	.4byte lbl_8051CAB0
 	.4byte lbl_8051CAB8
 	.4byte lbl_8051CAC0
 	.4byte lbl_8051CAC4
 	.4byte lbl_8051CACC
-.balign 4
-lbl_8048C270: # Shift-JIS
+.global lbl_8048C270
+lbl_8048C270:
 	.4byte 0x83498349
 	.4byte 0x8349835E
 	.4byte 0x834A8389
 	.4byte 0x837D836C
 	.4byte 0x815B8357
 	.4byte 0x83830000
-.balign 4
-lbl_8048C288:
-	.asciz "EnemyParmsBase"
-.balign 4
-lbl_8048C298: # Shift-JIS
+	.4byte 0x456E656D
+	.4byte 0x79506172
+	.4byte 0x6D734261
+	.4byte 0x73650000
 	.4byte 0x8378815B
 	.4byte 0x83588C57
 	.4byte 0x90940000
@@ -453,18 +450,24 @@ lbl_8048C298: # Shift-JIS
 	.4byte 0x95A582A2
 	.4byte 0x91C58C82
 	.4byte 0x82630000
-.balign 4
+.global lbl_8048C938
 lbl_8048C938:
-	.asciz "BigTreasureMgr.cpp"
-.balign 4
+	.4byte 0x42696754
+	.4byte 0x72656173
+	.4byte 0x7572654D
+	.4byte 0x67722E63
+	.4byte 0x70700000
+.global lbl_8048C94C
 lbl_8048C94C:
 	.asciz "P2Assert"
-.balign 4
-lbl_8048C958:
-	.asciz "PelletInitArg"
+	.skip 3
+	.4byte 0x50656C6C
+	.4byte 0x6574496E
+	.4byte 0x69744172
+	.4byte 0x67000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game11BigTreasure3Mgr
 __vt__Q34Game11BigTreasure3Mgr:
 	.4byte 0
@@ -528,114 +531,164 @@ __vt__Q34Game11BigTreasure5Parms:
 	.4byte 0
 	.4byte 0
 	.4byte read__Q34Game11BigTreasure5ParmsFR6Stream
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051CAB0
 lbl_8051CAB0:
 	.asciz "elec"
-.balign 4
+	.skip 3
+.global lbl_8051CAB8
 lbl_8051CAB8:
 	.asciz "fire"
-.balign 4
+	.skip 3
+.global lbl_8051CAC0
 lbl_8051CAC0:
 	.asciz "gas"
-.balign 4
+.global lbl_8051CAC4
 lbl_8051CAC4:
 	.asciz "water"
-.balign 4
+	.skip 2
+.global lbl_8051CACC
 lbl_8051CACC:
 	.asciz "loozy"
-.balign 4
+	.skip 2
+.global lbl_8051CAD4
 lbl_8051CAD4:
 	.float 3.0
+.global lbl_8051CAD8
 lbl_8051CAD8:
 	.float 0.0
+.global lbl_8051CADC
 lbl_8051CADC:
-	.float 10.0
+	.4byte 0x41200000
+.global lbl_8051CAE0
 lbl_8051CAE0:
-	.float -0.2
+	.4byte 0xBE4CCCCD
+.global lbl_8051CAE4
 lbl_8051CAE4:
-	.float -5.0
+	.4byte 0xC0A00000
+.global lbl_8051CAE8
 lbl_8051CAE8:
-	.float 5.0
+	.4byte 0x40A00000
+.global lbl_8051CAEC
 lbl_8051CAEC:
 	.float 0.5
+.global lbl_8051CAF0
 lbl_8051CAF0:
-	.float -2.0
+	.4byte 0xC0000000
+.global lbl_8051CAF4
 lbl_8051CAF4:
-	.float -10.0
+	.4byte 0xC1200000
+.global lbl_8051CAF8
 lbl_8051CAF8:
-	.float 120.0
+	.4byte 0x42F00000
+.global lbl_8051CAFC
 lbl_8051CAFC:
-	.float 200.0
+	.4byte 0x43480000
+.global lbl_8051CB00
 lbl_8051CB00:
-	.float 2.5
+	.4byte 0x40200000
+.global lbl_8051CB04
 lbl_8051CB04:
-	.float 2.8
+	.4byte 0x40333333
+.global lbl_8051CB08
 lbl_8051CB08:
-	.float 0.75
+	.4byte 0x3F400000
+.global lbl_8051CB0C
 lbl_8051CB0C:
 	.float 1.0
+.global lbl_8051CB10
 lbl_8051CB10:
-	.float 0.65
+	.4byte 0x3F266666
+.global lbl_8051CB14
 lbl_8051CB14:
-	.float 100.0
+	.4byte 0x42C80000
+.global lbl_8051CB18
 lbl_8051CB18:
-	.float 500.0
+	.4byte 0x43FA0000
+.global lbl_8051CB1C
 lbl_8051CB1C:
-	.float 220.0
+	.4byte 0x435C0000
+.global lbl_8051CB20
 lbl_8051CB20:
-	.float 170.0
+	.4byte 0x432A0000
+.global lbl_8051CB24
 lbl_8051CB24:
-	.float 2.7
+	.4byte 0x402CCCCD
+.global lbl_8051CB28
 lbl_8051CB28:
-	.float 0.02
+	.4byte 0x3CA3D70A
+.global lbl_8051CB2C
 lbl_8051CB2C:
 	.float 0.7
+.global lbl_8051CB30
 lbl_8051CB30:
-	.float 80.0
+	.4byte 0x42A00000
+.global lbl_8051CB34
 lbl_8051CB34:
-	.float 250.0
+	.4byte 0x437A0000
+.global lbl_8051CB38
 lbl_8051CB38:
-	.float 350.0
+	.4byte 0x43AF0000
+.global lbl_8051CB3C
 lbl_8051CB3C:
-	.float 4.5
+	.4byte 0x40900000
+.global lbl_8051CB40
 lbl_8051CB40:
-	.float 0.97
+	.4byte 0x3F7851EC
+.global lbl_8051CB44
 lbl_8051CB44:
-	.float 60.0
+	.4byte 0x42700000
+.global lbl_8051CB48
 lbl_8051CB48:
-	.float 70.0
+	.4byte 0x428C0000
+.global lbl_8051CB4C
 lbl_8051CB4C:
 	.float 0.25
+.global lbl_8051CB50
 lbl_8051CB50:
-	.float 0.2
+	.4byte 0x3E4CCCCD
+.global lbl_8051CB54
 lbl_8051CB54:
-	.float 0.985
+	.4byte 0x3F7C28F6
+.global lbl_8051CB58
 lbl_8051CB58:
-	.float 90.0
+	.4byte 0x42B40000
+.global lbl_8051CB5C
 lbl_8051CB5C:
-	.float 20.0
+	.4byte 0x41A00000
+.global lbl_8051CB60
 lbl_8051CB60:
 	.float 0.15
+.global lbl_8051CB64
 lbl_8051CB64:
-	.float 1.25
+	.4byte 0x3FA00000
+.global lbl_8051CB68
 lbl_8051CB68:
-	.float 0.015
+	.4byte 0x3C75C28F
+.global lbl_8051CB6C
 lbl_8051CB6C:
-	.float 0.01
+	.4byte 0x3C23D70A
+.global lbl_8051CB70
 lbl_8051CB70:
-	.float 0.03
+	.4byte 0x3CF5C28F
+.global lbl_8051CB74
 lbl_8051CB74:
-	.float 30.0
+	.4byte 0x41F00000
+.global lbl_8051CB78
 lbl_8051CB78:
-	.float 2.0
+	.4byte 0x40000000
+.global lbl_8051CB7C
 lbl_8051CB7C:
 	.float 0.1
+.global lbl_8051CB80
 lbl_8051CB80:
-	.float 0.4
+	.4byte 0x3ECCCCCD
+.global lbl_8051CB84
 lbl_8051CB84:
-	.float 50.0
+	.4byte 0x42480000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game11BigTreasure3MgrFiUc

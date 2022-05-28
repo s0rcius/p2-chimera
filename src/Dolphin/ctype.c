@@ -302,15 +302,9 @@ void iswblank(void)
  * Address:	........
  * Size:	000024
  */
-int toupper(int __c)
+void toupper(void)
 {
 	// UNUSED FUNCTION
-	{
-		if (__c == -1) {
-			return 0xffffffff;
-		}
-		return (unsigned int)__upper_map[__c & 0xff];
-	}
 }
 
 /*
@@ -384,10 +378,9 @@ void isprint(void)
  * Address:	........
  * Size:	000018
  */
-BOOL islower(unsigned char c)
+void islower(void)
 {
 	// UNUSED FUNCTION
-	return __ctype_map[c] & CTYPE_LOWER;
 }
 
 /*

@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_PSMainSide_Sound_cpp
 	
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8049DC30
 lbl_8049DC30:
 	.4byte 0x00000000
@@ -162,7 +161,7 @@ lbl_8049DE10:
 	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804EF9A8
 lbl_804EF9A8:
 	.4byte 0x00000000
@@ -233,7 +232,7 @@ __vt__Q23PSM7SeSound:
 	.4byte setSePositionDopplar__5JAISeFv
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global cDol_0Rad__Q23PSM7SeSound
 cDol_0Rad__Q23PSM7SeSound:
 	.float 1.0316
@@ -251,7 +250,7 @@ cCenterRad__Q23PSM7SeSound:
 	.float 1.57
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_80516330
 lbl_80516330:
 	.skip 0x4
@@ -266,7 +265,7 @@ init$3854_1:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80520D90
 lbl_80520D90:
 	.float 1.0

@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game11BombOtakara3Obj
 __vt__Q34Game11BombOtakara3Obj:
 	.4byte 0
@@ -216,13 +216,16 @@ __vt__Q34Game11BombOtakara3Obj:
 	.4byte "@756@12@viewStartCarryMotion__Q24Game9EnemyBaseFv"
 	.4byte "@756@12@viewOnPelletKilled__Q24Game9EnemyBaseFv"
 	.4byte "viewEntryShape__Q24Game10PelletViewFR7MatrixfR10Vector3<f>"
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051D2F0
 lbl_8051D2F0:
-	.float 2.5
+	.4byte 0x40200000
+.global lbl_8051D2F4
 lbl_8051D2F4:
-	.float 0.0
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game11BombOtakara3ObjFv

@@ -4,7 +4,7 @@
 #include "Dolphin/os.h"
 #include "Dolphin/dvd.h"
 #include "JSystem/JKR/JKRDisposer.h"
-#include "JSystem/JSupport/JSUList.h"
+#include "JSystem/JSU/JSUList.h"
 #include "types.h"
 
 struct JSUFileInputStream;
@@ -74,9 +74,9 @@ struct JKRDvdFile : public JKRFile {
 	DVDPlayer m_dvdPlayer;             // _5C
 	void* _98;                         // _98  Gets assigned `this` in initiate.
 	OSMessageQueue _9C;                // _9C
-	void* _BC;                         // _BC  Single msg slot for _9C
+	OSMessage _BC;                     // _BC  Single msg slot for _9C
 	OSMessageQueue _C0;                // _C0
-	void* _E0;                         // _E0  Single msg slot for _C0
+	OSMessage _E0;                     // _E0  Single msg slot for _C0
 	JSUPtrLink _E4;                    // _E4
 	OSThread* _F4;                     // _F4
 

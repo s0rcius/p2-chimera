@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q27JAInter6Object
 __vt__Q27JAInter6Object:
 	.4byte 0
@@ -34,19 +34,28 @@ __vt__Q27JAInter10ObjectBase:
 	.4byte getFreeSoundHandlePointer__Q27JAInter10ObjectBaseFv
 	.4byte getUseSoundHandlePointer__Q27JAInter10ObjectBaseFUl
 	.4byte handleStop__Q27JAInter10ObjectBaseFUcUl
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80517058
 lbl_80517058:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051705C
 lbl_8051705C:
 	.float 0.5
+.global lbl_80517060
 lbl_80517060:
-	.double 0.5
+	.4byte 0x3FE00000
+	.4byte 0x00000000
+.global lbl_80517068
 lbl_80517068:
-	.double 3.0
+	.4byte 0x40080000
+	.4byte 0x00000000
+.global lbl_80517070
 lbl_80517070:
-	.double 0.0
+	.4byte 0x00000000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __dt__Q27JAInter10ObjectBaseFv

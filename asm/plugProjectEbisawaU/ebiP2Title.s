@@ -1,34 +1,35 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_ebiP2Title_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80495C58
 lbl_80495C58:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-.balign 4
-lbl_80495C64:
-	.asciz "ebiP2Title"
-.balign 4
-lbl_80495C70:
-	.asciz "TTitleMgr"
-.balign 4
-lbl_80495C7C:
-	.asciz "TTitleCameraParameters"
-.balign 4
-lbl_80495C94: # Shift-JIS
+	.4byte 0x65626950
+	.4byte 0x32546974
+	.4byte 0x6C650000
+	.4byte 0x54546974
+	.4byte 0x6C654D67
+	.4byte 0x72000000
+	.4byte 0x54546974
+	.4byte 0x6C654361
+	.4byte 0x6D657261
+	.4byte 0x50617261
+	.4byte 0x6D657465
+	.4byte 0x72730000
 	.4byte 0x834A8381
 	.4byte 0x83898B97
 	.4byte 0x97A3838D
 	.4byte 0x83530000
-.balign 4
-lbl_80495CA4:
-	.asciz "TTitleFogParameters"
-.balign 4
-lbl_80495CB8: # Shift-JIS
+	.4byte 0x54546974
+	.4byte 0x6C65466F
+	.4byte 0x67506172
+	.4byte 0x616D6574
+	.4byte 0x65727300
 	.4byte 0x83748348
 	.4byte 0x834F974C
 	.4byte 0x8CF896B3
@@ -357,7 +358,7 @@ lbl_80495CB8: # Shift-JIS
 	.4byte 0x0A000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global lbl_804E7828
 lbl_804E7828:
 	.4byte 0x00000000
@@ -494,7 +495,7 @@ __vt__Q33ebi5title8TObjBase:
 	.4byte isCalc__Q33ebi5title8TObjBaseFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global lbl_805160A0
 lbl_805160A0:
 	.skip 0x4
@@ -515,7 +516,7 @@ init$5257:
 	.skip 0x4
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_8051F6F8
 lbl_8051F6F8:
 	.4byte 0x00000000
@@ -5014,7 +5015,8 @@ getCreatureType__Q33ebi5title8TObjBaseFv:
 /* 803C0AC0 003BDA00  38 60 FF FF */	li r3, -1
 /* 803C0AC4 003BDA04  4E 80 00 20 */	blr 
 
-__sinit_ebiP2Title_cpp: # static initializer
+.global __sinit_ebiP2Title_cpp
+__sinit_ebiP2Title_cpp:
 /* 803C0AC8 003BDA08  3C 80 80 51 */	lis r4, __float_nan@ha
 /* 803C0ACC 003BDA0C  38 00 FF FF */	li r0, -1
 /* 803C0AD0 003BDA10  C0 04 48 B0 */	lfs f0, __float_nan@l(r4)

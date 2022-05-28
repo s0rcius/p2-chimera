@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global sDifferedRegister
 sDifferedRegister:
 	.4byte 0x00000001
@@ -48,11 +48,16 @@ __vt__9J3DPacket:
 	.4byte draw__9J3DPacketFv
 	.4byte __dt__9J3DPacketFv
 
+.section .bss  # 0x804EFC20 - 0x8051467C
+.global sGDLObj__17J3DDisplayListObj
+sGDLObj__17J3DDisplayListObj:
+	.skip 0x10
+
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sInterruptFlag__17J3DDisplayListObj
 sInterruptFlag__17J3DDisplayListObj:
-	.skip 4
+	.skip 0x8
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global newDisplayList__17J3DDisplayListObjFUl

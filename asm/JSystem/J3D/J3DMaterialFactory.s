@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__14J3DPEBlockNull
 __vt__14J3DPEBlockNull:
 	.4byte 0
@@ -159,7 +159,7 @@ __vt__17J3DColorBlockNull:
 	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80516A80
 lbl_80516A80:
 	.4byte 0xFFFFFFFF
@@ -171,7 +171,7 @@ lbl_80516A88:
 	.4byte 0xFFFFFFFF
 	.4byte 0x00000000
 
-.section .sbss2, "", @nobits # 0x80520E40 - 0x80520ED8
+.section .sbss2, "", @nobits # 0x80520e40 - 0x80520ED8
 .global lbl_80520E48
 lbl_80520E48:
 	.skip 0x4

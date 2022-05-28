@@ -1,20 +1,23 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80483EA0
 lbl_80483EA0:
 	.asciz "texCaster"
-.balign 4
+	.skip 2
+.global lbl_80483EAC
 lbl_80483EAC:
 	.asciz "texCaster.cpp"
-.balign 4
+	.skip 2
+.global lbl_80483EBC
 lbl_80483EBC:
 	.asciz "P2Assert"
-.balign 4
-lbl_80483EC8:
+	.skip 3
 	.asciz "user/Kando/texCaster/arc.szs"
+	.skip 3
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q29TexCaster6Caster
 __vt__Q29TexCaster6Caster:
 	.4byte 0
@@ -23,33 +26,41 @@ __vt__Q29TexCaster6Caster:
 	.4byte getChildCount__5CNodeFv
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sInstance__Q29TexCaster3Mgr
 sInstance__Q29TexCaster3Mgr:
-	.skip 4
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051A5D8
 lbl_8051A5D8:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051A5DC
 lbl_8051A5DC:
 	.float 1.0
+.global lbl_8051A5E0
 lbl_8051A5E0:
-	.float 255.0
-.balign 4
+	.4byte 0x437F0000
+.global lbl_8051A5E4
 lbl_8051A5E4:
-	.asciz "tex.bti"
-.balign 4
+	.4byte 0x7465782E
+	.4byte 0x62746900
+.global lbl_8051A5EC
 lbl_8051A5EC:
 	.float 0.1
+.global lbl_8051A5F0
 lbl_8051A5F0:
 	.float 0.5
+.global lbl_8051A5F4
 lbl_8051A5F4:
-	.float 0.22
+	.4byte 0x3E6147AE
+.global lbl_8051A5F8
 lbl_8051A5F8:
-	.float 0.03125
+	.4byte 0x3D000000
+.global lbl_8051A5FC
 lbl_8051A5FC:
-	.float 30.0
+	.4byte 0x41F00000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __dt__Q29TexCaster6CasterFv

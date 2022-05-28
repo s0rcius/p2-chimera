@@ -1,8 +1,7 @@
 #ifndef _OG_NEWSCREEN_OGUTIL_H
 #define _OG_NEWSCREEN_OGUTIL_H
 
-#include "types.h"
-#include "Graphics.h"
+struct Graphics;
 
 namespace og {
 namespace newScreen {

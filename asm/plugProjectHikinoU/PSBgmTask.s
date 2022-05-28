@@ -1,56 +1,62 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global sTable__Q28PSSystem20TriangleTableModTask
 sTable__Q28PSSystem20TriangleTableModTask:
-	.float 0.0
+	.4byte 0x00000000
 	.float 0.1
-	.float 0.2
+	.4byte 0x3E4CCCCD
 	.float 0.3
-	.float 0.4
+	.4byte 0x3ECCCCCD
 	.float 0.5
-	.float 0.6
+	.4byte 0x3F19999A
 	.float 0.7
-	.float 0.8
-	.float 0.9
+	.4byte 0x3F4CCCCD
+	.4byte 0x3F666666
 	.float 1.0
-	.float 0.9
-	.float 0.8
+	.4byte 0x3F666666
+	.4byte 0x3F4CCCCD
 	.float 0.7
-	.float 0.6
+	.4byte 0x3F19999A
 	.float 0.5
-	.float 0.4
+	.4byte 0x3ECCCCCD
 	.float 0.3
-	.float 0.2
+	.4byte 0x3E4CCCCD
 	.float 0.1
-	.float 0.0
-	.float -0.1
-	.float -0.2
-	.float -0.3
-	.float -0.4
-	.float -0.5
-	.float -0.6
-	.float -0.7
-	.float -0.8
-	.float -0.9
-	.float -1.0
-	.float -0.9
-	.float -0.8
-	.float -0.7
-	.float -0.6
-	.float -0.5
-	.float -0.4
-	.float -0.3
-	.float -0.2
-	.float -0.1
+	.4byte 0x00000000
+	.4byte 0xBDCCCCCD
+	.4byte 0xBE4CCCCD
+	.4byte 0xBE99999A
+	.4byte 0xBECCCCCD
+	.4byte 0xBF000000
+	.4byte 0xBF19999A
+	.4byte 0xBF333333
+	.4byte 0xBF4CCCCD
+	.4byte 0xBF666666
+	.4byte 0xBF800000
+	.4byte 0xBF666666
+	.4byte 0xBF4CCCCD
+	.4byte 0xBF333333
+	.4byte 0xBF19999A
+	.4byte 0xBF000000
+	.4byte 0xBECCCCCD
+	.4byte 0xBE99999A
+	.4byte 0xBE4CCCCD
+	.4byte 0xBDCCCCCD
+.global lbl_8048FFF0
 lbl_8048FFF0:
-	.asciz "PSBgmTask.cpp"
-.balign 4
+	.4byte 0x50534267
+	.4byte 0x6D546173
+	.4byte 0x6B2E6370
+	.4byte 0x70000000
+.global lbl_80490000
 lbl_80490000:
-	.asciz "P2Assert"
+	.4byte 0x50324173
+	.4byte 0x73657274
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q28PSSystem14SimpleWaitTask
 __vt__Q28PSSystem14SimpleWaitTask:
 	.4byte 0
@@ -86,20 +92,24 @@ __vt__Q28PSSystem16ModParamWithFade:
 	.4byte task__Q28PSSystem16ModParamWithFadeFR8JASTrack
 	.4byte 0
 	.4byte 0
+	.4byte 0
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sInstance__Q28PSSystem11BankRandPrm
 sInstance__Q28PSSystem11BankRandPrm:
-	.skip 0x4
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051E178
 lbl_8051E178:
 	.4byte 0x43300000
 	.4byte 0x00000000
+.global lbl_8051E180
 lbl_8051E180:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051E184
 lbl_8051E184:
 	.float 1.0
 

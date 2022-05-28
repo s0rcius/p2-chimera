@@ -1,24 +1,38 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80483828
 lbl_80483828:
-	.asciz "cellIterator.cpp"
-.balign 4
+	.4byte 0x63656C6C
+	.4byte 0x49746572
+	.4byte 0x61746F72
+	.4byte 0x2E637070
+	.4byte 0x00000000
+.global lbl_8048383C
 lbl_8048383C:
-	.asciz "xy %f %f\n%f %f\n"
+	.4byte 0x78792025
+	.4byte 0x66202566
+	.4byte 0x0A256620
+	.4byte 0x25660A00
+	.4byte 0x00000000
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051A300
 lbl_8051A300:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_8051A304
 lbl_8051A304:
 	.float 1.0
+.global lbl_8051A308
 lbl_8051A308:
-	.asciz "x %f>%f"
-.balign 4
+	.4byte 0x78202566
+	.4byte 0x3E256600
+.global lbl_8051A310
 lbl_8051A310:
-	.asciz "y %f>%f"
-.balign 8
+	.4byte 0x79202566
+	.4byte 0x3E256600
+.global lbl_8051A318
 lbl_8051A318:
 	.4byte 0x43300000
 	.4byte 0x00000000

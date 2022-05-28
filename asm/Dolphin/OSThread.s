@@ -1,19 +1,24 @@
 .include "macros.inc"
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
+.global SwitchThreadCallback
 SwitchThreadCallback:
 	.4byte DefaultSwitchThreadCallback
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
+.global RunQueueBits
 RunQueueBits:
-	.skip 4
+	.skip 0x4
+.global RunQueueHint
 RunQueueHint:
-	.skip 4
+	.skip 0x4
+.global Reschedule
 Reschedule:
-	.skip 4
+	.skip 0x8
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
+.global DefaultSwitchThreadCallback
 DefaultSwitchThreadCallback:
 /* 800F1858 000EE798  4E 80 00 20 */	blr 
 
@@ -178,6 +183,7 @@ OSEnableScheduler:
 /* 800F1A7C 000EE9BC  7C 08 03 A6 */	mtlr r0
 /* 800F1A80 000EE9C0  4E 80 00 20 */	blr 
 
+.global UnsetRun
 UnsetRun:
 /* 800F1A84 000EE9C4  80 83 02 E0 */	lwz r4, 0x2e0(r3)
 /* 800F1A88 000EE9C8  80 A3 02 DC */	lwz r5, 0x2dc(r3)
@@ -232,6 +238,7 @@ lbl_800F1B18:
 /* 800F1B20 000EEA60  7C 83 23 78 */	mr r3, r4
 /* 800F1B24 000EEA64  4E 80 00 20 */	blr 
 
+.global SetEffectivePriority
 SetEffectivePriority:
 /* 800F1B28 000EEA68  7C 08 02 A6 */	mflr r0
 /* 800F1B2C 000EEA6C  90 01 00 04 */	stw r0, 4(r1)
@@ -391,6 +398,7 @@ lbl_800F1D24:
 /* 800F1D30 000EEC70  7C 08 03 A6 */	mtlr r0
 /* 800F1D34 000EEC74  4E 80 00 20 */	blr 
 
+.global SelectThread
 SelectThread:
 /* 800F1D38 000EEC78  7C 08 02 A6 */	mflr r0
 /* 800F1D3C 000EEC7C  3C 80 80 4F */	lis r4, RunQueue@ha

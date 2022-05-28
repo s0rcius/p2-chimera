@@ -1,77 +1,80 @@
 .include "macros.inc"
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game10PelletList3Mgr
 __vt__Q34Game10PelletList3Mgr:
 	.4byte 0
 	.4byte 0
 	.4byte __dt__Q34Game10PelletList3MgrFv
+	.4byte 0
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80483320
 lbl_80483320:
 	.asciz "gamePelletList"
-.balign 4
+	.skip 1
+.global lbl_80483330
 lbl_80483330:
 	.asciz "gamePelletList.cpp"
-.balign 4
+	.skip 1
+.global lbl_80483344
 lbl_80483344:
 	.asciz "P2Assert"
-.balign 4
+	.skip 3
+.global lbl_80483350
 lbl_80483350:
 	.asciz "numberpellet_config.txt"
-.balign 4
+.global lbl_80483368
 lbl_80483368:
 	.asciz "carcass_config.txt"
-.balign 4
+	.skip 1
+.global lbl_8048337C
 lbl_8048337C:
 	.asciz "fruit_config.txt"
-.balign 4
+	.skip 3
+.global lbl_80483390
 lbl_80483390:
 	.asciz "otakara_config.txt"
-.balign 4
+	.skip 1
+.global lbl_804833A4
 lbl_804833A4:
 	.asciz "item_config.txt"
-.balign 4
-lbl_804833B4:
 	.4byte lbl_80483350
 	.4byte lbl_80483368
 	.4byte lbl_8048337C
 	.4byte lbl_80483390
 	.4byte lbl_804833A4
-.balign 4
-lbl_804833C8:
 	.asciz "/user/Abe/Pellet/%s/pelletlist_%s.szs"
-.balign 4
-lbl_804833F0:
+	.skip 2
 	.asciz "don't use this !\n"
-.balign 4
-lbl_80483404:
+	.skip 2
 	.asciz "/user/Kando/pelletlist.szs"
-.balign 4
-lbl_80483420:
+	.skip 1
 	.asciz "no pelletlist.szs\n"
-.balign 4
-lbl_80483434:
+	.skip 1
 	.asciz "no config file [%s]\n"
-.balign 4
+	.skip 3
+.global lbl_8048344C
 lbl_8048344C:
 	.asciz "dictNo:%d \n"
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global mInstance__Q34Game10PelletList3Mgr
 mInstance__Q34Game10PelletList3Mgr:
-	.skip 4
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051A248
 lbl_8051A248:
 	.asciz "jpn"
-.balign 4
+.global lbl_8051A24C
 lbl_8051A24C:
 	.asciz "us"
+	.skip 1
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global getConfigList__Q34Game10PelletList3MgrFQ34Game10PelletList5cKind

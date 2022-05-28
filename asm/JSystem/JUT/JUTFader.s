@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__8JUTFader
 __vt__8JUTFader:
 	.4byte 0
@@ -11,7 +11,8 @@ __vt__8JUTFader:
 	.4byte draw__8JUTFaderFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516658
 lbl_80516658:
 	.4byte 0x43300000
 	.4byte 0x80000000
@@ -211,7 +212,7 @@ lbl_8002D0F4:
 /* 8002D0F8 0002A038  4E 80 00 20 */	blr 
 
 .global __dt__8JUTFaderFv
-__dt__8JUTFaderFv: # weak function
+__dt__8JUTFaderFv:
 /* 8002D0FC 0002A03C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002D100 0002A040  7C 08 02 A6 */	mflr r0
 /* 8002D104 0002A044  90 01 00 14 */	stw r0, 0x14(r1)

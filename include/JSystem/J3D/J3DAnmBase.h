@@ -28,11 +28,13 @@ enum J3DAnmAttr { J3DAA_UNKNOWN_0 = 0 };
 #pragma enumalwaysint reset
 
 struct J3DAnmBase {
-	virtual ~J3DAnmBase();                  // _00
-	virtual J3DAnmKind getKind() const = 0; // _04
+	virtual void getKind() const   = 0;
+	virtual void getColour() const = 0;
+	virtual ~J3DAnmBase();
+	virtual J3DAnmKind getKind();
 
 	// vtbl
-	s16 m_04;    // _04
+	s16 _04;     // _04
 	s16 m_time;  // _08
 	f32 m_fTime; // _0C
 };

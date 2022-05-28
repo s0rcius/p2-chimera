@@ -2,7 +2,6 @@
 #define _JSYSTEM_JAI_JAINTER_H
 
 #include "types.h"
-#include "Dolphin/Mtx.h"
 
 namespace JAInter {
 namespace SequenceMgr {
@@ -10,20 +9,8 @@ struct CustomHeapInfo {
 };
 } // namespace SequenceMgr
 struct Actor {
-	Vec* m_vec1; // _00
-	Vec* m_vec2; // _04
-	Vec* m_vec3; // _08
-	u32 m_unk;   // _0C (might be a pointer?)
-	// bool m_flag; // _10
-	union {
-		bool boolView[4];
-		u32 longView;
-	} m_flag; // _10
 };
 struct Camera {
-	Vec* m_vec1; // _00
-	Vec* m_vec2; // _04
-	Mtx* m_mtx;  // _08
 };
 struct HeapBlock {
 };
@@ -77,8 +64,8 @@ extern u8* mAddress;
 
 void deleteTmpDVDFile(u8**);
 void loadTmpDVDFile(char*, u8**);
-u8* transInitDataFile(u8*, u32);
-u32 routeToTrack(u32);
+void transInitDataFile(u8*, u32);
+void routeToTrack(u32);
 } // namespace JAInter
 
 #endif

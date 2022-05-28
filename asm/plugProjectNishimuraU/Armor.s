@@ -5,7 +5,7 @@ lbl_80487418:
 	.asciz "yoroimushi"
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q23efx9TYoroiEat
 __vt__Q23efx9TYoroiEat:
 	.4byte 0
@@ -264,49 +264,47 @@ __vt__Q34Game5Armor3Obj:
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
 .balign 8
 lbl_8051B540:
-	.float 0.0
+	.4byte 0x00000000
 lbl_8051B544:
-	.float 50.0
+	.4byte 0x42480000
 lbl_8051B548:
-	.float 2.5
+	.4byte 0x40200000
 lbl_8051B54C:
-	.float 25.0
+	.4byte 0x41C80000
 lbl_8051B550:
 	.float 1.0
 lbl_8051B554:
-	.float -1000.0
-.balign 4
+	.4byte 0xC47A0000
 lbl_8051B558:
-	.asciz "kamujnt"
-.balign 4
+	.4byte 0x6B616D75
+	.4byte 0x6A6E7400
 lbl_8051B560:
-	.float 32768.0
+	.4byte 0x47000000
 lbl_8051B564:
 	.float 0.5
-.balign 8
 lbl_8051B568:
 	.4byte 0x43300000
 	.4byte 0x80000000
 lbl_8051B570:
-	.float 5.0
+	.4byte 0x40A00000
 lbl_8051B574:
-	.float -50.0
+	.4byte 0xC2480000
 lbl_8051B578:
-	.float 250.0
+	.4byte 0x437A0000
 lbl_8051B57C:
-	.float 0.75
-lbl_8051B580: # pi
-	.float 3.1415927
+	.4byte 0x3F400000
+lbl_8051B580:
+	.4byte 0x40490FDB
 lbl_8051B584:
-	.float 0.0055555557
+	.4byte 0x3BB60B61
 lbl_8051B588:
 	.float 0.7
 lbl_8051B58C:
-	.float -25.0
+	.4byte 0xC1C80000
 lbl_8051B590:
-	.float 750.0
+	.4byte 0x443B8000
 lbl_8051B594:
-	.float 0.9
+	.4byte 0x3F666666
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__Q34Game5Armor3ObjFv

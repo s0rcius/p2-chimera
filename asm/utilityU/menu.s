@@ -1,14 +1,22 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_8049CD78
 lbl_8049CD78:
-	.asciz "menu.cpp"
-.balign 4
+	.4byte 0x6D656E75
+	.4byte 0x2E637070
+	.4byte 0x00000000
+.global lbl_8049CD84
 lbl_8049CD84:
-	.asciz "MenuList is wrong.\n"
+	.4byte 0x4D656E75
+	.4byte 0x4C697374
+	.4byte 0x20697320
+	.4byte 0x77726F6E
+	.4byte 0x672E0A00
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
+.global lbl_804EDCC8
 lbl_804EDCC8:
 	.4byte lbl_80456ACC
 	.4byte lbl_80456954
@@ -43,20 +51,26 @@ lbl_804EDCC8:
 	.4byte lbl_80456ACC
 	.4byte lbl_80456ACC
 	.4byte lbl_804569BC
+	.4byte 0x00000000
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80520BE8
 lbl_80520BE8:
-	.asciz "root"
-.balign 4
+	.4byte 0x726F6F74
+	.4byte 0x00000000
+.global lbl_80520BF0
 lbl_80520BF0:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80520BF4
 lbl_80520BF4:
 	.float 1.0
+.global lbl_80520BF8
 lbl_80520BF8:
-	.float 7.0
+	.4byte 0x40E00000
+.global lbl_80520BFC
 lbl_80520BFC:
-	.float 8.0
+	.4byte 0x41000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __ct__4MenuFP10JUTGamePadP7JUTFontb
@@ -647,6 +661,7 @@ lbl_8045698C:
 /* 804569B0 004538F0  7D 89 03 A6 */	mtctr r12
 /* 804569B4 004538F4  4E 80 04 21 */	bctrl 
 /* 804569B8 004538F8  48 00 01 14 */	b lbl_80456ACC
+lbl_804569BC:
 lbl_804569BC:
 /* 804569BC 004538FC  80 7B 00 00 */	lwz r3, 0(r27)
 /* 804569C0 00453900  80 04 00 04 */	lwz r0, 4(r4)

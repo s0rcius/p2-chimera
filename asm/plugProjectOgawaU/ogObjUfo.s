@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_ogObjUfo_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_8048F280
 lbl_8048F280:
 	.4byte 0x6F674F62
@@ -32,7 +31,7 @@ lbl_8048F2B8:
 	.4byte 0x0A000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q32og9newScreen10ObjUfoMenu
 __vt__Q32og9newScreen10ObjUfoMenu:
 	.4byte 0
@@ -72,7 +71,7 @@ msVal__Q32og9newScreen10ObjUfoMenu:
 	.skip 0x28
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_8051DD28
 lbl_8051DD28:
 	.4byte 0x44480000

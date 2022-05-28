@@ -1,49 +1,88 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_JFWDisplay_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_804789E0
 lbl_804789E0:
-	.asciz "GP status %d%d%d%d%d%d --> "
-.balign 4
-lbl_804789FC:
-	.asciz "GP hang due to XF stall bug.\n"
-.balign 4
-lbl_80478A1C:
-	.asciz "GP hang due to unterminated primitive.\n"
-.balign 4
-lbl_80478A44:
-	.asciz "GP hang due to illegal instruction.\n"
-.balign 4
-lbl_80478A6C:
-	.asciz "GP appears to be not hung (waiting for input).\n"
-.balign 4
-lbl_80478A9C:
-	.asciz "GP is in unknown state.\n"
+	.4byte 0x47502073
+	.4byte 0x74617475
+	.4byte 0x73202564
+	.4byte 0x25642564
+	.4byte 0x25642564
+	.4byte 0x2564202D
+	.4byte 0x2D3E2000
+	.4byte 0x47502068
+	.4byte 0x616E6720
+	.4byte 0x64756520
+	.4byte 0x746F2058
+	.4byte 0x46207374
+	.4byte 0x616C6C20
+	.4byte 0x6275672E
+	.4byte 0x0A000000
+	.4byte 0x47502068
+	.4byte 0x616E6720
+	.4byte 0x64756520
+	.4byte 0x746F2075
+	.4byte 0x6E746572
+	.4byte 0x6D696E61
+	.4byte 0x74656420
+	.4byte 0x7072696D
+	.4byte 0x69746976
+	.4byte 0x652E0A00
+	.4byte 0x47502068
+	.4byte 0x616E6720
+	.4byte 0x64756520
+	.4byte 0x746F2069
+	.4byte 0x6C6C6567
+	.4byte 0x616C2069
+	.4byte 0x6E737472
+	.4byte 0x75637469
+	.4byte 0x6F6E2E0A
+	.4byte 0x00000000
+	.4byte 0x47502061
+	.4byte 0x70706561
+	.4byte 0x72732074
+	.4byte 0x6F206265
+	.4byte 0x206E6F74
+	.4byte 0x2068756E
+	.4byte 0x67202877
+	.4byte 0x61697469
+	.4byte 0x6E672066
+	.4byte 0x6F722069
+	.4byte 0x6E707574
+	.4byte 0x292E0A00
+	.4byte 0x47502069
+	.4byte 0x7320696E
+	.4byte 0x20756E6B
+	.4byte 0x6E6F776E
+	.4byte 0x20737461
+	.4byte 0x74652E0A
+	.4byte 0x00000000
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global e_mtx
 e_mtx:
 	.float 1.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 	.float 1.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 	.float 1.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
-	.float 0.0
-clear_z_TX: # local object
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+.global clear_z_TX
+clear_z_TX:
 	.4byte 0x00FF00FF
 	.4byte 0x00FF00FF
 	.4byte 0x00FF00FF
@@ -68,6 +107,8 @@ __vt__10JFWDisplay:
 	.4byte endRender__10JFWDisplayFv
 	.4byte endFrame__10JFWDisplayFv
 	.4byte __dt__10JFWDisplayFv
+	.4byte 0
+	.4byte 0
 
 .section .bss  # 0x804EFC20 - 0x8051467C
 .global sList__8JFWAlarm
@@ -75,44 +116,56 @@ sList__8JFWAlarm:
 	.skip 0xC
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global sManager__10JFWDisplay
 sManager__10JFWDisplay:
 	.skip 0x4
-prevFrame$3378: # local
+.global prevFrame$3378
+prevFrame$3378:
 	.skip 0x4
-init$3379: # local
-	.skip 0x1
-.balign 8
-nextTick$3423: # local
+.global init$3379
+init$3379:
 	.skip 0x8
-init$3424: # local
-	.skip 0x1
-.balign 4
-nextCount$3431: # local
+.global nextTick$3423
+nextTick$3423:
 	.skip 0x4
-init$3432: # local
-	.skip 0x1
+.global lbl_8051507C
+lbl_8051507C:
+	.skip 0x4
+.global init$3424
+init$3424:
+	.skip 0x4
+.global nextCount$3431
+nextCount$3431:
+	.skip 0x4
+.global init$3432
+init$3432:
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_80516B10
 lbl_80516B10:
-	.float 0.0
+	.4byte 0x00000000
+.global lbl_80516B14
 lbl_80516B14:
 	.float -1.0
+.global lbl_80516B18
 lbl_80516B18:
 	.float 1.0
-.balign 8
+	.4byte 0x00000000
+.global lbl_80516B20
 lbl_80516B20:
 	.4byte 0x43300000
 	.4byte 0x00000000
-.balign 8
+.global lbl_80516B28
 lbl_80516B28:
 	.4byte 0x43300000
 	.4byte 0x80000000
-.balign 8
+.global lbl_80516B30
 lbl_80516B30:
-	.double 0.5
+	.4byte 0x3FE00000
+	.4byte 0x00000000
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F00
 .global __dt__10JFWDisplayFv
@@ -941,7 +994,7 @@ waitForTick__FUlUs:
 /* 8008A650 00087590  40 82 00 18 */	bne lbl_8008A668
 /* 8008A654 00087594  48 06 85 3D */	bl OSGetTime
 /* 8008A658 00087598  38 00 00 01 */	li r0, 1
-/* 8008A65C 0008759C  90 8D 89 FC */	stw r4, nextTick$3423+4@sda21(r13)
+/* 8008A65C 0008759C  90 8D 89 FC */	stw r4, lbl_8051507C@sda21(r13)
 /* 8008A660 000875A0  90 6D 89 F8 */	stw r3, nextTick$3423@sda21(r13)
 /* 8008A664 000875A4  98 0D 8A 00 */	stb r0, init$3424@sda21(r13)
 lbl_8008A668:
@@ -958,7 +1011,7 @@ lbl_8008A674:
 lbl_8008A68C:
 /* 8008A68C 000875CC  80 ED 89 F8 */	lwz r7, nextTick$3423@sda21(r13)
 /* 8008A690 000875D0  6D 05 80 00 */	xoris r5, r8, 0x8000
-/* 8008A694 000875D4  80 CD 89 FC */	lwz r6, nextTick$3423+4@sda21(r13)
+/* 8008A694 000875D4  80 CD 89 FC */	lwz r6, lbl_8051507C@sda21(r13)
 /* 8008A698 000875D8  6C E3 80 00 */	xoris r3, r7, 0x8000
 /* 8008A69C 000875DC  7C 06 20 10 */	subfc r0, r6, r4
 /* 8008A6A0 000875E0  7C 63 29 10 */	subfe r3, r3, r5
@@ -968,7 +1021,7 @@ lbl_8008A68C:
 /* 8008A6B0 000875F0  7C 64 F8 14 */	addc r3, r4, r31
 /* 8008A6B4 000875F4  38 00 00 00 */	li r0, 0
 /* 8008A6B8 000875F8  7C 08 01 14 */	adde r0, r8, r0
-/* 8008A6BC 000875FC  90 6D 89 FC */	stw r3, nextTick$3423+4@sda21(r13)
+/* 8008A6BC 000875FC  90 6D 89 FC */	stw r3, lbl_8051507C@sda21(r13)
 /* 8008A6C0 00087600  90 0D 89 F8 */	stw r0, nextTick$3423@sda21(r13)
 /* 8008A6C4 00087604  48 00 00 6C */	b lbl_8008A730
 lbl_8008A6C8:
@@ -1323,24 +1376,24 @@ lbl_8008ABAC:
 /* 8008ABE0 00087B20  7D 1E C2 14 */	add r8, r30, r24
 /* 8008ABE4 00087B24  38 00 00 01 */	li r0, 1
 /* 8008ABE8 00087B28  7D 3F CA 14 */	add r9, r31, r25
-/* 8008ABEC 00087B2C  B3 E7 80 00 */	sth r31, 0xCC008000@l(r7)
+/* 8008ABEC 00087B2C  B3 E7 80 00 */	sth r31, -0x8000(r7)
 /* 8008ABF0 00087B30  38 60 00 00 */	li r3, 0
 /* 8008ABF4 00087B34  38 80 00 16 */	li r4, 0x16
 /* 8008ABF8 00087B38  38 A0 00 00 */	li r5, 0
-/* 8008ABFC 00087B3C  98 C7 80 00 */	stb r6, 0xCC008000@l(r7)
-/* 8008AC00 00087B40  98 C7 80 00 */	stb r6, 0xCC008000@l(r7)
-/* 8008AC04 00087B44  B1 07 80 00 */	sth r8, 0xCC008000@l(r7)
-/* 8008AC08 00087B48  B3 E7 80 00 */	sth r31, 0xCC008000@l(r7)
-/* 8008AC0C 00087B4C  98 07 80 00 */	stb r0, 0xCC008000@l(r7)
-/* 8008AC10 00087B50  98 C7 80 00 */	stb r6, 0xCC008000@l(r7)
-/* 8008AC14 00087B54  B1 07 80 00 */	sth r8, 0xCC008000@l(r7)
-/* 8008AC18 00087B58  B1 27 80 00 */	sth r9, 0xCC008000@l(r7)
-/* 8008AC1C 00087B5C  98 07 80 00 */	stb r0, 0xCC008000@l(r7)
-/* 8008AC20 00087B60  98 07 80 00 */	stb r0, 0xCC008000@l(r7)
-/* 8008AC24 00087B64  B3 C7 80 00 */	sth r30, 0xCC008000@l(r7)
-/* 8008AC28 00087B68  B1 27 80 00 */	sth r9, 0xCC008000@l(r7)
-/* 8008AC2C 00087B6C  98 C7 80 00 */	stb r6, 0xCC008000@l(r7)
-/* 8008AC30 00087B70  98 07 80 00 */	stb r0, 0xCC008000@l(r7)
+/* 8008ABFC 00087B3C  98 C7 80 00 */	stb r6, -0x8000(r7)
+/* 8008AC00 00087B40  98 C7 80 00 */	stb r6, -0x8000(r7)
+/* 8008AC04 00087B44  B1 07 80 00 */	sth r8, -0x8000(r7)
+/* 8008AC08 00087B48  B3 E7 80 00 */	sth r31, -0x8000(r7)
+/* 8008AC0C 00087B4C  98 07 80 00 */	stb r0, -0x8000(r7)
+/* 8008AC10 00087B50  98 C7 80 00 */	stb r6, -0x8000(r7)
+/* 8008AC14 00087B54  B1 07 80 00 */	sth r8, -0x8000(r7)
+/* 8008AC18 00087B58  B1 27 80 00 */	sth r9, -0x8000(r7)
+/* 8008AC1C 00087B5C  98 07 80 00 */	stb r0, -0x8000(r7)
+/* 8008AC20 00087B60  98 07 80 00 */	stb r0, -0x8000(r7)
+/* 8008AC24 00087B64  B3 C7 80 00 */	sth r30, -0x8000(r7)
+/* 8008AC28 00087B68  B1 27 80 00 */	sth r9, -0x8000(r7)
+/* 8008AC2C 00087B6C  98 C7 80 00 */	stb r6, -0x8000(r7)
+/* 8008AC30 00087B70  98 07 80 00 */	stb r0, -0x8000(r7)
 /* 8008AC34 00087B74  48 05 DD 5D */	bl GXSetZTexture
 /* 8008AC38 00087B78  38 60 00 01 */	li r3, 1
 /* 8008AC3C 00087B7C  48 05 E5 7D */	bl GXSetZCompLoc
@@ -1475,7 +1528,7 @@ JFWGXAbortAlarmHandler__FP7OSAlarmP9OSContext:
 /* 8008AE04 00087D44  3C 60 58 00 */	lis r3, 0x5800000F@ha
 /* 8008AE08 00087D48  98 04 80 00 */	stb r0, 0xCC008000@l(r4)
 /* 8008AE0C 00087D4C  38 03 00 0F */	addi r0, r3, 0x5800000F@l
-/* 8008AE10 00087D50  90 04 80 00 */	stw r0, 0xCC008000@l(r4)
+/* 8008AE10 00087D50  90 04 80 00 */	stw r0, -0x8000(r4)
 /* 8008AE14 00087D54  48 05 A6 45 */	bl GXSetDrawDone
 /* 8008AE18 00087D58  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8008AE1C 00087D5C  7C 08 03 A6 */	mtlr r0
@@ -1645,7 +1698,8 @@ lbl_8008B064:
 /* 8008B070 00087FB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8008B074 00087FB4  4E 80 00 20 */	blr 
 
-__sinit_JFWDisplay_cpp: # static initializer
+.global __sinit_JFWDisplay_cpp
+__sinit_JFWDisplay_cpp:
 /* 8008B078 00087FB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008B07C 00087FBC  7C 08 02 A6 */	mflr r0
 /* 8008B080 00087FC0  3C 60 80 51 */	lis r3, sList__8JFWAlarm@ha

@@ -1,37 +1,47 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
+.global lbl_804A7AF8
 lbl_804A7AF8:
 	.asciz "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n"
-.balign 4
+.global lbl_804A7BC0
 lbl_804A7BC0:
 	.asciz "Warning: DVDOpen(): file '%s' was not found under %s.\n"
-.balign 4
+	.skip 1
+.global lbl_804A7BF8
 lbl_804A7BF8:
 	.asciz "DVDReadAsync(): specified area is out of the file  "
-.balign 4
+.global lbl_804A7C2C
 lbl_804A7C2C:
 	.asciz "DVDRead(): specified area is out of the file  "
-.balign 4
+	.skip 1
+.global lbl_804A7C5C
 lbl_804A7C5C:
 	.asciz "Warning: DVDOpenDir(): file '%s' was not found under %s.\n"
+	.skip 2
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
+.global lbl_80514930
 lbl_80514930:
 	.asciz "dvdfs.c"
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
-BootInfo: # local object
+.balign 0x8
+.global BootInfo
+BootInfo:
 	.skip 0x4
-FstStart: # local object
+.global FstStart
+FstStart:
 	.skip 0x4
-FstStringStart: # local object
+.global FstStringStart
+FstStringStart:
 	.skip 0x4
-MaxEntryNum: # local object
+.global MaxEntryNum
+MaxEntryNum:
 	.skip 0x4
-currentDirectory: # local object
+.global currentDirectory
+currentDirectory:
 	.skip 0x4
 .global __DVDLongFileNameFlag
 __DVDLongFileNameFlag:
@@ -395,7 +405,8 @@ DVDClose:
 /* 800DC5B0 000D94F0  7C 08 03 A6 */	mtlr r0
 /* 800DC5B4 000D94F4  4E 80 00 20 */	blr 
 
-entryToPath: # local func
+.global entryToPath
+entryToPath:
 /* 800DC5B8 000D94F8  7C 08 02 A6 */	mflr r0
 /* 800DC5BC 000D94FC  28 03 00 00 */	cmplwi r3, 0
 /* 800DC5C0 000D9500  90 01 00 04 */	stw r0, 4(r1)
@@ -497,7 +508,8 @@ lbl_800DC6F8:
 /* 800DC710 000D9650  7C 08 03 A6 */	mtlr r0
 /* 800DC714 000D9654  4E 80 00 20 */	blr 
 
-DVDConvertEntrynumToPath: # local func
+.global DVDConvertEntrynumToPath
+DVDConvertEntrynumToPath:
 /* 800DC718 000D9658  7C 08 02 A6 */	mflr r0
 /* 800DC71C 000D965C  90 01 00 04 */	stw r0, 4(r1)
 /* 800DC720 000D9660  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -741,7 +753,8 @@ lbl_800DCA10:
 /* 800DCA48 000D9988  7C 08 03 A6 */	mtlr r0
 /* 800DCA4C 000D998C  4E 80 00 20 */	blr 
 
-cbForReadAsync: # local func
+.global cbForReadAsync
+cbForReadAsync:
 /* 800DCA50 000D9990  7C 08 02 A6 */	mflr r0
 /* 800DCA54 000D9994  90 01 00 04 */	stw r0, 4(r1)
 /* 800DCA58 000D9998  94 21 FF F8 */	stwu r1, -8(r1)
@@ -840,7 +853,8 @@ lbl_800DCB84:
 /* 800DCB90 000D9AD0  7C 08 03 A6 */	mtlr r0
 /* 800DCB94 000D9AD4  4E 80 00 20 */	blr 
 
-cbForReadSync: # local func
+.global cbForReadSync
+cbForReadSync:
 /* 800DCB98 000D9AD8  7C 08 02 A6 */	mflr r0
 /* 800DCB9C 000D9ADC  38 6D 8E 28 */	addi r3, r13, __DVDThreadQueue@sda21
 /* 800DCBA0 000D9AE0  90 01 00 04 */	stw r0, 4(r1)

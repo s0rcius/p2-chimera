@@ -1,4 +1,3 @@
-#include "JSystem/JUT/JUTDbPrint.h"
 #include "types.h"
 
 /*
@@ -47,7 +46,7 @@ JUTDbPrint::~JUTDbPrint()
  * Address:	800294D4
  * Size:	0000AC
  */
-JUTDbPrint* JUTDbPrint::start(JUTFont*, JKRHeap*)
+void JUTDbPrint::start(JUTFont*, JKRHeap*)
 {
 	/*
 	stwu     r1, -0x10(r1)
@@ -111,7 +110,7 @@ lbl_80029564:
  * Address:	80029580
  * Size:	000018
  */
-JUTFont* JUTDbPrint::changeFont(JUTFont*)
+void JUTDbPrint::changeFont(JUTFont*)
 {
 	/*
 	cmplwi   r4, 0

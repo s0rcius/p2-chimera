@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q34Game6VsGame8TekiNode
 __vt__Q34Game6VsGame8TekiNode:
 	.4byte 0
@@ -9,14 +9,18 @@ __vt__Q34Game6VsGame8TekiNode:
 	.4byte getChildCount__5CNodeFv
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
+.global lbl_8051A3C0
 lbl_8051A3C0:
-	.float 32768.0
-lbl_8051A3C4: #tau
-	.float 6.2831855
+	.4byte 0x47000000
+.global lbl_8051A3C4
+lbl_8051A3C4:
+	.4byte 0x40C90FDB
+.global lbl_8051A3C8
 lbl_8051A3C8:
-	.float 50.0
-.balign 8
+	.4byte 0x42480000
+	.4byte 0x00000000
+.global lbl_8051A3D0
 lbl_8051A3D0:
 	.4byte 0x43300000
 	.4byte 0x80000000
@@ -43,7 +47,7 @@ __ct__Q34Game6VsGame7TekiMgrFv:
 /* 80235330 00232270  4E 80 00 20 */	blr 
 
 .global __dt__Q34Game6VsGame8TekiNodeFv
-__dt__Q34Game6VsGame8TekiNodeFv: # weak func
+__dt__Q34Game6VsGame8TekiNodeFv:
 /* 80235334 00232274  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80235338 00232278  7C 08 02 A6 */	mflr r0
 /* 8023533C 0023227C  90 01 00 14 */	stw r0, 0x14(r1)

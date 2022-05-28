@@ -119,7 +119,17 @@ struct TOption : public TScreenBase {
  * ebi::Option::*
  */
 namespace Option {
-enum StateID { Standby = 0, LoadOption, ScreenOpen, ScreenWait, ScreenClose, SaveMgr, WaitCloseForNoCard, WorldMapInfoWindow };
+enum StateID {
+	Standby = 0,
+	LoadOption,
+	ScreenOpen,
+	ScreenWait,
+	ScreenClose,
+	SaveMgr,
+	WaitCloseForNoCard,
+	WorldMapInfoWindow,
+	_FORCE_UINT = 0xFFFFFFFF
+};
 // TODO: Additional state data members, if any.
 struct FSMState : public Game::FSMState<TMgr> {
 	inline FSMState(int id, const char* name)

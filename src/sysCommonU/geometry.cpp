@@ -1,11 +1,8 @@
-#include "Sys/Edge.h"
 #include "Sys/GridDivider.h"
-#include "Sys/RayIntersectInfo.h"
 #include "Sys/Triangle.h"
 #include "Sys/TriangleTable.h"
 #include "Sys/TriIndexList.h"
 #include "Sys/Tube.h"
-#include "Vector3.h"
 #include "types.h"
 
 /*
@@ -533,7 +530,7 @@ void Tube::getPosGradient(Vector3f&, float, Vector3f&, Vector3f&)
  * Address:	80415EC8
  * Size:	00004C
  */
-Vector3f Tube::setPos(float)
+void Tube::setPos(float)
 {
 	/*
 	lfs      f6, 0(r4)
@@ -563,7 +560,7 @@ Vector3f Tube::setPos(float)
  * Address:	80415F14
  * Size:	000058
  */
-bool Sphere::intersect(Sys::Sphere&)
+void Sphere::intersect(Sys::Sphere&)
 {
 	/*
 	lfs      f2, 4(r4)
@@ -596,7 +593,7 @@ bool Sphere::intersect(Sys::Sphere&)
  * Address:	80415F6C
  * Size:	000120
  */
-bool Sphere::intersect(Sys::Sphere&, Vector3f&)
+void Sphere::intersect(Sys::Sphere&, Vector3f&)
 {
 	/*
 	stwu     r1, -0x20(r1)
@@ -687,7 +684,7 @@ lbl_80416070:
  * Address:	8041608C
  * Size:	000204
  */
-bool Sphere::intersect(Sys::Edge&, float&)
+void Sphere::intersect(Sys::Edge&, float&)
 {
 	/*
 	stwu     r1, -0x50(r1)
@@ -841,7 +838,7 @@ lbl_8041625C:
  * Address:	80416290
  * Size:	00028C
  */
-bool Sphere::intersect(Sys::Edge&, float&, Vector3f&)
+void Sphere::intersect(Sys::Edge&, float&, Vector3f&)
 {
 	/*
 	stwu     r1, -0x60(r1)
@@ -1029,7 +1026,7 @@ lbl_804164DC:
  * Address:	8041651C
  * Size:	0003D4
  */
-bool Sphere::intersect(Sys::Edge&, float&, Vector3f&, float&)
+void Sphere::intersect(Sys::Edge&, float&, Vector3f&, float&)
 {
 	/*
 	stwu     r1, -0x50(r1)
@@ -1319,7 +1316,7 @@ lbl_804168C4:
  * Address:	........
  * Size:	0000D8
  */
-bool Sphere::intersectRay(Vector3f&, Vector3f&)
+void Sphere::intersectRay(Vector3f&, Vector3f&)
 {
 	// UNUSED FUNCTION
 }
@@ -1481,7 +1478,7 @@ lbl_80416A60:
  * Address:	80416AC0
  * Size:	000084
  */
-bool Triangle::fastIntersect(Sys::Sphere&)
+void Triangle::fastIntersect(Sys::Sphere&)
 {
 	/*
 	stwu     r1, -0x10(r1)
@@ -1657,7 +1654,7 @@ lbl_80416C30:
  * Address:	........
  * Size:	0001EC
  */
-bool Triangle::intersect(Sys::VertexTable&, BoundBox2d&)
+void Triangle::intersect(Sys::VertexTable&, BoundBox2d&)
 {
 	// UNUSED FUNCTION
 }
@@ -1667,7 +1664,7 @@ bool Triangle::intersect(Sys::VertexTable&, BoundBox2d&)
  * Address:	........
  * Size:	0002F0
  */
-bool Triangle::intersect(Sys::Edge&, Vector3f&)
+void Triangle::intersect(Sys::Edge&, Vector3f&)
 {
 	// UNUSED FUNCTION
 }
@@ -1677,7 +1674,7 @@ bool Triangle::intersect(Sys::Edge&, Vector3f&)
  * Address:	80416C48
  * Size:	000334
  */
-bool Triangle::intersect(Sys::Edge&, float, Vector3f&)
+void Triangle::intersect(Sys::Edge&, float, Vector3f&)
 {
 	/*
 	stwu     r1, -0x60(r1)
@@ -1917,7 +1914,7 @@ lbl_80416F40:
  * Address:	80416F7C
  * Size:	000370
  */
-bool Triangle::intersect(Sys::Edge&, float, Vector3f&, float&)
+void Triangle::intersect(Sys::Edge&, float, Vector3f&, float&)
 {
 	/*
 	stwu     r1, -0x60(r1)
@@ -2172,7 +2169,7 @@ lbl_804172AC:
  * Address:	804172EC
  * Size:	0002AC
  */
-bool Triangle::intersect(Sys::VertexTable&, Sys::Sphere&)
+void Triangle::intersect(Sys::VertexTable&, Sys::Sphere&)
 {
 	/*
 	stwu     r1, -0x40(r1)
@@ -2376,7 +2373,7 @@ lbl_8041757C:
  * Address:	80417598
  * Size:	0002F8
  */
-bool Triangle::intersect(Sys::VertexTable&, Sys::Sphere&, Vector3f&)
+void Triangle::intersect(Sys::VertexTable&, Sys::Sphere&, Vector3f&)
 {
 	/*
 	stwu     r1, -0x40(r1)
@@ -2593,7 +2590,7 @@ lbl_80417870:
  * Address:	80417890
  * Size:	0002F8
  */
-bool Triangle::intersectHard(Sys::VertexTable&, Sys::Sphere&, Vector3f&)
+void Triangle::intersectHard(Sys::VertexTable&, Sys::Sphere&, Vector3f&)
 {
 	/*
 	stwu     r1, -0x40(r1)
@@ -2816,7 +2813,7 @@ lbl_80417B68:
  * Address:	........
  * Size:	00014C
  */
-bool Triangle::intersectOptimistic(Sys::Sphere&, Vector3f&)
+void Triangle::intersectOptimistic(Sys::Sphere&, Vector3f&)
 {
 	// UNUSED FUNCTION
 }
@@ -2826,7 +2823,7 @@ bool Triangle::intersectOptimistic(Sys::Sphere&, Vector3f&)
  * Address:	80417B88
  * Size:	0000EC
  */
-bool Triangle::insideXZ(Vector3f&)
+void Triangle::insideXZ(Vector3f&)
 {
 	/*
 	lfs      f4, 0x10(r3)
@@ -3229,7 +3226,7 @@ lbl_8041806C:
  * Address:	8041813C
  * Size:	000040
  */
-bool RayIntersectInfo::condition(Sys::Triangle&)
+void RayIntersectInfo::condition(Sys::Triangle&)
 {
 	/*
 	lbz      r0, 0x1c(r3)
@@ -3561,7 +3558,7 @@ lbl_80418584:
  * Address:	804185A4
  * Size:	0001D8
  */
-float GridDivider::getMinY(Vector3f&)
+void GridDivider::getMinY(Vector3f&)
 {
 	/*
 	stwu     r1, -0x20(r1)
@@ -3888,7 +3885,7 @@ lbl_804189A8:
  * Address:	804189B0
  * Size:	000230
  */
-TriIndexList* GridDivider::findTriLists(Sys::Sphere&)
+void GridDivider::findTriLists(Sys::Sphere&)
 {
 	/*
 	stwu     r1, -0x50(r1)
@@ -4438,7 +4435,7 @@ void GridDivider::create(BoundBox&, int, int, Sys::VertexTable*, Sys::TriangleTa
  * Address:	8041903C
  * Size:	000088
  */
-TriIndexList::TriIndexList()
+TriIndexList::TriIndexList(void)
 {
 	/*
 	stwu     r1, -0x10(r1)
@@ -4488,82 +4485,84 @@ void GridDivider::write(Stream&)
 	// UNUSED FUNCTION
 }
 
+} // namespace Sys
+
 /*
- * @generated{write__31ArrayContainer<Q23Sys8Triangle>FR6Stream}
  * --INFO--
  * Address:	804190C4
  * Size:	0000D4
  */
-// void ArrayContainer<Sys::Triangle>::write(Stream&)
-// {
-// 	/*
-// 	stwu     r1, -0x20(r1)
-// 	mflr     r0
-// 	stw      r0, 0x24(r1)
-// 	stmw     r27, 0xc(r1)
-// 	mr       r28, r4
-// 	mr       r27, r3
-// 	lwz      r4, 0x14(r3)
-// 	mr       r3, r28
-// 	bl       textBeginGroup__6StreamFPc
-// 	lwz      r4, 0x414(r28)
-// 	mr       r3, r28
-// 	bl       textWriteTab__6StreamFi
-// 	lwz      r4, 0x20(r27)
-// 	mr       r3, r28
-// 	bl       writeInt__6StreamFi
-// 	mr       r3, r28
-// 	addi     r4, r2, lbl_80520338@sda21
-// 	crclr    6
-// 	bl       textWriteText__6StreamFPce
-// 	lis      r3, lbl_804997A8@ha
-// 	li       r29, 0
-// 	addi     r31, r3, lbl_804997A8@l
-// 	li       r30, 0
-// 	b        lbl_80419170
+void ArrayContainer<Sys::Triangle>::write(Stream&)
+{
+	/*
+	stwu     r1, -0x20(r1)
+	mflr     r0
+	stw      r0, 0x24(r1)
+	stmw     r27, 0xc(r1)
+	mr       r28, r4
+	mr       r27, r3
+	lwz      r4, 0x14(r3)
+	mr       r3, r28
+	bl       textBeginGroup__6StreamFPc
+	lwz      r4, 0x414(r28)
+	mr       r3, r28
+	bl       textWriteTab__6StreamFi
+	lwz      r4, 0x20(r27)
+	mr       r3, r28
+	bl       writeInt__6StreamFi
+	mr       r3, r28
+	addi     r4, r2, lbl_80520338@sda21
+	crclr    6
+	bl       textWriteText__6StreamFPce
+	lis      r3, lbl_804997A8@ha
+	li       r29, 0
+	addi     r31, r3, lbl_804997A8@l
+	li       r30, 0
+	b        lbl_80419170
 
-// lbl_80419124:
-// 	lwz      r4, 0x414(r28)
-// 	mr       r3, r28
-// 	bl       textWriteTab__6StreamFi
-// 	mr       r3, r27
-// 	lwz      r0, 0x24(r27)
-// 	lwz      r12, 0(r27)
-// 	mr       r4, r28
-// 	add      r5, r0, r30
-// 	lwz      r12, 0x2c(r12)
-// 	mtctr    r12
-// 	bctrl
-// 	lwz      r6, 0x20(r27)
-// 	mr       r3, r28
-// 	mr       r4, r31
-// 	mr       r5, r29
-// 	crclr    6
-// 	bl       textWriteText__6StreamFPce
-// 	addi     r30, r30, 0x60
-// 	addi     r29, r29, 1
+lbl_80419124:
+	lwz      r4, 0x414(r28)
+	mr       r3, r28
+	bl       textWriteTab__6StreamFi
+	mr       r3, r27
+	lwz      r0, 0x24(r27)
+	lwz      r12, 0(r27)
+	mr       r4, r28
+	add      r5, r0, r30
+	lwz      r12, 0x2c(r12)
+	mtctr    r12
+	bctrl
+	lwz      r6, 0x20(r27)
+	mr       r3, r28
+	mr       r4, r31
+	mr       r5, r29
+	crclr    6
+	bl       textWriteText__6StreamFPce
+	addi     r30, r30, 0x60
+	addi     r29, r29, 1
 
-// lbl_80419170:
-// 	lwz      r0, 0x20(r27)
-// 	cmpw     r29, r0
-// 	blt      lbl_80419124
-// 	mr       r3, r28
-// 	bl       textEndGroup__6StreamFv
-// 	lmw      r27, 0xc(r1)
-// 	lwz      r0, 0x24(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x20
-// 	blr
-// 	*/
-// }
+lbl_80419170:
+	lwz      r0, 0x20(r27)
+	cmpw     r29, r0
+	blt      lbl_80419124
+	mr       r3, r28
+	bl       textEndGroup__6StreamFv
+	lmw      r27, 0xc(r1)
+	lwz      r0, 0x24(r1)
+	mtlr     r0
+	addi     r1, r1, 0x20
+	blr
+	*/
+}
 
 /*
- * @generated{writeObject__31ArrayContainer<Q23Sys8Triangle>FR6StreamRQ23Sys8Triangle}
  * --INFO--
  * Address:	80419198
  * Size:	000004
  */
-// void ArrayContainer<Sys::Triangle>::writeObject(Stream&, Sys::Triangle&) { }
+void ArrayContainer<Sys::Triangle>::writeObject(Stream&, Sys::Triangle&) { }
+
+namespace Sys {
 
 /*
  * --INFO--
@@ -4740,73 +4739,75 @@ lbl_804193B0:
 	*/
 }
 
+} // namespace Sys
+
 /*
- * @generated{read__31ArrayContainer<Q23Sys8Triangle>FR6Stream}
  * --INFO--
  * Address:	804193E4
  * Size:	0000B0
  */
-// void ArrayContainer<Sys::Triangle>::read(Stream&)
-// {
-// 	/*
-// 	stwu     r1, -0x20(r1)
-// 	mflr     r0
-// 	stw      r0, 0x24(r1)
-// 	stw      r31, 0x1c(r1)
-// 	stw      r30, 0x18(r1)
-// 	stw      r29, 0x14(r1)
-// 	mr       r29, r4
-// 	stw      r28, 0x10(r1)
-// 	mr       r28, r3
-// 	mr       r3, r29
-// 	bl       readInt__6StreamFv
-// 	stw      r3, 0x20(r28)
-// 	mr       r3, r28
-// 	lwz      r12, 0(r28)
-// 	lwz      r4, 0x20(r28)
-// 	lwz      r12, 0x3c(r12)
-// 	mtctr    r12
-// 	bctrl
-// 	lwz      r0, 0x20(r28)
-// 	li       r30, 0
-// 	li       r31, 0
-// 	stw      r0, 0x1c(r28)
-// 	b        lbl_80419468
+void ArrayContainer<Sys::Triangle>::read(Stream&)
+{
+	/*
+	stwu     r1, -0x20(r1)
+	mflr     r0
+	stw      r0, 0x24(r1)
+	stw      r31, 0x1c(r1)
+	stw      r30, 0x18(r1)
+	stw      r29, 0x14(r1)
+	mr       r29, r4
+	stw      r28, 0x10(r1)
+	mr       r28, r3
+	mr       r3, r29
+	bl       readInt__6StreamFv
+	stw      r3, 0x20(r28)
+	mr       r3, r28
+	lwz      r12, 0(r28)
+	lwz      r4, 0x20(r28)
+	lwz      r12, 0x3c(r12)
+	mtctr    r12
+	bctrl
+	lwz      r0, 0x20(r28)
+	li       r30, 0
+	li       r31, 0
+	stw      r0, 0x1c(r28)
+	b        lbl_80419468
 
-// lbl_80419440:
-// 	mr       r3, r28
-// 	lwz      r0, 0x24(r28)
-// 	lwz      r12, 0(r28)
-// 	mr       r4, r29
-// 	add      r5, r0, r31
-// 	lwz      r12, 0x30(r12)
-// 	mtctr    r12
-// 	bctrl
-// 	addi     r31, r31, 0x60
-// 	addi     r30, r30, 1
+lbl_80419440:
+	mr       r3, r28
+	lwz      r0, 0x24(r28)
+	lwz      r12, 0(r28)
+	mr       r4, r29
+	add      r5, r0, r31
+	lwz      r12, 0x30(r12)
+	mtctr    r12
+	bctrl
+	addi     r31, r31, 0x60
+	addi     r30, r30, 1
 
-// lbl_80419468:
-// 	lwz      r0, 0x20(r28)
-// 	cmpw     r30, r0
-// 	blt      lbl_80419440
-// 	lwz      r0, 0x24(r1)
-// 	lwz      r31, 0x1c(r1)
-// 	lwz      r30, 0x18(r1)
-// 	lwz      r29, 0x14(r1)
-// 	lwz      r28, 0x10(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x20
-// 	blr
-// 	*/
-// }
+lbl_80419468:
+	lwz      r0, 0x20(r28)
+	cmpw     r30, r0
+	blt      lbl_80419440
+	lwz      r0, 0x24(r1)
+	lwz      r31, 0x1c(r1)
+	lwz      r30, 0x18(r1)
+	lwz      r29, 0x14(r1)
+	lwz      r28, 0x10(r1)
+	mtlr     r0
+	addi     r1, r1, 0x20
+	blr
+	*/
+}
 
 /*
- * @generated{readObject__31ArrayContainer<Q23Sys8Triangle>FR6StreamRQ23Sys8Triangle}
  * --INFO--
  * Address:	80419494
  * Size:	000004
  */
-// void ArrayContainer<Sys::Triangle>::readObject(Stream&, Sys::Triangle&) { }
+void ArrayContainer<Sys::Triangle>::readObject(Stream&, Sys::Triangle&) { }
+
+namespace Sys {
 
 /*
  * --INFO--
@@ -5245,97 +5246,99 @@ TriangleTable::TriangleTable(void)
 	*/
 }
 
+} // namespace Sys
+
 /*
- * @generated{__dt__31ArrayContainer<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	804199F8
  * Size:	000080
  */
-// void ArrayContainer<Sys::Triangle>::~ArrayContainer()
-// {
-// 	/*
-// 	stwu     r1, -0x10(r1)
-// 	mflr     r0
-// 	stw      r0, 0x14(r1)
-// 	stw      r31, 0xc(r1)
-// 	mr       r31, r4
-// 	stw      r30, 8(r1)
-// 	or.      r30, r3, r3
-// 	beq      lbl_80419A5C
-// 	lis      r4, "__vt__31ArrayContainer<Q23Sys8Triangle>"@ha
-// 	addi     r0, r4, "__vt__31ArrayContainer<Q23Sys8Triangle>"@l
-// 	stw      r0, 0(r30)
-// 	beq      lbl_80419A4C
-// 	lis      r4, "__vt__26Container<Q23Sys8Triangle>"@ha
-// 	addi     r0, r4, "__vt__26Container<Q23Sys8Triangle>"@l
-// 	stw      r0, 0(r30)
-// 	beq      lbl_80419A4C
-// 	lis      r5, __vt__16GenericContainer@ha
-// 	li       r4, 0
-// 	addi     r0, r5, __vt__16GenericContainer@l
-// 	stw      r0, 0(r30)
-// 	bl       __dt__5CNodeFv
+void ArrayContainer<Sys::Triangle>::~ArrayContainer()
+{
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	stw      r31, 0xc(r1)
+	mr       r31, r4
+	stw      r30, 8(r1)
+	or.      r30, r3, r3
+	beq      lbl_80419A5C
+	lis      r4, "__vt__31ArrayContainer<Q23Sys8Triangle>"@ha
+	addi     r0, r4, "__vt__31ArrayContainer<Q23Sys8Triangle>"@l
+	stw      r0, 0(r30)
+	beq      lbl_80419A4C
+	lis      r4, "__vt__26Container<Q23Sys8Triangle>"@ha
+	addi     r0, r4, "__vt__26Container<Q23Sys8Triangle>"@l
+	stw      r0, 0(r30)
+	beq      lbl_80419A4C
+	lis      r5, __vt__16GenericContainer@ha
+	li       r4, 0
+	addi     r0, r5, __vt__16GenericContainer@l
+	stw      r0, 0(r30)
+	bl       __dt__5CNodeFv
 
-// lbl_80419A4C:
-// 	extsh.   r0, r31
-// 	ble      lbl_80419A5C
-// 	mr       r3, r30
-// 	bl       __dl__FPv
+lbl_80419A4C:
+	extsh.   r0, r31
+	ble      lbl_80419A5C
+	mr       r3, r30
+	bl       __dl__FPv
 
-// lbl_80419A5C:
-// 	lwz      r0, 0x14(r1)
-// 	mr       r3, r30
-// 	lwz      r31, 0xc(r1)
-// 	lwz      r30, 8(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x10
-// 	blr
-// 	*/
-// }
+lbl_80419A5C:
+	lwz      r0, 0x14(r1)
+	mr       r3, r30
+	lwz      r31, 0xc(r1)
+	lwz      r30, 8(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
+}
 
 /*
- * @generated{__dt__26Container<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	80419A78
  * Size:	000070
  */
-// void Container<Sys::Triangle>::~Container()
-// {
-// 	/*
-// 	stwu     r1, -0x10(r1)
-// 	mflr     r0
-// 	stw      r0, 0x14(r1)
-// 	stw      r31, 0xc(r1)
-// 	mr       r31, r4
-// 	stw      r30, 8(r1)
-// 	or.      r30, r3, r3
-// 	beq      lbl_80419ACC
-// 	lis      r4, "__vt__26Container<Q23Sys8Triangle>"@ha
-// 	addi     r0, r4, "__vt__26Container<Q23Sys8Triangle>"@l
-// 	stw      r0, 0(r30)
-// 	beq      lbl_80419ABC
-// 	lis      r5, __vt__16GenericContainer@ha
-// 	li       r4, 0
-// 	addi     r0, r5, __vt__16GenericContainer@l
-// 	stw      r0, 0(r30)
-// 	bl       __dt__5CNodeFv
+void Container<Sys::Triangle>::~Container()
+{
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	stw      r31, 0xc(r1)
+	mr       r31, r4
+	stw      r30, 8(r1)
+	or.      r30, r3, r3
+	beq      lbl_80419ACC
+	lis      r4, "__vt__26Container<Q23Sys8Triangle>"@ha
+	addi     r0, r4, "__vt__26Container<Q23Sys8Triangle>"@l
+	stw      r0, 0(r30)
+	beq      lbl_80419ABC
+	lis      r5, __vt__16GenericContainer@ha
+	li       r4, 0
+	addi     r0, r5, __vt__16GenericContainer@l
+	stw      r0, 0(r30)
+	bl       __dt__5CNodeFv
 
-// lbl_80419ABC:
-// 	extsh.   r0, r31
-// 	ble      lbl_80419ACC
-// 	mr       r3, r30
-// 	bl       __dl__FPv
+lbl_80419ABC:
+	extsh.   r0, r31
+	ble      lbl_80419ACC
+	mr       r3, r30
+	bl       __dl__FPv
 
-// lbl_80419ACC:
-// 	lwz      r0, 0x14(r1)
-// 	mr       r3, r30
-// 	lwz      r31, 0xc(r1)
-// 	lwz      r30, 8(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x10
-// 	blr
-// 	*/
-// }
+lbl_80419ACC:
+	lwz      r0, 0x14(r1)
+	mr       r3, r30
+	lwz      r31, 0xc(r1)
+	lwz      r30, 8(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
+}
+
+namespace Sys {
 
 /*
  * --INFO--
@@ -5784,141 +5787,128 @@ void GridDivider::getBoundBox(BoundBox&)
 } // namespace Sys
 
 /*
- * @generated{setArray__31ArrayContainer<Q23Sys8Triangle>FPQ23Sys8Trianglei}
  * --INFO--
  * Address:	80419FA4
  * Size:	000010
  */
-// void ArrayContainer<Sys::Triangle>::setArray(Sys::Triangle*, int)
-// {
-// 	/*
-// 	stw      r4, 0x24(r3)
-// 	stw      r5, 0x20(r3)
-// 	stw      r5, 0x1c(r3)
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::setArray(Sys::Triangle*, int)
+{
+	/*
+	stw      r4, 0x24(r3)
+	stw      r5, 0x20(r3)
+	stw      r5, 0x1c(r3)
+	blr
+	*/
+}
 
 /*
- * @generated{get__31ArrayContainer<Q23Sys8Triangle>FPv}
  * --INFO--
  * Address:	80419FB4
  * Size:	000010
  */
-// void ArrayContainer<Sys::Triangle>::get(void*)
-// {
-// 	/*
-// 	mulli    r0, r4, 0x60
-// 	lwz      r3, 0x24(r3)
-// 	add      r3, r3, r0
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::get(void*)
+{
+	/*
+	mulli    r0, r4, 0x60
+	lwz      r3, 0x24(r3)
+	add      r3, r3, r0
+	blr
+	*/
+}
 
 /*
- * @generated{getNext__31ArrayContainer<Q23Sys8Triangle>FPv}
  * --INFO--
  * Address:	80419FC4
  * Size:	000008
  */
-// void ArrayContainer<Sys::Triangle>::getNext(void*)
-// {
-// 	/*
-// 	addi     r3, r4, 1
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::getNext(void*)
+{
+	/*
+	addi     r3, r4, 1
+	blr
+	*/
+}
 
 /*
- * @generated{getStart__31ArrayContainer<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	80419FCC
  * Size:	000008
  */
-// u32 ArrayContainer<Sys::Triangle>::getStart() { return 0x0; }
+u32 ArrayContainer<Sys::Triangle>::getStart() { return 0x0; }
 
 /*
- * @generated{getEnd__31ArrayContainer<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	80419FD4
  * Size:	000008
  */
-// void ArrayContainer<Sys::Triangle>::getEnd()
-// {
-// 	/*
-// 	lwz      r3, 0x1c(r3)
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::getEnd()
+{
+	/*
+	lwz      r3, 0x1c(r3)
+	blr
+	*/
+}
 
 /*
- * @generated{getAt__31ArrayContainer<Q23Sys8Triangle>Fi}
  * --INFO--
  * Address:	80419FDC
  * Size:	000010
  */
-// void ArrayContainer<Sys::Triangle>::getAt(int)
-// {
-// 	/*
-// 	mulli    r0, r4, 0x60
-// 	lwz      r3, 0x24(r3)
-// 	add      r3, r3, r0
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::getAt(int)
+{
+	/*
+	mulli    r0, r4, 0x60
+	lwz      r3, 0x24(r3)
+	add      r3, r3, r0
+	blr
+	*/
+}
 
 /*
- * @generated{getTo__31ArrayContainer<Q23Sys8Triangle>Fv}
- * @generated{getObject__26Container<Q23Sys8Triangle>FPv}
- * @generated{getAt__26Container<Q23Sys8Triangle>Fi}
- * @generated{getTo__26Container<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	80419FEC
  * Size:	000008
  */
-// void ArrayContainer<Sys::Triangle>::getTo()
-// {
-// 	/*
-// 	lwz      r3, 0x20(r3)
-// 	blr
-// 	*/
-// }
+void ArrayContainer<Sys::Triangle>::getTo()
+{
+	/*
+	lwz      r3, 0x20(r3)
+	blr
+	*/
+}
 
 /*
- * @generated{getObject__26Container<Q23Sys8Triangle>FPv}
  * --INFO--
  * Address:	80419FF4
  * Size:	00002C
  */
-// void Container<Sys::Triangle>::getObject(void*)
-// {
-// 	/*
-// 	stwu     r1, -0x10(r1)
-// 	mflr     r0
-// 	stw      r0, 0x14(r1)
-// 	lwz      r12, 0(r3)
-// 	lwz      r12, 0x20(r12)
-// 	mtctr    r12
-// 	bctrl
-// 	lwz      r0, 0x14(r1)
-// 	mtlr     r0
-// 	addi     r1, r1, 0x10
-// 	blr
-// 	*/
-// }
+void Container<Sys::Triangle>::getObject(void*)
+{
+	/*
+	stwu     r1, -0x10(r1)
+	mflr     r0
+	stw      r0, 0x14(r1)
+	lwz      r12, 0(r3)
+	lwz      r12, 0x20(r12)
+	mtctr    r12
+	bctrl
+	lwz      r0, 0x14(r1)
+	mtlr     r0
+	addi     r1, r1, 0x10
+	blr
+	*/
+}
 
 /*
- * @generated{getAt__26Container<Q23Sys8Triangle>Fi}
  * --INFO--
  * Address:	8041A020
  * Size:	000008
  */
-// u32 Container<Sys::Triangle>::getAt(int) { return 0x0; }
+u32 Container<Sys::Triangle>::getAt(int) { return 0x0; }
 
 /*
- * @generated{getTo__26Container<Q23Sys8Triangle>Fv}
  * --INFO--
  * Address:	8041A028
  * Size:	000008
  */
-// u32 Container<Sys::Triangle>::getTo() { return 0x0; }
+u32 Container<Sys::Triangle>::getTo() { return 0x0; }

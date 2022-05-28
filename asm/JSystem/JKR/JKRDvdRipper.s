@@ -1,10 +1,9 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 .4byte __sinit_JKRDvdRipper_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80473688
 lbl_80473688:
 	.4byte 0x4A4B5244
@@ -38,7 +37,7 @@ sDvdAsyncList__12JKRDvdRipper:
 	.skip 0xC
 
 .section .sdata, "wa"  # 0x80514680 - 0x80514D80
-.balign 8
+.balign 0x8
 .global errorRetry__12JKRDvdRipper
 errorRetry__12JKRDvdRipper:
 	.4byte 0x01000000
@@ -47,7 +46,7 @@ sSZSBufferSize__12JKRDvdRipper:
 	.4byte 0x00000400
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global szpBuf_2
 szpBuf_2:
 	.skip 0x4

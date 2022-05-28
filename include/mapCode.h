@@ -10,23 +10,6 @@ struct TriangleTable;
 namespace MapCode {
 // typedef u8 Code;
 struct Code {
-#pragma enumsalwaysint off
-	enum Attribute {
-		Attribute1 = 0x1,
-		Attribute2 = 0x2,
-		Attribute3 = 0x4,
-		Attribute4 = 0x8,
-		ATTR_MASK  = 0xF,
-	};
-
-	enum SlipCode {
-		SlipCode1     = 0x1,
-		SlipCode2     = 0x2,
-		SlipCode3     = 0x3,
-		SLIPCODE_MASK = 0x3,
-	};
-#pragma enumsalwaysint reset
-
 	u8 getAttribute();
 	char* getAttributeName();
 	u8 getSlipCode();
@@ -45,13 +28,11 @@ struct Code {
 
 struct Mgr {
 	struct CodeArray : ArrayContainer<MapCode::Code> {
-		inline CodeArray()
-		    : ArrayContainer<MapCode::Code>()
-		{
-		}
-		virtual ~CodeArray();                     // _00
-		virtual void writeObject(Stream&, Code&); // _24
-		virtual void readObject(Stream&, Code&);  // _28
+		CodeArray();
+		virtual ~CodeArray();
+		virtual void writeObject(Stream&, Code&) override;
+		virtual void readObject(Stream&, Code&) override;
+		virtual void addOne(Code&) override;
 	};
 
 	Mgr();

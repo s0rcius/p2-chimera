@@ -1,6 +1,6 @@
 .include "macros.inc"
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
 .global lbl_80496908
 lbl_80496908:
 	.4byte 0x65626953
@@ -127,7 +127,7 @@ lbl_80496ADC:
 	.4byte 0x61727400
 
 .section .data, "wa"  # 0x8049E220 - 0x804EFC20
-.balign 8
+.balign 0x8
 .global __vt__Q33ebi6Screen11TPressStart
 __vt__Q33ebi6Screen11TPressStart:
 	.4byte 0
@@ -149,9 +149,10 @@ __vt__Q33ebi6Screen11TPressStart:
 	.4byte doUpdateStateClose__Q33ebi6Screen11TPressStartFv
 	.4byte doDraw__Q33ebi6Screen11TPressStartFv
 	.4byte getName__Q33ebi6Screen11TPressStartFv
+	.4byte 0
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_8051FAE0
 lbl_8051FAE0:
 	.4byte 0x3E4CCCCD
@@ -161,7 +162,7 @@ lbl_8051FAE4:
 .global lbl_8051FAE8
 lbl_8051FAE8:
 	.4byte 0x437F0000
-.balign 8
+	.4byte 0x00000000
 .global lbl_8051FAF0
 lbl_8051FAF0:
 	.4byte 0x43300000
@@ -169,6 +170,7 @@ lbl_8051FAF0:
 .global lbl_8051FAF8
 lbl_8051FAF8:
 	.4byte 0x46FFFE00
+.global lbl_8051FAFC
 lbl_8051FAFC:
 	.float 0.25
 .global lbl_8051FB00
@@ -180,7 +182,8 @@ lbl_8051FB04:
 .global lbl_8051FB08
 lbl_8051FB08:
 	.4byte 0x42700000
-.balign 8
+	.4byte 0x00000000
+.global lbl_8051FB10
 lbl_8051FB10:
 	.4byte 0x43300000
 	.4byte 0x80000000

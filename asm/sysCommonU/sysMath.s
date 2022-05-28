@@ -1,15 +1,16 @@
 .include "macros.inc"
 .section .ctors, "wa"  # 0x80472F00 - 0x804732C0
-lbl_constructor:
 	.4byte __sinit_sysMath_cpp
 
 .section .rodata  # 0x804732E0 - 0x8049E220
-.balign 8
+.balign 0x8
+.global lbl_80499648
 lbl_80499648:
 	.asciz "sysMath.cpp"
-.balign 4
+.global lbl_80499654
 lbl_80499654:
 	.asciz "acosf %f\n"
+	.skip 0x2
 
 .section .bss  # 0x804EFC20 - 0x8051467C
 .global "zero__10Vector3<f>"
@@ -17,13 +18,13 @@ lbl_80499654:
 	.skip 0xC
 
 .section .sbss # 0x80514D80 - 0x80516360
-.balign 8
+.balign 0x8
 .global "__init__zero__10Vector3<f>"
-"__init__zero__10Vector3<f>": # weak object
-	.skip 0x1
+"__init__zero__10Vector3<f>":
+	.skip 0x8
 
 .section .sdata2, "a"     # 0x80516360 - 0x80520E40
-.balign 8
+.balign 0x8
 .global lbl_80520268
 lbl_80520268:
 	.float -325.9493
@@ -83,7 +84,7 @@ lbl_805202B0:
 	.double 0.0
 .global lbl_805202B8
 lbl_805202B8:
-	.float 1.0E-5
+	.4byte 0x3727C5AC
 .global lbl_805202BC
 lbl_805202BC:
 	.float 0.25
@@ -95,8 +96,9 @@ lbl_805202C4:
 	.float -32768.0
 
 .section .text, "ax"  # 0x800056C0 - 0x80472F005
+
 .global __ml__FR4QuatR4Quat
-__ml__FR4QuatR4Quat: # weak function
+__ml__FR4QuatR4Quat:
 /* 80412400 0040F340  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80412404 0040F344  DB E1 00 40 */	stfd f31, 0x40(r1)
 /* 80412408 0040F348  F3 E1 00 48 */	psq_st f31, 72(r1), 0, qr0
@@ -1107,7 +1109,8 @@ lbl_80413208:
 /* 80413220 00410160  38 21 00 90 */	addi r1, r1, 0x90
 /* 80413224 00410164  4E 80 00 20 */	blr 
 
-__sinit_sysMath_cpp: # static initializer
+.global __sinit_sysMath_cpp
+__sinit_sysMath_cpp:
 /* 80413228 00410168  88 0D 9A C8 */	lbz r0, "__init__zero__10Vector3<f>"@sda21(r13)
 /* 8041322C 0041016C  7C 00 07 75 */	extsb. r0, r0
 /* 80413230 00410170  4C 82 00 20 */	bnelr 

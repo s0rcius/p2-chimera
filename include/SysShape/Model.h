@@ -16,7 +16,7 @@ struct Joint;
 struct Model : MtxObject {
 	Model(J3DModelData*, u32, u32);
 
-	virtual Matrixf* getMatrix(int);                   // _00
+	virtual Matrixf* getMatrix();                      // _00
 	virtual bool isModel();                            // _04
 	virtual bool isVisible(Sys::Sphere&);              // _08
 	virtual bool isVisible();                          // _0C
@@ -29,9 +29,10 @@ struct Model : MtxObject {
 
 	void clearAnimatorAll();
 	void enableMaterialAnim(int);
-	static void enableMaterialAnim(J3DModelData*, int);
+	void enableMaterialAnim(J3DModelData*, int);
 	SysShape::Joint* getJoint(char*);
 	void getJointIndex(char*);
+	void getMatrix(int);
 	void getRoughBoundingRadius();
 	void getRoughCenter();
 	void initJoints();
@@ -53,7 +54,7 @@ struct Model : MtxObject {
 	bool m_isVisible;     // _06
 	J3DModel* m_j3dModel; // _08
 	int m_jointCount;     // _0C
-	Joint** m_joints;     // _10
+	Joint* m_joints;      // _10
 };
 } // namespace SysShape
 
