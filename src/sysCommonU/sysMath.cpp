@@ -120,10 +120,7 @@ extern const float lbl_805202AC;  // 0.0099999998 OR 0.01
 extern const double lbl_805202B0; // 0.0
 extern const float lbl_805202C0; // 32768.0
 extern const float lbl_805202C4; // -32768.0
-extern s8 __init__zero;
-extern Vector3f zero;
 
-extern void PSMTXMultVec(Matrixf*, Vector3<float>*, Vector3<float>*);
 
 
 // FROM ANOTHER FILE.. WTF?
