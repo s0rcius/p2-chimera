@@ -46,6 +46,10 @@ template <typename T> struct Vector3 {
 		z = other.z;
 	}
 
+	// inline Vector3& operator+(const Vector3 b) { return Vector3(x + b.x, y + b.y, z + b.z); }
+
+	// inline Vector3& operator-(const Vector3 b) { return Vector3(x - b.x, y - b.y, z - b.z); }
+
 	/**
 	 * @fabricated
 	 */

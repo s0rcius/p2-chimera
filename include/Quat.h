@@ -8,7 +8,14 @@
 struct Quat {
 	Quat();
 	Quat(float, Vector3f);
+	Quat(Quat&);
 	void set(float a, float b, float c, float d);
+	void operator*(Quat&);
+	void set(Vector3f&);
+	void inverse();
+	void normalise();
+	void slerp(Quat&, float, Quat&);
+	void fromMatrix(Matrixf&);
 
 	f32 w, // _00
 	    x, // _04

@@ -1,3 +1,5 @@
+#include "Game/CurrTriInfo.h"
+#include "Sys/CreateTriangleArg.h"
 #include "Sys/Edge.h"
 #include "Sys/GridDivider.h"
 #include "Sys/RayIntersectInfo.h"
@@ -5,6 +7,7 @@
 #include "Sys/TriangleTable.h"
 #include "Sys/TriIndexList.h"
 #include "Sys/Tube.h"
+#include "Container.h"
 #include "Vector3.h"
 #include "types.h"
 
@@ -172,83 +175,52 @@
 
 namespace Sys {
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000238
- */
-void Edge::calcNearestEdgePoint(Vector3f&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000238
+// */
+// void Edge::calcNearestEdgePoint(Vector3f&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
  * Address:	80415AA4
  * Size:	0000B4
  */
-void Tube::getAxisVector(Vector3f&)
+void Tube::getAxisVector(Vector3f& axisVector)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	stw      r31, 0xc(r1)
-	mr       r31, r4
-	lfs      f1, 0xc(r3)
-	lfs      f0, 0(r3)
-	lfs      f3, 0x10(r3)
-	lfs      f2, 4(r3)
-	fsubs    f0, f1, f0
-	lfs      f4, 0x14(r3)
-	lfs      f1, 8(r3)
-	fsubs    f2, f3, f2
-	stfs     f0, 0(r4)
-	fsubs    f0, f4, f1
-	stfs     f2, 4(r4)
-	stfs     f0, 8(r4)
-	lfs      f1, 0(r4)
-	lfs      f0, 4(r4)
-	lfs      f2, 8(r4)
-	fmuls    f1, f1, f1
-	fmuls    f0, f0, f0
-	fmuls    f2, f2, f2
-	fadds    f0, f1, f0
-	fadds    f1, f2, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_80415B44
-	lfs      f2, lbl_8052030C@sda21(r2)
-	lfs      f0, 0(r31)
-	fdivs    f1, f2, f1
-	fmuls    f0, f0, f1
-	stfs     f0, 0(r31)
-	lfs      f0, 4(r31)
-	fmuls    f0, f0, f1
-	stfs     f0, 4(r31)
-	lfs      f0, 8(r31)
-	fmuls    f0, f0, f1
-	stfs     f0, 8(r31)
+	// pos2(x,y,z) which are 0xC, 0x10, and 0x14 = position of one end of tube
+	// pos1(x,y,z) which are 0x0, 0x4, and 0x8 = position of other end of tube
+	// 'returns' a normalised vector 'axisVector' that points in direction of tube
 
-lbl_80415B44:
-	lwz      r0, 0x14(r1)
-	lwz      r31, 0xc(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	axisVector = pos2 - pos1;
+
+	f32 X   = axisVector.x * axisVector.x;
+	f32 Y   = axisVector.y * axisVector.y;
+	f32 Z   = axisVector.z * axisVector.z;
+	f32 mag = pikmin2_sqrtf(X + Y + Z); // length/magnitude of output vector
+
+	// normalise output vector (so long as it's not just the zero vector lol)
+	if (mag > lbl_80520308) { // idk if this should be 0.0f or 0x00000000, the file has 0x00000000 (4-byte)
+		f32 norm = lbl_8052030C / mag;
+		axisVector.x *= norm;
+		axisVector.y *= norm;
+		axisVector.z *= norm;
+	}
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	00002C
- */
-void Tube::getYRatio(float)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	00002C
+// */
+// void Tube::getYRatio(float)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
@@ -437,96 +409,48 @@ lbl_80415D84:
  * Address:	80415DD4
  * Size:	0000F4
  */
-void Tube::getPosRatio(const Vector3f&)
+float Tube::getPosRatio(const Vector3f& point)
 {
-	/*
-	stwu     r1, -0x40(r1)
-	mflr     r0
-	stw      r0, 0x44(r1)
-	stfd     f31, 0x30(r1)
-	psq_st   f31, 56(r1), 0, qr0
-	stfd     f30, 0x20(r1)
-	psq_st   f30, 40(r1), 0, qr0
-	stfd     f29, 0x10(r1)
-	psq_st   f29, 24(r1), 0, qr0
-	stw      r31, 0xc(r1)
-	stw      r30, 8(r1)
-	lfs      f2, 0x10(r3)
-	mr       r30, r3
-	lfs      f0, 4(r3)
-	mr       r31, r4
-	lfs      f1, 0xc(r3)
-	fsubs    f30, f2, f0
-	lfs      f0, 0(r3)
-	lfs      f2, 0x14(r3)
-	fsubs    f31, f1, f0
-	lfs      f1, 8(r3)
-	fmuls    f0, f30, f30
-	fsubs    f29, f2, f1
-	fmadds   f0, f31, f31, f0
-	fmadds   f1, f29, f29, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_80415E60
-	lfs      f0, lbl_8052030C@sda21(r2)
-	fdivs    f0, f0, f1
-	fmuls    f31, f31, f0
-	fmuls    f30, f30, f0
-	fmuls    f29, f29, f0
-	b        lbl_80415E64
+	// calculates dot product between axisVector of tube
+	// and separation vector between pos1 of tube and
+	// input 'point', then normalises by length of tube
+	Vector3f axis(pos2.x - pos1.x, pos2.y - pos1.y, pos2.z - pos1.z);
 
-lbl_80415E60:
-	fmr      f1, f0
+	float mag = pikmin2_sqrtf(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z);
 
-lbl_80415E64:
-	lfs      f2, 4(r31)
-	lfs      f0, 4(r30)
-	lfs      f3, 0(r31)
-	fsubs    f0, f2, f0
-	lfs      f2, 0(r30)
-	lfs      f4, 8(r31)
-	fsubs    f2, f3, f2
-	lfs      f3, 8(r30)
-	fmuls    f0, f30, f0
-	fsubs    f3, f4, f3
-	fmadds   f0, f31, f2, f0
-	fmadds   f0, f29, f3, f0
-	fdivs    f1, f0, f1
-	psq_l    f31, 56(r1), 0, qr0
-	lfd      f31, 0x30(r1)
-	psq_l    f30, 40(r1), 0, qr0
-	lfd      f30, 0x20(r1)
-	psq_l    f29, 24(r1), 0, qr0
-	lfd      f29, 0x10(r1)
-	lwz      r31, 0xc(r1)
-	lwz      r0, 0x44(r1)
-	lwz      r30, 8(r1)
-	mtlr     r0
-	addi     r1, r1, 0x40
-	blr
-	*/
+	// if tube isn't 0-length, normalise axisVector to unit vector
+	if (mag > lbl_80520308) {
+		float norm = lbl_8052030C / mag;
+		axis.x *= norm;
+		axis.y *= norm;
+		axis.z *= norm;
+	} else {
+		mag = lbl_80520308;
+	}
+	Vector3f sep = point - pos1;
+	// return normalised dot product between (axisVector) and (separation vector between arg0 and pos1)
+	return (axis.x * (point.x - pos1.x) + axis.y * (point.y - pos1.y) + axis.z * (point.z - pos1.z)) / mag;
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	00001C
- */
-void Tube::getRatioRadius(float)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	00001C
+// */
+// void Tube::getRatioRadius(float)
+// {
+// // UNUSED FUNCTION
+// }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000200
- */
-void Tube::getPosGradient(Vector3f&, float, Vector3f&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000200
+// */
+// void Tube::getPosGradient(Vector3f&, float, Vector3f&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
@@ -563,32 +487,30 @@ Vector3f Tube::setPos(float)
  * Address:	80415F14
  * Size:	000058
  */
-bool Sphere::intersect(Sys::Sphere&)
+bool Sphere::intersect(Sys::Sphere& ball)
 {
-	/*
-	lfs      f2, 4(r4)
-	lfs      f0, 4(r3)
-	lfs      f1, 0(r4)
-	fsubs    f3, f2, f0
-	lfs      f0, 0(r3)
-	lfs      f2, 8(r4)
-	fsubs    f4, f1, f0
-	lfs      f1, 8(r3)
-	fmuls    f0, f3, f3
-	fsubs    f5, f2, f1
-	lfs      f3, 0xc(r4)
-	lfs      f2, 0xc(r3)
-	fmadds   f1, f4, f4, f0
-	lfs      f0, lbl_80520308@sda21(r2)
-	fadds    f2, f3, f2
-	fmadds   f1, f5, f5, f1
-	fnmsubs  f1, f2, f2, f1
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	mfcr     r0
-	rlwinm   r3, r0, 3, 0x1f, 0x1f
-	blr
-	*/
+	// check if a sphere intersects with a second sphere 'ball'
+	// return 1 if yes, return 0 if no
+
+	// first, calculate separation vector
+	float diff_y = ball.m_position.y - m_position.y;
+	float diff_x = ball.m_position.x - m_position.x;
+	float diff_z = ball.m_position.z - m_position.z;
+
+	// calculate square of distance between them
+	float sq_dist = diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
+
+	// add radii to get total "material" between their centers
+	float sep = ball.m_radius + m_radius;
+
+	// total material ^2 - dist^2 > 0 if no intersection, but flip the sign (??)
+	float gap = -(sep * sep - sq_dist);
+
+	// get return values - 1 if they spheres intersect (including touch), 0 if they don't
+	if (gap <= lbl_80520308) {
+		return 1;
+	}
+	return 0;
 }
 
 /*
@@ -596,90 +518,39 @@ bool Sphere::intersect(Sys::Sphere&)
  * Address:	80415F6C
  * Size:	000120
  */
-bool Sphere::intersect(Sys::Sphere&, Vector3f&)
+bool Sphere::intersect(Sys::Sphere& ball, Vector3f& vec)
 {
-	/*
-	stwu     r1, -0x20(r1)
-	mflr     r0
-	stw      r0, 0x24(r1)
-	stw      r31, 0x1c(r1)
-	mr       r31, r5
-	stw      r30, 0x18(r1)
-	mr       r30, r4
-	stw      r29, 0x14(r1)
-	mr       r29, r3
-	lfs      f1, 0(r4)
-	lfs      f0, 0(r3)
-	lfs      f3, 4(r4)
-	lfs      f2, 4(r3)
-	fsubs    f0, f1, f0
-	lfs      f4, 8(r4)
-	lfs      f1, 8(r3)
-	fsubs    f2, f3, f2
-	stfs     f0, 0(r5)
-	fsubs    f0, f4, f1
-	stfs     f2, 4(r5)
-	stfs     f0, 8(r5)
-	lfs      f1, 0(r5)
-	lfs      f0, 4(r5)
-	lfs      f2, 8(r5)
-	fmuls    f1, f1, f1
-	fmuls    f0, f0, f0
-	fmuls    f2, f2, f2
-	fadds    f0, f1, f0
-	fadds    f1, f2, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_80416020
-	lfs      f2, lbl_8052030C@sda21(r2)
-	lfs      f0, 0(r31)
-	fdivs    f2, f2, f1
-	fmuls    f0, f0, f2
-	stfs     f0, 0(r31)
-	lfs      f0, 4(r31)
-	fmuls    f0, f0, f2
-	stfs     f0, 4(r31)
-	lfs      f0, 8(r31)
-	fmuls    f0, f0, f2
-	stfs     f0, 8(r31)
-	b        lbl_80416024
+	// calculate whether sphere intersects with another sphere 'ball'
+	// output 1 if they intersect (or touch), 0 if they don't
+	// also load into vec the (negative) separation vector between the spheres, scaled by how much they overlap
+	// i.e. a repulsion vector
 
-lbl_80416020:
-	fmr      f1, f0
+	// get separation vector
+	vec = ball.m_position - m_position;
+	// vec = Vector3f(ball.m_position.x - m_position.x, ball.m_position.y - m_position.y, ball.m_position.z - m_position.z);
 
-lbl_80416024:
-	lfs      f3, 0xc(r30)
-	lfs      f2, 0xc(r29)
-	lfs      f0, lbl_80520308@sda21(r2)
-	fadds    f2, f3, f2
-	fsubs    f3, f1, f2
-	fcmpo    cr0, f3, f0
-	ble      lbl_80416048
-	li       r3, 0
-	b        lbl_80416070
+	// get distance between centers
+	float mag = pikmin2_sqrtf(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+	if (mag > lbl_80520308) { // if spheres aren't in the exact same spot, normalise separation vector
+		float norm = lbl_8052030C / mag;
+		vec.x *= norm;
+		vec.y *= norm;
+		vec.z *= norm;
+	} else { // if they're in the same spot or some funky math has happened, make the distance 0
+		mag = lbl_80520308;
+	}
+	// (distance between centers) - (total 'material' between centers); positive if there's a gap
+	float sep = mag - (ball.m_radius + m_radius);
 
-lbl_80416048:
-	lfs      f0, 0(r31)
-	li       r3, 1
-	lfs      f1, 4(r31)
-	fmuls    f0, f0, f3
-	lfs      f2, 8(r31)
-	fmuls    f1, f1, f3
-	fmuls    f2, f2, f3
-	stfs     f0, 0(r31)
-	stfs     f1, 4(r31)
-	stfs     f2, 8(r31)
+	// if positive, gap, so no intersection
+	if (sep > lbl_80520308) {
+		return 0;
+	}
+	// if negative, scale the unit separation vector by the (negative) overlap to make it a repulsion vector
+	vec = Vector3f(vec.x * sep, vec.y * sep, vec.z * sep);
 
-lbl_80416070:
-	lwz      r0, 0x24(r1)
-	lwz      r31, 0x1c(r1)
-	lwz      r30, 0x18(r1)
-	lwz      r29, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x20
-	blr
-	*/
+	// yes they intersect
+	return 1;
 }
 
 /*
@@ -687,153 +558,68 @@ lbl_80416070:
  * Address:	8041608C
  * Size:	000204
  */
-bool Sphere::intersect(Sys::Edge&, float&)
+bool Sphere::intersect(Sys::Edge& edge_in, float& t)
 {
-	/*
-	stwu     r1, -0x50(r1)
-	mflr     r0
-	stw      r0, 0x54(r1)
-	stfd     f31, 0x40(r1)
-	psq_st   f31, 72(r1), 0, qr0
-	stfd     f30, 0x30(r1)
-	psq_st   f30, 56(r1), 0, qr0
-	stfd     f29, 0x20(r1)
-	psq_st   f29, 40(r1), 0, qr0
-	stw      r31, 0x1c(r1)
-	stw      r30, 0x18(r1)
-	stw      r29, 0x14(r1)
-	mr       r29, r3
-	mr       r30, r4
-	lfs      f2, 4(r4)
-	mr       r31, r5
-	lfs      f0, 4(r3)
-	lfs      f1, 0(r4)
-	fsubs    f4, f2, f0
-	lfs      f0, 0(r3)
-	lfs      f2, 8(r4)
-	fsubs    f3, f1, f0
-	lfs      f1, 8(r3)
-	fmuls    f0, f4, f4
-	fsubs    f1, f2, f1
-	fmadds   f0, f3, f3, f0
-	fmadds   f1, f1, f1, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, 0xc(r29)
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	bne      lbl_8041611C
-	lfs      f0, lbl_80520308@sda21(r2)
-	li       r3, 1
-	stfs     f0, 0(r31)
-	b        lbl_8041625C
+	// calculate if sphere intersections with edge edge_in
+	// return 1 if intersecting, 0 if not
+	// also put a parameter into t that says how far along the edge it's intersecting
+	// t = 0 if intersecting at pos1; = 1 if at pos2; 0 < t < 1 if in the middle
 
-lbl_8041611C:
-	lfs      f2, 0x10(r30)
-	lfs      f0, 4(r29)
-	lfs      f1, 0xc(r30)
-	fsubs    f4, f2, f0
-	lfs      f0, 0(r29)
-	lfs      f2, 0x14(r30)
-	fsubs    f3, f1, f0
-	lfs      f1, 8(r29)
-	fmuls    f0, f4, f4
-	fsubs    f1, f2, f1
-	fmadds   f0, f3, f3, f0
-	fmadds   f1, f1, f1, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, 0xc(r29)
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	bne      lbl_80416170
-	lfs      f0, lbl_8052030C@sda21(r2)
-	li       r3, 1
-	stfs     f0, 0(r31)
-	b        lbl_8041625C
+	// check one end point of edge
+	Vector3f diff_0(edge_in.pos1.x - m_position.x, edge_in.pos1.y - m_position.y, edge_in.pos1.z - m_position.z);
+	float dist_0 = pikmin2_sqrtf(diff_0.x * diff_0.x + diff_0.y * diff_0.y + diff_0.z * diff_0.z);
+	if (dist_0 <= m_radius) { // one end is already intersecting
+		t = lbl_80520308;
+		return 1;
+	}
 
-lbl_80416170:
-	lfs      f2, 0x10(r30)
-	lfs      f0, 4(r30)
-	lfs      f1, 0xc(r30)
-	fsubs    f30, f2, f0
-	lfs      f0, 0(r30)
-	lfs      f2, 0x14(r30)
-	fsubs    f31, f1, f0
-	lfs      f1, 8(r30)
-	fmuls    f0, f30, f30
-	fsubs    f29, f2, f1
-	fmadds   f0, f31, f31, f0
-	fmadds   f1, f29, f29, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_804161C8
-	lfs      f0, lbl_8052030C@sda21(r2)
-	fdivs    f0, f0, f1
-	fmuls    f31, f31, f0
-	fmuls    f30, f30, f0
-	fmuls    f29, f29, f0
-	b        lbl_804161CC
+	// check other end point of edge
+	Vector3f diff_1(edge_in.pos2.x - m_position.x, edge_in.pos2.y - m_position.y, edge_in.pos2.z - m_position.z);
+	float dist_1 = pikmin2_sqrtf(diff_1.x * diff_1.x + diff_1.y * diff_1.y + diff_1.z * diff_1.z);
+	if (dist_1 <= m_radius) { // one end is already intersecting
+		t = lbl_8052030C;
+		return 1;
+	}
 
-lbl_804161C8:
-	fmr      f1, f0
+	// create edge vector (pointing along edge)
+	Vector3f vec_edge(edge_in.pos2.x - edge_in.pos1.x, edge_in.pos2.y - edge_in.pos1.y, edge_in.pos2.z - edge_in.pos1.z);
 
-lbl_804161CC:
-	lfs      f3, 4(r29)
-	lfs      f0, 4(r30)
-	lfs      f2, 0(r29)
-	fsubs    f5, f3, f0
-	lfs      f0, 0(r30)
-	lfs      f3, 8(r29)
-	fsubs    f4, f2, f0
-	lfs      f0, 8(r30)
-	fmuls    f2, f5, f30
-	fsubs    f3, f3, f0
-	lfs      f0, lbl_80520308@sda21(r2)
-	fmadds   f2, f4, f31, f2
-	fmadds   f2, f3, f29, f2
-	stfs     f2, 0(r31)
-	lfs      f2, 0(r31)
-	fcmpo    cr0, f2, f0
-	blt      lbl_80416218
-	fcmpo    cr0, f2, f1
-	ble      lbl_80416220
+	// calculate how long the edge is
+	float len_edge = pikmin2_sqrtf(vec_edge.x * vec_edge.x + vec_edge.y * vec_edge.y + vec_edge.z * vec_edge.z);
+	if (len_edge > lbl_80520308) { // if edge exists, normalise edge vector
+		float norm = lbl_8052030C / len_edge;
+		vec_edge.x *= norm;
+		vec_edge.y *= norm;
+		vec_edge.z *= norm;
+	} else {
+		len_edge = lbl_80520308; // edge is 0 length or we did funky math
+	}
 
-lbl_80416218:
-	li       r3, 0
-	b        lbl_8041625C
+	// negative of diff_0, will be used to calculate perp dist
+	Vector3f sep(m_position.x - edge_in.pos1.x, m_position.y - edge_in.pos1.y, m_position.z - edge_in.pos1.z);
 
-lbl_80416220:
-	fmuls    f1, f30, f2
-	fmuls    f0, f31, f2
-	fmuls    f2, f29, f2
-	fsubs    f5, f5, f1
-	fsubs    f1, f4, f0
-	fsubs    f2, f3, f2
-	fmuls    f0, f5, f5
-	fmadds   f0, f1, f1, f0
-	fmadds   f1, f2, f2, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, 0xc(r29)
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	mfcr     r0
-	rlwinm   r3, r0, 3, 0x1f, 0x1f
+	// set t = dot product between edge vec and sep vec between ball and start point
+	t = sep.x * vec_edge.x + sep.y * vec_edge.y + sep.z * vec_edge.z;
 
-lbl_8041625C:
-	psq_l    f31, 72(r1), 0, qr0
-	lfd      f31, 0x40(r1)
-	psq_l    f30, 56(r1), 0, qr0
-	lfd      f30, 0x30(r1)
-	psq_l    f29, 40(r1), 0, qr0
-	lfd      f29, 0x20(r1)
-	lwz      r31, 0x1c(r1)
-	lwz      r30, 0x18(r1)
-	lwz      r0, 0x54(r1)
-	lwz      r29, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x50
-	blr
-	*/
+	// if dot prod is negative or really big, there's no intersection
+	if ((t < lbl_80520308) || (t > len_edge)) {
+		return 0;
+	}
+
+	// create a weighted edge vector with dot product
+	float t_vec_x = vec_edge.x * t;
+	float t_vec_y = vec_edge.y * t;
+	float t_vec_z = vec_edge.z * t;
+
+	// vector to closest point of edge from center of sphere
+	Vector3f weighted_sep(sep.x - t_vec_x, sep.y - t_vec_y, sep.z - t_vec_z);
+
+	// check if perp distance to edge is less than or equal to radius of sphere
+	float sep_dist = pikmin2_sqrtf(weighted_sep.x * weighted_sep.x + weighted_sep.y * weighted_sep.y + weighted_sep.z * weighted_sep.z);
+	if (sep_dist <= m_radius) { // if so, intersects, so return 1; t is then parametrised 'center' of intersection on edge
+		return 1;
+	}
+	return 0;
 }
 
 /*
@@ -1029,300 +815,143 @@ lbl_804164DC:
  * Address:	8041651C
  * Size:	0003D4
  */
-bool Sphere::intersect(Sys::Edge&, float&, Vector3f&, float&)
+bool Sphere::intersect(Sys::Edge& edge_in, float& t, Vector3f& vec_out, float& f_out)
 {
-	/*
-	stwu     r1, -0x50(r1)
-	mflr     r0
-	stw      r0, 0x54(r1)
-	stfd     f31, 0x40(r1)
-	psq_st   f31, 72(r1), 0, qr0
-	stfd     f30, 0x30(r1)
-	psq_st   f30, 56(r1), 0, qr0
-	stfd     f29, 0x20(r1)
-	psq_st   f29, 40(r1), 0, qr0
-	stmw     r27, 0xc(r1)
-	lfs      f2, 0x10(r4)
-	mr       r28, r4
-	lfs      f0, 4(r4)
-	mr       r27, r3
-	lfs      f1, 0xc(r4)
-	mr       r29, r5
-	fsubs    f30, f2, f0
-	lfs      f0, 0(r4)
-	lfs      f2, 0x14(r4)
-	mr       r30, r6
-	fsubs    f31, f1, f0
-	lfs      f1, 8(r4)
-	fmuls    f0, f30, f30
-	mr       r31, r7
-	fsubs    f29, f2, f1
-	fmadds   f0, f31, f31, f0
-	fmadds   f1, f29, f29, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_804165B0
-	lfs      f0, lbl_8052030C@sda21(r2)
-	fdivs    f0, f0, f1
-	fmuls    f31, f31, f0
-	fmuls    f30, f30, f0
-	fmuls    f29, f29, f0
-	b        lbl_804165B4
+	// cakculates whether sphere intersects an edge 'edge_in'
+	// puts "position" of overlap in t - t = 0 if overlap = start of edge, t = 1 if overlap = end of edge
+	// vec_out = repulsion vector away from edge
+	// f_out = amount of overlap between edge and sphere - "strength of overlap"
 
-lbl_804165B0:
-	fmr      f1, f0
+	// calculate vector along edge
+	Vector3f edge_vec(edge_in.pos2.x - edge_in.pos1.x, edge_in.pos2.y - edge_in.pos1.y, edge_in.pos2.z - edge_in.pos1.z);
 
-lbl_804165B4:
-	lfs      f3, 4(r27)
-	lfs      f0, 4(r28)
-	lfs      f2, 0(r27)
-	fsubs    f5, f3, f0
-	lfs      f0, 0(r28)
-	lfs      f3, 8(r27)
-	fsubs    f4, f2, f0
-	lfs      f0, 8(r28)
-	fmuls    f2, f5, f30
-	fsubs    f3, f3, f0
-	lfs      f0, lbl_80520308@sda21(r2)
-	fmadds   f2, f4, f31, f2
-	fmadds   f2, f3, f29, f2
-	stfs     f2, 0(r29)
-	lfs      f2, 0(r29)
-	fcmpo    cr0, f2, f0
-	blt      lbl_80416600
-	fcmpo    cr0, f2, f1
-	ble      lbl_80416820
+	// calculate length of edge
+	float len_edge = pikmin2_sqrtf(edge_vec.x * edge_vec.x + edge_vec.y * edge_vec.y + edge_vec.z * edge_vec.z);
+	if (len_edge > lbl_80520308) { // if edge has non-zero length, normalise edge vector
+		float norm_0 = lbl_8052030C / len_edge;
+		edge_vec.x *= norm_0;
+		edge_vec.y *= norm_0;
+		edge_vec.z *= norm_0;
+	} else { // if we did funky math or it's 0, make sure it's 0
+		len_edge = lbl_80520308;
+	}
 
-lbl_80416600:
-	lfs      f2, 4(r28)
-	lfs      f0, 4(r27)
-	lfs      f1, 0(r28)
-	fsubs    f4, f2, f0
-	lfs      f0, 0(r27)
-	lfs      f2, 8(r28)
-	fsubs    f3, f1, f0
-	lfs      f1, 8(r27)
-	fmuls    f0, f4, f4
-	fsubs    f1, f2, f1
-	fmadds   f0, f3, f3, f0
-	fmadds   f1, f1, f1, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, 0xc(r27)
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	bne      lbl_8041670C
-	lfs      f0, lbl_80520308@sda21(r2)
-	stfs     f0, 0(r29)
-	lfs      f1, 0(r27)
-	lfs      f0, 0(r28)
-	lfs      f3, 4(r27)
-	lfs      f2, 4(r28)
-	fsubs    f0, f1, f0
-	lfs      f4, 8(r27)
-	lfs      f1, 8(r28)
-	fsubs    f2, f3, f2
-	stfs     f0, 0(r30)
-	fsubs    f0, f4, f1
-	stfs     f2, 4(r30)
-	stfs     f0, 8(r30)
-	lfs      f1, 0(r30)
-	lfs      f0, 4(r30)
-	lfs      f2, 8(r30)
-	fmuls    f1, f1, f1
-	fmuls    f0, f0, f0
-	fmuls    f2, f2, f2
-	fadds    f0, f1, f0
-	fadds    f1, f2, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_804166DC
-	lfs      f2, lbl_8052030C@sda21(r2)
-	lfs      f0, 0(r30)
-	fdivs    f2, f2, f1
-	fmuls    f0, f0, f2
-	stfs     f0, 0(r30)
-	lfs      f0, 4(r30)
-	fmuls    f0, f0, f2
-	stfs     f0, 4(r30)
-	lfs      f0, 8(r30)
-	fmuls    f0, f0, f2
-	stfs     f0, 8(r30)
-	b        lbl_804166E0
+	// calculate vector from start of edge to sphere
+	Vector3f diff_0(m_position.x - edge_in.pos1.x, m_position.y - edge_in.pos1.y, m_position.z - edge_in.pos1.z);
 
-lbl_804166DC:
-	fmr      f1, f0
+	// set t to dot product between diff_0 and edge_vec - this is 0 if perpendicular, max if parallel.
+	t = diff_0.x * edge_vec.x + diff_0.y * edge_vec.y + diff_0.z * edge_vec.z;
 
-lbl_804166E0:
-	lfs      f2, 0xc(r27)
-	lfs      f0, lbl_80520308@sda21(r2)
-	fsubs    f2, f2, f1
-	fcmpu    cr0, f0, f1
-	stfs     f2, 0(r31)
-	bne      lbl_80416704
-	stfs     f0, 0(r30)
-	stfs     f0, 4(r30)
-	stfs     f0, 8(r30)
+	// if sphere is either on "left" side of edge, or "right" side of edge, check more carefully
+	if ((t < lbl_80520308) || (t > len_edge)) {
 
-lbl_80416704:
-	li       r3, 1
-	b        lbl_804168C4
+		// legit just -diff_0 but go with it
+		Vector3f sep_1(edge_in.pos1.x - m_position.x, edge_in.pos1.y - m_position.y, edge_in.pos1.z - m_position.z);
 
-lbl_8041670C:
-	lfs      f2, 0x10(r28)
-	lfs      f0, 4(r27)
-	lfs      f1, 0xc(r28)
-	fsubs    f4, f2, f0
-	lfs      f0, 0(r27)
-	lfs      f2, 0x14(r28)
-	fsubs    f3, f1, f0
-	lfs      f1, 8(r27)
-	fmuls    f0, f4, f4
-	fsubs    f1, f2, f1
-	fmadds   f0, f3, f3, f0
-	fmadds   f1, f1, f1, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, 0xc(r27)
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	bne      lbl_80416818
-	lfs      f0, lbl_8052030C@sda21(r2)
-	stfs     f0, 0(r29)
-	lfs      f1, 0(r27)
-	lfs      f0, 0xc(r28)
-	lfs      f3, 4(r27)
-	lfs      f2, 0x10(r28)
-	fsubs    f0, f1, f0
-	lfs      f4, 8(r27)
-	lfs      f1, 0x14(r28)
-	fsubs    f2, f3, f2
-	stfs     f0, 0(r30)
-	fsubs    f0, f4, f1
-	stfs     f2, 4(r30)
-	stfs     f0, 8(r30)
-	lfs      f1, 0(r30)
-	lfs      f0, 4(r30)
-	lfs      f2, 8(r30)
-	fmuls    f1, f1, f1
-	fmuls    f0, f0, f0
-	fmuls    f2, f2, f2
-	fadds    f0, f1, f0
-	fadds    f1, f2, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_804167E8
-	lfs      f2, lbl_8052030C@sda21(r2)
-	lfs      f0, 0(r30)
-	fdivs    f2, f2, f1
-	fmuls    f0, f0, f2
-	stfs     f0, 0(r30)
-	lfs      f0, 4(r30)
-	fmuls    f0, f0, f2
-	stfs     f0, 4(r30)
-	lfs      f0, 8(r30)
-	fmuls    f0, f0, f2
-	stfs     f0, 8(r30)
-	b        lbl_804167EC
+		// if the length of sep vector <= radius, we have overlap with start of edge!
+		if (pikmin2_sqrtf(sep_1.x * sep_1.x + sep_1.y * sep_1.y + sep_1.z * sep_1.z) <= m_radius) {
 
-lbl_804167E8:
-	fmr      f1, f0
+			// overlap is at start of edge!
+			t = lbl_80520308;
+			// vec_out (initially) = diff_0, i.e. sep vec but pointing away from edge, i.e. repulsion
+			vec_out = Vector3f(m_position.x - edge_in.pos1.x, m_position.y - edge_in.pos1.y, m_position.z - edge_in.pos1.z);
 
-lbl_804167EC:
-	lfs      f2, 0xc(r27)
-	lfs      f0, lbl_80520308@sda21(r2)
-	fsubs    f2, f2, f1
-	fcmpu    cr0, f0, f1
-	stfs     f2, 0(r31)
-	bne      lbl_80416810
-	stfs     f0, 0(r30)
-	stfs     f0, 4(r30)
-	stfs     f0, 8(r30)
+			// next, normalise vec_out, and put "strength of overlap" into f_out
+			float len_vec = pikmin2_sqrtf(vec_out.x * vec_out.x + vec_out.y * vec_out.y + vec_out.z * vec_out.z);
+			if (len_vec > lbl_80520308) { // if sep vec has non-zero length, normalise
+				float norm_vec = lbl_8052030C / len_vec;
+				vec_out.x *= norm_vec;
+				vec_out.y *= norm_vec;
+				vec_out.z *= norm_vec;
+			} else { // if we did funky math or it's 0, make sure it's 0
+				len_vec = lbl_80520308;
+			}
 
-lbl_80416810:
-	li       r3, 1
-	b        lbl_804168C4
+			// set f_out to roughly how much overlap there is, i.e. "strength of overlap"
+			f_out = m_radius - len_vec;
+			// if the length is 0, make sure output vector is 0
+			if (lbl_80520308 == len_vec) {
+				vec_out = Vector3f(lbl_80520308, lbl_80520308, lbl_80520308);
+			}
+			return 1; // yes it overlaps, we're done
+		}
 
-lbl_80416818:
-	li       r3, 0
-	b        lbl_804168C4
+		// now we check end point of edge, so calculate vector between sphere and end point
+		Vector3f diff_1(edge_in.pos2.x - m_position.x, edge_in.pos2.y - m_position.y, edge_in.pos2.z - m_position.z);
 
-lbl_80416820:
-	fmuls    f1, f30, f2
-	fmuls    f0, f31, f2
-	fmuls    f2, f29, f2
-	fsubs    f30, f5, f1
-	fsubs    f29, f4, f0
-	fsubs    f31, f3, f2
-	fmuls    f0, f30, f30
-	fmadds   f0, f29, f29, f0
-	fmadds   f1, f31, f31, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_8041686C
-	lfs      f0, lbl_8052030C@sda21(r2)
-	fdivs    f0, f0, f1
-	fmuls    f29, f29, f0
-	fmuls    f30, f30, f0
-	fmuls    f31, f31, f0
-	b        lbl_80416870
+		// if we're too close to end point, need to do some overlap calculations
+		if (pikmin2_sqrtf(diff_1.x * diff_1.x + diff_1.y * diff_1.y + diff_1.z * diff_1.z) <= m_radius) {
+			// overlap is at the end of edge!
+			t = 1.0f;
+			// vec_out (initially) = -diff_1, i.e. sep vec but pointing away from edge, i.e. repulsion
+			vec_out = Vector3f(m_position.x - edge_in.pos2.x, m_position.y - edge_in.pos2.y, m_position.z - edge_in.pos2.z);
 
-lbl_8041686C:
-	fmr      f1, f0
+			// next, normalise vec_out, and put "strength of overlap" into f_out
+			float len_vec = pikmin2_sqrtf(vec_out.x * vec_out.x + vec_out.y * vec_out.y + vec_out.z * vec_out.z);
+			if (len_vec > lbl_80520308) { // if sep vec has non-zero length, normalise
+				float norm_vec = lbl_8052030C / len_vec;
+				vec_out.x *= norm_vec;
+				vec_out.y *= norm_vec;
+				vec_out.z *= norm_vec;
+			} else { // if we did funky math or it's 0, make sure it's 0
+				len_vec = lbl_80520308;
+			}
 
-lbl_80416870:
-	lfs      f2, 0xc(r27)
-	fcmpo    cr0, f1, f2
-	bge      lbl_804168C0
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpu    cr0, f0, f1
-	bne      lbl_804168A4
-	stfs     f0, 0(r30)
-	li       r3, 1
-	stfs     f0, 4(r30)
-	stfs     f0, 8(r30)
-	lfs      f0, 0xc(r27)
-	stfs     f0, 0(r31)
-	b        lbl_804168C4
+			// set f_out to roughly how much overlap there is, i.e. "strength of overlap"
+			f_out = m_radius - len_vec;
+			// if the length is 0, make sure output vector is 0
+			if (lbl_80520308 == len_vec) {
+				vec_out = Vector3f(lbl_80520308, lbl_80520308, lbl_80520308);
+			}
+			return 1; // yes it overlaps, we're done
+		}
+		return 0; // to "left" or "right" of edge, but not close enough - no overlap, we're done
+	}
 
-lbl_804168A4:
-	fsubs    f0, f2, f1
-	li       r3, 1
-	stfs     f0, 0(r31)
-	stfs     f29, 0(r30)
-	stfs     f30, 4(r30)
-	stfs     f31, 8(r30)
-	b        lbl_804168C4
+	// if sphere is "in front" of the edge, need to do some other calculations
+	// first, weight edge vector by dot product
+	float t_x = edge_vec.x * t;
+	float t_y = edge_vec.y * t;
+	float t_z = edge_vec.z * t;
 
-lbl_804168C0:
-	li       r3, 0
+	// calculate "perp dist" vector
+	Vector3f sep(diff_0.x - t_x, diff_0.y - t_y, diff_0.z - t_z);
 
-lbl_804168C4:
-	psq_l    f31, 72(r1), 0, qr0
-	lfd      f31, 0x40(r1)
-	psq_l    f30, 56(r1), 0, qr0
-	lfd      f30, 0x30(r1)
-	psq_l    f29, 40(r1), 0, qr0
-	lfd      f29, 0x20(r1)
-	lmw      r27, 0xc(r1)
-	lwz      r0, 0x54(r1)
-	mtlr     r0
-	addi     r1, r1, 0x50
-	blr
-	*/
+	// calculate distance from edge
+	float len_sep = pikmin2_sqrtf(sep.x * sep.x + sep.y * sep.y + sep.z * sep.z);
+	if (len_sep > lbl_80520308) { // if sep vec has non-zero length, normalise
+		float norm_sep = lbl_8052030C / len_sep;
+		sep.x *= norm_sep;
+		sep.y *= norm_sep;
+		sep.z *= norm_sep;
+	} else { // if we did funky math or it's 0, make sure it's 0
+		len_sep = lbl_80520308;
+	}
+
+	// check if sphere is too close to the edge
+	if (len_sep < m_radius) {          // yes, it's too close - edge is inside radius
+		if (lbl_80520308 == len_sep) { // if sphere is centered ON the edge
+			vec_out = Vector3f(lbl_80520308, lbl_80520308, lbl_80520308);
+			f_out   = m_radius; // "strength of overlap" is radius
+			return 1;           // yes it overlaps, we're done
+		}
+		// sphere not centered on the edge
+		f_out   = m_radius - len_sep;            // reduce "strength of overlap" by how far away it is
+		vec_out = Vector3f(sep.x, sep.y, sep.z); // vec_out = repulsion vector directly away from edge
+		return 1;                                // yes it overlaps, we're done
+	}
+	return 0; // not close enough to the edge - no overlap, we're done
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	0000D8
- */
-bool Sphere::intersectRay(Vector3f&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	0000D8
+// */
+// bool Sphere::intersectRay(Vector3f&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
@@ -1331,45 +960,24 @@ bool Sphere::intersectRay(Vector3f&, Vector3f&)
  */
 Triangle::Triangle(void)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	lfs      f1, lbl_80520308@sda21(r2)
-	li       r5, 0
-	stw      r0, 0x14(r1)
-	li       r6, 0x10
-	lfs      f0, lbl_8052030C@sda21(r2)
-	li       r7, 3
-	stw      r31, 0xc(r1)
-	mr       r31, r3
-	lis      r3, __ct__5PlaneFv@ha
-	stfs     f1, 0xc(r31)
-	addi     r4, r3, __ct__5PlaneFv@l
-	addi     r3, r31, 0x1c
-	stfs     f0, 0x10(r31)
-	stfs     f1, 0x14(r31)
-	stfs     f1, 0x18(r31)
-	bl       __construct_array
-	li       r0, 0
-	mr       r3, r31
-	stb      r0, 0x5c(r31)
-	lwz      r31, 0xc(r1)
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	// Triangle constructor
+	//     Vector3i m_vertices;
+	//     Plane m_normal;
+	//     Plane m_tangents[3];
+	//     Sphere m_sphere;
+	//     MapCode::Code m_code;
+	m_code.m_contents = (bool)0;
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	00027C
- */
-void Triangle::findNearestPoint(Sys::VertexTable&, Vector3f&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	00027C
+// */
+// void Triangle::findNearestPoint(Sys::VertexTable&, Vector3f&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
@@ -1481,196 +1089,124 @@ lbl_80416A60:
  * Address:	80416AC0
  * Size:	000084
  */
-bool Triangle::fastIntersect(Sys::Sphere&)
+bool Sys::Triangle::fastIntersect(Sys::Sphere& ball)
 {
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	stw      r31, 0xc(r1)
-	mr       r31, r4
-	stw      r30, 8(r1)
-	mr       r30, r3
-	lfs      f1, 4(r4)
-	lfs      f0, 0x50(r3)
-	lfs      f3, 0(r4)
-	fsubs    f4, f1, f0
-	lfs      f0, 0x4c(r3)
-	lfs      f2, 8(r4)
-	fsubs    f3, f3, f0
-	lfs      f1, 0x54(r3)
-	fmuls    f0, f4, f4
-	fsubs    f1, f2, f1
-	fmadds   f0, f3, f3, f0
-	fmadds   f1, f1, f1, f0
-	bl       pikmin2_sqrtf__Ff
-	lfs      f2, 0xc(r31)
-	lfs      f0, 0x58(r30)
-	fadds    f0, f2, f0
-	fcmpo    cr0, f1, f0
-	cror     2, 0, 2
-	mfcr     r0
-	rlwinm   r3, r0, 3, 0x1f, 0x1f
-	lwz      r31, 0xc(r1)
-	lwz      r30, 8(r1)
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
+	// check if "triangle sphere" intersects with sphere 'ball'
+	// first, calculate separation vector between center of spheres
+	Vector3f sep = ball.m_position - m_sphere.m_position;
+
+	// check how far apart they are
+	float dist = pikmin2_sqrtf(sep.x * sep.x + sep.y * sep.y + sep.z * sep.z);
+	// check how much "stuff" is between them
+	float radii = ball.m_radius + m_sphere.m_radius;
+
+	// if separation is less than or equal to amount of material, overlap; if not, no overlap
+	return (dist <= radii);
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000088
- */
-void Triangle::write(Stream&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000088
+// */
+// void Triangle::write(Stream&)
+// {
+// // UNUSED FUNCTION
+// }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000088
- */
-void Triangle::read(Stream&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000088
+// */
+// void Triangle::read(Stream&)
+// {
+// // UNUSED FUNCTION
+// }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000038
- */
-void Triangle::constructFromJ3D(Sys::VertexTable&, __J3DUTriangle&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000038
+// */
+// void Triangle::constructFromJ3D(Sys::VertexTable&, __J3DUTriangle&)
+// {
+// // UNUSED FUNCTION
+// }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	000004
- */
-void Triangle::draw(Graphics&, Sys::VertexTable&, bool)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	000004
+// */
+// void Triangle::draw(Graphics&, Sys::VertexTable&, bool)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
  * Address:	80416B44
  * Size:	000104
  */
-void Triangle::calcDist(Plane&, Sys::VertexTable&)
+float Sys::Triangle::calcDist(Plane& plane_in, Sys::VertexTable& vertTable)
 {
-	/*
-	lwz      r0, 0(r3)
-	lwz      r6, 4(r3)
-	mulli    r7, r0, 0xc
-	lwz      r8, 0x24(r5)
-	lwz      r0, 8(r3)
-	lfs      f6, 4(r4)
-	add      r5, r8, r7
-	lfs      f7, 0(r4)
-	mulli    r3, r6, 0xc
-	lfs      f0, 4(r5)
-	lfs      f4, 0(r5)
-	fmuls    f3, f0, f6
-	lfs      f5, 8(r5)
-	add      r3, r8, r3
-	mulli    r0, r0, 0xc
-	lfs      f0, 4(r3)
-	lfs      f2, 0(r3)
-	fmuls    f1, f0, f6
-	lfs      f8, 8(r4)
-	add      r5, r8, r0
-	lfs      f0, 4(r5)
-	fmadds   f4, f4, f7, f3
-	fmadds   f2, f2, f7, f1
-	lfs      f3, 8(r3)
-	fmuls    f0, f0, f6
-	lfs      f1, 0(r5)
-	fmadds   f4, f5, f8, f4
-	lfs      f5, 0xc(r4)
-	fmadds   f3, f3, f8, f2
-	lfs      f2, 8(r5)
-	fmadds   f0, f1, f7, f0
-	fsubs    f4, f4, f5
-	fsubs    f3, f3, f5
-	fmadds   f0, f2, f8, f0
-	fcmpo    cr0, f4, f3
-	fsubs    f0, f0, f5
-	bge      lbl_80416BF0
-	fcmpo    cr0, f4, f0
-	bge      lbl_80416BE8
-	fmr      f1, f4
-	b        lbl_80416C04
+	// calculate distance to closest vertex of triangle from a given plane
 
-lbl_80416BE8:
-	fmr      f1, f0
-	b        lbl_80416C04
+	// get triangle vertices from VertexTable vertTable
+	Vector3f vert_1 = vertTable.m_objects[m_vertices[0]];
+	Vector3f vert_2 = vertTable.m_objects[m_vertices[1]];
+	Vector3f vert_3 = vertTable.m_objects[m_vertices[2]];
 
-lbl_80416BF0:
-	fcmpo    cr0, f3, f0
-	bge      lbl_80416C00
-	fmr      f1, f3
-	b        lbl_80416C04
+	// calculate distance from plane to each vertex
+	float vert_1_sep = (vert_1.x * plane_in.a + vert_1.y * plane_in.b + vert_1.z * plane_in.c) - plane_in.d;
+	float vert_2_sep = (vert_2.x * plane_in.a + vert_2.y * plane_in.b + vert_2.z * plane_in.c) - plane_in.d;
+	float vert_3_sep = (vert_3.x * plane_in.a + vert_3.y * plane_in.b + vert_3.z * plane_in.c) - plane_in.d;
 
-lbl_80416C00:
-	fmr      f1, f0
+	float shortest_dist;
 
-lbl_80416C04:
-	fcmpo    cr0, f4, f3
-	bge      lbl_80416C20
-	fcmpo    cr0, f3, f0
-	bge      lbl_80416C18
-	b        lbl_80416C30
+	// check what closest point is
+	if (vert_1_sep < vert_2_sep) {
+		shortest_dist = (vert_1_sep < vert_3_sep) ? vert_1_sep : vert_3_sep;
+	} else {
+		shortest_dist = (vert_2_sep < vert_3_sep) ? vert_2_sep : vert_3_sep;
+	}
 
-lbl_80416C18:
-	fmr      f0, f3
-	b        lbl_80416C30
+	// check what second closest point is
+	float second_dist;
+	if (vert_1_sep < vert_2_sep) {
+		second_dist = (vert_2_sep < vert_3_sep) ? vert_3_sep : vert_2_sep;
+	} else {
+		second_dist = (vert_1_sep < vert_3_sep) ? vert_3_sep : vert_1_sep;
+	}
 
-lbl_80416C20:
-	fcmpo    cr0, f4, f0
-	bge      lbl_80416C2C
-	b        lbl_80416C30
-
-lbl_80416C2C:
-	fmr      f0, f4
-
-lbl_80416C30:
-	fmuls    f2, f1, f0
-	lfs      f0, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f2, f0
-	bgtlr
-	fmr      f1, f0
-	blr
-	*/
+	// make sure math isn't funky or we're not intersecting the plane
+	// float factor = (shortest_dist * second_dist);
+	if (shortest_dist * second_dist > lbl_80520308) { // 0.0f
+		return shortest_dist;                         // assuming both distances are positive, we're good, return shortest distance
+	}
+	return lbl_80520308; // if something's negative or one is zero, we're overlapping, so return 0 as distance
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	0001EC
- */
-bool Triangle::intersect(Sys::VertexTable&, BoundBox2d&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	0001EC
+// */
+// bool Triangle::intersect(Sys::VertexTable&, BoundBox2d&)
+// {
+// // UNUSED FUNCTION
+// }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	0002F0
- */
-bool Triangle::intersect(Sys::Edge&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	0002F0
+// */
+// bool Triangle::intersect(Sys::Edge&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
@@ -2811,92 +2347,42 @@ lbl_80417B68:
 	*/
 }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	00014C
- */
-bool Triangle::intersectOptimistic(Sys::Sphere&, Vector3f&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	00014C
+// */
+// bool Triangle::intersectOptimistic(Sys::Sphere&, Vector3f&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--
  * Address:	80417B88
  * Size:	0000EC
  */
-bool Triangle::insideXZ(Vector3f&)
+bool Sys::Triangle::insideXZ(Vector3f& arg0)
 {
-	/*
-	lfs      f4, 0x10(r3)
-	lfs      f7, lbl_80520308@sda21(r2)
-	fcmpo    cr0, f4, f7
-	cror     2, 0, 2
-	bne      lbl_80417BA4
-	li       r3, 0
-	blr
+	// work out if a given point 'arg0' is inside XZ of a given triangle
 
-lbl_80417BA4:
-	lfs      f1, 0x14(r3)
-	lfs      f0, 8(r4)
-	lfs      f2, 0xc(r3)
-	fmuls    f0, f1, f0
-	lfs      f1, 0(r4)
-	lfs      f3, 0x18(r3)
-	fmadds   f0, f2, f1, f0
-	fsubs    f0, f3, f0
-	fdivs    f0, f0, f4
-	stfs     f0, 4(r4)
-	lfs      f2, 4(r4)
-	lfs      f0, 0x20(r3)
-	lfs      f4, 0(r4)
-	fmuls    f1, f2, f0
-	lfs      f3, 0x1c(r3)
-	lfs      f6, 8(r4)
-	lfs      f5, 0x24(r3)
-	fmadds   f1, f4, f3, f1
-	lfs      f0, 0x28(r3)
-	fmadds   f1, f6, f5, f1
-	fsubs    f0, f1, f0
-	fcmpo    cr0, f0, f7
-	ble      lbl_80417C08
-	li       r3, 0
-	blr
+	// if y <= 0, can't be inside XZ since it's on the wrong side
+	if (m_trianglePlane.b <= lbl_80520308) {
+		return 0;
+	}
 
-lbl_80417C08:
-	lfs      f0, 0x30(r3)
-	lfs      f3, 0x2c(r3)
-	fmuls    f1, f2, f0
-	lfs      f5, 0x34(r3)
-	lfs      f0, 0x38(r3)
-	fmadds   f1, f4, f3, f1
-	fmadds   f1, f6, f5, f1
-	fsubs    f0, f1, f0
-	fcmpo    cr0, f0, f7
-	ble      lbl_80417C38
-	li       r3, 0
-	blr
+	// adjust input vector's y component for some reason
+	arg0.y = (m_trianglePlane.d - ((m_trianglePlane.a * arg0.x) + (m_trianglePlane.c * arg0.z))) / m_trianglePlane.b;
 
-lbl_80417C38:
-	addi     r3, r3, 0x20
-	lfs      f0, 0x20(r3)
-	lfs      f3, 0x1c(r3)
-	fmuls    f1, f2, f0
-	lfs      f5, 0x24(r3)
-	lfs      f0, 0x28(r3)
-	fmadds   f1, f4, f3, f1
-	fmadds   f1, f6, f5, f1
-	fsubs    f0, f1, f0
-	fcmpo    cr0, f0, f7
-	ble      lbl_80417C6C
-	li       r3, 0
-	blr
+	// check each tangent plane against input vector - if "separation" > 0, not inside XZ
+	for (int i = 0; i < 3; ++i) {
+		if (((arg0.x * m_edgePlanes[i].a + arg0.y * m_edgePlanes[i].b + arg0.z * m_edgePlanes[i].c) - m_edgePlanes[i].d) > lbl_80520308) {
+			return 0;
+		}
+	}
 
-lbl_80417C6C:
-	li       r3, 1
-	blr
-	*/
+	// if separation from all tangent planes is <= 0, we're inside XZ
+	return 1;
 }
 
 /*
@@ -3229,30 +2715,15 @@ lbl_8041806C:
  * Address:	8041813C
  * Size:	000040
  */
-bool RayIntersectInfo::condition(Sys::Triangle&)
+bool Sys::RayIntersectInfo::condition(Sys::Triangle& arg0)
 {
-	/*
-	lbz      r0, 0x1c(r3)
-	cmplwi   r0, 0
-	beq      lbl_80418174
-	lfs      f1, 0x10(r4)
-	lfs      f0, lbl_80520310@sda21(r2)
-	fcmpo    cr0, f1, f0
-	bge      lbl_8041816C
-	lfs      f0, lbl_80520324@sda21(r2)
-	fcmpo    cr0, f1, f0
-	ble      lbl_8041816C
-	li       r3, 1
-	blr
-
-lbl_8041816C:
-	li       r3, 0
-	blr
-
-lbl_80418174:
-	li       r3, 1
-	blr
-	*/
+	if (_1C != 0) {
+		if ((arg0.m_trianglePlane.b < lbl_80520310) && (arg0.m_trianglePlane.b > lbl_80520324)) {
+			return 1;
+		}
+		return 0;
+	}
+	return 1;
 }
 
 /*
@@ -4438,55 +3909,17 @@ void GridDivider::create(BoundBox&, int, int, Sys::VertexTable*, Sys::TriangleTa
  * Address:	8041903C
  * Size:	000088
  */
-TriIndexList::TriIndexList()
-{
-	/*
-	stwu     r1, -0x10(r1)
-	mflr     r0
-	stw      r0, 0x14(r1)
-	stw      r31, 0xc(r1)
-	mr       r31, r3
-	bl       __ct__5CNodeFv
-	lis      r4, __vt__16GenericContainer@ha
-	lis      r3, "__vt__12Container<i>"@ha
-	addi     r0, r4, __vt__16GenericContainer@l
-	lis      r5, "__vt__17ArrayContainer<i>"@ha
-	stw      r0, 0(r31)
-	addi     r0, r3, "__vt__12Container<i>"@l
-	lis      r4, __vt__Q23Sys9IndexList@ha
-	lis      r3, __vt__Q23Sys12TriIndexList@ha
-	stw      r0, 0(r31)
-	li       r7, 0
-	addi     r6, r5, "__vt__17ArrayContainer<i>"@l
-	li       r5, 1
-	stb      r7, 0x18(r31)
-	addi     r4, r4, __vt__Q23Sys9IndexList@l
-	addi     r0, r3, __vt__Q23Sys12TriIndexList@l
-	mr       r3, r31
-	stw      r6, 0(r31)
-	stb      r5, 0x18(r31)
-	stw      r7, 0x20(r31)
-	stw      r7, 0x1c(r31)
-	stw      r7, 0x24(r31)
-	stw      r4, 0(r31)
-	stw      r0, 0(r31)
-	lwz      r31, 0xc(r1)
-	lwz      r0, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x10
-	blr
-	*/
-}
+TriIndexList::TriIndexList() { }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	00006C
- */
-void GridDivider::write(Stream&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	00006C
+// */
+// void GridDivider::write(Stream&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * @generated{write__31ArrayContainer<Q23Sys8Triangle>FR6Stream}
@@ -4565,15 +3998,15 @@ void GridDivider::write(Stream&)
  */
 // void ArrayContainer<Sys::Triangle>::writeObject(Stream&, Sys::Triangle&) { }
 
-/*
- * --INFO--
- * Address:	........
- * Size:	0000C0
- */
-void GridInfo::write(Stream&)
-{
-	// UNUSED FUNCTION
-}
+// /*
+// * --INFO--
+// * Address:	........
+// * Size:	0000C0
+// */
+// void GridInfo::write(Stream&)
+// {
+// // UNUSED FUNCTION
+// }
 
 /*
  * --INFO--

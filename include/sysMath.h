@@ -1,12 +1,17 @@
 #ifndef _SYSMATH_H
 #define _SYSMATH_H
 
+#include "Dolphin/mtx.h"
 #include "JSystem/JMath.h"
+#include "Vector3.h"
+#include "Matrixf.h"
 
 float pikmin2_sinf(float x);
 float pikmin2_cosf(float x);
 float pikmin2_atan2f(float x, float y);
 float pikmin2_sqrtf(float x);
+void PSMTXMultVec(Matrixf*, Vector3<float>*, Vector3<float>*);
+
 
 float qdist2(float, float, float, float);
 
