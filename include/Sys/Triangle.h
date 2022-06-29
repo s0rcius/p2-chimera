@@ -1,9 +1,11 @@
 #ifndef _SYS_TRIANGLE_H
 #define _SYS_TRIANGLE_H
 
+
 #include "types.h"
 #include "Vector3.h"
 #include "Sys/Sphere.h"
+#include "Plane.h"
 #include "mapCode.h"
 
 struct __J3DUTriangle;
