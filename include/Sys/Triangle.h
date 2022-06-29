@@ -11,9 +11,9 @@
 struct __J3DUTriangle;
 struct Graphics;
 struct BoundBox2d;
+struct Plane;
 namespace Sys {
 struct Edge;
-struct Plane;
 struct VertexTable;
 struct Triangle {
 	struct SphereSweep {
