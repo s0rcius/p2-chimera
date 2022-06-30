@@ -1,4 +1,10 @@
 #include "types.h"
+#include "Game/Cave/RandMapMgr.h"
+#include "Game/Cave/RandMapUnit.h"
+#include "Game/Cave/Node.h"
+#include "Game/Cave/Info.h"
+#include "Dolphin/string.h"
+#include "Dolphin/rand.h"
 
 /*
     Generated from dpostproc
@@ -25,21 +31,12 @@ namespace Game {
  * Address:	80300E68
  * Size:	00002C
  */
-Cave::RandCapEnemyUnit::RandCapEnemyUnit(Game::Cave::MapUnitGenerator*)
-{
-	/*
-	stw      r4, 0(r3)
-	li       r0, 0
-	lwz      r4, 0(r3)
-	lwz      r4, 0x18(r4)
-	stw      r4, 8(r3)
-	lwz      r4, 0(r3)
-	lwz      r4, 0x1c(r4)
-	stw      r4, 0xc(r3)
-	stw      r0, 0x10(r3)
-	stw      r0, 0x14(r3)
-	blr
-	*/
+Game::Cave::RandCapEnemyUnit::RandCapEnemyUnit(Game::Cave::MapUnitGenerator& mapUnitGenerator) {
+    m_mapUnitGenerator = &mapUnitGenerator;
+    m_enemyNode[0] = m_mapUnitGenerator->m_enemyNodeB;
+    m_enemyNode[1] = m_mapUnitGenerator->m_enemyNodeC;
+    m_perSpawn[0] = 0;
+    m_perSpawn[1] = 0;
 }
 
 /*
@@ -47,10 +44,8 @@ Cave::RandCapEnemyUnit::RandCapEnemyUnit(Game::Cave::MapUnitGenerator*)
  * Address:	80300E94
  * Size:	000008
  */
-void Cave::RandCapEnemyUnit::setManageClassPtr(Game::Cave::RandItemUnit* a1)
-{
-	// Generated from stw r4, 0x4(r3)
-	_04 = a1;
+void Game::Cave::RandCapEnemyUnit::setManageClassPtr(Game::Cave::RandItemUnit& randItemUnit) {
+    m_randItemUnit = &randItemUnit;
 }
 
 /*
@@ -58,90 +53,36 @@ void Cave::RandCapEnemyUnit::setManageClassPtr(Game::Cave::RandItemUnit* a1)
  * Address:	80300E9C
  * Size:	000108
  */
-void Cave::RandCapEnemyUnit::setCapEnemySlot()
-{
-	/*
-	stwu     r1, -0x20(r1)
-	mflr     r0
-	stw      r0, 0x24(r1)
-	stw      r31, 0x1c(r1)
-	stw      r30, 0x18(r1)
-	stw      r29, 0x14(r1)
-	mr       r29, r3
-	lwz      r3, 0(r3)
-	lwz      r31, 0x28(r3)
-	lwz      r30, 0x10(r31)
-	b        lbl_80300F1C
+void Game::Cave::RandCapEnemyUnit::setCapEnemySlot() {
+    MapNode* placedMapNode;
+    Game::Cave::MapNode* childNode;
+    Game::Cave::MapNode* childNode_2;
 
-lbl_80300EC8:
-	lwz      r3, 0x18(r30)
-	bl       getUnitKind__Q34Game4Cave8UnitInfoFv
-	cmpwi    r3, 0
-	bne      lbl_80300F18
-	mr       r3, r30
-	bl       getUnitName__Q34Game4Cave7MapNodeFv
-	addi     r4, r2, lbl_8051D4C0@sda21
-	li       r5, 4
-	bl       strncmp
-	cmpwi    r3, 0
-	bne      lbl_80300F18
-	lwz      r3, 4(r29)
-	mr       r4, r30
-	bl isGroundCapEnemySetDone__Q34Game4Cave12RandItemUnitFPQ34Game4Cave7MapNode
-	clrlwi.  r0, r3, 0x18
-	bne      lbl_80300F18
-	mr       r3, r29
-	mr       r4, r30
-	li       r5, 0
-	bl
-setCapCommonEnemySlot__Q34Game4Cave16RandCapEnemyUnitFPQ34Game4Cave7MapNodei
+    placedMapNode = m_mapUnitGenerator->m_placedMapNodes;
+    childNode = (MapNode*) placedMapNode->m_child;
 
-lbl_80300F18:
-	lwz      r30, 4(r30)
+    // loop through and check there aren't any ground cap teki?
+    while (childNode != nullptr) {
+        if (childNode->m_unitInfo->getUnitKind() == 0) {
+            char* unitName = childNode->getUnitName(); // I guess??
+            if ((strncmp(unitName, &lbl_8051D4C0, 4) == 0) && (m_randItemUnit->isGroundCapEnemySetDone(childNode) == 0)) {
+                setCapCommonEnemySlot(childNode, 0);
+            }
+        }
+        childNode = (MapNode*) childNode->m_next;
+    }
+    childNode_2 = (MapNode*) placedMapNode->m_child;
 
-lbl_80300F1C:
-	cmplwi   r30, 0
-	bne      lbl_80300EC8
-	lwz      r30, 0x10(r31)
-	b        lbl_80300F80
-
-lbl_80300F2C:
-	lwz      r3, 0x18(r30)
-	bl       getUnitKind__Q34Game4Cave8UnitInfoFv
-	cmpwi    r3, 0
-	bne      lbl_80300F7C
-	mr       r3, r30
-	bl       getUnitName__Q34Game4Cave7MapNodeFv
-	addi     r4, r2, lbl_8051D4C0@sda21
-	li       r5, 4
-	bl       strncmp
-	cmpwi    r3, 0
-	bne      lbl_80300F7C
-	lwz      r3, 4(r29)
-	mr       r4, r30
-	bl isFallCapEnemySetDone__Q34Game4Cave12RandItemUnitFPQ34Game4Cave7MapNode
-	clrlwi.  r0, r3, 0x18
-	bne      lbl_80300F7C
-	mr       r3, r29
-	mr       r4, r30
-	li       r5, 1
-	bl
-setCapCommonEnemySlot__Q34Game4Cave16RandCapEnemyUnitFPQ34Game4Cave7MapNodei
-
-lbl_80300F7C:
-	lwz      r30, 4(r30)
-
-lbl_80300F80:
-	cmplwi   r30, 0
-	bne      lbl_80300F2C
-	lwz      r0, 0x24(r1)
-	lwz      r31, 0x1c(r1)
-	lwz      r30, 0x18(r1)
-	lwz      r29, 0x14(r1)
-	mtlr     r0
-	addi     r1, r1, 0x20
-	blr
-	*/
+    // loop through and check there aren't any falling cap teki?
+    while (childNode_2 != nullptr) {
+        if (childNode_2->m_unitInfo->getUnitKind() == 0) {
+            char* unitName = childNode_2->getUnitName();
+            if ((strncmp(unitName, &lbl_8051D4C0, 4) == 0) && (m_randItemUnit->isFallCapEnemySetDone(childNode_2) == 0)) {
+                setCapCommonEnemySlot(childNode_2, 1);
+            }
+        }
+        childNode_2 = (MapNode*) childNode_2->m_next;
+    }
 }
 
 /*
@@ -291,54 +232,12 @@ lbl_8030114C:
  * Address:	80301160
  * Size:	000098
  */
-void Cave::RandCapEnemyUnit::setCapEnemy(Game::Cave::MapNode*, Game::Cave::EnemyUnit*, int, int)
-{
-	/*
-	.loc_0x0:
-	  stwu      r1, -0x30(r1)
-	  mflr      r0
-	  rlwinm    r6,r6,2,0,29
-	  stw       r0, 0x34(r1)
-	  stmw      r25, 0x14(r1)
-	  mr        r25, r3
-	  mr        r26, r4
-	  mr        r27, r5
-	  mr        r28, r7
-	  addi      r30, r6, 0x10
-	  li        r29, 0
-	  b         .loc_0x7C
-
-	.loc_0x30:
-	  li        r3, 0x38
-	  bl        -0x2DD2F0
-	  mr.       r31, r3
-	  beq-      .loc_0x54
-	  mr        r4, r27
-	  li        r5, 0
-	  li        r6, 0x1
-	  bl        -0xBCFE4
-	  mr        r31, r3
-
-	.loc_0x54:
-	  mr        r3, r31
-	  mr        r4, r26
-	  bl        -0xBCF60
-	  lwz       r3, 0x1C(r26)
-	  mr        r4, r31
-	  bl        0x110240
-	  lwzx      r3, r25, r30
-	  addi      r29, r29, 0x1
-	  addi      r0, r3, 0x1
-	  stwx      r0, r25, r30
-
-	.loc_0x7C:
-	  cmpw      r29, r28
-	  blt+      .loc_0x30
-	  lmw       r25, 0x14(r1)
-	  lwz       r0, 0x34(r1)
-	  mtlr      r0
-	  addi      r1, r1, 0x30
-	  blr
-	*/
+void Game::Cave::RandCapEnemyUnit::setCapEnemy(Game::Cave::MapNode* inputMapNode, Game::Cave::EnemyUnit* inputEnemyUnit, int param_1, int param_2) {
+    for (int ctr = 0; ctr < param_2; ctr++) {
+        EnemyNode* newNode = new EnemyNode(inputEnemyUnit, nullptr, 1);
+        newNode->makeGlobalData(inputMapNode);
+        inputMapNode->m_enemyNode->add(newNode);
+        m_perSpawn[param_1] += 1;
+    }
 }
 } // namespace Game
