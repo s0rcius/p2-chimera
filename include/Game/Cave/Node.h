@@ -166,8 +166,8 @@ struct EnemyUnit {
 struct EnemyNode : public ObjectLayoutNode {
 	EnemyNode();
 	EnemyNode(EnemyUnit*, BaseGen*, int);
-	~EnemyNode() {};
 
+	virtual ~EnemyNode() {}
 	virtual int getObjectId();
 	virtual u32 getObjectType();
 	virtual int getBirthCount();
