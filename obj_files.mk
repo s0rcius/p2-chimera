@@ -1089,6 +1089,9 @@ KONO:=\
 	$(BUILD_DIR)/asm/plugProjectKonoU/khWinLoseReason.o\
 	$(BUILD_DIR)/src/plugProjectKonoU/khMailSaveData.o\
 
+CHIMERA:=\
+    $(BUILD_DIR)/src/chimeraMod/main.o\
+
 BOOTUP:=\
 	$(BUILD_DIR)/src/sysBootupU/sysBootup.o\
 

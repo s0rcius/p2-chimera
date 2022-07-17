@@ -35,7 +35,7 @@ endif
 EPILOGUE_PROCESS := 1
 
 # Update the README after build
-UPDATE_README ?= 1
+UPDATE_README ?= 0
 
 BUILD_DIR := build/$(NAME).$(VERSION)
 ifeq ($(EPILOGUE_PROCESS),1)
@@ -66,6 +66,7 @@ endif
 
 O_FILES :=	$(GROUP_0_FILES) $(JSYSTEM) $(DOLPHIN)\
 			$(YAMASHITA) $(KANDO) $(NISHIMURA) $(OGAWA) $(HIKINO) $(MORIMURA) $(EBISAWA) $(KONO)\
+			$(CHIMERA)\
 			$(BOOTUP) $(COMMON) $(GC) $(UTILITY) $(GLOBAL_BSS)
 ifeq ($(EPILOGUE_PROCESS),1)
 E_FILES :=	$(EPILOGUE_UNSCHEDULED)
@@ -192,9 +193,9 @@ $(LDSCRIPT): ldscript.lcf
 
 $(DOL): $(ELF) | tools
 	$(QUIET) $(ELF2DOL) $< $@
-	$(QUIET) $(SHA1SUM) -c sha1/$(NAME).$(VERSION).sha1
+	#$(QUIET) $(SHA1SUM) -c sha1/$(NAME).$(VERSION).sha1
 ifneq ($(findstring -map,$(LDFLAGS)),)
-	$(QUIET) $(PYTHON) tools/calcprogress.py $(DOL) $(MAP)
+	#$(QUIET) $(PYTHON) tools/calcprogress.py $(DOL) $(MAP)
 endif
 ifeq ($(UPDATE_README),1)
 	$(WINE) $(READMEGEN)
